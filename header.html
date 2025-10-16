@@ -135,3 +135,128 @@
   }
 
   /* ---- MOBILE ONLY ADJUSTMENTS: keep name on 1 line + edge padding + vertical centering ---- */
+  @media (max-width: 768px) {
+    /* keep full name in one line and scale down slightly */
+    .companyNameTop {
+      white-space: nowrap !important;
+      font-size: clamp(1rem, 4vw, 1.3rem) !important;
+      letter-spacing: 1.5px;
+      line-height: 1;
+    }
+
+    /* ensure logo not touching left edge (uses viewport units to match existing layout) */
+    .branding-block {
+      margin-left: 4vw !important;
+    }
+
+    /* ensure hamburger not at screen edge and vertically centered */
+    .hamburger {
+      margin-right: 4vw !important;
+      padding-right: 0;
+      align-self: center !important;
+      height: 44px;
+      width: 44px;
+      border-radius: 8px;
+    }
+    .hamburger-box { margin: 0 auto; position: relative; top: 0; }
+
+    /* force header row to align items center so everything sits on same baseline */
+    .header-bar, .branding-block, .branding-link {
+      align-items: center !important;
+    }
+
+    /* allow brand text to shrink instead of pushing the hamburger down */
+    .brand-text, .companyNameTop, .branding-link { min-width: 0; }
+
+    /* slightly reduce header height on mobile so elements appear aligned */
+    .header-bar { min-height: 70px; height: auto; padding-top: 6px; padding-bottom: 6px; }
+  }
+</style>
+
+<div class="top-bar">
+  <a href="tel:9999944622" class="phone-link">
+    <span class="phone-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z" /></svg>
+      Call: 9999944622
+    </span>
+  </a>
+</div>
+
+<div class="header-bar">
+  <div class="branding-block">
+    <a href="https://sdapromoters.com" target="_blank" rel="noopener" class="branding-link">
+      <img src="images/logo.png" alt="SDA Infra & Promoters Logo" class="logo-img" />
+      <span class="companyNameTop">SDA Infra & Promoters</span>
+    </a>
+  </div>
+
+  <!-- hamburger -->
+  <button id="hamburgerBtn" class="hamburger" aria-label="Menu" aria-expanded="false">
+    <span class="hamburger-box"><span class="hamburger-inner" aria-hidden="true"></span></span>
+  </button>
+</div>
+
+<!-- slide nav -->
+<nav id="sideNav" class="side-nav" aria-hidden="true" aria-label="Main menu">
+  <div id="sideNavInner" aria-live="polite">
+    <div style="color:#666">Loading menu…</div>
+  </div>
+</nav>
+<div id="overlay" class="overlay" aria-hidden="true"></div>
+
+<script>
+  (function(){
+    const btn = document.getElementById('hamburgerBtn');
+    const side = document.getElementById('sideNav');
+    const sideInner = document.getElementById('sideNavInner');
+    const overlay = document.getElementById('overlay');
+
+    async function loadMenu() {
+      try {
+        const url = new URL('menu.html', location.href).href;
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+        const text = await res.text();
+        sideInner.innerHTML = text;
+      } catch (err) {
+        console.error('Failed to load menu.html:', err);
+        sideInner.innerHTML = '<div style="color:#b33">Menu failed to load</div>';
+      }
+    }
+
+    function openNav(){
+      side.classList.add('open');
+      overlay.classList.add('show');
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      side.setAttribute('aria-hidden','false');
+      document.documentElement.style.overflow='hidden';
+      const a = side.querySelector('a');
+      if (a) a.focus();
+    }
+    function closeNav(){
+      side.classList.remove('open');
+      overlay.classList.remove('show');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      side.setAttribute('aria-hidden','true');
+      document.documentElement.style.overflow='';
+      btn.focus();
+    }
+
+    btn.addEventListener('click', async ()=>{
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      if (expanded) return closeNav();
+      if (!sideInner.querySelector('ul')) {
+        await loadMenu();
+      }
+      openNav();
+    });
+
+    overlay.addEventListener('click', closeNav);
+    side.addEventListener('click', (e) => { if (e.target.tagName === 'A') closeNav(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && side.classList.contains('open')) closeNav();
+    });
+  })();
+</script>
