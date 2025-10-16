@@ -1,7 +1,7 @@
 <!-- HEADER START -->
 <style>
   :root {
-    --topbar-height: 48px; /* adjust if you change top-bar padding/size */
+    --topbar-height: 48px;
   }
 
   /* Top info bar */
@@ -24,28 +24,29 @@
   .phone-link:hover { text-decoration: underline; color: #c8e6c9; }
   .phone-icon svg { width: 19px; height: 19px; fill: #e8f5e8; display:block; }
 
-  /* Header / branding area (sits below top-bar) */
+  /* Header bar */
   .header-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;            /* keep brand left and hamburger right */
+    justify-content: space-between;
     padding: 10px 4vw;
-    margin-top: calc(var(--topbar-height) + 6px); /* ensure header is below fixed top-bar */
+    margin-top: calc(var(--topbar-height) + 5px);
     background: linear-gradient(135deg, #fff, #f0f7f0);
-    min-height: 72px;
     width: 100%;
+    min-height: 75px;
     box-sizing: border-box;
     position: relative;
     z-index: 1060;
   }
 
-  /* Branding block (left side) */
+  /* Branding left */
   .branding-block {
     display: flex;
     align-items: center;
-    gap: 16px;
-    flex: 1 1 auto;
-    min-width: 0; /* allow truncation */
+    gap: 14px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
   }
   .branding-link {
     display: flex;
@@ -53,56 +54,46 @@
     gap: 12px;
     text-decoration: none;
     color: inherit;
-    min-width: 0;
-    flex: 1 1 auto;
-    overflow: hidden;
+    width: 100%;
   }
   .logo-img {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 10px;
     background: #fff;
     border: 3px solid #1a3a1a;
     flex-shrink: 0;
-    transition: width 0.2s, height 0.2s;
   }
   .companyNameTop {
     font-size: 1.6rem;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 1.6px;
+    letter-spacing: 1.4px;
     color: #1a3a1a;
-    line-height: 1.05;
+    line-height: 1.1;
     margin: 0;
     padding: 0;
-    text-align: left;
-    display: block;
-    min-width: 0;
-    flex: 1 1 auto;
-    overflow: hidden;
-    text-overflow: ellipsis;   /* truncate instead of wrapping under hamburger */
-    white-space: nowrap;
+    white-space: nowrap; /* Always on one line */
+    flex-shrink: 0;      /* Never shrink */
   }
 
-  /* Hamburger (right side) - larger touch area */
+  /* Hamburger */
   .hamburger {
     background: transparent;
     border: none;
     cursor: pointer;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 56px;               /* good touch target */
+    height: 56px;
     width: 56px;
-    padding: 0;
     border-radius: 10px;
-    margin-left: 12px;
+    margin-left: auto;
     flex-shrink: 0;
-    z-index: 1080;
   }
   .hamburger:focus { outline: none; box-shadow: 0 0 0 4px rgba(46,125,50,0.12); }
-  .hamburger-box { width: 28px; height: 20px; position: relative; display:inline-block; }
+  .hamburger-box { width: 28px; height: 20px; position: relative; }
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
@@ -118,7 +109,7 @@
   .hamburger.open .hamburger-inner::before { transform: rotate(45deg) translate(4px,4px); top: 0; }
   .hamburger.open .hamburger-inner::after { transform: rotate(-45deg) translate(4px,-4px); top: 0; }
 
-  /* side nav and overlay remain same but ensure higher z */
+  /* Side Nav */
   .side-nav {
     position: fixed; top: 0; right: 0;
     width: 280px; max-width: 86vw; height: 100vh;
@@ -134,36 +125,31 @@
   }
   .overlay.show { opacity: 1; pointer-events: all; }
 
-  /* Responsive tweaks */
-  @media (max-width: 900px) {
-    .logo-img { width: 54px; height: 54px; }
-    .companyNameTop { font-size: 1.1rem; letter-spacing: 1px; }
-    .header-bar { padding: 10px 3vw; min-height: 64px; }
-  }
-
-  @media (max-width: 540px) {
+  /* Mobile Fix */
+  @media (max-width: 600px) {
     :root { --topbar-height: 46px; }
-    .logo-img { width: 40px; height: 40px; }
-    .companyNameTop { font-size: clamp(0.9rem, 4.2vw, 1.1rem); }
-    .hamburger { width: 52px; height: 52px; }
-    .hamburger-box { transform: translateY(0); }
-    /* Remove label wrapping and keep brand short */
+    .header-bar { padding: 8px 4vw; min-height: 68px; }
+    .logo-img { width: 42px; height: 42px; }
+    .companyNameTop {
+      font-size: clamp(1rem, 4.5vw, 1.25rem);
+      white-space: nowrap;
+    }
     .branding-link { gap: 10px; }
+    .hamburger { width: 52px; height: 52px; }
+    .hamburger-box { transform: none; }
   }
 </style>
 
 <!-- top call bar -->
-<div class="top-bar" role="banner">
+<div class="top-bar">
   <a href="tel:9999944622" class="phone-link" aria-label="Call SDA Infra and Promoters">
-    <span class="phone-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
-    </span>
-    <span>Call: 9999944622</span>
+    <span class="phone-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg></span>
+    Call: 9999944622
   </a>
 </div>
 
 <!-- main header -->
-<header class="header-bar" role="navigation" aria-label="Main header">
+<header class="header-bar">
   <div class="branding-block">
     <a href="https://sdapromoters.com" target="_blank" rel="noopener" class="branding-link">
       <img src="images/logo.png" alt="SDA Infra & Promoters Logo" class="logo-img" />
@@ -176,7 +162,7 @@
   </button>
 </header>
 
-<!-- nav + overlay (unchanged IDs so existing script still works) -->
+<!-- side menu -->
 <nav id="sideNav" class="side-nav" aria-hidden="true" aria-label="Main menu">
   <div id="sideNavInner" aria-live="polite">
     <div style="color:#666">Loading menu…</div>
