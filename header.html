@@ -1,155 +1,150 @@
 <!-- HEADER START -->
 <style>
-  :root {
-    --topbar-height: 48px;
-  }
+  :root { --topbar-height: 48px; }
 
   /* Top info bar */
-  .top-bar {
-    background: linear-gradient(135deg, #1a3a1a, #2e7d32);
-    color: #e8f5e8;
-    padding: 8px 5vw;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--topbar-height);
-    z-index: 1050;
-    box-sizing: border-box;
+  .top-bar{
+    background: linear-gradient(135deg,#1a3a1a,#2e7d32);
+    color:#e8f5e8;
+    padding:8px 5vw;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:1rem;
+    font-weight:bold;
+    position:fixed; top:0; left:0; right:0;
+    height:var(--topbar-height);
+    z-index:1050; box-sizing:border-box;
   }
-  .phone-link { color: #e8f5e8; text-decoration: none; cursor: pointer; display: flex; align-items: center; gap:8px; }
-  .phone-link:hover { text-decoration: underline; color: #c8e6c9; }
-  .phone-icon svg { width: 19px; height: 19px; fill: #e8f5e8; display:block; }
+  .phone-link{ color:#e8f5e8; text-decoration:none; display:flex; align-items:center; gap:8px; }
+  .phone-link:hover{ color:#c8e6c9; text-decoration:underline; }
+  .phone-icon svg{ width:19px; height:19px; fill:#e8f5e8; display:block; }
 
-  /* Header bar */
-  .header-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 4vw;
-    margin-top: calc(var(--topbar-height) + 5px);
-    background: linear-gradient(135deg, #fff, #f0f7f0);
-    width: 100%;
-    min-height: 75px;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 1060;
+  /* Header / branding area */
+  .header-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 4vw;
+    margin-top:calc(var(--topbar-height) + 6px);
+    background:linear-gradient(135deg,#fff,#f0f7f0);
+    width:100%;
+    min-height:75px;
+    box-sizing:border-box;
+    position:relative; /* for absolute-positioned hamburger on mobile */
+    z-index:1060;
   }
 
-  /* Branding left */
-  .branding-block {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    min-width: 0;
+  /* branding (left) */
+  .branding-block{
+    display:flex; align-items:center; gap:14px;
+    flex:1 1 auto; min-width:0;
   }
-  .branding-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
+  .branding-link{
+    display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;
+    min-width:0;
   }
-  .logo-img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 10px;
-    background: #fff;
-    border: 3px solid #1a3a1a;
-    flex-shrink: 0;
+  .logo-img{
+    width:60px; height:60px; object-fit:contain; border-radius:10px;
+    background:#fff; border:3px solid #1a3a1a; flex-shrink:0;
   }
-  .companyNameTop {
-    font-size: 1.6rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-    color: #1a3a1a;
-    line-height: 1.1;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap; /* Always on one line */
-    flex-shrink: 0;      /* Never shrink */
+  .companyNameTop{
+    font-size:1.6rem; font-weight:900; text-transform:uppercase;
+    letter-spacing:1.4px; color:#1a3a1a; line-height:1.1; margin:0; padding:0;
+    white-space:nowrap; /* ALWAYS remain on a single line */
+    flex-shrink:0;      /* never shrink */
   }
 
-  /* Hamburger */
-  .hamburger {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 56px;
-    width: 56px;
-    border-radius: 10px;
-    margin-left: auto;
-    flex-shrink: 0;
+  /* HAMBURGER: boxed button with restored styling + animation */
+  .hamburger{
+    background: rgba(255,255,255,0.92);
+    border: 1.5px solid rgba(26,58,26,0.12);
+    backdrop-filter: blur(3px);
+    border-radius: 12px;
+    height:56px; width:56px;
+    display:inline-flex; align-items:center; justify-content:center;
+    cursor:pointer; padding:0; margin-left:12px; flex-shrink:0;
+    transition: transform .12s ease, box-shadow .12s ease;
+    box-shadow: 0 3px 10px rgba(26,58,26,0.06);
   }
-  .hamburger:focus { outline: none; box-shadow: 0 0 0 4px rgba(46,125,50,0.12); }
-  .hamburger-box { width: 28px; height: 20px; position: relative; }
-  .hamburger-inner,
-  .hamburger-inner::before,
-  .hamburger-inner::after {
-    width: 28px; height: 2px; background: #1a3a1a;
-    position: absolute; left: 0;
-    transition: all 0.22s ease;
-    border-radius: 2px;
-  }
-  .hamburger-inner { top: 9px; }
-  .hamburger-inner::before { content: ""; top: -8px; }
-  .hamburger-inner::after { content: ""; top: 8px; }
-  .hamburger.open .hamburger-inner { background: transparent; }
-  .hamburger.open .hamburger-inner::before { transform: rotate(45deg) translate(4px,4px); top: 0; }
-  .hamburger.open .hamburger-inner::after { transform: rotate(-45deg) translate(4px,-4px); top: 0; }
+  .hamburger:hover{ transform: translateY(-3px); box-shadow:0 6px 18px rgba(26,58,26,0.10); }
+  .hamburger:focus{ outline:none; box-shadow:0 0 0 4px rgba(46,125,50,0.12); }
 
-  /* Side Nav */
-  .side-nav {
-    position: fixed; top: 0; right: 0;
-    width: 280px; max-width: 86vw; height: 100vh;
-    background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,.15);
-    transform: translateX(110%); transition: transform .28s ease;
-    z-index: 2000; padding: 20px; overflow:auto;
+  /* hamburger icon lines */
+  .hamburger-box{ width:28px; height:20px; position:relative; display:inline-block; }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after{
+    width:28px; height:2px; background:#1a3a1a; position:absolute; left:0;
+    transition: all .22s ease; border-radius:2px;
   }
-  .side-nav.open { transform: translateX(0); }
-  .overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.3);
-    opacity: 0; pointer-events: none; transition: opacity .28s ease;
-    z-index: 1999;
-  }
-  .overlay.show { opacity: 1; pointer-events: all; }
+  .hamburger-inner{ top:9px; }
+  .hamburger-inner::before{ content:""; top:-8px; }
+  .hamburger-inner::after{ content:""; top:8px; }
+  .hamburger.open .hamburger-inner{ background:transparent; }
+  .hamburger.open .hamburger-inner::before{ transform: rotate(45deg) translate(4px,4px); top:0; }
+  .hamburger.open .hamburger-inner::after{ transform: rotate(-45deg) translate(4px,-4px); top:0; }
 
-  /* Mobile Fix */
-  @media (max-width: 600px) {
-    :root { --topbar-height: 46px; }
-    .header-bar { padding: 8px 4vw; min-height: 68px; }
-    .logo-img { width: 42px; height: 42px; }
-    .companyNameTop {
-      font-size: clamp(1rem, 4.5vw, 1.25rem);
-      white-space: nowrap;
+  /* small "Menu" pill to make purpose explicit on mobile */
+  .hamburger .menu-pill{ display:none; }
+  @media (max-width: 600px){
+    .hamburger{ position:absolute; right:12px; /* move into top-right empty space */ top:-10px; height:56px; width:56px; }
+    /* place a visible pill slightly above or left so user sees 'Menu' label */
+    .hamburger .menu-pill{
+      display:block;
+      position:absolute;
+      right:calc(100% + 8px); /* sits left of the button */
+      top:50%;
+      transform:translateY(-50%);
+      background: rgba(255,255,255,0.98);
+      color:#1a3a1a;
+      padding:6px 10px;
+      font-weight:700;
+      border-radius:10px;
+      border:1px solid rgba(26,58,26,0.08);
+      box-shadow:0 4px 12px rgba(26,58,26,0.06);
+      white-space:nowrap;
+      font-size:0.95rem;
     }
-    .branding-link { gap: 10px; }
-    .hamburger { width: 52px; height: 52px; }
-    .hamburger-box { transform: none; }
+    /* if you prefer pill above button instead, uncomment:
+    .hamburger .menu-pill { right:0; top:-34px; transform:none; }
+    */
+    /* keep brand visible - no overlap */
+    .companyNameTop{ font-size:1.1rem; }
+    .logo-img{ width:48px; height:48px; }
+  }
+
+  /* side-nav & overlay (unchanged except z-index safety) */
+  .side-nav{
+    position:fixed; top:0; right:0;
+    width:280px; max-width:86vw; height:100vh;
+    background:#fff; box-shadow:-4px 0 20px rgba(0,0,0,.15);
+    transform:translateX(110%); transition: transform .28s ease;
+    z-index:2000; padding:20px; overflow:auto;
+  }
+  .side-nav.open{ transform:translateX(0); }
+  .overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.3);
+    opacity:0; pointer-events:none; transition:opacity .28s ease; z-index:1999;
+  }
+  .overlay.show{ opacity:1; pointer-events:all; }
+
+  /* responsive safe tweaks */
+  @media (max-width:900px){
+    .logo-img{ width:54px; height:54px; }
   }
 </style>
 
 <!-- top call bar -->
-<div class="top-bar">
+<div class="top-bar" role="banner">
   <a href="tel:9999944622" class="phone-link" aria-label="Call SDA Infra and Promoters">
-    <span class="phone-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg></span>
-    Call: 9999944622
+    <span class="phone-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+    </span>
+    <span>Call: 9999944622</span>
   </a>
 </div>
 
 <!-- main header -->
-<header class="header-bar">
+<header class="header-bar" role="navigation" aria-label="Main header">
   <div class="branding-block">
     <a href="https://sdapromoters.com" target="_blank" rel="noopener" class="branding-link">
       <img src="images/logo.png" alt="SDA Infra & Promoters Logo" class="logo-img" />
@@ -157,12 +152,14 @@
     </a>
   </div>
 
+  <!-- hamburger: boxed and obvious; menu-pill appears on mobile -->
   <button id="hamburgerBtn" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sideNav">
+    <span class="menu-pill" aria-hidden="true">Menu</span>
     <span class="hamburger-box"><span class="hamburger-inner" aria-hidden="true"></span></span>
   </button>
 </header>
 
-<!-- side menu -->
+<!-- side menu + overlay -->
 <nav id="sideNav" class="side-nav" aria-hidden="true" aria-label="Main menu">
   <div id="sideNavInner" aria-live="polite">
     <div style="color:#666">Loading menu…</div>
@@ -177,14 +174,14 @@
     const sideInner = document.getElementById('sideNavInner');
     const overlay = document.getElementById('overlay');
 
-    async function loadMenu() {
-      try {
+    async function loadMenu(){
+      try{
         const url = new URL('menu.html', location.href).href;
         const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+        if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
         const text = await res.text();
         sideInner.innerHTML = text;
-      } catch (err) {
+      }catch(err){
         console.error('Failed to load menu.html:', err);
         sideInner.innerHTML = '<div style="color:#b33">Menu failed to load</div>';
       }
@@ -198,7 +195,7 @@
       side.setAttribute('aria-hidden','false');
       document.documentElement.style.overflow='hidden';
       const a = side.querySelector('a');
-      if (a) a.focus();
+      if(a) a.focus();
     }
     function closeNav(){
       side.classList.remove('open');
@@ -212,17 +209,15 @@
 
     btn.addEventListener('click', async ()=>{
       const expanded = btn.getAttribute('aria-expanded') === 'true';
-      if (expanded) return closeNav();
-      if (!sideInner.querySelector('ul')) {
-        await loadMenu();
-      }
+      if(expanded) return closeNav();
+      if(!sideInner.querySelector('ul')) await loadMenu();
       openNav();
     });
 
     overlay.addEventListener('click', closeNav);
-    side.addEventListener('click', (e) => { if (e.target.tagName === 'A') closeNav(); });
+    side.addEventListener('click', (e) => { if(e.target.tagName === 'A') closeNav(); });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && side.classList.contains('open')) closeNav();
+      if(e.key === 'Escape' && side.classList.contains('open')) closeNav();
     });
   })();
 </script>
