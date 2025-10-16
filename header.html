@@ -1,174 +1,82 @@
-<!-- header.html -->
-<header class="site-header" role="banner">
-  <div class="header-inner">
-    <a class="brand" href="index.html" aria-label="SDA Infra and Promoters homepage">
-      <!-- simple text logo, replace with img if you want -->
-      <strong>SDA Infra &amp; Promoters</strong>
-    </a>
+<!-- header.html — minimal, drop-in. Only adds a working hamburger on the right. -->
+<header id="siteHeader" class="site-header" role="banner" style="border-bottom:1px solid #eee;background:#fff;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;">
+    <a class="brand" href="index.html" style="font-weight:700;color:#111;text-decoration:none;">SDA Infra &amp; Promoters</a>
 
-    <!-- phone / quick info (visible on larger screens) -->
-    <div class="header-info" aria-hidden="true">
-      <a class="phone" href="tel:+919999944622">+91 99999 44622</a>
+    <!-- phone (keeps whatever you already used) -->
+    <div class="header-info" style="margin-right:12px;">
+      <a href="tel:+919999944622" style="text-decoration:none;color:#333;font-size:14px;">+91 99999 44622</a>
     </div>
 
-    <!-- Hamburger button -->
-    <button id="navToggle" class="hamburger" aria-controls="sideNav" aria-expanded="false" aria-label="Open menu">
-      <span class="hamburger-box" aria-hidden="true">
-        <span class="hamburger-inner"></span>
+    <!-- hamburger button (right side) -->
+    <button id="hamburgerBtn" aria-label="Open menu" aria-controls="sideNav" aria-expanded="false"
+            style="background:transparent;border:0;padding:8px;cursor:pointer;">
+      <!-- simple 3-line icon -->
+      <span style="display:inline-block;width:26px;height:18px;position:relative;">
+        <span style="position:absolute;height:2px;left:0;right:0;top:2px;background:#111;display:block;border-radius:2px"></span>
+        <span style="position:absolute;height:2px;left:0;right:0;top:8px;background:#111;display:block;border-radius:2px"></span>
+        <span style="position:absolute;height:2px;left:0;right:0;bottom:2px;background:#111;display:block;border-radius:2px"></span>
       </span>
     </button>
   </div>
 
-  <!-- Slide-in side nav -->
-  <nav id="sideNav" class="side-nav" aria-hidden="true" aria-label="Main navigation">
-    <div class="side-nav-inner" role="navigation">
-      <button id="navClose" class="nav-close" aria-label="Close menu">&times;</button>
-
-      <ul class="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="blogs.html">Blogs &amp; Gallery</a></li>
-      </ul>
-
-      <div class="side-footer">
-        <a class="phone-large" href="tel:+919999944622">Call: +91 99999 44622</a>
-      </div>
+  <!-- minimal slide-out nav -->
+  <nav id="sideNav" aria-hidden="true" style="position:fixed;top:0;right:0;height:100vh;width:300px;max-width:86vw;background:#fff;box-shadow:-6px 0 20px rgba(0,0,0,.12);transform:translateX(110%);transition:transform .28s ease;z-index:9999;padding:18px;overflow:auto;">
+    <button id="sideClose" aria-label="Close menu" style="background:transparent;border:0;font-size:26px;float:right;cursor:pointer;">&times;</button>
+    <ul style="list-style:none;padding:14px 0 0 0;margin:0;font-weight:600;">
+      <li style="padding:10px 0;"><a href="index.html" style="color:#111;text-decoration:none;">Home</a></li>
+      <li style="padding:10px 0;"><a href="about.html" style="color:#111;text-decoration:none;">About Us</a></li>
+      <li style="padding:10px 0;"><a href="careers.html" style="color:#111;text-decoration:none;">Careers</a></li>
+      <li style="padding:10px 0;"><a href="blogs.html" style="color:#111;text-decoration:none;">Blogs &amp; Gallery</a></li>
+    </ul>
+    <div style="margin-top:20px;border-top:1px solid #eee;padding-top:14px;color:#444;font-size:14px;">
+      <div><strong>Call</strong></div>
+      <div style="margin-top:6px;"><a href="tel:+919999944622" style="text-decoration:none;color:#111;">+91 99999 44622</a></div>
     </div>
   </nav>
 
   <!-- overlay -->
-  <div id="navOverlay" class="nav-overlay" tabindex="-1" aria-hidden="true"></div>
-
-  <style>
-    /* --- Basic reset for header area --- */
-    .site-header { background: #fff; border-bottom: 1px solid #e6e6e6; position:relative; z-index:50; }
-    .header-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 16px; gap:12px; }
-
-    .brand { font-size:18px; color:#111; text-decoration:none; }
-    .brand strong { letter-spacing:0.2px; }
-
-    .header-info .phone { display:inline-block; font-size:14px; color:#333; text-decoration:none; padding:6px 10px; border-radius:6px; background: #f6f6f6; }
-
-    /* Hamburger */
-    .hamburger { background:transparent; border:0; padding:10px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
-    .hamburger:focus { outline:3px solid rgba(0,120,212,0.18); border-radius:6px; }
-
-    /* hamburger lines (pure CSS) */
-    .hamburger-box { display:inline-block; width:28px; height:20px; position:relative; }
-    .hamburger-inner { position:absolute; top:50%; left:0; right:0; height:2px; background:#111; transform:translateY(-50%); transition: all 0.25s ease; }
-    .hamburger-inner::before, .hamburger-inner::after {
-      content: ""; display:block; position:absolute; left:0; right:0; height:2px; background:#111; transition: all 0.25s ease;
-    }
-    .hamburger-inner::before { top:-8px; }
-    .hamburger-inner::after { bottom:-8px; }
-
-    /* Side nav */
-    .side-nav { position:fixed; top:0; left:0; height:100vh; width:320px; max-width:86vw; background:#fff; box-shadow: 2px 0 18px rgba(11,13,17,0.12); transform:translateX(-110%); transition: transform 0.28s cubic-bezier(.2,.9,.2,1); z-index:60; overflow-y:auto; }
-    .side-nav[aria-hidden="false"] { transform:translateX(0); }
-
-    .side-nav-inner { padding:20px; display:flex; flex-direction:column; min-height:100vh; }
-    .nav-close { font-size:28px; line-height:1; background:transparent; border:0; align-self:flex-end; cursor:pointer; margin-bottom:6px; }
-    .nav-list { list-style:none; padding:0; margin:10px 0 0 0; display:flex; flex-direction:column; gap:6px; }
-    .nav-list a { display:block; padding:12px 10px; text-decoration:none; color:#111; font-weight:600; border-radius:6px; }
-    .nav-list a:focus, .nav-list a:hover { background:#f3f6fb; outline:none; }
-
-    .side-footer { margin-top:auto; padding-top:16px; border-top:1px solid #eee; }
-    .phone-large { display:inline-block; text-decoration:none; padding:10px 12px; background:#f6f6f6; border-radius:6px; color:#111; }
-
-    /* Overlay */
-    .nav-overlay { position:fixed; inset:0; background:rgba(5,10,15,0.36); opacity:0; pointer-events:none; transition:opacity .28s ease; z-index:55; }
-    .nav-overlay[aria-hidden="false"] { opacity:1; pointer-events:auto; }
-
-    /* When open, animate hamburger into X */
-    .hamburger.open .hamburger-inner { background:transparent; }
-    .hamburger.open .hamburger-inner::before { transform:translateY(8px) rotate(45deg); }
-    .hamburger.open .hamburger-inner::after { transform:translateY(-8px) rotate(-45deg); }
-
-    /* Responsive tweaks */
-    @media (min-width: 880px) {
-      /* On larger screens show inline nav instead of overlay side nav */
-      .hamburger { display:none; }
-      .header-info { display:flex; }
-    }
-    @media (max-width: 879px) {
-      .header-info { display:none; } /* keep header compact on small screens */
-    }
-  </style>
+  <div id="sideOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.36);opacity:0;pointer-events:none;transition:opacity .28s ease;z-index:9998;"></div>
 
   <script>
     (function(){
-      const btn = document.getElementById('navToggle');
+      const btn = document.getElementById('hamburgerBtn');
       const side = document.getElementById('sideNav');
-      const closeBtn = document.getElementById('navClose');
-      const overlay = document.getElementById('navOverlay');
-
-      // Keep track of last focused element to restore focus when nav closes
-      let lastFocus = null;
-
+      const closeBtn = document.getElementById('sideClose');
+      const overlay = document.getElementById('sideOverlay');
+      // open
       function openNav() {
-        lastFocus = document.activeElement;
         btn.setAttribute('aria-expanded','true');
+        side.style.transform = 'translateX(0)';
         side.setAttribute('aria-hidden','false');
-        overlay.setAttribute('aria-hidden','false');
-        btn.classList.add('open');
-        // move focus to first link in nav
-        const firstLink = side.querySelector('.nav-list a');
-        if (firstLink) firstLink.focus();
-        // prevent body scroll
+        overlay.style.opacity = '1'; overlay.style.pointerEvents = 'auto';
+        // focus first link
+        const a = side.querySelector('a');
+        if(a) a.focus();
         document.documentElement.style.overflow = 'hidden';
       }
-
+      // close
       function closeNav() {
         btn.setAttribute('aria-expanded','false');
+        side.style.transform = 'translateX(110%)';
         side.setAttribute('aria-hidden','true');
-        overlay.setAttribute('aria-hidden','true');
-        btn.classList.remove('open');
-        // restore focus
-        if (lastFocus) lastFocus.focus();
+        overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
         document.documentElement.style.overflow = '';
+        btn.focus();
       }
-
-      // Toggle
       btn.addEventListener('click', () => {
-        const open = btn.getAttribute('aria-expanded') === 'true';
-        if (open) closeNav(); else openNav();
+        if (btn.getAttribute('aria-expanded') === 'true') closeNav(); else openNav();
       });
-
-      // Close button inside nav
       closeBtn.addEventListener('click', closeNav);
-
-      // close on overlay click
       overlay.addEventListener('click', closeNav);
-
-      // close on link click (mobile behavior) — helpful so nav closes after navigation
+      // close when a link is clicked (mobile behaviour)
       side.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') closeNav();
       });
-
-      // close on ESC
+      // close on Esc
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && side.getAttribute('aria-hidden') === 'false') closeNav();
       });
-
-      // Basic focus trap: keep Tab within side nav while open
-      document.addEventListener('keydown', (e) => {
-        if (e.key !== 'Tab') return;
-        if (side.getAttribute('aria-hidden') === 'true') return;
-        const focusable = side.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
-        if (!focusable.length) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      });
-
-      // Defensive: if JS disabled, ensure side nav is hidden via aria-hidden attr; CSS already transforms it out of view.
     })();
   </script>
 </header>
