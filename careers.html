@@ -4,71 +4,103 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Careers — SDA Infra & Promoters</title>
-  <meta name="description" content="Explore career opportunities with SDA Infra & Promoters and join our growing team.">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #111;
-      background: #fff;
-    }
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px 16px 60px 16px;
-      box-sizing: border-box;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5em;
-      color: #1a3a1a;
-      text-align: center;
-    }
-    p.intro {
-      color: #444;
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 2em;
-      line-height: 1.5;
-    }
-    iframe {
-      width: 100%;
-      height: 900px;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    }
-    @media (max-width: 600px) {
-      iframe {
-        height: 1100px;
-      }
-    }
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#111}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    #headerdiv { width:100%; }
+
+    h2{margin-top:0}
+    .card{background:#fff;border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04);margin-bottom:24px}
+    .muted{color:#666}
+    .btn{background:#1f7a3a;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block;margin-top:8px}
+    .btn.secondary{background:#fff;color:#1f7a3a;border:1px solid #e6e6e6}
+    footer{border-top:1px solid #eee;margin-top:32px;padding:16px 0;text-align:center;color:#444}
+    ul{padding-left:18px}
+
+    /* Layout grid */
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+    /* Map container responsive */
+    .map-container{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;box-shadow:0 6px 18px rgba(2,12,6,.06)}
+    .map-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+    /* Responsive Microsoft Form */
+    .form-container{position:relative;width:100%;padding-bottom:120%;height:0;overflow:hidden;border-radius:8px;margin-top:12px}
+    .form-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
   </style>
 </head>
 <body>
-  <!-- header include -->
+  <!-- Header dynamically loaded -->
   <div id="headerdiv" aria-hidden="true"></div>
 
-  <main>
-    <h1>Join Our Team</h1>
-    <p class="intro">
-      At <strong>SDA Infra & Promoters</strong>, we’re always looking for motivated individuals who want to grow
-      in the real estate and infrastructure sector. Fill out the form below to apply — our HR team will reach out if your profile matches an open role.
-    </p>
+  <main class="wrap">
+    <h1>Careers at SDA Infra & Promoters</h1>
+    <p class="muted">Join our growing team and help us build Delhi NCR’s most trusted real estate brand.</p>
 
-    <!-- embedded Microsoft Form -->
-    <iframe
-      src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAFGy7qFUQzNaN05QQU9BMUtXRTZDSTRMMkQ3WFZPSC4u"
-      title="SDA Infra & Promoters Careers Form"
-      allowfullscreen>
-    </iframe>
+    <div class="grid">
+      <!-- Left column: office + form -->
+      <div>
+        <div class="card">
+          <h2>Our Office Location</h2>
+          <p class="muted">Branch Office: Pili Building, Opposite Nithari School & Jal Board Pump, Sukhi Nehar Road, Pratap Vihar, Delhi 110086</p>
+
+          <div class="map-container">
+            <iframe
+              src="https://maps.google.com/maps?q=Pili%20Building%20Sukhi%20Nehar%20Road%20Pratap%20Vihar%20Delhi&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Apply for a Role</h2>
+          <p class="muted">Fill the form below or open it in a new tab.</p>
+          <a class="btn" target="_blank" rel="noopener"
+             href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAFGy7qFUQzNaN05QQU9BMUtXRTZDSTRMMkQ3WFZPSC4u">
+            Open Form
+          </a>
+
+          <div class="form-container">
+            <iframe
+              src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAFGy7qFUQzNaN05QQU9BMUtXRTZDSTRMMkQ3WFZPSC4u"
+              loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: job listings -->
+      <aside>
+        <div class="card">
+          <h2>Current Openings</h2>
+          <ul class="muted">
+            <li>Sales Executive — Real Estate (Delhi NCR)</li>
+            <li>Video Editor — Part-Time</li>
+            <li>Site Supervisor — Construction</li>
+            <li>Marketing & Social Media Associate</li>
+          </ul>
+          <a class="btn" target="_blank" rel="noopener"
+             href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAFGy7qFUQzNaN05QQU9BMUtXRTZDSTRMMkQ3WFZPSC4u">
+            Apply Now
+          </a>
+        </div>
+
+        <div class="card">
+          <h2>Contact Us</h2>
+          <p class="muted">
+            📞 Call: <strong>9999944622</strong><br>
+            ⏰ Mon–Sat, 10 AM – 6 PM
+          </p>
+        </div>
+      </aside>
+    </div>
   </main>
 
-  <!-- footer include -->
+  <!-- Footer dynamically loaded -->
   <div id="footerdiv" aria-hidden="true"></div>
 
-  <!-- helper to load header/footer and run their scripts -->
   <script>
+    // same dynamic loader as index.html
     async function loadHTML(targetId, relPath) {
       const target = document.getElementById(targetId);
       if (!target) return;
@@ -80,19 +112,19 @@
         const tmp = document.createElement('div');
         tmp.innerHTML = text;
 
-        // append non-script content
+        // append non-script nodes
         Array.from(tmp.childNodes).forEach(node => {
           if (node.tagName && node.tagName.toLowerCase() === 'script') return;
           target.appendChild(node.cloneNode(true));
         });
 
-        // execute any scripts found inside the HTML (header/footer)
+        // run scripts if any inside header/footer
         const scripts = tmp.querySelectorAll('script');
         for (const s of scripts) {
           const newScript = document.createElement('script');
           for (const attr of s.attributes) newScript.setAttribute(attr.name, attr.value);
           if (s.src) {
-            await new Promise(resLoad => {
+            await new Promise((resLoad) => {
               newScript.onload = resLoad;
               newScript.onerror = resLoad;
               document.body.appendChild(newScript);
@@ -107,7 +139,7 @@
         target.setAttribute('aria-hidden','false');
       } catch (err) {
         console.error('loadHTML error', err);
-        target.innerHTML = `<div style="padding:12px;background:#fee;color:#600">Failed to load ${relPath}</div>`;
+        target.innerHTML = '<div style="padding:12px;background:#fee;color:#600">Failed to load header/footer</div>';
         target.setAttribute('aria-hidden','true');
       }
     }
