@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SDA Promoters</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: #004d00;
+      overflow-x: hidden;
+    }
+    #headerdiv, #footerdiv {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .slideshow-container {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .slideshow-container img {
+      width: 100%;
+      height: auto;
+      display: none;
+      background: black;
+      border: 0;
+    }
+    .slideshow-container img.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="headerdiv"></div>
+  <div class="slideshow-container">
+    <img src="https://i.postimg.cc/tT6pbKBz/img1.jpg" alt="First" class="active"/>
+    <img src="https://i.postimg.cc/3xkqzgSp/img2.jpg" alt="Second"/>
+  </div>
+  <div id="footerdiv"></div>
+  <script>
+    async function loadHTML(id, url) {
+      const response = await fetch(url);
+      if (response.ok) {
+        document.getElementById(id).innerHTML = await response.text();
+      }
+    }
+    async function startPage() {
+      await loadHTML("headerdiv", "header.html");
+      await loadHTML("footerdiv", "footer.html");
+    }
+    startPage();
+
+    function startSlideshow() {
+      const images = document.querySelectorAll('.slideshow-container img');
+      let current = 0;
+      setInterval(() => {
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
+      }, 5000);
+    }
+    startSlideshow();
+  </script>
+</body>
+</html>

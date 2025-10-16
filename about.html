@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - SDA Promoters</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="headerdiv"></div>
+
+  <main class="main-content">
+    <h1>About SDA Promoters</h1>
+    <p>
+      SDA Promoters is a trusted name in the real estate industry in Delhi NCR.
+      With a deep understanding of local markets and a commitment to transparent,
+      honest service, we help families and investors find the property that best fits
+      their needs.
+    </p>
+    <h2>Our Mission</h2>
+    <p>
+      Our mission is to help every Delhiite leave rental woes behind and
+      step into the comfort and pride of ownership. We believe in turning your
+      "Ghar Ho Apna" dream into a reality.
+    </p>
+    <h2>Contact Details</h2>
+    <ul>
+      <li><b>Phone:</b> 9999944622</li>
+      <li><b>Email:</b> info@sdapromoters.com</li>
+      <li><b>Main Office:</b> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015</li>
+      <li><b>Branch Office:</b> Pili Building, Opposite Nithari School & Jal Board Pump, Sukhi Nehar Road, Pratap Vihar, Delhi 110086</li>
+    </ul>
+  </main>
+
+  <div id="footerdiv"></div>
+
+  <script>
+    async function loadHTML(id, url) {
+      const response = await fetch(url);
+      if (response.ok) {
+        document.getElementById(id).innerHTML = await response.text();
+      }
+    }
+    async function startPage() {
+      await loadHTML("headerdiv", "header.html");
+      await loadHTML("footerdiv", "footer.html");
+    }
+    startPage();
+  </script>
+</body>
+</html>
