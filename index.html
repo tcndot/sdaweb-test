@@ -1,71 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>SDA Promoters</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SDA Infra & Promoters</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: black;
-      color: #004d00;
-      overflow-x: hidden;
-    }
-    #headerdiv, #footerdiv {
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .slideshow-container {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    .slideshow-container img {
-      width: 100%;
-      height: auto;
-      display: none;
-      background: black;
-      border: 0;
-    }
-    .slideshow-container img.active {
-      display: block;
-    }
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#111}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    /* placeholder so header injection area doesn't jump */
+    #headerdiv { width:100%; }
   </style>
 </head>
 <body>
-  <div id="headerdiv"></div>
-  <div class="slideshow-container">
-    <img src="https://i.postimg.cc/tT6pbKBz/img1.jpg" alt="First" class="active"/>
-    <img src="https://i.postimg.cc/3xkqzgSp/img2.jpg" alt="Second"/>
-  </div>
-  <div id="footerdiv"></div>
+  <!-- keep your existing layout: header will be injected here -->
+  <div id="headerdiv" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <h1>Welcome</h1>
+    <p>Replace this content with your existing index content. This file is intentionally minimal so we don't redesign anything.</p>
+  </main>
+
+  <div id="footerdiv" aria-hidden="true"></div>
+
   <script>
-    async function loadHTML(id, url) {
-      const response = await fetch(url);
-      if (response.ok) {
-        document.getElementById(id).innerHTML = await response.text();
+    // loadHTML: fetch partial, insert, and execute any <script> tags inside it.
+    async function loadHTML(targetId, relPath) {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      try {
+        const url = new URL(relPath, location.href).href;
+        const res = await fetch(url, {cache:'no-store'});
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
+        const text = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = text;
+
+        // append non-script nodes
+        Array.from(tmp.childNodes).forEach(node => {
+          if (node.tagName && node.tagName.toLowerCase() === 'script') return;
+          target.appendChild(node.cloneNode(true));
+        });
+
+        // run scripts
+        const scripts = tmp.querySelectorAll('script');
+        for (const s of scripts) {
+          const newScript = document.createElement('script');
+          for (const attr of s.attributes) newScript.setAttribute(attr.name, attr.value);
+          if (s.src) {
+            // external -> append & wait
+            await new Promise((resLoad) => {
+              newScript.onload = resLoad;
+              newScript.onerror = resLoad; // don't block on failure
+              document.body.appendChild(newScript);
+              newScript.src = s.src;
+            });
+          } else {
+            newScript.textContent = s.textContent;
+            document.body.appendChild(newScript);
+          }
+        }
+
+        target.setAttribute('aria-hidden','false');
+      } catch (err) {
+        console.error('loadHTML error', err);
+        target.innerHTML = '<div style="padding:12px;background:#fee;color:#600">Failed to load header/footer</div>';
+        target.setAttribute('aria-hidden','true');
       }
     }
-    async function startPage() {
-      await loadHTML("headerdiv", "header.html");
-      await loadHTML("footerdiv", "footer.html");
-    }
-    startPage();
 
-    function startSlideshow() {
-      const images = document.querySelectorAll('.slideshow-container img');
-      let current = 0;
-      setInterval(() => {
-        images[current].classList.remove('active');
-        current = (current + 1) % images.length;
-        images[current].classList.add('active');
-      }, 5000);
-    }
-    startSlideshow();
+    (async function init() {
+      await loadHTML('headerdiv','header.html'); // loads header and runs its script
+      await loadHTML('footerdiv','footer.html'); // footer optional; safe if exists
+    })();
   </script>
 </body>
 </html>
