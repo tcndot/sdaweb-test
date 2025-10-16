@@ -10,10 +10,25 @@
     #headerdiv { width:100%; }
 
     h1,h2{margin-top:0;}
-    .card{background:#fff;border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04);margin-bottom:24px;}
+    .card{
+      background:#fff;
+      border-radius:10px;
+      padding:18px;
+      box-shadow:0 6px 18px rgba(8,24,12,.06);
+      border:1px solid rgba(0,0,0,.04);
+      margin-bottom:24px;
+    }
     .muted{color:#666;}
-    .btn{background:#1f7a3a;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block;margin-top:8px;}
-    .btn.secondary{background:#fff;color:#1f7a3a;border:1px solid #e6e6e6;}
+    .btn{
+      background:#1f7a3a;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:700;
+      display:inline-block;
+      margin-top:8px;
+    }
     ul{padding-left:18px;}
     footer{border-top:1px solid #eee;margin-top:32px;padding:16px 0;text-align:center;color:#444;}
 
@@ -36,7 +51,6 @@
       border:0;
     }
 
-    /* Layout adjustments for small screens */
     @media(max-width:900px){
       .wrap{padding:16px;}
     }
@@ -53,10 +67,12 @@
     <!-- Apply Section -->
     <div class="card">
       <h2>Apply for Customer Relationship Manager</h2>
-      <p class="muted">We are seeking an energetic and persuasive Customer Relationship Manager (CRM) to manage client interactions, follow up on leads, and maintain long-term relationships with homebuyers.</p>
-
-      <p><strong>Skills required:</strong> Communication, Sales Coordination, Client Follow-up, and CRM Tools.</p>
-      <p><strong>Location:</strong> Pratap Vihar, Delhi NCR</p>
+      <p class="muted">
+        We are looking for an energetic and persuasive <strong>Customer Relationship Manager</strong> to manage client interactions, 
+        follow up on leads, and maintain long-term relationships with homebuyers.
+      </p>
+      <p><strong>Skills required:</strong> Excellent communication, sales coordination, client follow-up, and CRM tools.</p>
+      <p><strong>Location:</strong> Ramesh Nagar, Delhi</p>
 
       <div class="form-container">
         <iframe
@@ -69,22 +85,16 @@
     <div class="card">
       <h2>Current Openings</h2>
       <ul class="muted">
-        <li>Sales Executive — Real Estate (Delhi NCR)</li>
         <li>Customer Relationship Manager — Full Time</li>
+        <li>Sales Executive — Real Estate (Delhi NCR)</li>
         <li>Video Editor — Part-Time</li>
         <li>Marketing & Social Media Associate</li>
       </ul>
     </div>
 
-    <!-- Contact Information -->
-    <div class="card">
-      <h2>For More Information</h2>
-      <p class="muted">
-        📞 <strong>9999944622</strong><br>
-        ✉️ <strong>hr@sda-developers.example</strong><br>
-        🕓 Mon–Sat, 10 AM – 6 PM
-      </p>
-      <a class="btn" href="tel:9999944622">Call Now</a>
+    <!-- Contact / Call -->
+    <div class="card" style="text-align:center;">
+      <a class="btn" href="tel:9999944622">📞 Call Now</a>
     </div>
   </main>
 
@@ -104,13 +114,11 @@
         const tmp = document.createElement('div');
         tmp.innerHTML = text;
 
-        // append non-script nodes
         Array.from(tmp.childNodes).forEach(node => {
           if (node.tagName && node.tagName.toLowerCase() === 'script') return;
           target.appendChild(node.cloneNode(true));
         });
 
-        // run scripts inside header/footer if any
         const scripts = tmp.querySelectorAll('script');
         for (const s of scripts) {
           const newScript = document.createElement('script');
