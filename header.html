@@ -1,224 +1,304 @@
 <!-- HEADER START -->
 <style>
-  :root { --topbar-height: 48px; }
+  :root { --topbar-height: 52px; --topbar-bg: linear-gradient(135deg,#1a3a1a,#2e7d32); }
 
-  /* Top info bar */
-  .top-bar{
-    background: linear-gradient(135deg,#1a3a1a,#2e7d32);
-    color:#e8f5e8;
-    padding:8px 5vw;
+  /* ---------- Top bar (fixed, always visible) ---------- */
+  .top-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--topbar-height);
+    background: var(--topbar-bg);
+    color: #e8f5e8;
+    padding: 8px 4vw;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 3000;               /* high so dropdown sits above content */
+    box-sizing: border-box;
+    font-weight: 700;
+  }
+  .top-left {
     display:flex;
     align-items:center;
-    gap:12px;
-    font-size:1rem;
-    font-weight:bold;
-    position:fixed; top:0; left:0; right:0;
-    height:var(--topbar-height);
-    z-index:1050; box-sizing:border-box;
+    gap:10px;
+    min-width: 0;
   }
-  .phone-link{ color:#e8f5e8; text-decoration:none; display:flex; align-items:center; gap:8px; }
-  .phone-link:hover{ color:#c8e6c9; text-decoration:underline; }
-  .phone-icon svg{ width:19px; height:19px; fill:#e8f5e8; display:block; }
-
-  /* Header / branding area */
-  .header-bar{
+  .phone-link {
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    padding:10px 4vw;
-    margin-top:calc(var(--topbar-height) + 6px);
-    background:linear-gradient(135deg,#fff,#f0f7f0);
-    width:100%;
-    min-height:75px;
-    box-sizing:border-box;
-    position:relative; /* for absolute-positioned hamburger on mobile */
-    z-index:1060;
+    gap:8px;
+    color: #e8f5e8;
+    text-decoration: none;
+  }
+  .phone-link svg { width:18px; height:18px; fill: #e8f5e8; display:block; }
+
+  /* ---------- Menu button (in top bar, right) ---------- */
+  .top-menu-wrap {
+    margin-left: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  /* branding (left) */
-  .branding-block{
-    display:flex; align-items:center; gap:14px;
-    flex:1 1 auto; min-width:0;
-  }
-  .branding-link{
-    display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;
-    min-width:0;
-  }
-  .logo-img{
-    width:60px; height:60px; object-fit:contain; border-radius:10px;
-    background:#fff; border:3px solid #1a3a1a; flex-shrink:0;
-  }
-  .companyNameTop{
-    font-size:1.6rem; font-weight:900; text-transform:uppercase;
-    letter-spacing:1.4px; color:#1a3a1a; line-height:1.1; margin:0; padding:0;
-    white-space:nowrap; /* ALWAYS remain on a single line */
-    flex-shrink:0;      /* never shrink */
-  }
-
-  /* HAMBURGER: boxed button with restored styling + animation */
-  .hamburger{
-    background: rgba(255,255,255,0.92);
-    border: 1.5px solid rgba(26,58,26,0.12);
-    backdrop-filter: blur(3px);
-    border-radius: 12px;
-    height:56px; width:56px;
-    display:inline-flex; align-items:center; justify-content:center;
-    cursor:pointer; padding:0; margin-left:12px; flex-shrink:0;
+  .menu-btn {
+    background: rgba(255,255,255,0.95);
+    color: #1a3a1a;
+    border: 1px solid rgba(26,58,26,0.12);
+    padding: 8px 12px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 14px rgba(26,58,26,0.06);
     transition: transform .12s ease, box-shadow .12s ease;
-    box-shadow: 0 3px 10px rgba(26,58,26,0.06);
   }
-  .hamburger:hover{ transform: translateY(-3px); box-shadow:0 6px 18px rgba(26,58,26,0.10); }
-  .hamburger:focus{ outline:none; box-shadow:0 0 0 4px rgba(46,125,50,0.12); }
+  .menu-btn:hover { transform: translateY(-2px); }
+  .menu-btn:focus { outline: none; box-shadow: 0 0 0 4px rgba(46,125,50,0.12); }
 
-  /* hamburger icon lines */
-  .hamburger-box{ width:28px; height:20px; position:relative; display:inline-block; }
-  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after{
-    width:28px; height:2px; background:#1a3a1a; position:absolute; left:0;
-    transition: all .22s ease; border-radius:2px;
+  .menu-btn .arrow {
+    display:inline-block;
+    width: 12px; height: 12px;
+    transform-origin: center;
+    transition: transform .18s ease;
+    font-size: 12px;
+    line-height: 1;
   }
-  .hamburger-inner{ top:9px; }
-  .hamburger-inner::before{ content:""; top:-8px; }
-  .hamburger-inner::after{ content:""; top:8px; }
-  .hamburger.open .hamburger-inner{ background:transparent; }
-  .hamburger.open .hamburger-inner::before{ transform: rotate(45deg) translate(4px,4px); top:0; }
-  .hamburger.open .hamburger-inner::after{ transform: rotate(-45deg) translate(4px,-4px); top:0; }
+  .menu-btn[aria-expanded="true"] .arrow { transform: rotate(180deg); }
 
-  /* small "Menu" pill to make purpose explicit on mobile */
-  .hamburger .menu-pill{ display:none; }
-  @media (max-width: 600px){
-    .hamburger{ position:absolute; right:12px; /* move into top-right empty space */ top:-10px; height:56px; width:56px; }
-    /* place a visible pill slightly above or left so user sees 'Menu' label */
-    .hamburger .menu-pill{
-      display:block;
-      position:absolute;
-      right:calc(100% + 8px); /* sits left of the button */
-      top:50%;
-      transform:translateY(-50%);
-      background: rgba(255,255,255,0.98);
-      color:#1a3a1a;
-      padding:6px 10px;
-      font-weight:700;
-      border-radius:10px;
-      border:1px solid rgba(26,58,26,0.08);
-      box-shadow:0 4px 12px rgba(26,58,26,0.06);
-      white-space:nowrap;
-      font-size:0.95rem;
-    }
-    /* if you prefer pill above button instead, uncomment:
-    .hamburger .menu-pill { right:0; top:-34px; transform:none; }
-    */
-    /* keep brand visible - no overlap */
-    .companyNameTop{ font-size:1.1rem; }
-    .logo-img{ width:48px; height:48px; }
+  /* ---------- Dropdown panel anchored under top-bar ---------- */
+  .menu-dropdown {
+    position: fixed;
+    right: 4vw; /* aligned to menu button visually */
+    top: calc(var(--topbar-height) + 10px);
+    width: min(92vw, 360px);
+    max-height: 60vh;
+    overflow: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 40px rgba(10,20,10,0.15);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 12px;
+    z-index: 2999;
+    transform-origin: top right;
+    transform: scale(.98);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .14s ease, opacity .14s ease;
+  }
+  .menu-dropdown.open {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .menu-dropdown ul { list-style: none; padding: 6px 4px; margin: 0; }
+  .menu-dropdown li { margin: 6px 0; }
+  .menu-dropdown a {
+    color: #12321a;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+  .menu-dropdown a:hover, .menu-dropdown a:focus {
+    background: #f1f7f1;
+    color: #0b3a13;
+    outline: none;
+  }
+  .menu-dropdown .menu-note { color: #666; font-size: 0.9rem; padding: 4px 8px; }
+
+  /* small screens: dropdown full width under top-bar */
+  @media (max-width: 420px) {
+    .menu-dropdown { right: 6px; left: 6px; width: auto; max-width: none; }
+    .menu-btn { padding: 8px 10px; }
   }
 
-  /* side-nav & overlay (unchanged except z-index safety) */
-  .side-nav{
-    position:fixed; top:0; right:0;
-    width:280px; max-width:86vw; height:100vh;
-    background:#fff; box-shadow:-4px 0 20px rgba(0,0,0,.15);
-    transform:translateX(110%); transition: transform .28s ease;
-    z-index:2000; padding:20px; overflow:auto;
+  /* ---------- Header / Branding area (below top-bar) ---------- */
+  .header-bar {
+    margin-top: calc(var(--topbar-height) + 10px);
+    display: flex;
+    align-items: center;
+    padding: 12px 4vw;
+    background: linear-gradient(135deg,#fff,#f0f7f0);
+    box-sizing: border-box;
+    z-index: 1060;
   }
-  .side-nav.open{ transform:translateX(0); }
-  .overlay{
-    position:fixed; inset:0; background:rgba(0,0,0,0.3);
-    opacity:0; pointer-events:none; transition:opacity .28s ease; z-index:1999;
+  .branding {
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-width: 0;
   }
-  .overlay.show{ opacity:1; pointer-events:all; }
+  .branding-link { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+  .logo-img { width: 64px; height: 64px; object-fit: contain; border-radius: 12px; background: #fff; border: 3px solid #1a3a1a; }
+  .companyNameTop {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    color: #1a3a1a;
+    white-space: nowrap;
+  }
 
-  /* responsive safe tweaks */
-  @media (max-width:900px){
-    .logo-img{ width:54px; height:54px; }
+  /* ensure dropdown doesn't hide behind header on z-index collisions */
+  .menu-dropdown { z-index: 2999; }
+
+  /* small screens: slightly smaller branding */
+  @media (max-width: 540px) {
+    .logo-img { width: 48px; height: 48px; }
+    .companyNameTop { font-size: 1.15rem; }
+    .top-bar { padding: 8px 3vw; height: calc(var(--topbar-height) - 2px); }
   }
 </style>
 
-<!-- top call bar -->
+<!-- Topbar (fixed) -->
 <div class="top-bar" role="banner">
-  <a href="tel:9999944622" class="phone-link" aria-label="Call SDA Infra and Promoters">
-    <span class="phone-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
-    </span>
-    <span>Call: 9999944622</span>
-  </a>
-</div>
-
-<!-- main header -->
-<header class="header-bar" role="navigation" aria-label="Main header">
-  <div class="branding-block">
-    <a href="https://sdapromoters.com" target="_blank" rel="noopener" class="branding-link">
-      <img src="images/logo.png" alt="SDA Infra & Promoters Logo" class="logo-img" />
-      <span class="companyNameTop">SDA Infra & Promoters</span>
+  <div class="top-left">
+    <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+      <span>Call: 9999944622</span>
     </a>
   </div>
 
-  <!-- hamburger: boxed and obvious; menu-pill appears on mobile -->
-  <button id="hamburgerBtn" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sideNav">
-    <span class="menu-pill" aria-hidden="true">Menu</span>
-    <span class="hamburger-box"><span class="hamburger-inner" aria-hidden="true"></span></span>
-  </button>
+  <!-- menu button sits in top bar, right aligned -->
+  <div class="top-menu-wrap">
+    <button id="topMenuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="topMenuDropdown">
+      <span>Menu</span>
+      <span class="arrow" aria-hidden="true">▾</span>
+    </button>
+  </div>
+</div>
+
+<!-- Dropdown panel (lazy-populated) -->
+<div id="topMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="topMenuBtn" tabindex="-1">
+  <div class="menu-note">Loading navigation…</div>
+</div>
+
+<!-- Branding area below top-bar -->
+<header class="header-bar" role="navigation" aria-label="Main header">
+  <div class="branding">
+    <a href="https://sdapromoters.com" class="branding-link" target="_blank" rel="noopener">
+      <img class="logo-img" src="images/logo.png" alt="SDA Infra & Promoters logo">
+      <div class="companyNameTop">SDA Infra & Promoters</div>
+    </a>
+  </div>
 </header>
 
-<!-- side menu + overlay -->
-<nav id="sideNav" class="side-nav" aria-hidden="true" aria-label="Main menu">
-  <div id="sideNavInner" aria-live="polite">
-    <div style="color:#666">Loading menu…</div>
-  </div>
-</nav>
-<div id="overlay" class="overlay" aria-hidden="true"></div>
-
 <script>
-  (function(){
-    const btn = document.getElementById('hamburgerBtn');
-    const side = document.getElementById('sideNav');
-    const sideInner = document.getElementById('sideNavInner');
-    const overlay = document.getElementById('overlay');
+(function(){
+  const btn = document.getElementById('topMenuBtn');
+  const dropdown = document.getElementById('topMenuDropdown');
 
-    async function loadMenu(){
-      try{
-        const url = new URL('menu.html', location.href).href;
-        const res = await fetch(url, { cache: 'no-store' });
-        if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
-        const text = await res.text();
-        sideInner.innerHTML = text;
-      }catch(err){
-        console.error('Failed to load menu.html:', err);
-        sideInner.innerHTML = '<div style="color:#b33">Menu failed to load</div>';
+  let menuLoaded = false;
+
+  async function loadMenuHtml() {
+    // fetch menu.html and insert into the dropdown
+    try {
+      const url = new URL('menu.html', location.href).href;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+      const html = await res.text();
+
+      // sanitize minimal: place inside wrapper (we don't parse scripts)
+      dropdown.innerHTML = html.trim();
+
+      // if the loaded html contains a <ul> or links, ensure they have role/menuitem-like focus styles
+      dropdown.querySelectorAll('a').forEach(a => {
+        a.setAttribute('role','menuitem');
+        a.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeMenu();
+        });
+      });
+
+      // if no list present, fallback to simple list from anchors in html
+      if (!dropdown.querySelector('ul') && dropdown.querySelectorAll('a').length === 0) {
+        dropdown.innerHTML = '<div class="menu-note">No navigation found.</div>';
+      }
+
+      menuLoaded = true;
+    } catch (err) {
+      console.error('Menu load failed:', err);
+      dropdown.innerHTML = '<div class="menu-note" style="color:#b33;">Failed to load menu</div>';
+      menuLoaded = true;
+    }
+  }
+
+  function openMenu() {
+    btn.setAttribute('aria-expanded','true');
+    dropdown.classList.add('open');
+    // focus first focusable item in dropdown or the dropdown itself
+    const firstLink = dropdown.querySelector('a');
+    if (firstLink) firstLink.focus();
+    else dropdown.focus();
+    document.addEventListener('click', outsideClickHandler);
+    document.addEventListener('keydown', keyHandler);
+  }
+
+  function closeMenu() {
+    btn.setAttribute('aria-expanded','false');
+    dropdown.classList.remove('open');
+    btn.focus();
+    document.removeEventListener('click', outsideClickHandler);
+    document.removeEventListener('keydown', keyHandler);
+  }
+
+  function outsideClickHandler(e) {
+    if (!dropdown.contains(e.target) && !btn.contains(e.target)) closeMenu();
+  }
+
+  function keyHandler(e) {
+    if (e.key === 'Escape') closeMenu();
+    // Arrow keys navigation within dropdown
+    if (['ArrowDown','ArrowUp'].includes(e.key) && dropdown.classList.contains('open')) {
+      const items = Array.from(dropdown.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')).filter(Boolean);
+      if (items.length === 0) return;
+      e.preventDefault();
+      const idx = items.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') {
+        const next = items[(idx + 1) % items.length];
+        next.focus();
+      } else {
+        const prev = items[(idx - 1 + items.length) % items.length];
+        prev.focus();
       }
     }
+  }
 
-    function openNav(){
-      side.classList.add('open');
-      overlay.classList.add('show');
-      btn.classList.add('open');
-      btn.setAttribute('aria-expanded','true');
-      side.setAttribute('aria-hidden','false');
-      document.documentElement.style.overflow='hidden';
-      const a = side.querySelector('a');
-      if(a) a.focus();
+  btn.addEventListener('click', async (e) => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    if (open) { closeMenu(); return; }
+
+    // load menu if not loaded
+    if (!menuLoaded) {
+      dropdown.innerHTML = '<div class="menu-note">Loading navigation…</div>';
+      await loadMenuHtml();
     }
-    function closeNav(){
-      side.classList.remove('open');
-      overlay.classList.remove('show');
-      btn.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-      side.setAttribute('aria-hidden','true');
-      document.documentElement.style.overflow='';
-      btn.focus();
+    openMenu();
+  });
+
+  // allow toggle via Enter/Space when focused
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!dropdown.classList.contains('open')) btn.click();
+      const first = dropdown.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+      if (first) first.focus();
     }
+  });
 
-    btn.addEventListener('click', async ()=>{
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      if(expanded) return closeNav();
-      if(!sideInner.querySelector('ul')) await loadMenu();
-      openNav();
-    });
+  // Close dropdown when any internal link is clicked (so navigation can proceed)
+  dropdown.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (a) closeMenu();
+  });
 
-    overlay.addEventListener('click', closeNav);
-    side.addEventListener('click', (e) => { if(e.target.tagName === 'A') closeNav(); });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && side.classList.contains('open')) closeNav();
-    });
-  })();
+  // If user resizes and dropdown would go off-screen, adjust position (keep right aligned)
+  window.addEventListener('resize', () => {
+    // nothing complex required; CSS handles full width small screens
+  });
+})();
 </script>
 <!-- HEADER END -->
