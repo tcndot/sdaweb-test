@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Careers — SDA Infra & Promoters</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#111;background:#fff;}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px;}
+    #headerdiv { width:100%; }
+
+    h1,h2{margin-top:0;}
+    .card{
+      background:#fff;
+      border-radius:10px;
+      padding:18px;
+      box-shadow:0 6px 18px rgba(8,24,12,.06);
+      border:1px solid rgba(0,0,0,.04);
+      margin-bottom:24px;
+    }
+    .muted{color:#666;}
+    .btn{
+      background:#1f7a3a;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:700;
+      display:inline-block;
+      margin-top:8px;
+    }
+    ul{padding-left:18px;}
+    footer{border-top:1px solid #eee;margin-top:32px;padding:16px 0;text-align:center;color:#444;}
+
+    /* Responsive Microsoft Form */
+    .form-container{
+      position:relative;
+      width:100%;
+      padding-bottom:120%;
+      height:0;
+      overflow:hidden;
+      border-radius:8px;
+      margin-top:12px;
+    }
+    .form-container iframe{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    @media(max-width:900px){
+      .wrap{padding:16px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header dynamically loaded -->
+  <div id="headerdiv" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <h1>Careers at SDA Infra & Promoters</h1>
+    <p class="muted">Join our growing team and help us build Delhi NCR’s most trusted real estate brand.</p>
+
+    <!-- Apply Section -->
+    <div class="card">
+      <h2>Apply for Customer Relationship Manager</h2>
+      <p class="muted">
+        We are looking for an energetic and persuasive <strong>Customer Relationship Manager</strong> to manage client interactions, 
+        follow up on leads, and maintain long-term relationships with homebuyers.
+      </p>
+      <p><strong>Skills required:</strong> Excellent communication, sales coordination, client follow-up, and CRM tools.</p>
+      <p><strong>Location:</strong> Ramesh Nagar, Delhi</p>
+
+      <div class="form-container">
+        <iframe
+          src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAFGy7qFUQzNaN05QQU9BMUtXRTZDSTRMMkQ3WFZPSC4u"
+          loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- Current Openings -->
+    <div class="card">
+      <h2>Current Openings</h2>
+      <ul class="muted">
+        <li>Customer Relationship Manager — Full Time</li>
+        <li>Sales Executive — Real Estate (Delhi NCR)</li>
+        <li>Video Editor — Part-Time</li>
+        <li>Marketing & Social Media Associate</li>
+      </ul>
+    </div>
+
+    <!-- Contact / Call -->
+    <div class="card" style="text-align:center;">
+      <a class="btn" href="tel:9999944622">📞 Call Now</a>
+    </div>
+  </main>
+
+  <!-- Footer dynamically loaded -->
+  <div id="footerdiv" aria-hidden="true"></div>
+
+  <script>
+    // same dynamic loader as index.html
+    async function loadHTML(targetId, relPath) {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      try {
+        const url = new URL(relPath, location.href).href;
+        const res = await fetch(url, {cache:'no-store'});
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
+        const text = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = text;
+
+        Array.from(tmp.childNodes).forEach(node => {
+          if (node.tagName && node.tagName.toLowerCase() === 'script') return;
+          target.appendChild(node.cloneNode(true));
+        });
+
+        const scripts = tmp.querySelectorAll('script');
+        for (const s of scripts) {
+          const newScript = document.createElement('script');
+          for (const attr of s.attributes) newScript.setAttribute(attr.name, attr.value);
+          if (s.src) {
+            await new Promise((resLoad) => {
+              newScript.onload = resLoad;
+              newScript.onerror = resLoad;
+              document.body.appendChild(newScript);
+              newScript.src = s.src;
+            });
+          } else {
+            newScript.textContent = s.textContent;
+            document.body.appendChild(newScript);
+          }
+        }
+
+        target.setAttribute('aria-hidden','false');
+      } catch (err) {
+        console.error('loadHTML error', err);
+        target.innerHTML = '<div style="padding:12px;background:#fee;color:#600">Failed to load header/footer</div>';
+        target.setAttribute('aria-hidden','true');
+      }
+    }
+
+    (async function init() {
+      await loadHTML('headerdiv','header.html');
+      await loadHTML('footerdiv','footer.html');
+    })();
+  </script>
+</body>
+</html>
