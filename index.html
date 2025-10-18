@@ -75,9 +75,14 @@
     .fade-in { animation: fadeIn .7s ease both; }
     /* subtle accessibility helpers */
     .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+    /* tiny console-area for debug notes (toggle visible via CSS if needed) */
+    #debug { font-family:monospace; font-size:12px; color:#666; margin-top:12px; display:none; white-space:pre-wrap; }
   </style>
 </head>
 <body>
+  <!-- loader targets for header/footer -->
+  <div id="headerdiv" aria-hidden="true"></div>
+
   <div class="wrap">
     <!-- topbar: language toggle only -->
     <div class="topbar" role="region" aria-label="Language">
@@ -103,12 +108,13 @@
 
       <!-- RIGHT: Slideshow (on mobile this appears above the about block) -->
       <div class="slideshow" id="slideshow" aria-label="Featured photos">
-        <div class="slide" style="background-image:url('images/mainpagetopphoto/1.jpg')" role="img" aria-label="Photo 1"></div>
-        <div class="slide" style="background-image:url('images/mainpagetopphoto/2.jpg')" role="img" aria-label="Photo 2"></div>
-        <div class="slide" style="background-image:url('images/mainpagetopphoto/3.jpg')" role="img" aria-label="Photo 3"></div>
-        <div class="slide" style="background-image:url('images/mainpagetopphoto/4.jpg')" role="img" aria-label="Photo 4"></div>
-        <div class="slide" style="background-image:url('images/mainpagetopphoto/5.jpg')" role="img" aria-label="Photo 5"></div>
-        <div class="slide" style="background-image:url('images/mainpagetopphoto/6.jpg')" role="img" aria-label="Photo 6"></div>
+        <!-- Use relative paths. JS will swap to raw GitHub URLs if any fail to load. -->
+        <div class="slide" data-src="images/mainpagetopphoto/1.jpg" role="img" aria-label="Photo 1"></div>
+        <div class="slide" data-src="images/mainpagetopphoto/2.jpg" role="img" aria-label="Photo 2"></div>
+        <div class="slide" data-src="images/mainpagetopphoto/3.jpg" role="img" aria-label="Photo 3"></div>
+        <div class="slide" data-src="images/mainpagetopphoto/4.jpg" role="img" aria-label="Photo 4"></div>
+        <div class="slide" data-src="images/mainpagetopphoto/5.jpg" role="img" aria-label="Photo 5"></div>
+        <div class="slide" data-src="images/mainpagetopphoto/6.jpg" role="img" aria-label="Photo 6"></div>
       </div>
 
       <!-- mobile gallery fallback (visible on small screens) -->
@@ -121,11 +127,22 @@
         <img src="images/mainpagetopphoto/6.jpg" alt="Area map">
       </div>
     </div>
+
+    <div id="debug" aria-hidden="true"></div>
   </div>
+
+  <!-- footer loader target -->
+  <div id="footerdiv" aria-hidden="true"></div>
 
   <script>
     /*****************************************************************
-     * Language content (English + Hindi) - short homepage about text
+     * CONFIG: set your GitHub repo info so the fallback raw URLs are
+     * correct when local relative paths fail.
+     *****************************************************************/
+    const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/tcndot/sdaweb-test/main';
+
+    /*****************************************************************
+     * Localized short about text (English + Hindi)
      *****************************************************************/
     const HOME_LOCALE = {
       en: {
@@ -150,6 +167,15 @@
       }
     };
 
+    function logDebug(msg) {
+      try {
+        const el = document.getElementById('debug');
+        el.style.display = 'block';
+        el.textContent += msg + '\n';
+        console.log(msg);
+      } catch(e) { console.log(msg); }
+    }
+
     // Apply locale to the short about block
     function applyHomeLocale(lang) {
       const map = HOME_LOCALE[lang] || HOME_LOCALE.en;
@@ -173,7 +199,6 @@
       try { localStorage.setItem('sda_home_lang', lang); } catch(e) {}
     }
 
-    // init language from localStorage or navigator
     (function initLang(){
       let saved = null;
       try { saved = localStorage.getItem('sda_home_lang'); } catch(e){}
@@ -188,69 +213,167 @@
     document.getElementById('btn-hi').addEventListener('click', ()=>applyHomeLocale('hi'));
 
     /*****************************************************************
-     * Slideshow logic: rotates every 3 seconds with fade & subtle zoom
+     * Slideshow logic with robust fallback: relative -> raw.github
      *****************************************************************/
     (function initSlideshow() {
-      const slides = Array.from(document.querySelectorAll('.slideshow .slide'));
+      const slideEls = Array.from(document.querySelectorAll('.slideshow .slide'));
       const slideshowEl = document.getElementById('slideshow');
       const heroEl = document.getElementById('hero');
-      // show hero & slideshow with a fade-in on load
-      window.requestAnimationFrame(() => {
-        heroEl.style.opacity = 1;
-        heroEl.classList.add('fade-in');
-        slideshowEl.style.opacity = 1;
-        slideshowEl.classList.add('fade-in');
+
+      // Prepare slide URLs (relative first, then raw fallback)
+      const slides = slideEls.map((el, idx) => {
+        const rel = el.getAttribute('data-src');
+        const raw = `${GITHUB_RAW_BASE}/${rel.replace(/^images\//,'images/')}`; // same path under raw URL
+        return {el, rel, raw};
       });
 
-      if (!slides.length) return;
-      let cur = 0;
-      slides.forEach((s, i) => { s.classList.remove('visible'); s.style.opacity = 0; });
-      slides[0].classList.add('visible');
-
-      function show(index) {
-        slides.forEach((s, i) => {
-          if (i === index) s.classList.add('visible');
-          else s.classList.remove('visible');
+      // Helper: test if an image URL loads
+      function testImage(url) {
+        return new Promise((res) => {
+          const img = new Image();
+          img.onload = () => res(true);
+          img.onerror = () => res(false);
+          img.src = url + (url.includes('?') ? '&' : '?') + 'cachebust=' + Date.now();
         });
       }
 
-      // autoplay every 3s
-      let interval = setInterval(() => {
-        cur = (cur + 1) % slides.length;
-        show(cur);
-      }, 3000);
+      // Set background images, trying relative first; if it fails, use raw GitHub URL
+      async function ensureImages() {
+        for (const s of slides) {
+          let ok = await testImage(s.rel);
+          if (ok) {
+            s.el.style.backgroundImage = `url("${s.rel}")`;
+          } else {
+            logDebug(`Relative image failed: ${s.rel} — trying raw GitHub fallback.`);
+            // try raw
+            ok = await testImage(s.raw);
+            if (ok) {
+              s.el.style.backgroundImage = `url("${s.raw}")`;
+            } else {
+              logDebug(`Raw fallback also failed for: ${s.raw}. Slide will be empty.`);
+              // set a neutral background color if both fail
+              s.el.style.backgroundColor = '#ddd';
+            }
+          }
+        }
+      }
 
-      // Pause on mouseover (desktop) for better UX
-      slideshowEl.addEventListener('mouseenter', () => clearInterval(interval));
-      slideshowEl.addEventListener('mouseleave', () => {
-        clearInterval(interval);
-        interval = setInterval(() => {
+      // Fade-in hero & slideshow after images set (prettier)
+      ensureImages().then(() => {
+        window.requestAnimationFrame(() => {
+          heroEl.style.opacity = 1;
+          heroEl.classList.add('fade-in');
+          slideshowEl.style.opacity = 1;
+          slideshowEl.classList.add('fade-in');
+        });
+
+        // initialize visible slide
+        let cur = 0;
+        slides.forEach((s, i) => s.el.classList.toggle('visible', i === 0));
+
+        function show(index) {
+          slides.forEach((s, i) => s.el.classList.toggle('visible', i === index));
+        }
+
+        // autoplay every 3s
+        let interval = setInterval(() => {
           cur = (cur + 1) % slides.length;
           show(cur);
         }, 3000);
-      });
 
-      // Make slideshow swipeable on touch devices (left/right)
-      let startX = null;
-      slideshowEl.addEventListener('touchstart', e => {
-        if (e.touches && e.touches[0]) startX = e.touches[0].clientX;
-      }, {passive:true});
-      slideshowEl.addEventListener('touchend', e => {
-        if (startX === null) return;
-        const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : null;
-        if (endX === null) { startX = null; return; }
-        const dx = endX - startX;
-        if (Math.abs(dx) > 40) {
-          if (dx < 0) { // swipe left -> next
+        // Pause on mouseover (desktop)
+        slideshowEl.addEventListener('mouseenter', () => clearInterval(interval));
+        slideshowEl.addEventListener('mouseleave', () => {
+          clearInterval(interval);
+          interval = setInterval(() => {
             cur = (cur + 1) % slides.length;
-          } else { // swipe right -> prev
-            cur = (cur - 1 + slides.length) % slides.length;
+            show(cur);
+          }, 3000);
+        });
+
+        // swipeable
+        let startX = null;
+        slideshowEl.addEventListener('touchstart', e => {
+          if (e.touches && e.touches[0]) startX = e.touches[0].clientX;
+        }, {passive:true});
+        slideshowEl.addEventListener('touchend', e => {
+          if (startX === null) return;
+          const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : null;
+          if (endX === null) { startX = null; return; }
+          const dx = endX - startX;
+          if (Math.abs(dx) > 40) {
+            if (dx < 0) cur = (cur + 1) % slides.length;
+            else cur = (cur - 1 + slides.length) % slides.length;
+            show(cur);
           }
-          show(cur);
-        }
-        startX = null;
-      }, {passive:true});
+          startX = null;
+        }, {passive:true});
+      });
     })();
+
+    /*****************************************************************
+     * Robust header/footer loader:
+     * 1) try relative fetch('header.html')
+     * 2) if fails (any error), try raw GitHub URL fallback
+     *****************************************************************/
+    async function loadHTMLWithFallback(targetId, relPath) {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      const rawFallback = `${GITHUB_RAW_BASE}/${relPath}`;
+      // attempt relative fetch first
+      try {
+        const res = await fetch(relPath, {cache:'no-store'});
+        if (!res.ok) throw new Error(`Relative fetch returned ${res.status}`);
+        const text = await res.text();
+        target.innerHTML = text;
+        target.setAttribute('aria-hidden','false');
+        return;
+      } catch (err) {
+        logDebug(`Relative fetch failed for ${relPath}: ${err.message}. Trying raw GitHub fallback...`);
+      }
+
+      // attempt raw fallback
+      try {
+        const res2 = await fetch(rawFallback, {cache:'no-store'});
+        if (!res2.ok) throw new Error(`Raw fetch returned ${res2.status}`);
+        const text2 = await res2.text();
+        target.innerHTML = text2;
+        target.setAttribute('aria-hidden','false');
+        logDebug(`Loaded ${relPath} from raw GitHub fallback.`);
+        return;
+      } catch (err2) {
+        logDebug(`Raw fallback failed for ${relPath}: ${err2.message}. Header/footer not loaded.`);
+        // optional: inject a minimal fallback so the page isn't totally blank
+        if (targetId === 'headerdiv') {
+          target.innerHTML = `<div style="padding:12px;background:#fff;border-bottom:1px solid #eee"><a href="/" style="text-decoration:none;color:var(--accent);font-weight:700">SDA Infra & Promoters</a></div>`;
+          target.setAttribute('aria-hidden','false');
+        }
+        if (targetId === 'footerdiv') {
+          target.innerHTML = `<footer style="padding:12px;text-align:center;color:#666;border-top:1px solid #eee">© ${new Date().getFullYear()} SDA Infra & Promoters</footer>`;
+          target.setAttribute('aria-hidden','false');
+        }
+      }
+    }
+
+    // Start loading header/footer
+    (async function initHeaderFooter() {
+      await loadHTMLWithFallback('headerdiv', 'header.html');
+      await loadHTMLWithFallback('footerdiv', 'footer.html');
+    })();
+
+    /*****************************************************************
+     * Quick note: if you are testing by double-clicking index.html
+     * (file://...) fetch() will fail for local files. Run a local HTTP
+     * server instead:
+     *
+     * 1) Python 3 (inside repo root):  python -m http.server 8000
+     *    then open http://localhost:8000/
+     *
+     * 2) Node (if installed): npx http-server . -p 8000
+     *
+     * Or push to GitHub Pages — then relative paths work and fetch will
+     * load header/footer correctly.
+     *****************************************************************/
   </script>
 </body>
 </html>
