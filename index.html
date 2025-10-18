@@ -5,14 +5,25 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SDA Infra & Promoters</title>
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#111}
-    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      color: #111;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+    }
     /* placeholder so header injection area doesn't jump */
-    #headerdiv { width:100%; }
+    #headerdiv { width: 100%; }
   </style>
+  <!-- Tailwind CDN for the section styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-  <!-- keep your existing layout: header will be injected here -->
+  <!-- header injected dynamically -->
   <div id="headerdiv" aria-hidden="true"></div>
 
   <main class="wrap">
@@ -20,37 +31,156 @@
     <p>Replace this content with your existing index content. This file is intentionally minimal so we don't redesign anything.</p>
   </main>
 
+  <!-- 👇 your new section goes here -->
+  <section class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap -m-4">
+
+        <div class="p-4 md:w-1/3">
+          <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
+            <img class="lg:h-48 md:h-36 w-full object-cover object-center"
+                 src="https://dummyimage.com/720x400" alt="blog">
+            <div class="p-6">
+              <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">CATEGORY</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">The Catalyzer</h1>
+              <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+              <div class="flex items-center flex-wrap ">
+                <a class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                  <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                       fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+                <span class="text-gray-500 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto
+                             leading-none text-sm pr-3 py-1 border-r-2 border-gray-800">
+                  <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                       stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>1.2K
+                </span>
+                <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                  <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                       stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7
+                             8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0
+                             01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0
+                             013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>6
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 md:w-1/3">
+          <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
+            <img class="lg:h-48 md:h-36 w-full object-cover object-center"
+                 src="https://dummyimage.com/721x401" alt="blog">
+            <div class="p-6">
+              <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">CATEGORY</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">The 400 Blows</h1>
+              <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+              <div class="flex items-center flex-wrap">
+                <a class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                  <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                       fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+                <span class="text-gray-500 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto
+                             leading-none text-sm pr-3 py-1 border-r-2 border-gray-800">
+                  <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                       stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>1.2K
+                </span>
+                <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                  <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                       stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7
+                             8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0
+                             01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0
+                             013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>6
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 md:w-1/3">
+          <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
+            <img class="lg:h-48 md:h-36 w-full object-cover object-center"
+                 src="https://dummyimage.com/722x402" alt="blog">
+            <div class="p-6">
+              <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">CATEGORY</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">Shooting Stars</h1>
+              <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+              <div class="flex items-center flex-wrap ">
+                <a class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                  <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                       fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+                <span class="text-gray-500 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto
+                             leading-none text-sm pr-3 py-1 border-r-2 border-gray-800">
+                  <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                       stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>1.2K
+                </span>
+                <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                  <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                       stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7
+                             8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0
+                             01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0
+                             013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>6
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- end of section -->
+
   <div id="footerdiv" aria-hidden="true"></div>
 
   <script>
-    // loadHTML: fetch partial, insert, and execute any <script> tags inside it.
+    // same script from your original file
     async function loadHTML(targetId, relPath) {
       const target = document.getElementById(targetId);
       if (!target) return;
       try {
         const url = new URL(relPath, location.href).href;
-        const res = await fetch(url, {cache:'no-store'});
+        const res = await fetch(url, { cache: 'no-store' });
         if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
         const text = await res.text();
         const tmp = document.createElement('div');
         tmp.innerHTML = text;
-
-        // append non-script nodes
         Array.from(tmp.childNodes).forEach(node => {
           if (node.tagName && node.tagName.toLowerCase() === 'script') return;
           target.appendChild(node.cloneNode(true));
         });
-
-        // run scripts
         const scripts = tmp.querySelectorAll('script');
         for (const s of scripts) {
           const newScript = document.createElement('script');
           for (const attr of s.attributes) newScript.setAttribute(attr.name, attr.value);
           if (s.src) {
-            // external -> append & wait
-            await new Promise((resLoad) => {
+            await new Promise(resLoad => {
               newScript.onload = resLoad;
-              newScript.onerror = resLoad; // don't block on failure
+              newScript.onerror = resLoad;
               document.body.appendChild(newScript);
               newScript.src = s.src;
             });
@@ -59,18 +189,17 @@
             document.body.appendChild(newScript);
           }
         }
-
-        target.setAttribute('aria-hidden','false');
+        target.setAttribute('aria-hidden', 'false');
       } catch (err) {
         console.error('loadHTML error', err);
         target.innerHTML = '<div style="padding:12px;background:#fee;color:#600">Failed to load header/footer</div>';
-        target.setAttribute('aria-hidden','true');
+        target.setAttribute('aria-hidden', 'true');
       }
     }
 
     (async function init() {
-      await loadHTML('headerdiv','header.html'); // loads header and runs its script
-      await loadHTML('footerdiv','footer.html'); // footer optional; safe if exists
+      await loadHTML('headerdiv', 'header.html');
+      await loadHTML('footerdiv', 'footer.html');
     })();
   </script>
 </body>
