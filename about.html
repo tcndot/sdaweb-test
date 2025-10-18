@@ -9,16 +9,20 @@
       --accent:#1f7a3a;
       --muted:#666;
       --wrap:1100px;
+      --card-bg: #fff;
     }
     html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}
     .wrap{max-width:var(--wrap);margin:0 auto;padding:20px}
-    #headerdiv{width:100%}
-    h1{margin:0 0 8px}
+    header.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0}
+    .lang-switch{display:flex;gap:8px;align-items:center}
+    .lang-btn{background:transparent;border:1px solid #e6e6e6;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    .lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    h1{margin:6px 0 8px}
     h2{margin:0 0 12px}
     p.lead{color:var(--muted);margin:0 0 18px}
     .grid{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
     @media(max-width:900px){.grid{grid-template-columns:1fr}}
-    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(12,20,12,.06);border:1px solid rgba(0,0,0,.04)}
+    .card{background:var(--card-bg);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(12,20,12,.06);border:1px solid rgba(0,0,0,.04)}
     .muted{color:var(--muted)}
     .meta{font-size:14px;color:var(--muted);margin-top:8px}
     .btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700}
@@ -26,6 +30,13 @@
     .stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
     .stat{background:#f7faf7;border-radius:8px;padding:10px;min-width:110px;text-align:center}
     footer{border-top:1px solid #eee;margin-top:28px;padding:18px 0;text-align:center;color:#444}
+    /* small gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+    .gallery img{width:100%;height:84px;object-fit:cover;border-radius:8px;border:1px solid #eee}
+    @media(max-width:600px){.gallery{grid-template-columns:repeat(2,1fr)} .gallery img{height:72px}}
+    /* hidden role */
+    .lang-content{display:block}
+    .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
 <body>
@@ -33,90 +44,110 @@
   <div id="headerdiv" aria-hidden="true"></div>
 
   <main class="wrap" id="content">
-    <h1>About SDA Infra &amp; Promoters</h1>
-    <p class="lead">SDA Infra &amp; Promoters (also known as SDA Developers &amp; Promoters) is a Delhi-based real estate firm focused on premium residential plots and boutique developments across Delhi NCR. Built on trust and transparency, we help people find land and investment opportunities that truly match their goals.</p>
+    <header class="topbar" role="banner" aria-label="About page controls">
+      <div>
+        <h1 id="pageTitle">About SDA Infra &amp; Promoters</h1>
+        <p class="lead" id="pageLead">SDA Infra &amp; Promoters (also known as SDA Developers &amp; Promoters) is a Delhi-based real estate firm focused on premium residential plots and boutique developments across Delhi NCR.</p>
+      </div>
+
+      <div class="lang-switch" aria-hidden="false">
+        <label for="lang" class="sr-only">Select language</label>
+        <button type="button" id="btn-en" class="lang-btn" aria-pressed="true">English</button>
+        <button type="button" id="btn-hi" class="lang-btn" aria-pressed="false">हिन्दी</button>
+      </div>
+    </header>
 
     <div class="grid">
       <!-- main column -->
       <section>
         <div class="card">
-          <h2>Who We Are</h2>
-          <p class="muted">SDA Infra &amp; Promoters was established with a simple goal — to make real estate buying and selling in Delhi NCR straightforward, transparent, and reliable. With roots in West Delhi and operations extending across Gurgaon, Noida, Faridabad, and surrounding areas, we specialize in plotted developments and small-scale residential projects designed for real buyers, not just investors.</p>
+          <h2 data-key="who_title">Who We Are</h2>
+          <p class="muted" data-key="who_body">SDA Infra &amp; Promoters was established with a simple goal — to make real estate buying and selling in Delhi NCR straightforward, transparent, and reliable. With roots in West Delhi and operations extending across Gurgaon, Noida, Faridabad, and surrounding areas, we specialize in plotted developments and small-scale residential projects designed for real buyers, not just investors.</p>
 
-          <h2 style="margin-top:18px">Our Vision &amp; Mission</h2>
-          <p class="muted"><strong>Vision:</strong> To be the most trusted name in Delhi NCR’s real estate plotting market — where honesty and reliability are standard, not special.</p>
-          <p class="muted"><strong>Mission:</strong> To provide verified plots, clear documentation, and transparent transactions that make every client confident in their investment decision.</p>
+          <h2 style="margin-top:18px" data-key="vision_title">Our Vision &amp; Mission</h2>
+          <p class="muted"><strong data-key="vision_lbl">Vision:</strong> <span data-key="vision_body">To be the most trusted name in Delhi NCR’s real estate plotting market — where honesty and reliability are standard, not special.</span></p>
+          <p class="muted"><strong data-key="mission_lbl">Mission:</strong> <span data-key="mission_body">To provide verified plots, clear documentation, and transparent transactions that make every client confident in their investment decision.</span></p>
 
-          <h2 style="margin-top:18px">What We Do</h2>
+          <h2 style="margin-top:18px" data-key="what_title">What We Do</h2>
           <ul class="muted">
-            <li>Sale and development of residential and commercial plots</li>
-            <li>End-to-end buyer assistance — from first call to final registry</li>
-            <li>Site visits, legal documentation, and after-sale support</li>
-            <li>Market guidance and property consulting across Delhi NCR</li>
-            <li>Collaboration opportunities for builders and investors</li>
+            <li data-key="what_1">Sale and development of residential and commercial plots</li>
+            <li data-key="what_2">End-to-end buyer assistance — from first call to final registry</li>
+            <li data-key="what_3">Site visits, legal documentation, and after-sale support</li>
+            <li data-key="what_4">Market guidance and property consulting across Delhi NCR</li>
+            <li data-key="what_5">Collaboration opportunities for builders and investors</li>
           </ul>
 
-          <h2 style="margin-top:18px">Why Choose Us</h2>
+          <h2 style="margin-top:18px" data-key="why_title">Why Choose Us</h2>
           <ul class="muted">
-            <li>100% verified plots and clear title documentation</li>
-            <li>Local expertise — we know Delhi NCR on the ground, not just on paper</li>
-            <li>Transparent pricing and zero hidden charges</li>
-            <li>Personalized guidance for first-time and repeat buyers</li>
-            <li>Strong vendor and legal network for smooth transactions</li>
+            <li data-key="why_1">100% verified plots and clear title documentation</li>
+            <li data-key="why_2">Local expertise — we know Delhi NCR on the ground, not just on paper</li>
+            <li data-key="why_3">Transparent pricing and zero hidden charges</li>
+            <li data-key="why_4">Personalized guidance for first-time and repeat buyers</li>
+            <li data-key="why_5">Strong vendor and legal network for smooth transactions</li>
           </ul>
 
-          <h2 style="margin-top:18px">Our Philosophy</h2>
-          <p class="muted">We believe real estate should feel personal, not pressured. Every conversation starts with understanding your need — whether it’s a home, an investment, or a partnership. Our approach combines clarity, honesty, and genuine local knowledge to make your buying experience as stress-free as possible.</p>
+          <h2 style="margin-top:18px" data-key="philosophy_title">Our Philosophy</h2>
+          <p class="muted" data-key="philosophy_body">We believe real estate should feel personal, not pressured. Every conversation starts with understanding your need — whether it’s a home, an investment, or a partnership. Our approach combines clarity, honesty, and genuine local knowledge to make your buying experience as stress-free as possible.</p>
 
           <div class="stat-row" aria-hidden="false" style="margin-top:14px">
             <div class="stat">
-              <div style="font-weight:700">15+ Projects</div>
-              <div class="muted">Across Delhi NCR</div>
+              <div style="font-weight:700" data-key="stat_projects">15+ Projects</div>
+              <div class="muted" data-key="stat_projects_sub">Across Delhi NCR</div>
             </div>
             <div class="stat">
-              <div style="font-weight:700">500+ Clients</div>
-              <div class="muted">Served &amp; Growing</div>
+              <div style="font-weight:700" data-key="stat_clients">500+ Clients</div>
+              <div class="muted" data-key="stat_clients_sub">Served &amp; Growing</div>
             </div>
             <div class="stat">
-              <div style="font-weight:700">Local Team</div>
-              <div class="muted">Hands-on Guidance</div>
+              <div style="font-weight:700" data-key="stat_team">Local Team</div>
+              <div class="muted" data-key="stat_team_sub">Hands-on Guidance</div>
             </div>
           </div>
         </div>
 
         <div class="card" style="margin-top:18px">
-          <h2>Leadership &amp; Experience</h2>
-          <p class="muted">Led by professionals with years of local market experience, SDA Infra &amp; Promoters combines real estate knowledge with on-ground practicality. From site supervision to sales and documentation, our leadership is personally involved in every client interaction — ensuring accountability and satisfaction at every step.</p>
+          <h2 data-key="leadership_title">Leadership &amp; Experience</h2>
+          <p class="muted" data-key="leadership_body">Led by professionals with years of local market experience, SDA Infra &amp; Promoters combines real estate knowledge with on-ground practicality. From site supervision to sales and documentation, our leadership is personally involved in every client interaction — ensuring accountability and satisfaction at every step.</p>
         </div>
 
         <div class="card" style="margin-top:18px">
-          <h2>Careers &amp; Partnerships</h2>
-          <p class="muted">We’re always looking for motivated individuals who share our passion for property and client service. If you’re interested in joining our sales, site, or marketing teams — or wish to partner with us on upcoming projects — please visit our <a href="/careers.html" class="muted">Careers</a> page or contact us directly.</p>
+          <h2 data-key="careers_title">Careers &amp; Partnerships</h2>
+          <p class="muted" data-key="careers_body">We’re always looking for motivated individuals who share our passion for property and client service. If you’re interested in joining our sales, site, or marketing teams — or wish to partner with us on upcoming projects — please visit our <a href="/careers.html" class="muted" data-key="careers_link">Careers</a> page or contact us directly.</p>
         </div>
 
         <div class="card" style="margin-top:18px">
-          <h2>Looking Ahead</h2>
-          <p class="muted">Our journey is just beginning. As we expand into new plotted developments and modern township collaborations, our goal remains unchanged — to help every buyer feel confident, informed, and valued. At SDA Infra &amp; Promoters, we’re not just building property deals — we’re building long-term relationships.</p>
+          <h2 data-key="future_title">Looking Ahead</h2>
+          <p class="muted" data-key="future_body">Our journey is just beginning. As we expand into new plotted developments and modern township collaborations, our goal remains unchanged — to help every buyer feel confident, informed, and valued. At SDA Infra &amp; Promoters, we’re not just building property deals — we’re building long-term relationships.</p>
         </div>
       </section>
 
       <!-- right column -->
       <aside>
         <div class="card">
-          <h2>Contact</h2>
-          <p class="muted"><strong>Phone:</strong> 9999944622</p>
-          <p class="muted"><strong>Email:</strong> info@sdapromoters.com</p>
-          <p class="muted"><strong>Main Office:</strong> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015</p>
+          <h2 data-key="contact_title">Contact</h2>
+          <p class="muted"><strong data-key="phone_lbl">Phone:</strong> <span data-key="phone">9999944622</span></p>
+          <p class="muted"><strong data-key="email_lbl">Email:</strong> <span data-key="email">info@sdapromoters.com</span></p>
+          <p class="muted"><strong data-key="office_lbl">Main Office:</strong> <span data-key="office">C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015</span></p>
           <div style="margin-top:12px">
-            <a class="btn" href="tel:9999944622">📞 Call Now</a>
-            <a class="btn" style="background:#fff;color:var(--accent);border:1px solid #e6e6e6;margin-left:8px" href="/careers.html">Careers</a>
+            <a class="btn" href="tel:9999944622" data-key="call_now">📞 Call Now</a>
+            <a class="btn" style="background:#fff;color:var(--accent);border:1px solid #e6e6e6;margin-left:8px" href="/careers.html" data-key="careers_btn">Careers</a>
+          </div>
+
+          <div class="gallery" aria-hidden="false" style="margin-top:12px">
+            <!-- Replace src with your real images -->
+            <img src="images/office-1.jpg" alt="Office front (placeholder)">
+            <img src="images/site-visit-1.jpg" alt="Site visit (placeholder)">
+            <img src="images/plot-1.jpg" alt="Plot area (placeholder)">
+            <img src="images/team-1.jpg" alt="Team photo (placeholder)">
+            <img src="images/handover-1.jpg" alt="Client handover (placeholder)">
+            <img src="images/map-1.jpg" alt="Area map (placeholder)">
           </div>
         </div>
 
         <div class="card" style="margin-top:16px">
-          <h2>Recent Posts</h2>
-          <p class="muted">Follow us for the latest property listings, site updates, and buying guides.</p>
-          <p class="muted"><a href="https://www.facebook.com/sda.rameshnagar/" target="_blank" rel="noopener">Facebook</a> • <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></p>
+          <h2 data-key="posts_title">Recent Posts</h2>
+          <p class="muted" data-key="posts_body">Follow us for the latest property listings, site updates, and buying guides.</p>
+          <p class="muted"><a href="https://www.facebook.com/sda.rameshnagar/" target="_blank" rel="noopener" data-key="facebook">Facebook</a> • <a href="https://www.instagram.com/" target="_blank" rel="noopener" data-key="instagram">Instagram</a></p>
         </div>
       </aside>
     </div>
@@ -126,7 +157,160 @@
   <div id="footerdiv" aria-hidden="true"></div>
 
   <script>
-    // same loader as index.html — loads header.html and footer.html into the page
+    // --- Localization content (English & Hindi) ---
+    const LOCALE = {
+      en: {
+        pageTitle: "About SDA Infra & Promoters",
+        pageLead: "SDA Infra & Promoters (also known as SDA Developers & Promoters) is a Delhi-based real estate firm focused on premium residential plots and boutique developments across Delhi NCR.",
+        who_title: "Who We Are",
+        who_body: "SDA Infra & Promoters was established with a simple goal — to make real estate buying and selling in Delhi NCR straightforward, transparent, and reliable. With roots in West Delhi and operations extending across Gurgaon, Noida, Faridabad, and surrounding areas, we specialize in plotted developments and small-scale residential projects designed for real buyers, not just investors.",
+        vision_title: "Our Vision & Mission",
+        vision_lbl: "Vision:",
+        vision_body: "To be the most trusted name in Delhi NCR’s real estate plotting market — where honesty and reliability are standard, not special.",
+        mission_lbl: "Mission:",
+        mission_body: "To provide verified plots, clear documentation, and transparent transactions that make every client confident in their investment decision.",
+        what_title: "What We Do",
+        what_1: "Sale and development of residential and commercial plots",
+        what_2: "End-to-end buyer assistance — from first call to final registry",
+        what_3: "Site visits, legal documentation, and after-sale support",
+        what_4: "Market guidance and property consulting across Delhi NCR",
+        what_5: "Collaboration opportunities for builders and investors",
+        why_title: "Why Choose Us",
+        why_1: "100% verified plots and clear title documentation",
+        why_2: "Local expertise — we know Delhi NCR on the ground, not just on paper",
+        why_3: "Transparent pricing and zero hidden charges",
+        why_4: "Personalized guidance for first-time and repeat buyers",
+        why_5: "Strong vendor and legal network for smooth transactions",
+        philosophy_title: "Our Philosophy",
+        philosophy_body: "We believe real estate should feel personal, not pressured. Every conversation starts with understanding your need — whether it’s a home, an investment, or a partnership. Our approach combines clarity, honesty, and genuine local knowledge to make your buying experience as stress-free as possible.",
+        stat_projects: "15+ Projects",
+        stat_projects_sub: "Across Delhi NCR",
+        stat_clients: "500+ Clients",
+        stat_clients_sub: "Served & Growing",
+        stat_team: "Local Team",
+        stat_team_sub: "Hands-on Guidance",
+        leadership_title: "Leadership & Experience",
+        leadership_body: "Led by professionals with years of local market experience, SDA Infra & Promoters combines real estate knowledge with on-ground practicality. From site supervision to sales and documentation, our leadership is personally involved in every client interaction — ensuring accountability and satisfaction at every step.",
+        careers_title: "Careers & Partnerships",
+        careers_body: "We’re always looking for motivated individuals who share our passion for property and client service. If you’re interested in joining our sales, site, or marketing teams — or wish to partner with us on upcoming projects — please visit our <a href='/careers.html' class='muted'>Careers</a> page or contact us directly.",
+        future_title: "Looking Ahead",
+        future_body: "Our journey is just beginning. As we expand into new plotted developments and modern township collaborations, our goal remains unchanged — to help every buyer feel confident, informed, and valued. At SDA Infra & Promoters, we’re not just building property deals — we’re building long-term relationships.",
+        contact_title: "Contact",
+        phone_lbl: "Phone:",
+        phone: "9999944622",
+        email_lbl: "Email:",
+        email: "info@sdapromoters.com",
+        office_lbl: "Main Office:",
+        office: "C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015",
+        call_now: "📞 Call Now",
+        careers_btn: "Careers",
+        posts_title: "Recent Posts",
+        posts_body: "Follow us for the latest property listings, site updates, and buying guides.",
+        facebook: "Facebook",
+        instagram: "Instagram"
+      },
+      hi: {
+        pageTitle: "SDA Infra & Promoters के बारे में",
+        pageLead: "SDA Infra & Promoters (जिसे SDA Developers & Promoters के नाम से भी जाना जाता है) दिल्ली-आधारित रियल एस्टेट फर्म है जो दिल्ली एनसीआर में प्रीमियम आवासीय प्लॉट और बुटीक डेवलपमेंट पर केंद्रित है।",
+        who_title: "हम कौन हैं",
+        who_body: "SDA Infra & Promoters की स्थापना एक सरल उद्देश्य के साथ हुई — दिल्ली एनसीआर में रियल एस्टेट खरीद-बिक्री को सरल, पारदर्शी और भरोसेमंद बनाना। वेस्ट दिल्ली में हमारी जड़ें हैं और हमारे काम का दायरा गाजियाबाद/गुरुग्राम, नोएडा, फरीदाबाद और आसपास के क्षेत्रों तक है। हम प्लॉटेड डेवलपमेंट और छोटे पैमाने की आवासीय परियोजनाओं में विशेषज्ञ हैं, जो असली खरीदारों के लिए डिज़ाइन की गई हैं, सिर्फ निवेशकों के लिए नहीं।",
+        vision_title: "हमारे लक्ष्य और मिशन",
+        vision_lbl: "दृष्टि:",
+        vision_body: "दिल्ली एनसीआर के प्लॉटिंग बाजार में सबसे भरोसेमंद नाम बनना — जहाँ ईमानदारी और विश्वसनीयता सामान्य मानक हों।",
+        mission_lbl: "मिशन:",
+        mission_body: "सत्यापित प्लॉट, स्पष्ट दस्तावेज़ और पारदर्शी लेन-देन प्रदान करना ताकि हर ग्राहक अपने निवेश के निर्णय में आत्मविश्वास महसूस करे।",
+        what_title: "हम क्या करते हैं",
+        what_1: "आवासीय और वाणिज्यिक प्लॉटों की बिक्री और विकास",
+        what_2: "पहली कॉल से लेकर अंतिम रजिस्ट्री तक एंड-टू-एंड खरीदार सहायता",
+        what_3: "साइट विज़िट, कानूनी दस्तावेज़ और बिक्री के बाद सहायता",
+        what_4: "दिल्ली एनसीआर में बाजार मार्गदर्शन और संपत्ति परामर्श",
+        what_5: "बिल्डरों और निवेशकों के लिए साझेदारी के अवसर",
+        why_title: "हमें क्यों चुनें",
+        why_1: "100% सत्यापित प्लॉट और स्पष्ट टाइटल दस्तावेज़",
+        why_2: "स्थानीय विशेषज्ञता — हम दिल्ली एनसीआर को जमीन पर जानते हैं, केवल कागज पर नहीं",
+        why_3: "पारदर्शी मूल्य निर्धारण और कोई छिपे हुए शुल्क नहीं",
+        why_4: "पहली बार और पुराने खरीदारों के लिए व्यक्तिगत मार्गदर्शन",
+        why_5: "सुगम लेन-देन के लिए मजबूत विक्रेता और कानूनी नेटवर्क",
+        philosophy_title: "हमारा दर्शन",
+        philosophy_body: "हम मानते हैं कि रियल एस्टेट व्यक्तिगत होना चाहिए, दबाव वाला नहीं। हर बातचीत आपकी आवश्यकता को समझने से शुरू होती है — चाहे वह घर हो, निवेश हो या साझेदारी। हमारी पद्धति स्पष्टता, ईमानदारी और वास्तविक स्थानीय ज्ञान का संयोजन है ताकि आपकी खरीदारी का अनुभव तनावमुक्त रहे।",
+        stat_projects: "15+ प्रोजेक्ट्स",
+        stat_projects_sub: "दिल्ली एनसीआर में",
+        stat_clients: "500+ ग्राहक",
+        stat_clients_sub: "सेवा प्राप्त और बढ़ते हुए",
+        stat_team: "स्थानीय टीम",
+        stat_team_sub: "हैंड्स-ऑन मार्गदर्शन",
+        leadership_title: "लीडरशिप और अनुभव",
+        leadership_body: "स्थानीय बाजार के वर्षों के अनुभव वाले पेशेवरों द्वारा संचालित, SDA Infra & Promoters रियल एस्टेट ज्ञान को ऑन-ग्राउंड व्यवहारिकता के साथ जोड़ती है। साइट सुपरविजन से लेकर बिक्री और दस्तावेज़ों तक, हमारी लीडरशिप हर ग्राहक इंटरैक्शन में व्यक्तिगत रूप से शामिल रहती है — हर चरण में जवाबदेही और संतुष्टि सुनिश्चित करती है।",
+        careers_title: "करियर और साझेदारियाँ",
+        careers_body: "हम हमेशा प्रेरित व्यक्तियों की तलाश में रहते हैं जो संपत्ति और ग्राहक सेवा के प्रति हमारे जुनून को साझा करते हों। यदि आप हमारी सेल्स, साइट, या मार्केटिंग टीम में शामिल होना चाहते हैं — या हमें आने वाली परियोजनाओं पर साझेदारी करना चाहते हैं — तो कृपया हमारे <a href='/careers.html' class='muted'>Careers</a> पेज पर जाएँ या सीधे संपर्क करें।",
+        future_title: "आगे की दिशा",
+        future_body: "हमारा सफर अभी शुरू हुआ है। जैसे-जैसे हम नए प्लॉटेड डेवलपमेंट और आधुनिक टाउनशिप सहयोगों में विस्तार करेंगे, हमारा लक्ष्य अपरिवर्तित रहता है — हर खरीदार को आत्मविश्वासी, सूचित और सम्मानित महसूस कराना। SDA Infra & Promoters में हम सिर्फ संपत्ति सौदे नहीं बनाते — हम दीर्घकालिक रिश्ते बनाते हैं।",
+        contact_title: "संपर्क",
+        phone_lbl: "फोन:",
+        phone: "9999944622",
+        email_lbl: "ईमेल:",
+        email: "info@sdapromoters.com",
+        office_lbl: "मुख्य कार्यालय:",
+        office: "C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015",
+        call_now: "📞 कॉल करें",
+        careers_btn: "करियर",
+        posts_title: "हाल की पोस्ट",
+        posts_body: "ताज़ा प्रॉपर्टी लिस्टिंग, साइट अपडेट और खरीददार गाइड के लिए हमें फॉलो करें।",
+        facebook: "Facebook",
+        instagram: "Instagram"
+      }
+    };
+
+    // --- Helpers to apply locale to page ---
+    function applyLocale(locale) {
+      const map = LOCALE[locale] || LOCALE.en;
+      // text nodes with ids
+      document.getElementById('pageTitle').textContent = map.pageTitle;
+      document.getElementById('pageLead').textContent = map.pageLead;
+
+      // data-key elements
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (!key) return;
+        const val = map[key];
+        if (val === undefined) return;
+
+        // preserve innerHTML only where content contains anchors (<a>)
+        if (typeof val === 'string' && val.includes('<a ')) {
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
+        }
+      });
+
+      // update language button states & aria
+      document.getElementById('btn-en').classList.toggle('active', locale === 'en');
+      document.getElementById('btn-hi').classList.toggle('active', locale === 'hi');
+      document.getElementById('btn-en').setAttribute('aria-pressed', locale === 'en');
+      document.getElementById('btn-hi').setAttribute('aria-pressed', locale === 'hi');
+
+      // remember
+      try { localStorage.setItem('sda_about_lang', locale); } catch(e) {}
+    }
+
+    // --- Init: set default from localStorage (or navigator) ---
+    (function initLocale() {
+      let saved = null;
+      try { saved = localStorage.getItem('sda_about_lang'); } catch(e) {}
+      if (!saved) {
+        // prefer browser language if Hindi explicitly set
+        const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        if (nav.startsWith('hi')) saved = 'hi';
+        else saved = 'en';
+      }
+      applyLocale(saved);
+    })();
+
+    // --- Event listeners for buttons ---
+    document.getElementById('btn-en').addEventListener('click', () => applyLocale('en'));
+    document.getElementById('btn-hi').addEventListener('click', () => applyLocale('hi'));
+
+    // --- load header/footer same as before (keeps your dynamic loader) ---
     async function loadHTML(targetId, relPath) {
       const target = document.getElementById(targetId);
       if (!target) return;
