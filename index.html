@@ -8,12 +8,12 @@
   :root{
     --accent:#1f7a3a;
     --muted:#606060;
-    --bg:#f1f4f3;       /* page background (not white) */
+    --bg:#fbfbf9;       /* INDEX page background — warm off-white */
     --wrap:1120px;
     --gap:22px;
     --topbar-h:52px;
     --card-bg:#ffffff;
-    --footer-bg:#0f3b2b; /* dark footer */
+    --footer-bg:#0b2540; /* INDEX footer — deep navy */
     --footer-color:#e6f6ea;
   }
   *{box-sizing:border-box}
@@ -64,6 +64,8 @@
   .fsmall{color:rgba(230,246,234,0.9);font-size:14px;line-height:1.6}
   .map-embed{border-radius:8px;border:3px solid rgba(255,255,255,0.06)}
   .footer-bottom{max-width:var(--wrap);margin:18px auto 0;padding:0 22px;text-align:center;color:rgba(230,246,234,0.85);font-size:13px}
+  /* tweak for chromium 125 zoom — comfortable spacing */
+  @media (min-width:1200px){ .site{padding-left:28px;padding-right:28px} }
 </style>
 </head>
 <body>
