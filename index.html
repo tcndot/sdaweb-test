@@ -6,104 +6,179 @@
 <title>SDA Infra & Promoters — Home</title>
 <style>
   :root{
-    --accent: #1f7a3a;
-    --muted: #666;
-    --bg: #fbfbf9;           /* page background (soft off-white) */
-    --card: #ffffff;
-    --wrap: 1100px;
-    --gap: 24px;
-    --footer-bg: #0b2540;    /* dark footer */
-    --footer-color: #e6f6ea;
+    --accent:#1f7a3a;
+    --muted:#666;
+    --bg:#fbfbf9;
+    --card:#fff;
+    --wrap:1120px;
+    --gap:22px;
+    --topbar-height:52px;
+    --footer-bg:linear-gradient(135deg,#1a3a1a,#2e7d32);
+    --footer-color:#e8f5e8;
   }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter, Arial, Helvetica, sans-serif;-webkit-font-smoothing:antialiased;background:var(--bg);color:#111}
+  html,body{height:100%;margin:0;font-family:Inter, Arial, Helvetica, sans-serif;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
   a{color:var(--accent);text-decoration:none}
-  .container{max-width:var(--wrap);margin:0 auto;padding:24px}
-  /* header */
-  header.topbar{display:flex;align-items:center;gap:14px;padding:10px 24px;background:transparent;position:sticky;top:0;z-index:50}
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo{width:56px;height:56px;border-radius:10px;border:3px solid var(--accent);background:#fff;object-fit:cover}
-  .brand-name{font-weight:900;font-size:1.2rem;color:#12321a}
-  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:12px}
-  .menu-btn{background:var(--card);border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-  .menu-btn:focus{outline:0;box-shadow:0 0 0 5px rgba(31,122,58,0.08)}
-  .menu-panel{position:absolute;right:24px;top:82px;min-width:220px;background:var(--card);border-radius:10px;padding:10px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 14px 40px rgba(10,20,10,0.12);display:none;z-index:80}
-  .menu-panel.open{display:block}
-  .menu-panel a{display:block;padding:8px;border-radius:8px;font-weight:700;color:#12321a}
-  .menu-panel a:hover{background:#f2fbf2}
-  .menu-panel a.active{background:linear-gradient(90deg,#e6f4e6,#dff0df);color:#083a12}
-  /* main layout */
-  main{padding:20px 0}
-  .hero{display:grid;grid-template-columns:1fr 560px;gap:var(--gap);align-items:start}
-  @media(max-width:1000px){ .hero{grid-template-columns:1fr 420px} }
-  @media(max-width:880px){ .hero{grid-template-columns:1fr; } .hero{row-gap:18px} }
-  .about.card{
-    background:var(--card);border-radius:12px;padding:22px;box-shadow:0 12px 36px rgba(12,20,12,0.06);border:1px solid rgba(0,0,0,0.03);
+  img{max-width:100%;display:block}
+
+  /* ---------- Top bar (fixed) ---------- */
+  .top-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--topbar-height);
+    background: linear-gradient(135deg,#1a3a1a,#2e7d32);
+    color: var(--footer-color);
+    padding: 8px 4vw;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    z-index:3000;
+    font-weight:700;
   }
+  .top-left{display:flex;align-items:center;gap:10px;min-width:0}
+  .phone-link{display:flex;align-items:center;gap:8px;color:var(--footer-color);text-decoration:none;font-weight:700}
+  .phone-link svg{width:18px;height:18px;fill:var(--footer-color);display:block}
+  .top-menu-wrap{margin-left:auto;display:flex;align-items:center;gap:12px}
+
+  /* menu button */
+  .menu-btn{
+    background:rgba(255,255,255,0.95);
+    color:#1a3a1a;
+    border:1px solid rgba(26,58,26,0.12);
+    padding:8px 12px;border-radius:10px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:800;
+    box-shadow:0 4px 14px rgba(26,58,26,0.06);
+  }
+  .menu-btn:focus{outline:none;box-shadow:0 0 0 4px rgba(46,125,50,0.12)}
+  .menu-btn .arrow{width:12px;height:12px;transition:transform .18s ease}
+  .menu-btn[aria-expanded="true"] .arrow{transform:rotate(180deg)}
+
+  /* dropdown */
+  .menu-dropdown{
+    position:fixed;right:4vw;top:calc(var(--topbar-height) + 10px);
+    width:min(92vw,360px);max-height:60vh;overflow:auto;background:#fff;border-radius:10px;
+    box-shadow:0 14px 40px rgba(10,20,10,0.15);border:1px solid rgba(0,0,0,0.06);
+    padding:12px;z-index:2999;transform-origin:top right;transform:scale(.98);opacity:0;pointer-events:none;transition:transform .14s ease,opacity .14s ease;
+  }
+  .menu-dropdown.open{transform:scale(1);opacity:1;pointer-events:auto}
+  .menu-dropdown ul{list-style:none;padding:6px;margin:0}
+  .menu-dropdown li{margin:6px 0}
+  .menu-dropdown a{display:inline-block;padding:8px 10px;border-radius:8px;font-weight:700;color:#12321a}
+  .menu-dropdown a:hover{background:#f1f7f1}
+  .menu-dropdown a.active{background:linear-gradient(90deg,#e6f4e6,#dff0df);color:#083a12;font-weight:900}
+  .menu-note{color:#666;font-size:.95rem;padding:4px 8px;margin-bottom:8px}
+
+  /* ---------- Header branding block (below topbar) ---------- */
+  .header-bar{margin-top:calc(var(--topbar-height) + 10px);display:flex;align-items:center;padding:12px 4vw;background:linear-gradient(135deg,#fff,#f0f7f0)}
+  .branding{display:flex;align-items:center;gap:14px}
+  .branding-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .logo-img{width:64px;height:64px;object-fit:cover;border-radius:12px;background:#fff;border:3px solid #1a3a1a}
+  .companyNameTop{font-size:1.5rem;font-weight:900;color:#1a3a1a;letter-spacing:1px}
+
+  /* ---------- Page container ---------- */
+  .container{max-width:var(--wrap);margin:24px auto;padding:0 20px}
+  main{padding:10px 0 40px}
+
+  /* ---------- Hero layout ---------- */
+  .hero{display:grid;grid-template-columns:1fr 560px;gap:var(--gap);align-items:start}
+  @media(max-width:1000px){.hero{grid-template-columns:1fr 420px}}
+  @media(max-width:880px){.hero{grid-template-columns:1fr;row-gap:18px}}
+
+  .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 12px 36px rgba(12,20,12,0.06);border:1px solid rgba(0,0,0,0.03)}
   .about .title{font-size:28px;margin:0 0 8px;font-weight:800}
   .about .lead{color:var(--muted);margin:0 0 14px;font-size:15px;line-height:1.5}
   .about .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
   .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700}
   .muted-small{color:var(--muted);font-size:13px;margin-top:12px;display:block}
+
   /* slideshow */
-  .slideshow.card{position:relative;width:100%;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#eef6ee,#f7faf7);padding:0}
-  @media(max-width:1000px){ .slideshow{height:300px} }
-  @media(max-width:880px){ .slideshow{height:220px;border-radius:10px} }
+  .slideshow{position:relative;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#eef6ee,#f7faf7)}
+  @media(max-width:1000px){.slideshow{height:300px}}
+  @media(max-width:880px){.slideshow{height:220px;border-radius:10px}}
   .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease, transform .9s ease;transform:scale(1.02)}
   .slide.visible{opacity:1;transform:scale(1)}
   .slideshow::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.45) 100%);pointer-events:none}
-  /* gallery fallback on small */
+
   .gallery-strip{display:none}
   @media(max-width:880px){ .gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px} .gallery-strip img{width:100%;height:72px;object-fit:cover;border-radius:6px} }
-  /* footer */
-  footer{background:var(--footer-bg);color:var(--footer-color);padding:36px 24px;margin-top:32px;border-top-left-radius:6px;border-top-right-radius:6px}
-  .footer-inner{max-width:var(--wrap);margin:0 auto;display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between}
-  .fcol{min-width:220px;max-width:360px}
-  .fheading{font-weight:800;margin-bottom:8px}
-  .fsmall{opacity:0.95;line-height:1.6}
+
+  /* ---------- Footer (copied & completed) ---------- */
+  footer{background:var(--footer-bg);color:var(--footer-color);margin-top:32px;padding:36px 2vw}
+  .footer-section{max-width:var(--wrap);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:34px;flex-wrap:wrap;font-size:1rem}
+  .footer-section > div{min-width:220px;max-width:370px;flex:1 1 0}
+  .footer-section b{color:#c8e6c9;font-size:1.03em}
+  .footer-section a{color:#a5d6a7;text-decoration:underline;display:inline-block;margin-top:8px;margin-right:10px}
+  .footer-section a:hover{color:var(--footer-color)}
+  .footer-section iframe{border-radius:7px;margin-top:8px;width:100%;min-height:160px;border:none;background:#fff;box-shadow:0 0 5px rgba(26,58,26,0.15)}
   .footer-bottom{text-align:center;margin-top:18px;opacity:0.95}
+  @media(max-width:900px){ .footer-section{flex-direction:column;gap:22px;padding:18px 2vw} .footer-section>div{max-width:unset;min-width:unset} }
+
+  /* socials & whatsapp */
+  .socials-fixed{position:fixed;left:16px;bottom:20px;z-index:9999;display:flex;gap:18px}
+  .socials-fixed a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.95);box-shadow:0 2px 8px rgba(26,58,26,0.15);border:1px solid rgba(46,125,50,0.1)}
+  .socials-fixed svg{width:22px;height:22px}
+  @media(max-width:600px){.socials-fixed{left:8px;bottom:8px}.socials-fixed a{width:28px;height:28px}.socials-fixed svg{width:16px;height:16px}}
+
+  .whatsapp-fixed-wrap{position:fixed;right:18px;bottom:22px;z-index:9999;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .chat-label{color:#1a3a1a;background:rgba(255,255,255,0.95);font-weight:800;font-size:1.03em;padding:6px 14px;margin-bottom:8px;border-radius:12px;border:1.5px solid rgba(46,125,50,0.2);box-shadow:0 2px 9px rgba(26,58,26,0.08)}
+  .whatsapp-fixed-btn{background:linear-gradient(135deg,#25d366,#128c7e);border-radius:50%;width:72px;height:72px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(46,125,50,0.2)}
+  .whatsapp-fixed-btn img{width:48px;height:48px;filter:brightness(0) invert(1)}
+  @media(max-width:600px){.whatsapp-fixed-btn{width:44px;height:44px}.whatsapp-fixed-btn img{width:22px;height:22px}}
+
   /* small helpers */
   .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
-  button {font-family:inherit}
 </style>
 </head>
 <body>
-  <header class="topbar" role="banner" aria-label="Top bar">
-    <div class="brand" style="min-width:0">
-      <a href="index.html" style="display:flex;align-items:center;gap:12px;color:inherit">
-        <img src="images/logo.png" alt="SDA logo" class="logo" onerror="this.style.display='none'">
-        <div class="brand-name">SDA Infra & Promoters</div>
+
+  <!-- TOP BAR -->
+  <div class="top-bar" role="banner">
+    <div class="top-left">
+      <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+        <span>Call: 9999944622</span>
       </a>
     </div>
 
-    <nav class="nav-actions" role="navigation" aria-label="Primary">
-      <div style="display:flex;align-items:center;gap:12px">
-        <a href="index.html" style="font-weight:700">Home</a>
-        <a href="about.html" style="font-weight:700">About</a>
-        <a href="blogs.html" style="font-weight:700">Blogs</a>
-        <a href="careers.html" style="font-weight:700">Careers</a>
-      </div>
+    <div class="top-menu-wrap">
+      <button id="topMenuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="topMenuDropdown">
+        <span>Menu</span><span class="arrow">▾</span>
+      </button>
+    </div>
+  </div>
 
-      <div style="position:relative">
-        <button id="menuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel">Menu <span aria-hidden="true">▾</span></button>
-        <div id="menuPanel" class="menu-panel" role="menu" aria-labelledby="menuBtn">
-          <a href="index.html">Home</a>
-          <a href="about.html">About Us</a>
-          <a href="careers.html">Careers</a>
-          <a href="blogs.html">Blogs &amp; Gallery</a>
+  <!-- MENU DROPDOWN (inlined content inserted below by JS) -->
+  <div id="topMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="topMenuBtn" tabindex="-1">
+    <div class="menu-note">Navigation</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="blogs.html">Blogs &amp; Gallery</a></li>
+    </ul>
+  </div>
+
+  <!-- BRANDING -->
+  <header class="header-bar" role="navigation" aria-label="Main header">
+    <div class="branding">
+      <a class="branding-link" href="index.html">
+        <img class="logo-img" src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'">
+        <div>
+          <div class="companyNameTop">SDA Infra & Promoters</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:6px">Verified plots • Clear paperwork • Local guidance</div>
         </div>
-      </div>
-    </nav>
+      </a>
+    </div>
   </header>
 
-  <main class="container" role="main">
+  <!-- MAIN -->
+  <main class="container" role="main" aria-labelledby="aboutTitle">
     <div class="hero" id="hero">
-      <!-- LEFT: About -->
-      <section class="about card" aria-labelledby="aboutTitle">
+      <!-- LEFT: ABOUT -->
+      <section class="card about" id="aboutBlock">
         <h2 class="title" id="aboutTitle">SDA Infra &amp; Promoters</h2>
-        <p class="lead" id="lead">Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.</p>
+        <p class="lead" id="aboutLead">Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.</p>
 
-        <ul class="bullets" id="bullets">
+        <ul class="bullets" id="aboutBullets">
           <li>Verified listings with clear titles</li>
           <li>On-site visits & complete documentation support</li>
           <li>Local knowledge across Delhi, Gurgaon & Noida</li>
@@ -113,9 +188,9 @@
         <div class="muted-small">Photos rotate every 3 seconds — swipe on mobile to explore.</div>
       </section>
 
-      <!-- RIGHT: Slideshow -->
+      <!-- RIGHT: SLIDESHOW (6 images) -->
       <aside>
-        <div class="slideshow card" aria-label="Featured photos" id="slideshow">
+        <div id="slideshow" class="slideshow card" aria-label="Featured photos">
           <div class="slide" data-src="images/mainpagetopphoto/1.jpg" role="img" aria-label="Photo 1"></div>
           <div class="slide" data-src="images/mainpagetopphoto/2.jpg" role="img" aria-label="Photo 2"></div>
           <div class="slide" data-src="images/mainpagetopphoto/3.jpg" role="img" aria-label="Photo 3"></div>
@@ -136,144 +211,147 @@
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      <div class="fcol">
-        <div class="fheading">Contact</div>
-        <div class="fsmall">
-          SDA Infra & Promoters<br>
-          Phone: 9999944622<br>
-          Email: info@sdapromoters.com
+    <div class="footer-section">
+      <div>
+        <b>Contact Us</b><br>
+        SDA Infra & Promoters<br>
+        SDA Developers & Promoters<br>
+        Phone: <a href="tel:9999944622" style="color:#a5d6a7;text-decoration:underline">9999944622</a><br>
+        Email: <a href="mailto:info@sdapromoters.com" style="color:#a5d6a7;text-decoration:underline">info@sdapromoters.com</a>
+        <div style="margin-top:10px">
+          <b>Head Office:</b> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015<br>
+          <b>Branch Office:</b> Pili Building, Opposite Nithari School &amp; Jal Board Pump, Sukhi Nehar Road, Pratap Vihar, Delhi 110086
         </div>
       </div>
 
-      <div class="fcol" style="text-align:center">
-        <div class="fheading">Office Location</div>
-        <iframe title="office-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="260" height="160" style="border:0;border-radius:8px"></iframe>
+      <div>
+        <b>Our Office Location</b>
+        <iframe title="office-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="260" height="200"></iframe>
+        <div style="margin-top:8px">
+          <a href="https://maps.apple.com/?q=Ramesh+Nagar+Delhi" target="_blank" rel="noopener">Open in Apple Maps</a>
+          <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">Open in OpenStreetMap</a>
+        </div>
       </div>
 
-      <div class="fcol">
-        <div class="fheading">Our Motto</div>
-        <div class="fsmall">SDA ka sapna, sabka ghar ho apna</div>
+      <div>
+        <b>Our Motto</b><br>
+        <div style="color:#c8e6c9;font-weight:700;margin-top:6px">SDA ka sapna, sabka ghar ho apna</div>
+        <p style="margin-top:10px;color:#d8efd2">
+          We deeply understand the pain of renting in Delhi. Our mission is to help families move from rented uncertainty to the pride of home ownership. We provide verified listings, on-site support and clear documentation.
+        </p>
       </div>
     </div>
 
-    <div class="footer-bottom">© <span id="year"></span> SDA Infra & Promoters</div>
+    <div class="footer-bottom">© <span id="year">2025</span> SDA Infra & Promoters</div>
+
+    <!-- floating socials -->
+    <div class="socials-fixed" aria-hidden="false">
+      <a href="https://m.youtube.com/@sdapromoters" target="_blank" title="YouTube" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M21.58 7.19s-.22-1.62-.88-2.34c-.84-.9-1.78-.9-2.21-.95C15 3.71 12 3.71 12 3.71h0s-3 0-6.49.19c-.43.05-1.37.05-2.21.94-.66.73-.88 2.34-.88 2.34S2 8.81 2 10.44v.62c0 1.62.22 3.25.22 3.25s.22 1.62.88 2.34c.84.89 1.94.86 2.44.96C7.73 18.29 12 18.29 12 18.29s3 0 6.49-.19c.43-.05 1.37-.05 2.21-.94.66-.73.88-2.34.88-2.34s.22-1.62.22-3.25v-.62c0-1.63-.22-3.25-.22-3.25zM10 15V9l5 3-5 3z"/></svg>
+      </a>
+      <a href="https://m.facebook.com/sda.rameshnagar/" target="_blank" title="Facebook" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91V127.44c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26
+        S260.43 0 225.36 0C141.09 0 89.09 54.41 89.09 153.31V195.3H0V288h89.09v224h104.89V288z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/Sdapromoters/" target="_blank" title="Instagram" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.057 1.97.24 2.422.415.5.195.858.428 1.23.8.372.372.605.73.8 1.23.175.452.358 1.251.415 2.422.058 1.266.069 1.646.069 4.85s-.011 3.584-.069 4.85c-.057 1.17-.24 1.97-.415 2.422-.195.5-.428.858-.8 1.23-.372.372-.73.605-1.23.8-.452.175-1.251.358-2.422.415-1.266.058-1.646.069-4.85.069s-3.583-.011-4.85-.069c-1.17-.057-1.97-.24-2.422-.415-.5-.195-.858-.428-1.23-.8-.372-.372-.605-.73-.8-1.23-.175-.452-.358-1.251-.415-2.422C2.175 15.647 2.163 15.267 2.163 12s.012-3.583.07-4.85c.057-1.17.24-1.97.415-2.422A3.495 3.495 0 0 1 4.379 2.55c.452-.175 1.251-.358 2.422-.415C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.015 7.053.072 5.774.127 4.685.309 3.802.634c-.892.328-1.671.768-2.447 1.544C.444 3.327.003 4.106-.325 4.998c-.324.883-.506 1.972-.561 3.251C-.015 8.667 0 9.075 0 12c0 2.926.015 3.333.072 4.613.055 1.279.237 2.368.561 3.251.328.892.769 1.67 1.544 2.447.777.777 1.555 1.216 2.447 1.545.883.324 1.972.506 3.251.56C8.333 23.985 8.741 24 12 24s3.667-.015 4.947-.072c1.279-.055 2.368-.237 3.251-.561.892-.329 1.67-.768 2.447-1.545.777-.776 1.216-1.555 1.545-2.447.324-.883.506-1.972.56-3.251C23.985 15.333 24 14.926 24 12c0-2.925-.015-3.333-.072-4.613-.055-1.279-.236-2.368-.56-3.251a4.063 4.063 0 0 0-1.545-2.447c-.777-.777-1.555-1.216-2.447-1.544C19.333.309 18.244.127 16.965.072 15.686.015 15.259 0 12 0zm0 5.838A6.162 6.162 0 1 0 18.163 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.406-11.845a1.44 1.44 0 1 0 1.438 1.44 1.438 1.438 0 0 0-1.436-1.44z"/></svg>
+      </a>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <div class="whatsapp-fixed-wrap" aria-hidden="false">
+      <span class="chat-label">Chat with us</span>
+      <a class="whatsapp-fixed-btn" href="https://wa.me/919999944622?text=Hello,%20Can%20I%20get%20more%20information???" target="_blank" rel="noopener" title="Start WhatsApp chat">
+        <img src="images/whatsapplogo.png" alt="WhatsApp">
+      </a>
+    </div>
   </footer>
 
 <script>
-/* --------- MENU (works without external files) --------- */
+/* ---------- MENU logic (in-page) ---------- */
 (function(){
-  const btn = document.getElementById('menuBtn');
-  const panel = document.getElementById('menuPanel');
-  if (!btn || !panel) return;
+  const btn = document.getElementById('topMenuBtn');
+  const dropdown = document.getElementById('topMenuDropdown');
+  if(!btn || !dropdown) return;
+
+  function normalizePath(url){
+    try{
+      const u = new URL(url, location.href);
+      let p = u.pathname;
+      p = p.replace(/\/index\.html$/,'/').replace(/\/$/,'');
+      return p || '/';
+    }catch{
+      return url || '/';
+    }
+  }
+
+  function markActive(){
+    const cur = normalizePath(location.pathname);
+    dropdown.querySelectorAll('a').forEach(a=>{
+      const href = a.getAttribute('href') || '';
+      const link = normalizePath(href);
+      a.classList.toggle('active', link === cur);
+    });
+  }
 
   function openMenu(){
+    markActive();
     btn.setAttribute('aria-expanded','true');
-    panel.classList.add('open');
-    const first = panel.querySelector('a');
+    dropdown.classList.add('open');
+    const first = dropdown.querySelector('a');
     if(first) first.focus();
     document.addEventListener('click', outside);
     document.addEventListener('keydown', keyHandler);
   }
   function closeMenu(){
     btn.setAttribute('aria-expanded','false');
-    panel.classList.remove('open');
+    dropdown.classList.remove('open');
     document.removeEventListener('click', outside);
     document.removeEventListener('keydown', keyHandler);
-    try{ btn.focus(); } catch(e){}
+    try{ btn.focus(); }catch(e){}
   }
-  function outside(e){ if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); }
+  function outside(e){ if(!dropdown.contains(e.target) && !btn.contains(e.target)) closeMenu(); }
   function keyHandler(e){
-    if(e.key === 'Escape') return closeMenu();
-    if((e.key === 'ArrowDown' || e.key === 'ArrowUp') && panel.classList.contains('open')){
-      const items = Array.from(panel.querySelectorAll('a'));
+    if(e.key==='Escape') closeMenu();
+    if((e.key==='ArrowDown'||e.key==='ArrowUp') && dropdown.classList.contains('open')){
+      const items = Array.from(dropdown.querySelectorAll('a'));
       if(!items.length) return;
       e.preventDefault();
       const idx = items.indexOf(document.activeElement);
-      if(e.key === 'ArrowDown') items[(idx + 1) % items.length].focus();
-      else items[(idx - 1 + items.length) % items.length].focus();
+      if(e.key==='ArrowDown') items[(idx+1)%items.length].focus();
+      else items[(idx-1+items.length)%items.length].focus();
     }
   }
 
-  btn.addEventListener('click', ()=> panel.classList.contains('open') ? closeMenu() : openMenu());
-  btn.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ' || e.key==='ArrowDown'){ e.preventDefault(); openMenu(); }});
-  panel.addEventListener('click', (e)=> { if(e.target.closest('a')) closeMenu(); });
+  btn.addEventListener('click', ()=> dropdown.classList.contains('open') ? closeMenu() : openMenu());
+  btn.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '||e.key==='ArrowDown'){ e.preventDefault(); if(!dropdown.classList.contains('open')) openMenu(); }});
+  dropdown.addEventListener('click', e=>{ if(e.target.closest('a')) closeMenu(); });
 
-  // mark active link by comparing normalized path
-  function normalizePath(u){
-    try{ const url = new URL(u, location.href); let p = url.pathname.replace(/\/index\.html$/,'/'); if(p.endsWith('/') && p.length>1) p = p.slice(0,-1); return p||'/'; }catch{ return u; }
-  }
-  const cur = normalizePath(location.pathname);
-  panel.querySelectorAll('a').forEach(a => {
-    if(normalizePath(a.getAttribute('href')) === cur) a.classList.add('active');
-  });
+  // in case menu loaded dynamically earlier, ensure active marked now
+  markActive();
 })();
 
-/* --------- SLIDESHOW (6 images) --------- */
+/* ---------- SLIDESHOW (6 images) ---------- */
 (function(){
   const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/tcndot/sdaweb-test/main';
   const slideshow = document.getElementById('slideshow');
-  const slideEls = Array.from(slideshow.querySelectorAll('.slide'));
+  if(!slideshow) return;
+  const slides = Array.from(slideshow.querySelectorAll('.slide'));
 
-  // preload: try relative path first, else raw GitHub fallback, else neutral background
   function testImage(url){
     return new Promise(res => {
       const img = new Image();
-      img.onload = () => res(true);
-      img.onerror = () => res(false);
+      img.onload = ()=> res(true);
+      img.onerror = ()=> res(false);
       img.src = url + (url.includes('?') ? '&' : '?') + 'cb=' + Date.now();
     });
   }
 
-  async function setSlides(){
-    for(const s of slideEls){
+  async function setBackgrounds(){
+    for(const s of slides){
       const rel = s.getAttribute('data-src');
       const raw = `${GITHUB_RAW_BASE}/${rel.replace(/^images\//,'images/')}`;
       let ok = await testImage(rel);
-      if(ok){ s.style.backgroundImage = `url("${rel}")`; continue; }
-      ok = await testImage(raw);
-      if(ok){ s.style.backgroundImage = `url("${raw}")`; continue; }
-      // neither works: neutral placeholder
-      s.style.backgroundColor = '#ddd';
-    }
-  }
-
-  setSlides().then(()=> {
-    let cur = 0;
-    if(slideEls.length === 0) return;
-    slideEls.forEach((el,i)=> el.classList.toggle('visible', i===0));
-    let interval = setInterval(next, 3000);
-
-    function next(){
-      slideEls[cur].classList.remove('visible');
-      cur = (cur + 1) % slideEls.length;
-      slideEls[cur].classList.add('visible');
-    }
-
-    slideshow.addEventListener('mouseenter', ()=> clearInterval(interval));
-    slideshow.addEventListener('mouseleave', ()=> { clearInterval(interval); interval = setInterval(next, 3000); });
-
-    // touch swipe
-    let startX = null;
-    slideshow.addEventListener('touchstart', e => { if(e.touches && e.touches[0]) startX = e.touches[0].clientX; }, {passive:true});
-    slideshow.addEventListener('touchend', e => {
-      if(startX === null) return;
-      const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : null;
-      if(endX === null){ startX = null; return; }
-      const dx = endX - startX;
-      if(Math.abs(dx) > 40){
-        if(dx < 0) next();
-        else { slideEls[cur].classList.remove('visible'); cur = (cur - 1 + slideEls.length) % slideEls.length; slideEls[cur].classList.add('visible'); }
-      }
-      startX = null;
-    }, {passive:true});
-  });
-})();
-
-/* misc */
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-</body>
-</html>
-```0
+      if(ok){ s.style.backgroundImage = `url("${rel
