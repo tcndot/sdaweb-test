@@ -3,183 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SDA Infra & Promoters</title>
+  <title>Homepage — SDA Infra & Promoters</title>
   <style>
-    :root{
-      --accent:#1f7a3a;
-      --muted:#666;
-      --wrap:1200px;
-      --gap:28px;
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
     }
-    html,body{margin:0;padding:0;font-family:Inter, Arial, Helvetica, sans-serif;color:#111;background:#fff;-webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--wrap);margin:0 auto;padding:28px}
-    .hero{display:grid;grid-template-columns:1fr 560px;gap:var(--gap);align-items:center;opacity:0}
-    @media (max-width:1000px){ .hero{grid-template-columns:1fr 420px} }
-    @media (max-width:900px){ .hero{grid-template-columns:1fr; } .hero{row-gap:18px} }
-    .about{padding:0;line-height:1.5}
-    .about .title{font-size:28px;margin:0 0 8px;font-weight:800}
-    .about .lead{color:var(--muted);margin:0 0 14px;font-size:15px}
-    .about .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
-    .about .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
-    .about .muted-small{color:var(--muted);font-size:13px;margin-top:12px;display:block}
-    .slideshow{position:relative;width:100%;height:360px;border-radius:12px;overflow:hidden;background:#f7f7f7;box-shadow:none;opacity:0}
-    @media(max-width:1000px){ .slideshow{height:300px} }
-    @media(max-width:900px){ .slideshow{height:220px;border-radius:8px} }
-    .slide{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .9s ease, transform .9s ease;opacity:0;transform:scale(1.02);will-change:opacity, transform}
-    .slide.visible{opacity:1;transform:scale(1)}
-    .slideshow::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.5) 100%);pointer-events:none;}
-    .gallery-strip{display:none}
-    @media(max-width:900px){ .gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px} .gallery-strip img{width:100%;height:72px;object-fit:cover;border-radius:6px} }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .fade-in { animation: fadeIn .7s ease both; }
-    .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
-    #debug { font-family:monospace; font-size:12px; color:#666; margin-top:12px; display:none; white-space:pre-wrap; }
+    main {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1f7a3a;
+      padding: 40px 20px;
+    }
   </style>
 </head>
 <body>
-  <!-- loader targets for header/footer -->
-  <div id="headerdiv" aria-hidden="true"></div>
+  <div id="headerdiv"></div>
 
-  <div class="wrap">
-    <div class="hero" id="hero" role="main" aria-label="Homepage highlight">
-      <div class="about" id="aboutBlock" aria-labelledby="aboutTitle">
-        <h2 class="title" id="aboutTitle">SDA Infra &amp; Promoters</h2>
-        <p class="lead" id="aboutLead">
-          Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.
-        </p>
+  <main>
+    Homepage
+  </main>
 
-        <ul class="bullets" id="aboutBullets">
-          <li>Verified listings with clear titles</li>
-          <li>On-site visits & complete documentation support</li>
-          <li>Local knowledge across Delhi, Gurgaon & Noida</li>
-        </ul>
-
-        <a href="about.html" class="cta" id="aboutCta">Read full About page</a>
-        <span class="muted-small" id="aboutNote">Photos rotate every 3 seconds — swipe on mobile to explore.</span>
-      </div>
-
-      <div class="slideshow" id="slideshow" aria-label="Featured photos">
-        <div class="slide" data-src="images/mainpagetopphoto/1.jpg" role="img" aria-label="Photo 1"></div>
-        <div class="slide" data-src="images/mainpagetopphoto/2.jpg" role="img" aria-label="Photo 2"></div>
-        <div class="slide" data-src="images/mainpagetopphoto/3.jpg" role="img" aria-label="Photo 3"></div>
-        <div class="slide" data-src="images/mainpagetopphoto/4.jpg" role="img" aria-label="Photo 4"></div>
-        <div class="slide" data-src="images/mainpagetopphoto/5.jpg" role="img" aria-label="Photo 5"></div>
-        <div class="slide" data-src="images/mainpagetopphoto/6.jpg" role="img" aria-label="Photo 6"></div>
-      </div>
-
-      <div class="gallery-strip" aria-hidden="true">
-        <img src="images/mainpagetopphoto/1.jpg" alt="Office front">
-        <img src="images/mainpagetopphoto/2.jpg" alt="Site visit">
-        <img src="images/mainpagetopphoto/3.jpg" alt="Plot area">
-        <img src="images/mainpagetopphoto/4.jpg" alt="Team photo">
-        <img src="images/mainpagetopphoto/5.jpg" alt="Client handover">
-        <img src="images/mainpagetopphoto/6.jpg" alt="Area map">
-      </div>
-    </div>
-
-    <div id="debug" aria-hidden="true"></div>
-  </div>
-
-  <!-- footer loader target -->
-  <div id="footerdiv" aria-hidden="true"></div>
+  <div id="footerdiv"></div>
 
   <script>
     const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/tcndot/sdaweb-test/main';
-
-    function logDebug(msg) {
-      try {
-        const el = document.getElementById('debug');
-        el.style.display = 'block';
-        el.textContent += msg + '\n';
-        console.log(msg);
-      } catch(e) { console.log(msg); }
-    }
-
-    (function initSlideshow() {
-      const slideEls = Array.from(document.querySelectorAll('.slideshow .slide'));
-      const slideshowEl = document.getElementById('slideshow');
-      const heroEl = document.getElementById('hero');
-
-      const slides = slideEls.map((el) => {
-        const rel = el.getAttribute('data-src');
-        const raw = `${GITHUB_RAW_BASE}/${rel.replace(/^images\//,'images/')}`;
-        return {el, rel, raw};
-      });
-
-      function testImage(url) {
-        return new Promise((res) => {
-          const img = new Image();
-          img.onload = () => res(true);
-          img.onerror = () => res(false);
-          img.src = url + (url.includes('?') ? '&' : '?') + 'cachebust=' + Date.now();
-        });
-      }
-
-      async function ensureImages() {
-        for (const s of slides) {
-          let ok = await testImage(s.rel);
-          if (ok) {
-            s.el.style.backgroundImage = `url("${s.rel}")`;
-          } else {
-            logDebug(`Relative image failed: ${s.rel} — trying raw GitHub fallback.`);
-            ok = await testImage(s.raw);
-            if (ok) {
-              s.el.style.backgroundImage = `url("${s.raw}")`;
-            } else {
-              logDebug(`Raw fallback also failed for: ${s.raw}. Slide will be empty.`);
-              s.el.style.backgroundColor = '#ddd';
-            }
-          }
-        }
-      }
-
-      ensureImages().then(() => {
-        window.requestAnimationFrame(() => {
-          heroEl.style.opacity = 1;
-          heroEl.classList.add('fade-in');
-          slideshowEl.style.opacity = 1;
-          slideshowEl.classList.add('fade-in');
-        });
-
-        let cur = 0;
-        slides.forEach((s, i) => s.el.classList.toggle('visible', i === 0));
-
-        function show(index) {
-          slides.forEach((s, i) => s.el.classList.toggle('visible', i === index));
-        }
-
-        let interval = setInterval(() => {
-          cur = (cur + 1) % slides.length;
-          show(cur);
-        }, 3000);
-
-        slideshowEl.addEventListener('mouseenter', () => clearInterval(interval));
-        slideshowEl.addEventListener('mouseleave', () => {
-          clearInterval(interval);
-          interval = setInterval(() => {
-            cur = (cur + 1) % slides.length;
-            show(cur);
-          }, 3000);
-        });
-
-        let startX = null;
-        slideshowEl.addEventListener('touchstart', e => {
-          if (e.touches && e.touches[0]) startX = e.touches[0].clientX;
-        }, {passive:true});
-        slideshowEl.addEventListener('touchend', e => {
-          if (startX === null) return;
-          const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : null;
-          if (endX === null) { startX = null; return; }
-          const dx = endX - startX;
-          if (Math.abs(dx) > 40) {
-            if (dx < 0) cur = (cur + 1) % slides.length;
-            else cur = (cur - 1 + slides.length) % slides.length;
-            show(cur);
-          }
-          startX = null;
-        }, {passive:true});
-      });
-    })();
 
     async function loadHTMLWithFallback(targetId, relPath) {
       const target = document.getElementById(targetId);
@@ -187,32 +42,19 @@
       const rawFallback = `${GITHUB_RAW_BASE}/${relPath}`;
       try {
         const res = await fetch(relPath, {cache:'no-store'});
-        if (!res.ok) throw new Error(`Relative fetch returned ${res.status}`);
-        const text = await res.text();
-        target.innerHTML = text;
+        if (!res.ok) throw new Error(res.status);
+        target.innerHTML = await res.text();
         target.setAttribute('aria-hidden','false');
         return;
       } catch (err) {
-        logDebug(`Relative fetch failed for ${relPath}: ${err.message}. Trying raw GitHub fallback...`);
-      }
-
-      try {
-        const res2 = await fetch(rawFallback, {cache:'no-store'});
-        if (!res2.ok) throw new Error(`Raw fetch returned ${res2.status}`);
-        const text2 = await res2.text();
-        target.innerHTML = text2;
-        target.setAttribute('aria-hidden','false');
-        logDebug(`Loaded ${relPath} from raw GitHub fallback.`);
-        return;
-      } catch (err2) {
-        logDebug(`Raw fallback failed for ${relPath}: ${err2.message}. Header/footer not loaded.`);
-        if (targetId === 'headerdiv') {
-          target.innerHTML = `<div style="padding:12px;background:#fff;border-bottom:1px solid #eee"><a href="/" style="text-decoration:none;color:var(--accent);font-weight:700">SDA Infra & Promoters</a></div>`;
+        try {
+          const res2 = await fetch(rawFallback, {cache:'no-store'});
+          if (!res2.ok) throw new Error(res2.status);
+          target.innerHTML = await res2.text();
           target.setAttribute('aria-hidden','false');
-        }
-        if (targetId === 'footerdiv') {
-          target.innerHTML = `<footer style="padding:12px;text-align:center;color:#666;border-top:1px solid #eee">© ${new Date().getFullYear()} SDA Infra & Promoters</footer>`;
-          target.setAttribute('aria-hidden','false');
+          return;
+        } catch (err2) {
+          target.innerHTML = '';
         }
       }
     }
@@ -221,10 +63,9 @@
       await loadHTMLWithFallback('headerdiv', 'header.html');
       await loadHTMLWithFallback('footerdiv', 'footer.html');
 
-      // If your header is injected via fetch, header's inline scripts won't execute.
-      // If you installed header.js in the repo root, call initHeader() here to attach menu handlers:
+      // attach header behaviour if header.js is in repo
       if (typeof window.initHeader === 'function') {
-        try { window.initHeader(); } catch (e) { logDebug('initHeader() threw: ' + e.message); }
+        try { window.initHeader(); } catch(e){}
       }
     })();
   </script>
