@@ -5,81 +5,90 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>About — SDA Infra & Promoters</title>
 <style>
-  :root{--accent:#1f7a3a;--muted:#666;--wrap:1100px;--topbar-h:48px}
+  :root{
+    --accent:#1f7a3a;
+    --muted:#606060;
+    --bg:#eef3f1;        /* slightly different off-white for variety */
+    --wrap:1120px;
+    --topbar-h:52px;
+    --card-bg:#fff;
+    --footer-bg:#0f3b2b;
+    --footer-color:#e6f6ea;
+  }
   *{box-sizing:border-box}
-  html,body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:#111;background:#fff}
-  a{text-decoration:none;color:var(--accent)}
-  .site-wrap{max-width:var(--wrap);margin:0 auto;padding:18px}
-  .topbar{position:sticky;top:0;background:linear-gradient(90deg, rgba(31,122,58,0.08), rgba(31,122,58,0.04));padding:6px 3vw;height:calc(var(--topbar-h)+4px);display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(0,0,0,0.04);z-index:90}
-  .brand-name{font-weight:800;color:#12321a}
-  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
-  .lang-btn{background:transparent;border:1px solid #e6e6e6;padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+  html,body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:#111;background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  .site{max-width:var(--wrap);margin:0 auto;padding:22px}
+  .topbar{position:sticky;top:0;display:flex;align-items:center;gap:12px;padding:10px 3vw;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.35));border-bottom:1px solid rgba(0,0,0,0.04);z-index:100;height:48px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:44px;height:44px;border-radius:8px;border:2px solid var(--accent);background:#fff;object-fit:cover}
+  .brand-name{font-weight:800;color:rgba(16,40,16,0.95)}
+  .actions{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .lang-btn{background:transparent;border:1px solid rgba(0,0,0,0.08);padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700}
   .lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
   .menu-btn{background:#fff;padding:8px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);cursor:pointer;font-weight:800}
-  .menu-dropdown{position:absolute;right:3vw;top:calc(var(--topbar-h)+14px);min-width:200px;background:#fff;border-radius:8px;padding:8px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 30px rgba(12,18,12,0.06);display:none}
-  .menu-dropdown.open{display:block}
-  main{padding-top:22px}
-  .page-head{margin:22px 0}
+  main{padding-top:18px}
+  .page-head{margin:8px 0 20px}
   h1{font-size:28px;margin:0 0 8px}
   .lead{color:var(--muted);margin:0 0 18px}
-  .grid{display:grid;grid-template-columns:1fr 320px;gap:24px}
+  .grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
   @media(max-width:920px){.grid{grid-template-columns:1fr}}
-  .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 10px 30px rgba(12,20,12,0.04);border:1px solid rgba(0,0,0,0.03)}
-  footer{border-top:1px solid rgba(0,0,0,0.04);margin-top:28px;padding:22px 0}
+  .card{background:var(--card-bg);border-radius:12px;padding:18px;box-shadow:0 12px 30px rgba(10,20,10,0.04);border:1px solid rgba(0,0,0,0.03)}
+  footer{background:var(--footer-bg);color:var(--footer-color);padding:36px 0;margin-top:28px}
+  .footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 22px;display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+  .fcol{min-width:220px;max-width:360px}
+  .fheading{font-weight:800;margin-bottom:8px}
+  .fsmall{color:var(--footer-color);opacity:0.95;line-height:1.6}
+  .footer-bottom{text-align:center;margin-top:18px;color:rgba(230,246,234,0.9)}
 </style>
 </head>
 <body>
-  <div class="topbar" role="banner">
-    <div style="display:flex;align-items:center;gap:12px">
-      <a href="index.html" style="display:flex;align-items:center;gap:10px;color:inherit">
-        <img src="images/logo.png" alt="logo" style="width:48px;height:48px;border-radius:8px;border:2px solid var(--accent);object-fit:cover" onerror="this.style.display='none'">
-        <div class="brand-name">SDA Infra & Promoters</div>
-      </a>
+  <header class="topbar" role="banner">
+    <div class="brand">
+      <a href="index.html"><img src="images/logo.png" class="logo" alt="logo" onerror="this.style.display='none'"></a>
+      <div class="brand-name">SDA Infra & Promoters</div>
     </div>
 
-    <div class="nav-actions" role="navigation" aria-label="Main actions">
-      <div class="lang">
+    <div class="actions" role="navigation" aria-label="site actions">
+      <div>
         <button id="btn-en" class="lang-btn">EN</button>
         <button id="btn-hi" class="lang-btn">हिन्दी</button>
       </div>
 
       <div style="position:relative">
-        <button id="topMenuBtn" class="menu-btn" aria-expanded="false">Menu ▾</button>
-        <div id="topMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="topMenuBtn">
-          <ul style="list-style:none;margin:0;padding:4px">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="careers.html">Careers</a></li>
-            <li><a href="blogs.html">Blogs &amp; Gallery</a></li>
-          </ul>
+        <button id="menuBtn" class="menu-btn" aria-expanded="false">Menu ▾</button>
+        <div id="menuPanel" class="menu-panel" role="menu" aria-hidden="true" style="position:absolute;right:0;top:calc(100% + 8px);min-width:200px;background:#fff;border-radius:10px;padding:8px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 12px 36px rgba(8,16,8,0.08);display:none">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="careers.html">Careers</a>
+          <a href="blogs.html">Blogs & Gallery</a>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <main class="site-wrap">
+  <main class="site">
     <div class="page-head">
       <h1 id="pageTitle">About SDA Infra & Promoters</h1>
-      <p class="lead" id="pageLead">SDA Infra & Promoters is a Delhi-based real estate firm focused on premium residential plots across Delhi NCR.</p>
+      <p id="pageLead" class="lead">SDA Infra & Promoters is a Delhi-based firm focused on premium residential plots across Delhi NCR.</p>
     </div>
 
     <div class="grid">
       <section>
         <div class="card">
           <h2>Who We Are</h2>
-          <p id="who">SDA Infra & Promoters was established with a simple goal — to make real estate buying and selling in Delhi NCR straightforward, transparent, and reliable.</p>
+          <p>SDA Infra & Promoters was established to make real estate buying and selling in Delhi NCR straightforward, transparent, and reliable.</p>
 
-          <h3 style="margin-top:18px">Our Vision & Mission</h3>
+          <h3 style="margin-top:16px">Our Vision & Mission</h3>
           <p><strong>Vision:</strong> To be the most trusted name in Delhi NCR’s real estate plotting market.</p>
           <p><strong>Mission:</strong> To provide verified plots, clear documentation, and transparent transactions.</p>
 
-          <h3 style="margin-top:18px">What We Do</h3>
+          <h3 style="margin-top:16px">What We Do</h3>
           <ul>
             <li>Sale and development of residential and commercial plots</li>
             <li>End-to-end buyer assistance — from first call to final registry</li>
             <li>Site visits, legal documentation, and after-sale support</li>
             <li>Market guidance and property consulting across Delhi NCR</li>
-            <li>Collaboration opportunities for builders and investors</li>
           </ul>
         </div>
 
@@ -96,7 +105,7 @@
           <p><strong>Email:</strong> info@sdapromoters.com</p>
           <p><strong>Office:</strong> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015</p>
           <div style="margin-top:12px"><a href="tel:9999944622" style="background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;display:inline-block">Call Now</a></div>
-          <div style="display:flex;gap:8px;margin-top:12px">
+          <div style="display:flex;gap:8px;margin-top:14px">
             <img src="images/office-1.jpg" alt="" style="width:88px;height:64px;object-fit:cover;border-radius:8px;border:1px solid #eee">
             <img src="images/site-visit-1.jpg" alt="" style="width:88px;height:64px;object-fit:cover;border-radius:8px;border:1px solid #eee">
             <img src="images/plot-1.jpg" alt="" style="width:88px;height:64px;object-fit:cover;border-radius:8px;border:1px solid #eee">
@@ -107,43 +116,39 @@
   </main>
 
   <footer>
-    <div class="site-wrap" style="display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;padding:18px 0">
-      <div style="min-width:220px">
-        <strong style="color:var(--accent)">Contact Us</strong>
-        <div style="color:var(--muted);margin-top:6px">SDA Infra & Promoters</div>
-        <div style="color:var(--muted)">Phone: 9999944622</div>
-        <div style="color:var(--muted)">Email: info@sdapromoters.com</div>
+    <div class="footer-inner">
+      <div class="fcol">
+        <div class="fheading">Contact Us</div>
+        <div class="fsmall">SDA Infra & Promoters<br>Phone: 9999944622<br>Email: info@sdapromoters.com</div>
       </div>
 
-      <div style="min-width:220px;text-align:center">
-        <strong style="color:var(--accent)">Office Location</strong>
-        <div style="margin-top:10px">
-          <iframe title="office-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="240" height="160" style="border:0;border-radius:8px"></iframe>
-        </div>
+      <div class="fcol" style="text-align:center">
+        <div class="fheading">Office Location</div>
+        <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="240" height="160" style="border:0;border-radius:8px"></iframe>
       </div>
 
-      <div style="min-width:220px">
-        <strong style="color:var(--accent)">Our Motto</strong>
-        <div style="color:var(--muted);margin-top:8px">SDA ka sapna, sabka ghar ho apna</div>
+      <div class="fcol">
+        <div class="fheading">Our Motto</div>
+        <div class="fsmall">SDA ka sapna, sabka ghar ho apna</div>
       </div>
     </div>
 
-    <div style="text-align:center;color:#888;padding:12px 0">© <span id="year"></span> SDA Infra & Promoters</div>
+    <div class="footer-bottom">© <span id="year"></span> SDA Infra & Promoters</div>
   </footer>
 
 <script>
 /* locale */
 const LOCALE = {
-  en:{title:"About SDA Infra & Promoters",lead:"SDA Infra & Promoters is a Delhi-based real estate firm focused on premium residential plots across Delhi NCR."},
+  en:{title:"About SDA Infra & Promoters",lead:"SDA Infra & Promoters is a Delhi-based firm focused on premium residential plots across Delhi NCR."},
   hi:{title:"SDA Infra & Promoters के बारे में",lead:"SDA Infra & Promoters दिल्ली-आधारित रियल एस्टेट फर्म है जो दिल्ली एनसीआर में प्रीमियम आवासीय प्लॉट पर केंद्रित है।"}
 };
 function applyLocale(l){
-  const m=LOCALE[l]||LOCALE.en;
-  document.getElementById('pageTitle').textContent = m.title || document.getElementById('pageTitle').textContent;
-  document.getElementById('pageLead').textContent = m.lead || document.getElementById('pageLead').textContent;
+  const m = LOCALE[l] || LOCALE.en;
+  document.getElementById('pageTitle').textContent = m.title;
+  document.getElementById('pageLead').textContent = m.lead;
   document.getElementById('btn-en').classList.toggle('active', l==='en');
   document.getElementById('btn-hi').classList.toggle('active', l==='hi');
-  try{ localStorage.setItem('sda_about_lang', l); }catch(e){}
+  try{ localStorage.setItem('sda_about_lang', l) }catch(e){}
 }
 (function(){ let s=null; try{s=localStorage.getItem('sda_about_lang')}catch(e){} if(!s){ const nav=(navigator.language||'en').toLowerCase(); s=nav.startsWith('hi')?'hi':'en'; } applyLocale(s); })();
 document.getElementById('btn-en').addEventListener('click', ()=>applyLocale('en'));
@@ -151,15 +156,13 @@ document.getElementById('btn-hi').addEventListener('click', ()=>applyLocale('hi'
 
 /* menu */
 (function(){
-  const btn=document.getElementById('topMenuBtn');
-  const dd=document.getElementById('topMenuDropdown');
-  function open(){ btn.setAttribute('aria-expanded','true'); dd.classList.add('open'); document.addEventListener('click',outside); document.addEventListener('keydown',k); }
-  function close(){ btn.setAttribute('aria-expanded','false'); dd.classList.remove('open'); document.removeEventListener('click',outside); document.removeEventListener('keydown',k); }
-  function outside(e){ if(!dd.contains(e.target) && !btn.contains(e.target)) close(); }
-  function k(e){ if(e.key==='Escape') close(); if((e.key==='ArrowDown'||e.key==='ArrowUp')&&dd.classList.contains('open')){ const items=Array.from(dd.querySelectorAll('a')); if(!items.length) return; e.preventDefault(); const idx=items.indexOf(document.activeElement); if(e.key==='ArrowDown') items[(idx+1)%items.length].focus(); else items[(idx-1+items.length)%items.length].focus(); } }
-  btn.addEventListener('click', ()=>dd.classList.contains('open')?close():open());
-  dd.addEventListener('click', e=>{ if(e.target.closest('a')) close(); });
-  btn.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '||e.key==='ArrowDown'){ e.preventDefault(); btn.click(); }});
+  const menuBtn = document.getElementById('menuBtn');
+  const panel = document.getElementById('menuPanel');
+  function open(){ panel.style.display='block'; menuBtn.setAttribute('aria-expanded','true'); document.addEventListener('click', outside); }
+  function close(){ panel.style.display='none'; menuBtn.setAttribute('aria-expanded','false'); document.removeEventListener('click', outside); }
+  function outside(e){ if(!panel.contains(e.target) && !menuBtn.contains(e.target)) close(); }
+  menuBtn.addEventListener('click', ()=> panel.style.display==='block' ? close() : open());
+  panel.addEventListener('click', e=> { if(e.target.closest('a')) close(); });
 })();
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
