@@ -1,125 +1,210 @@
-<!-- header.html — markup-only (no scripts) -->
-<!-- HEADER START -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SDA Infra & Promoters — Home</title>
 <style>
-  :root { --topbar-height: 52px; --topbar-bg: linear-gradient(135deg,#1a3a1a,#2e7d32); }
-
-  /* Top bar (fixed, always visible) */
-  .top-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--topbar-height);
-    background: var(--topbar-bg);
-    color: #e8f5e8;
-    padding: 8px 4vw;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 3000;
-    box-sizing: border-box;
-    font-weight: 700;
+  :root{
+    --accent:#1f7a3a;
+    --muted:#666;
+    --bg:#fff;
+    --wrap:1100px;
+    --gap:22px;
+    --topbar-h:48px;
+    --card-bg:#fff;
   }
-  .top-left { display:flex; align-items:center; gap:10px; min-width:0; }
-  .phone-link { display:flex; align-items:center; gap:8px; color: #e8f5e8; text-decoration:none; }
-  .phone-link svg { width:18px; height:18px; fill: #e8f5e8; display:block; }
-
-  .top-menu-wrap { margin-left:auto; position:relative; display:flex; align-items:center; gap:12px; }
-
-  .menu-btn {
-    background: rgba(255,255,255,0.95);
-    color: #1a3a1a;
-    border: 1px solid rgba(26,58,26,0.12);
-    padding: 8px 12px;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-weight: 800;
-    font-size: 0.95rem;
-    box-shadow: 0 4px 14px rgba(26,58,26,0.06);
-    transition: transform .12s ease, box-shadow .12s ease;
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:#111;background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:var(--accent)}
+  .site-wrap{max-width:var(--wrap);margin:0 auto;padding:18px}
+  /* header: slim, unobtrusive */
+  .topbar{
+    position:sticky; top:0; left:0; right:0;
+    background:linear-gradient(90deg, rgba(31,122,58,0.12), rgba(31,122,58,0.06));
+    height:calc(var(--topbar-h) + 4px);
+    display:flex; align-items:center; gap:14px; padding:6px 3vw; z-index:100;
+    border-bottom:1px solid rgba(0,0,0,0.04);
   }
-  .menu-btn:hover { transform: translateY(-2px); }
-  .menu-btn:focus { outline: none; box-shadow: 0 0 0 4px rgba(46,125,50,0.12); }
-
-  .menu-btn .arrow { display:inline-block; width:12px; height:12px; transform-origin:center; transition: transform .18s ease; font-size:12px; line-height:1; }
-  .menu-btn[aria-expanded="true"] .arrow { transform: rotate(180deg); }
-
-  .menu-dropdown {
-    position: fixed;
-    right: 4vw;
-    top: calc(var(--topbar-height) + 10px);
-    width: min(92vw, 360px);
-    max-height: 60vh;
-    overflow: auto;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 14px 40px rgba(10,20,10,0.15);
-    border: 1px solid rgba(0,0,0,0.06);
-    padding: 12px;
-    z-index: 2999;
-    transform-origin: top right;
-    transform: scale(.98);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform .14s ease, opacity .14s ease;
-  }
-  .menu-dropdown.open { transform: scale(1); opacity: 1; pointer-events: auto; }
-  .menu-dropdown ul { list-style: none; padding: 6px 4px; margin: 0; }
-  .menu-dropdown li { margin: 6px 0; }
-  .menu-dropdown a {
-    color: #12321a; text-decoration:none; font-weight:700; display:inline-block; padding:8px 10px; border-radius:8px;
-  }
-  .menu-dropdown a:hover, .menu-dropdown a:focus { background:#f1f7f1; color:#0b3a13; outline: none; }
-
-  .menu-dropdown .menu-note { color:#666; font-size:0.9rem; padding:4px 8px; }
-
-  @media (max-width: 420px) {
-    .menu-dropdown { right:6px; left:6px; width:auto; max-width:none; }
-    .menu-btn { padding:8px 10px; }
-  }
-
-  .header-bar {
-    margin-top: calc(var(--topbar-height) + 10px);
-    display: flex; align-items:center; padding:12px 4vw; background: linear-gradient(135deg,#fff,#f0f7f0); box-sizing:border-box; z-index:1060;
-  }
-  .branding { display:flex; align-items:center; gap:14px; min-width:0; }
-  .branding-link { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
-  .logo-img { width:64px; height:64px; object-fit:contain; border-radius:12px; background:#fff; border:3px solid #1a3a1a; }
-  .companyNameTop { font-size:1.6rem; font-weight:900; letter-spacing:1.4px; color:#1a3a1a; white-space:nowrap; }
-  @media (max-width:540px) { .logo-img{width:48px;height:48px} .companyNameTop{font-size:1.15rem} .top-bar{padding:8px 3vw;height:calc(var(--topbar-height)-2px);} }
+  .branding{display:flex;align-items:center;gap:12px}
+  .brand-logo{width:52px;height:52px;border-radius:8px;background:#fff;border:2px solid var(--accent);object-fit:cover}
+  .brand-name{font-weight:800;color:#12321a;font-size:1.1rem;white-space:nowrap}
+  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .lang-toggle{display:flex;gap:6px}
+  .lang-btn{background:transparent;border:1px solid #e6e6e6;padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.95rem}
+  .lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .menu-wrap{position:relative}
+  .menu-btn{background:#fff;border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:800;display:flex;align-items:center;gap:8px}
+  .menu-dropdown{position:absolute;right:0;top:calc(100% + 8px);min-width:200px;background:var(--card-bg);border-radius:8px;box-shadow:0 10px 30px rgba(16,24,16,0.08);border:1px solid rgba(0,0,0,0.06);padding:8px;display:none}
+  .menu-dropdown.open{display:block}
+  .menu-dropdown ul{list-style:none;margin:0;padding:6px}
+  .menu-dropdown li{margin:4px 0}
+  .menu-dropdown a{display:block;padding:8px;border-radius:6px;color:#12321a}
+  .menu-dropdown a:hover{background:#f2faf2}
+  /* hero */
+  .hero{display:grid;grid-template-columns:1fr 460px;gap:var(--gap);align-items:start;padding:28px 0}
+  @media(max-width:920px){.hero{grid-template-columns:1fr;}}
+  .about .title{font-size:28px;margin:0 0 10px;font-weight:800}
+  .about .lead{color:var(--muted);margin:0 0 14px;font-size:15px;line-height:1.5}
+  .about .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
+  .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700}
+  /* slideshow */
+  .slideshow{position:relative;width:100%;height:320px;border-radius:10px;overflow:hidden;background:#f5f7f5}
+  @media(max-width:920px){.slideshow{height:220px}}
+  .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s}
+  .slide.visible{opacity:1}
+  /* footer */
+  footer{border-top:1px solid rgba(0,0,0,0.04);margin-top:34px;padding:28px 0;background:transparent}
+  .footer-grid{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+  .col{min-width:220px;max-width:360px}
+  .muted-small{color:var(--muted);font-size:13px}
+  /* card look for content blocks */
+  .card{background:var(--card-bg);border-radius:12px;padding:18px;box-shadow:0 10px 30px rgba(10,20,10,0.04);border:1px solid rgba(0,0,0,0.03)}
+  /* small helpers */
+  .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
 </style>
+</head>
+<body>
+  <!-- header -->
+  <div class="topbar" role="banner" aria-label="Top bar">
+    <div class="branding" style="min-width:0">
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;color:inherit">
+        <img alt="SDA logo" src="images/logo.png" class="brand-logo" onerror="this.style.display='none'">
+        <div class="brand-name">SDA Infra & Promoters</div>
+      </a>
+    </div>
 
-<!-- Top bar (fixed) -->
-<div class="top-bar" role="banner">
-  <div class="top-left">
-    <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
-      <span>Call: 9999944622</span>
-    </a>
+    <div class="nav-actions" role="navigation" aria-label="Main">
+      <div class="lang-toggle" role="region" aria-label="Language">
+        <button id="btn-en" class="lang-btn" aria-pressed="true">EN</button>
+        <button id="btn-hi" class="lang-btn">हिन्दी</button>
+      </div>
+
+      <div class="menu-wrap" style="margin-left:6px">
+        <button id="topMenuBtn" class="menu-btn" aria-expanded="false" aria-controls="topMenuDropdown">Menu <span style="font-size:11px;opacity:.8">▾</span></button>
+        <div id="topMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="topMenuBtn">
+          <ul id="siteMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="blogs.html">Blogs &amp; Gallery</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- menu button sits in top bar, right aligned -->
-  <div class="top-menu-wrap">
-    <button id="topMenuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="topMenuDropdown">
-      <span>Menu</span>
-      <span class="arrow" aria-hidden="true">▾</span>
-    </button>
-  </div>
-</div>
+  <!-- main content -->
+  <main class="site-wrap" id="main">
+    <div class="hero" role="main" aria-label="Homepage highlight">
+      <div class="about card" id="aboutCard">
+        <h2 class="title" id="aboutTitle">SDA Infra & Promoters</h2>
+        <p class="lead" id="aboutLead"></p>
 
-<!-- Dropdown panel (lazy-populated) -->
-<div id="topMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="topMenuBtn" tabindex="-1">
-  <div class="menu-note">Loading navigation…</div>
-</div>
+        <ul class="bullets" id="aboutBullets"></ul>
 
-<!-- Branding area below top-bar -->
-<header class="header-bar" role="navigation" aria-label="Main header">
-  <div class="branding">
-    <a href="index.html" class="branding-link">
-      <img class="logo-img" src="images/logo.png" alt="SDA Infra & Promoters logo">
-      <div class="companyNameTop">SDA Infra & Promoters</div>
-    </a>
-  </div>
-</header>
-<!-- HEADER END -->
+        <a href="about.html" class="cta" id="aboutCta">Read full About page</a>
+        <div class="muted-small" id="aboutNote" style="margin-top:12px"></div>
+      </div>
+
+      <div>
+        <div class="slideshow card" id="slideshow" aria-hidden="false">
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/1.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/2.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/3.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/4.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/5.jpg')"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- footer -->
+  <footer>
+    <div class="site-wrap">
+      <div class="footer-grid">
+        <div class="col">
+          <div style="font-weight:800;color:var(--accent);margin-bottom:6px">Contact</div>
+          <div class="muted-small">SDA Infra & Promoters</div>
+          <div class="muted-small">Phone: 9999944622</div>
+          <div class="muted-small">Email: info@sdapromoters.com</div>
+        </div>
+
+        <div class="col" style="text-align:center">
+          <div style="font-weight:800;color:var(--accent);margin-bottom:6px">Office Location</div>
+          <iframe title="office-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="240" height="160" style="border:0;border-radius:8px"></iframe>
+        </div>
+
+        <div class="col">
+          <div style="font-weight:800;color:var(--accent);margin-bottom:6px">Our Motto</div>
+          <div class="muted-small">SDA ka sapna, sabka ghar ho apna</div>
+          <div style="margin-top:12px">
+            <a href="tel:9999944622" class="cta" style="background:var(--accent);padding:8px 12px;border-radius:8px;color:#fff;display:inline-block">Call: 9999944622</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;color:#888;margin-top:22px;font-size:13px">© <span id="year"></span> SDA Infra & Promoters</div>
+    </div>
+  </footer>
+
+<script>
+/* Localization */
+const HOME_LOCALE = {
+  en: {
+    lead: "Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.",
+    bullets: ["Verified listings with clear titles","On-site visits & complete documentation support","Local knowledge across Delhi, Gurgaon & Noida"],
+    cta: "Read full About page",
+    note: "Photos rotate every 3 seconds — swipe on mobile to explore."
+  },
+  hi: {
+    lead: "दिल्ली-आधारित विशेषज्ञ — दिल्ली एनसीआर में प्रीमियम आवासीय प्लॉट। हम सत्यापित संपत्तियाँ, स्पष्ट दस्तावेज़ और ईमानदार मार्गदर्शन प्रदान करते हैं ताकि हर खरीदार आत्मविश्वास महसूस करे।",
+    bullets: ["सत्यापित लिस्टिंग और स्पष्ट टाइटल","साइट विज़िट और डॉक्यूमेंटेशन सपोर्ट","दिल्ली, गुरुग्राम और नोएडा में स्थानीय ज्ञान"],
+    cta: "विस्तृत पृष्ठ पढ़ें",
+    note: "फोटो हर 3 सेकंड में बदलती हैं — मोबाइल पर स्वाइप करें।"
+  }
+};
+function applyHomeLocale(lang){
+  const m = HOME_LOCALE[lang]||HOME_LOCALE.en;
+  document.getElementById('aboutLead').textContent = m.lead;
+  const bl = document.getElementById('aboutBullets'); bl.innerHTML=''; m.bullets.forEach(t=>{const li=document.createElement('li');li.textContent=t;bl.appendChild(li);});
+  document.getElementById('aboutCta').textContent = m.cta;
+  document.getElementById('aboutNote').textContent = m.note;
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-hi').classList.toggle('active', lang==='hi');
+  try{localStorage.setItem('sda_home_lang',lang)}catch(e){}
+}
+(function(){ let saved=null; try{ saved=localStorage.getItem('sda_home_lang'); }catch(e){} if(!saved){ const nav=(navigator.language||'en').toLowerCase(); saved=nav.startsWith('hi')?'hi':'en'; } applyHomeLocale(saved); })();
+document.getElementById('btn-en').addEventListener('click', ()=>applyHomeLocale('en'));
+document.getElementById('btn-hi').addEventListener('click', ()=>applyHomeLocale('hi'));
+
+/* slideshow */
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  if(!slides.length) return;
+  let cur=0; slides[cur].classList.add('visible');
+  setInterval(()=>{ slides[cur].classList.remove('visible'); cur=(cur+1)%slides.length; slides[cur].classList.add('visible'); },3000);
+  // reveal hero
+  document.querySelector('.hero').style.opacity = 1;
+})();
+
+/* menu */
+(function(){
+  const btn = document.getElementById('topMenuBtn');
+  const dd = document.getElementById('topMenuDropdown');
+  function open(){ btn.setAttribute('aria-expanded','true'); dd.classList.add('open'); document.addEventListener('click', outside); document.addEventListener('keydown', keyHandler); }
+  function close(){ btn.setAttribute('aria-expanded','false'); dd.classList.remove('open'); document.removeEventListener('click', outside); document.removeEventListener('keydown', keyHandler); }
+  function outside(e){ if(!dd.contains(e.target) && !btn.contains(e.target)) close(); }
+  function keyHandler(e){ if(e.key==='Escape') close(); if((e.key==='ArrowDown'||e.key==='ArrowUp')&&dd.classList.contains('open')){ const items=Array.from(dd.querySelectorAll('a')); if(!items.length) return; e.preventDefault(); const idx=items.indexOf(document.activeElement); if(e.key==='ArrowDown') items[(idx+1)%items.length].focus(); else items[(idx-1+items.length)%items.length].focus(); } }
+  btn.addEventListener('click', ()=>{ dd.classList.contains('open')?close():open(); });
+  dd.addEventListener('click', e=>{ if(e.target.closest('a')) close(); });
+  btn.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '||e.key==='ArrowDown'){ e.preventDefault(); btn.click(); } });
+  // mark active link
+  (function mark(){ const cur=location.pathname.replace(/\/(index\.html)?$/,'/'); dd.querySelectorAll('a').forEach(a=>{ const href=a.getAttribute('href'); const norm=href.replace(/\/(index\.html)?$/,'/'); a.classList.toggle('active', norm===cur)})})();
+})();
+
+/* misc */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
