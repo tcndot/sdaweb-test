@@ -8,12 +8,12 @@
   :root{
     --accent:#1f7a3a;
     --muted:#606060;
-    --bg:#eef3f1;        /* slightly different off-white for variety */
+    --bg:#f3f7fb;        /* ABOUT page background — soft cool blue */
     --wrap:1120px;
     --topbar-h:52px;
     --card-bg:#fff;
-    --footer-bg:#0f3b2b;
-    --footer-color:#e6f6ea;
+    --footer-bg:#26364d; /* ABOUT footer — slate-blue */
+    --footer-color:#e9f2fb;
   }
   *{box-sizing:border-box}
   html,body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:#111;background:var(--bg);-webkit-font-smoothing:antialiased}
@@ -40,6 +40,8 @@
   .fheading{font-weight:800;margin-bottom:8px}
   .fsmall{color:var(--footer-color);opacity:0.95;line-height:1.6}
   .footer-bottom{text-align:center;margin-top:18px;color:rgba(230,246,234,0.9)}
+  /* small fix for chromium 125 zoom */
+  @media (min-width:1200px){ .site{padding-left:28px;padding-right:28px} }
 </style>
 </head>
 <body>
