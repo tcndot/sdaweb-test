@@ -13,69 +13,26 @@
     }
     html,body{margin:0;padding:0;font-family:Inter, Arial, Helvetica, sans-serif;color:#111;background:#fff;-webkit-font-smoothing:antialiased}
     .wrap{max-width:var(--wrap);margin:0 auto;padding:28px}
-    /* topbar (language buttons only) */
-    .topbar{display:flex;justify-content:flex-end;gap:8px;align-items:center;margin-bottom:12px}
-    .lang-btn{background:transparent;border:1px solid #eee;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-    .lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-    /* main layout */
     .hero{display:grid;grid-template-columns:1fr 560px;gap:var(--gap);align-items:center;opacity:0}
     @media (max-width:1000px){ .hero{grid-template-columns:1fr 420px} }
     @media (max-width:900px){ .hero{grid-template-columns:1fr; } .hero{row-gap:18px} }
-    /* About card - minimal, spacious */
-    .about{
-      padding:0;
-      line-height:1.5;
-    }
+    .about{padding:0;line-height:1.5}
     .about .title{font-size:28px;margin:0 0 8px;font-weight:800}
     .about .lead{color:var(--muted);margin:0 0 14px;font-size:15px}
     .about .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
     .about .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
     .about .muted-small{color:var(--muted);font-size:13px;margin-top:12px;display:block}
-    /* slideshow column */
-    .slideshow{
-      position:relative;
-      width:100%;
-      height:360px;
-      border-radius:12px;
-      overflow:hidden;
-      background:#f7f7f7;
-      box-shadow:none; /* intentionally airy - no heavy box */
-      opacity:0;
-    }
+    .slideshow{position:relative;width:100%;height:360px;border-radius:12px;overflow:hidden;background:#f7f7f7;box-shadow:none;opacity:0}
     @media(max-width:1000px){ .slideshow{height:300px} }
     @media(max-width:900px){ .slideshow{height:220px;border-radius:8px} }
-    /* slides stacked absolutely */
-    .slide{
-      position:absolute;
-      inset:0;
-      background-size:cover;
-      background-position:center;
-      transition:opacity .9s ease, transform .9s ease;
-      opacity:0;
-      transform:scale(1.02);
-      will-change:opacity, transform;
-    }
+    .slide{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .9s ease, transform .9s ease;opacity:0;transform:scale(1.02);will-change:opacity, transform}
     .slide.visible{opacity:1;transform:scale(1)}
-    /* slight overlay for readability */
-    .slideshow::after{
-      content:"";
-      position:absolute;
-      left:0;right:0;bottom:0;height:40%;
-      background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.5) 100%);
-      pointer-events:none;
-    }
-    /* gallery strip for mobile fallback */
+    .slideshow::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.5) 100%);pointer-events:none;}
     .gallery-strip{display:none}
     @media(max-width:900px){ .gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px} .gallery-strip img{width:100%;height:72px;object-fit:cover;border-radius:6px} }
-    /* fade-in animation used on load */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .fade-in { animation: fadeIn .7s ease both; }
-    /* subtle accessibility helpers */
     .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
-    /* tiny console-area for debug notes (toggle visible via CSS if needed) */
     #debug { font-family:monospace; font-size:12px; color:#666; margin-top:12px; display:none; white-space:pre-wrap; }
   </style>
 </head>
@@ -84,31 +41,24 @@
   <div id="headerdiv" aria-hidden="true"></div>
 
   <div class="wrap">
-    <!-- topbar: language toggle only -->
-    <div class="topbar" role="region" aria-label="Language">
-      <button id="btn-en" class="lang-btn" aria-pressed="true">English</button>
-      <button id="btn-hi" class="lang-btn" aria-pressed="false">हिन्दी</button>
-    </div>
-
     <div class="hero" id="hero" role="main" aria-label="Homepage highlight">
-      <!-- LEFT: About text (on mobile will drop below due to grid stacking) -->
       <div class="about" id="aboutBlock" aria-labelledby="aboutTitle">
         <h2 class="title" id="aboutTitle">SDA Infra &amp; Promoters</h2>
         <p class="lead" id="aboutLead">
-          <!-- content filled by JS per selected language -->
+          Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.
         </p>
 
-        <ul class="bullets" id="aboutBullets" aria-hidden="false">
-          <!-- bullets injected by JS -->
+        <ul class="bullets" id="aboutBullets">
+          <li>Verified listings with clear titles</li>
+          <li>On-site visits & complete documentation support</li>
+          <li>Local knowledge across Delhi, Gurgaon & Noida</li>
         </ul>
 
         <a href="about.html" class="cta" id="aboutCta">Read full About page</a>
-        <span class="muted-small" id="aboutNote" aria-hidden="true"></span>
+        <span class="muted-small" id="aboutNote">Photos rotate every 3 seconds — swipe on mobile to explore.</span>
       </div>
 
-      <!-- RIGHT: Slideshow (on mobile this appears above the about block) -->
       <div class="slideshow" id="slideshow" aria-label="Featured photos">
-        <!-- Use relative paths. JS will swap to raw GitHub URLs if any fail to load. -->
         <div class="slide" data-src="images/mainpagetopphoto/1.jpg" role="img" aria-label="Photo 1"></div>
         <div class="slide" data-src="images/mainpagetopphoto/2.jpg" role="img" aria-label="Photo 2"></div>
         <div class="slide" data-src="images/mainpagetopphoto/3.jpg" role="img" aria-label="Photo 3"></div>
@@ -117,7 +67,6 @@
         <div class="slide" data-src="images/mainpagetopphoto/6.jpg" role="img" aria-label="Photo 6"></div>
       </div>
 
-      <!-- mobile gallery fallback (visible on small screens) -->
       <div class="gallery-strip" aria-hidden="true">
         <img src="images/mainpagetopphoto/1.jpg" alt="Office front">
         <img src="images/mainpagetopphoto/2.jpg" alt="Site visit">
@@ -135,37 +84,7 @@
   <div id="footerdiv" aria-hidden="true"></div>
 
   <script>
-    /*****************************************************************
-     * CONFIG: set your GitHub repo info so the fallback raw URLs are
-     * correct when local relative paths fail.
-     *****************************************************************/
     const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/tcndot/sdaweb-test/main';
-
-    /*****************************************************************
-     * Localized short about text (English + Hindi)
-     *****************************************************************/
-    const HOME_LOCALE = {
-      en: {
-        lead: "Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.",
-        bullets: [
-          "Verified listings with clear titles",
-          "On-site visits & complete documentation support",
-          "Local knowledge across Delhi, Gurgaon & Noida"
-        ],
-        cta: "Read full About page",
-        note: "Photos rotate every 3 seconds — swipe on mobile to explore."
-      },
-      hi: {
-        lead: "दिल्ली-आधारित विशेषज्ञ — दिल्ली एनसीआर में प्रीमियम आवासीय प्लॉट। हम सत्यापित संपत्तियाँ, स्पष्ट दस्तावेज़ और ईमानदार मार्गदर्शन प्रदान करते हैं ताकि हर खरीदार आत्मविश्वास महसूस करे।",
-        bullets: [
-          "सत्यापित लिस्टिंग और स्पष्ट टाइटल",
-          "साइट विज़िट और डॉक्यूमेंटेशन सपोर्ट",
-          "दिल्ली, गुरुग्राम और नोएडा में स्थानीय ज्ञान"
-        ],
-        cta: "विस्तृत पृष्ठ पढ़ें",
-        note: "फोटो हर 3 सेकंड में बदलती हैं — मोबाइल पर स्वाइप करें।"
-      }
-    };
 
     function logDebug(msg) {
       try {
@@ -176,58 +95,17 @@
       } catch(e) { console.log(msg); }
     }
 
-    // Apply locale to the short about block
-    function applyHomeLocale(lang) {
-      const map = HOME_LOCALE[lang] || HOME_LOCALE.en;
-      document.getElementById('aboutLead').textContent = map.lead;
-      const bulletsEl = document.getElementById('aboutBullets');
-      bulletsEl.innerHTML = '';
-      map.bullets.forEach(txt => {
-        const li = document.createElement('li');
-        li.textContent = txt;
-        bulletsEl.appendChild(li);
-      });
-      document.getElementById('aboutCta').textContent = map.cta;
-      document.getElementById('aboutNote').textContent = map.note;
-
-      // active buttons & aria
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.getElementById('btn-hi').classList.toggle('active', lang === 'hi');
-      document.getElementById('btn-en').setAttribute('aria-pressed', String(lang === 'en'));
-      document.getElementById('btn-hi').setAttribute('aria-pressed', String(lang === 'hi'));
-
-      try { localStorage.setItem('sda_home_lang', lang); } catch(e) {}
-    }
-
-    (function initLang(){
-      let saved = null;
-      try { saved = localStorage.getItem('sda_home_lang'); } catch(e){}
-      if (!saved) {
-        const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-        saved = nav.startsWith('hi') ? 'hi' : 'en';
-      }
-      applyHomeLocale(saved);
-    })();
-
-    document.getElementById('btn-en').addEventListener('click', ()=>applyHomeLocale('en'));
-    document.getElementById('btn-hi').addEventListener('click', ()=>applyHomeLocale('hi'));
-
-    /*****************************************************************
-     * Slideshow logic with robust fallback: relative -> raw.github
-     *****************************************************************/
     (function initSlideshow() {
       const slideEls = Array.from(document.querySelectorAll('.slideshow .slide'));
       const slideshowEl = document.getElementById('slideshow');
       const heroEl = document.getElementById('hero');
 
-      // Prepare slide URLs (relative first, then raw fallback)
-      const slides = slideEls.map((el, idx) => {
+      const slides = slideEls.map((el) => {
         const rel = el.getAttribute('data-src');
-        const raw = `${GITHUB_RAW_BASE}/${rel.replace(/^images\//,'images/')}`; // same path under raw URL
+        const raw = `${GITHUB_RAW_BASE}/${rel.replace(/^images\//,'images/')}`;
         return {el, rel, raw};
       });
 
-      // Helper: test if an image URL loads
       function testImage(url) {
         return new Promise((res) => {
           const img = new Image();
@@ -237,7 +115,6 @@
         });
       }
 
-      // Set background images, trying relative first; if it fails, use raw GitHub URL
       async function ensureImages() {
         for (const s of slides) {
           let ok = await testImage(s.rel);
@@ -245,20 +122,17 @@
             s.el.style.backgroundImage = `url("${s.rel}")`;
           } else {
             logDebug(`Relative image failed: ${s.rel} — trying raw GitHub fallback.`);
-            // try raw
             ok = await testImage(s.raw);
             if (ok) {
               s.el.style.backgroundImage = `url("${s.raw}")`;
             } else {
               logDebug(`Raw fallback also failed for: ${s.raw}. Slide will be empty.`);
-              // set a neutral background color if both fail
               s.el.style.backgroundColor = '#ddd';
             }
           }
         }
       }
 
-      // Fade-in hero & slideshow after images set (prettier)
       ensureImages().then(() => {
         window.requestAnimationFrame(() => {
           heroEl.style.opacity = 1;
@@ -267,7 +141,6 @@
           slideshowEl.classList.add('fade-in');
         });
 
-        // initialize visible slide
         let cur = 0;
         slides.forEach((s, i) => s.el.classList.toggle('visible', i === 0));
 
@@ -275,13 +148,11 @@
           slides.forEach((s, i) => s.el.classList.toggle('visible', i === index));
         }
 
-        // autoplay every 3s
         let interval = setInterval(() => {
           cur = (cur + 1) % slides.length;
           show(cur);
         }, 3000);
 
-        // Pause on mouseover (desktop)
         slideshowEl.addEventListener('mouseenter', () => clearInterval(interval));
         slideshowEl.addEventListener('mouseleave', () => {
           clearInterval(interval);
@@ -291,7 +162,6 @@
           }, 3000);
         });
 
-        // swipeable
         let startX = null;
         slideshowEl.addEventListener('touchstart', e => {
           if (e.touches && e.touches[0]) startX = e.touches[0].clientX;
@@ -311,16 +181,10 @@
       });
     })();
 
-    /*****************************************************************
-     * Robust header/footer loader:
-     * 1) try relative fetch('header.html')
-     * 2) if fails (any error), try raw GitHub URL fallback
-     *****************************************************************/
     async function loadHTMLWithFallback(targetId, relPath) {
       const target = document.getElementById(targetId);
       if (!target) return;
       const rawFallback = `${GITHUB_RAW_BASE}/${relPath}`;
-      // attempt relative fetch first
       try {
         const res = await fetch(relPath, {cache:'no-store'});
         if (!res.ok) throw new Error(`Relative fetch returned ${res.status}`);
@@ -332,7 +196,6 @@
         logDebug(`Relative fetch failed for ${relPath}: ${err.message}. Trying raw GitHub fallback...`);
       }
 
-      // attempt raw fallback
       try {
         const res2 = await fetch(rawFallback, {cache:'no-store'});
         if (!res2.ok) throw new Error(`Raw fetch returned ${res2.status}`);
@@ -343,7 +206,6 @@
         return;
       } catch (err2) {
         logDebug(`Raw fallback failed for ${relPath}: ${err2.message}. Header/footer not loaded.`);
-        // optional: inject a minimal fallback so the page isn't totally blank
         if (targetId === 'headerdiv') {
           target.innerHTML = `<div style="padding:12px;background:#fff;border-bottom:1px solid #eee"><a href="/" style="text-decoration:none;color:var(--accent);font-weight:700">SDA Infra & Promoters</a></div>`;
           target.setAttribute('aria-hidden','false');
@@ -355,25 +217,16 @@
       }
     }
 
-    // Start loading header/footer
     (async function initHeaderFooter() {
       await loadHTMLWithFallback('headerdiv', 'header.html');
       await loadHTMLWithFallback('footerdiv', 'footer.html');
-    })();
 
-    /*****************************************************************
-     * Quick note: if you are testing by double-clicking index.html
-     * (file://...) fetch() will fail for local files. Run a local HTTP
-     * server instead:
-     *
-     * 1) Python 3 (inside repo root):  python -m http.server 8000
-     *    then open http://localhost:8000/
-     *
-     * 2) Node (if installed): npx http-server . -p 8000
-     *
-     * Or push to GitHub Pages — then relative paths work and fetch will
-     * load header/footer correctly.
-     *****************************************************************/
+      // If your header is injected via fetch, header's inline scripts won't execute.
+      // If you installed header.js in the repo root, call initHeader() here to attach menu handlers:
+      if (typeof window.initHeader === 'function') {
+        try { window.initHeader(); } catch (e) { logDebug('initHeader() threw: ' + e.message); }
+      }
+    })();
   </script>
 </body>
 </html>
