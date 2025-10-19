@@ -1,0 +1,241 @@
+<!-- HEADER START -->
+<style>
+  :root { --topbar-height: 52px; --topbar-bg: linear-gradient(135deg,#1a3a1a,#2e7d32); }
+
+  /* ---------- Top bar (fixed, always visible) ---------- */
+  .top-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--topbar-height);
+    background: var(--topbar-bg);
+    color: #e8f5e8;
+    padding: 8px 4vw;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 3000;
+    box-sizing: border-box;
+    font-weight: 700;
+  }
+  .top-left { display:flex; align-items:center; gap:10px; min-width: 0; }
+  .phone-link {
+    display:flex; align-items:center; gap:8px;
+    color: #e8f5e8; text-decoration: none;
+  }
+  .phone-link svg { width:18px; height:18px; fill: #e8f5e8; display:block; }
+
+  /* ---------- Menu button ---------- */
+  .top-menu-wrap { margin-left:auto; display:flex; align-items:center; gap:12px; }
+  .menu-btn {
+    background: rgba(255,255,255,0.95);
+    color: #1a3a1a;
+    border: 1px solid rgba(26,58,26,0.12);
+    padding: 8px 12px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 14px rgba(26,58,26,0.06);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .menu-btn:hover { transform: translateY(-2px); }
+  .menu-btn:focus { outline: none; box-shadow: 0 0 0 4px rgba(46,125,50,0.12); }
+  .menu-btn .arrow {
+    width: 12px; height: 12px; transition: transform .18s ease;
+  }
+  .menu-btn[aria-expanded="true"] .arrow { transform: rotate(180deg); }
+
+  /* ---------- Dropdown panel ---------- */
+  .menu-dropdown {
+    position: fixed;
+    right: 4vw;
+    top: calc(var(--topbar-height) + 10px);
+    width: min(92vw, 360px);
+    max-height: 60vh;
+    overflow: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 40px rgba(10,20,10,0.15);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 12px;
+    z-index: 2999;
+    transform-origin: top right;
+    transform: scale(.98);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .14s ease, opacity .14s ease;
+  }
+  .menu-dropdown.open {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .menu-dropdown ul { list-style: none; padding: 6px 4px; margin: 0; }
+  .menu-dropdown li { margin: 6px 0; }
+  .menu-dropdown a {
+    color: #12321a;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+  .menu-dropdown a:hover, .menu-dropdown a:focus {
+    background: #f1f7f1;
+    color: #0b3a13;
+  }
+  /* ✅ Active page highlight */
+  .menu-dropdown a.active {
+    background: linear-gradient(90deg,#e6f4e6,#dff0df);
+    color: #083a12;
+    box-shadow: inset 0 0 0 1px rgba(8,58,18,0.03);
+    font-weight: 900;
+  }
+  .menu-dropdown .menu-note { color:#666; font-size:0.9rem; padding:4px 8px; }
+
+  /* Small screens */
+  @media (max-width: 420px) {
+    .menu-dropdown { right: 6px; left: 6px; width: auto; max-width: none; }
+    .menu-btn { padding: 8px 10px; }
+  }
+
+  /* ---------- Header / Branding ---------- */
+  .header-bar {
+    margin-top: calc(var(--topbar-height) + 10px);
+    display: flex;
+    align-items: center;
+    padding: 12px 4vw;
+    background: linear-gradient(135deg,#fff,#f0f7f0);
+  }
+  .branding { display:flex; align-items:center; gap:14px; }
+  .branding-link { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+  .logo-img { width:64px; height:64px; object-fit:contain; border-radius:12px; background:#fff; border:3px solid #1a3a1a; }
+  .companyNameTop {
+    font-size:1.6rem; font-weight:900; color:#1a3a1a; letter-spacing:1.4px;
+  }
+
+  @media (max-width:540px){
+    .logo-img{width:48px;height:48px;}
+    .companyNameTop{font-size:1.15rem;}
+  }
+</style>
+
+<!-- Topbar -->
+<div class="top-bar" role="banner">
+  <div class="top-left">
+    <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+      <span>Call: 9999944622</span>
+    </a>
+  </div>
+  <div class="top-menu-wrap">
+    <button id="topMenuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="topMenuDropdown">
+      <span>Menu</span><span class="arrow">▾</span>
+    </button>
+  </div>
+</div>
+
+<!-- Dropdown (menu embedded directly here) -->
+<div id="topMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="topMenuBtn" tabindex="-1">
+  <!-- === Menu markup inlined (was previously in menu.html) === -->
+  <div class="menu-note" style="margin-bottom:8px">Navigation</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="blogs.html">Blogs &amp; Gallery</a></li>
+  </ul>
+  <!-- === end embedded menu === -->
+</div>
+
+<!-- Branding -->
+<header class="header-bar" role="navigation" aria-label="Main header">
+  <div class="branding">
+    <a href="https://sdapromoters.com" class="branding-link" target="_blank" rel="noopener">
+      <img class="logo-img" src="images/logo.png" alt="SDA Infra & Promoters logo">
+      <div class="companyNameTop">SDA Infra & Promoters</div>
+    </a>
+  </div>
+</header>
+
+<script>
+(function(){
+  const btn = document.getElementById('topMenuBtn');
+  const dropdown = document.getElementById('topMenuDropdown');
+
+  function normalizePath(url){
+    try {
+      const u = new URL(url, location.origin);
+      let path = u.pathname;
+      // normalize index.html and trailing slash
+      path = path.replace(/\/index\.html$/,'/').replace(/\/$/,'');
+      return path || '/';
+    } catch {
+      return url || '/';
+    }
+  }
+
+  function markActiveLink(){
+    const current = normalizePath(location.pathname);
+    dropdown.querySelectorAll('a').forEach(a=>{
+      const href = a.getAttribute('href') || '';
+      const link = normalizePath(href);
+      if (link === current) a.classList.add('active');
+      else a.classList.remove('active');
+    });
+  }
+
+  function openMenu(){
+    markActiveLink();
+    btn.setAttribute('aria-expanded','true');
+    dropdown.classList.add('open');
+    // focus first link for keyboard users
+    const first = dropdown.querySelector('a');
+    if (first) first.focus();
+    document.addEventListener('click', outsideClick);
+    document.addEventListener('keydown', keyHandler);
+  }
+
+  function closeMenu(){
+    btn.setAttribute('aria-expanded','false');
+    dropdown.classList.remove('open');
+    document.removeEventListener('click', outsideClick);
+    document.removeEventListener('keydown', keyHandler);
+  }
+
+  function outsideClick(e){ if(!dropdown.contains(e.target) && !btn.contains(e.target)) closeMenu(); }
+  function keyHandler(e){
+    if(e.key === 'Escape') return closeMenu();
+    // basic arrow navigation
+    if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+      const items = Array.from(dropdown.querySelectorAll('a'));
+      if(!items.length) return;
+      const idx = items.indexOf(document.activeElement);
+      if(e.key === 'ArrowDown') items[(idx + 1) % items.length].focus();
+      else items[(idx - 1 + items.length) % items.length].focus();
+      e.preventDefault();
+    }
+  }
+
+  btn.addEventListener('click', ()=>{
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    if(open){ closeMenu(); return; }
+    openMenu();
+  });
+
+  // close when a link is clicked (keeps normal navigation)
+  dropdown.addEventListener('click', e=>{
+    if(e.target.closest('a')) closeMenu();
+  });
+
+  // initial active marking (in case header loaded after navigation)
+  document.addEventListener('DOMContentLoaded', markActiveLink);
+  // also run on load (for some environments)
+  markActiveLink();
+})();
+</script>
+<!-- HEADER END -->
+
