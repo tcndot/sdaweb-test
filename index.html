@@ -1,75 +1,237 @@
+<!doctype html>
+<html lang="en">
 <head>
-  ...
-  <!-- load header.js from root (defer so it doesn't block) -->
-  <script src="header.js" defer></script>
-
-  <!-- your other styles & inline scripts here... -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SDA Infra & Promoters — Home</title>
+  <style>
+    :root { --accent:#1f7a3a; --muted:#666; --wrap:1200px; --gap:28px; --topbar-height:52px; }
+    html,body{margin:0;padding:0;font-family:Inter,Arial,Helvetica,sans-serif;color:#111;background:#fff;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:var(--accent)}
+    .wrap{max-width:var(--wrap);margin:0 auto;padding:28px}
+    /* --- Top fixed bar / header --- */
+    .top-bar { position:fixed; top:0; left:0; right:0; height:var(--topbar-height); background:linear-gradient(135deg,#1a3a1a,#2e7d32); color:#e8f5e8; padding:8px 4vw; display:flex; align-items:center; gap:12px; z-index:3000; box-sizing:border-box; font-weight:700; }
+    .top-left { display:flex; align-items:center; gap:10px; }
+    .phone-link { display:flex; align-items:center; gap:8px; color:#e8f5e8; text-decoration:none; font-weight:700; }
+    .top-menu-wrap{margin-left:auto; display:flex; align-items:center; gap:12px;}
+    .menu-btn { background:rgba(255,255,255,0.95); color:#1a3a1a; border:1px solid rgba(26,58,26,0.12); padding:8px 12px; border-radius:10px; font-weight:800; cursor:pointer; display:inline-flex; gap:8px; align-items:center; }
+    .menu-btn:focus{outline: none; box-shadow: 0 0 0 4px rgba(46,125,50,0.12)}
+    .menu-btn .arrow{transition:transform .18s; display:inline-block}
+    .menu-btn[aria-expanded="true"] .arrow{transform:rotate(180deg)}
+    .menu-dropdown { position:fixed; right:4vw; top:calc(var(--topbar-height) + 10px); width:min(92vw,360px); max-height:60vh; overflow:auto; background:#fff; border-radius:10px; box-shadow:0 14px 40px rgba(10,20,10,0.15); border:1px solid rgba(0,0,0,0.06); padding:12px; z-index:2999; transform-origin:top right; transform:scale(.98); opacity:0; pointer-events:none; transition:transform .14s,opacity .14s; }
+    .menu-dropdown.open{transform:scale(1); opacity:1; pointer-events:auto;}
+    .menu-dropdown ul{list-style:none;padding:6px 4px;margin:0}
+    .menu-dropdown a{display:inline-block;padding:8px 10px;border-radius:8px;font-weight:700;color:#12321a}
+    .menu-dropdown a.active{background:linear-gradient(90deg,#e6f4e6,#dff0df); color:#083a12}
+    .header-bar{margin-top:calc(var(--topbar-height)+10px); display:flex; align-items:center; padding:12px 4vw; background:linear-gradient(135deg,#fff,#f0f7f0); }
+    .branding{display:flex;align-items:center;gap:14px}
+    .logo-img{width:64px;height:64px;border-radius:12px;background:#fff;border:3px solid #1a3a1a;object-fit:cover}
+    .companyNameTop{font-size:1.6rem;font-weight:900;color:#1a3a1a}
+    /* --- page layout --- */
+    .topbar { display:flex; justify-content:flex-end; gap:8px; align-items:center; margin:18px 0 12px 0; }
+    .lang-btn{background:transparent;border:1px solid #eee;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    .lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .hero{display:grid;grid-template-columns:1fr 520px;gap:var(--gap);align-items:center;opacity:0}
+    @media(max-width:1000px){.hero{grid-template-columns:1fr 420px}}
+    @media(max-width:900px){.hero{grid-template-columns:1fr; row-gap:18px}}
+    .about .title{font-size:28px;margin:0 0 8px;font-weight:800}
+    .about .lead{color:var(--muted);margin:0 0 14px;font-size:15px}
+    .about .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
+    .about .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
+    .slideshow{position:relative;width:100%;height:360px;border-radius:12px;overflow:hidden;background:#f7f7f7;opacity:0}
+    @media(max-width:1000px){.slideshow{height:300px}}
+    @media(max-width:900px){.slideshow{height:220px;border-radius:8px}}
+    .slide{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .9s ease, transform .9s ease;opacity:0;transform:scale(1.02)}
+    .slide.visible{opacity:1;transform:scale(1)}
+    .slideshow::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(180deg,rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.5) 100%);pointer-events:none;}
+    footer{border-top:1px solid #eee;margin-top:28px;padding:18px 0;text-align:center;color:#444}
+    /* adjust body padding so fixed top-bar doesn't cover content */
+    main { padding-top: calc(var(--topbar-height) + 82px); }
+    .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+  </style>
 </head>
 <body>
-  <!-- loader targets for header/footer -->
-  <div id="headerdiv" aria-hidden="true"></div>
 
-  <!-- rest of your page ... -->
+  <!-- header (top bar + branding + inline menu markup) -->
+  <div class="top-bar" role="banner">
+    <div class="top-left">
+      <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">Call: 9999944622</a>
+    </div>
+    <div class="top-menu-wrap">
+      <button id="topMenuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="topMenuDropdown">
+        <span>Menu</span><span class="arrow" aria-hidden="true">▾</span>
+      </button>
+    </div>
+  </div>
 
-  <div id="footerdiv" aria-hidden="true"></div>
+  <div id="topMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="topMenuBtn" tabindex="-1">
+    <!-- menu content inlined (no fetch) -->
+    <ul id="siteMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="blogs.html">Blogs &amp; Gallery</a></li>
+    </ul>
+  </div>
 
-  <script>
-    const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/tcndot/sdaweb-test/main';
+  <header class="header-bar" role="navigation" aria-label="Main header">
+    <div class="branding" style="margin-left:4vw">
+      <a href="index.html" class="branding-link" style="display:flex;align-items:center;gap:12px;color:inherit">
+        <img class="logo-img" src="images/logo.png" alt="SDA logo">
+        <div class="companyNameTop">SDA Infra & Promoters</div>
+      </a>
+    </div>
+  </header>
 
-    // loadHTMLWithFallback (your existing version) — unchanged except we call initHeader()
-    async function loadHTMLWithFallback(targetId, relPath) {
-      const target = document.getElementById(targetId);
-      if (!target) return;
-      const rawFallback = `${GITHUB_RAW_BASE}/${relPath}`;
+  <main>
+    <div class="wrap">
+      <div class="topbar" role="region" aria-label="Language">
+        <button id="btn-en" class="lang-btn" aria-pressed="true">English</button>
+        <button id="btn-hi" class="lang-btn" aria-pressed="false">हिन्दी</button>
+      </div>
 
-      // relative fetch
-      try {
-        const res = await fetch(relPath, {cache:'no-store'});
-        if (!res.ok) throw new Error(`Relative fetch returned ${res.status}`);
-        const text = await res.text();
-        target.innerHTML = text;
-        target.setAttribute('aria-hidden','false');
+      <div class="hero" id="hero" role="main" aria-label="Homepage highlight">
+        <div class="about" id="aboutBlock" aria-labelledby="aboutTitle">
+          <h2 class="title" id="aboutTitle">SDA Infra &amp; Promoters</h2>
+          <p class="lead" id="aboutLead"></p>
 
-        // If we just loaded the header, call initHeader() (if available)
-        if (targetId === 'headerdiv' && typeof window.initHeader === 'function') {
-          try { window.initHeader(); } catch (e) { console.warn('initHeader failed', e); }
-        }
-        return;
-      } catch (err) {
-        logDebug(`Relative fetch failed for ${relPath}: ${err.message}. Trying raw GitHub fallback...`);
-      }
+          <ul class="bullets" id="aboutBullets"></ul>
 
-      // raw fallback
-      try {
-        const res2 = await fetch(rawFallback, {cache:'no-store'});
-        if (!res2.ok) throw new Error(`Raw fetch returned ${res2.status}`);
-        const text2 = await res2.text();
-        target.innerHTML = text2;
-        target.setAttribute('aria-hidden','false');
-        logDebug(`Loaded ${relPath} from raw GitHub fallback.`);
+          <a href="about.html" class="cta" id="aboutCta">Read full About page</a>
+          <span class="muted-small" id="aboutNote" aria-hidden="true"></span>
+        </div>
 
-        if (targetId === 'headerdiv' && typeof window.initHeader === 'function') {
-          try { window.initHeader(); } catch (e) { console.warn('initHeader failed', e); }
-        }
-        return;
-      } catch (err2) {
-        logDebug(`Raw fallback failed for ${relPath}: ${err2.message}. Header/footer not loaded.`);
-        // minimal fallback (same as you had)
-        if (targetId === 'headerdiv') {
-          target.innerHTML = `<div style="padding:12px;background:#fff;border-bottom:1px solid #eee"><a href="/" style="text-decoration:none;color:var(--accent);font-weight:700">SDA Infra & Promoters</a></div>`;
-          target.setAttribute('aria-hidden','false');
-        }
-        if (targetId === 'footerdiv') {
-          target.innerHTML = `<footer style="padding:12px;text-align:center;color:#666;border-top:1px solid #eee">© ${new Date().getFullYear()} SDA Infra & Promoters</footer>`;
-          target.setAttribute('aria-hidden','false');
-        }
-      }
+        <div class="slideshow" id="slideshow" aria-label="Featured photos">
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/1.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/2.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/3.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/4.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/5.jpg')"></div>
+          <div class="slide" style="background-image:url('images/mainpagetopphoto/6.jpg')"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- footer (inlined) -->
+  <footer>
+    <div style="padding:24px 4vw;max-width:1200px;margin:0 auto;display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start">
+      <div style="min-width:220px;max-width:370px;flex:1 1 0">
+        <strong style="color:#c8e6c9">Contact Us</strong><br>
+        SDA Infra & Promoters<br>SDA Developers & Promoters<br>
+        Phone: 9999944622<br>Email: info@sdapromoters.com<br>
+        <div style="margin-top:10px">
+          <strong>Head Office:</strong> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015
+        </div>
+      </div>
+
+      <div style="min-width:220px;max-width:370px;flex:1 1 0">
+        <strong style="color:#c8e6c9">Our Office Location</strong><br>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="260" height="200" style="border-radius:7px;border:none;box-shadow:0 0 5px rgba(26,58,26,0.15)"></iframe>
+      </div>
+
+      <div style="min-width:220px;max-width:370px;flex:1 1 0">
+        <strong style="color:#c8e6c9">Our Motto</strong><br>
+        <div style="color:#c8e6c9;font-weight:700;margin-top:8px">SDA ka sapna, sabka ghar ho apna</div>
+        <p style="color:#e8f5e8;margin-top:10px">We help Delhiites leave rental woes behind and step into the comfort and pride of ownership.</p>
+      </div>
+    </div>
+    <div style="text-align:center;color:#e8f5e8;padding:8px 0;background:linear-gradient(135deg,#1a3a1a,#2e7d32)">© <span id="year"></span> SDA Infra & Promoters</div>
+  </footer>
+
+<script>
+/* ---------------- Localization (EN / HI) ---------------- */
+const HOME_LOCALE = {
+  en: {
+    lead: "Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.",
+    bullets: ["Verified listings with clear titles","On-site visits & complete documentation support","Local knowledge across Delhi, Gurgaon & Noida"],
+    cta: "Read full About page",
+    note: "Photos rotate every 3 seconds — swipe on mobile to explore."
+  },
+  hi: {
+    lead: "दिल्ली-आधारित विशेषज्ञ — दिल्ली एनसीआर में प्रीमियम आवासीय प्लॉट। हम सत्यापित संपत्तियाँ, स्पष्ट दस्तावेज़ और ईमानदार मार्गदर्शन प्रदान करते हैं ताकि हर खरीदार आत्मविश्वास महसूस करे।",
+    bullets: ["सत्यापित लिस्टिंग और स्पष्ट टाइटल","साइट विज़िट और डॉक्यूमेंटेशन सपोर्ट","दिल्ली, गुरुग्राम और नोएडा में स्थानीय ज्ञान"],
+    cta: "विस्तृत पृष्ठ पढ़ें",
+    note: "फोटो हर 3 सेकंड में बदलती हैं — मोबाइल पर स्वाइप करें।"
+  }
+};
+
+function applyHomeLocale(lang){
+  const map = HOME_LOCALE[lang] || HOME_LOCALE.en;
+  document.getElementById('aboutLead').textContent = map.lead;
+  const bulletsEl = document.getElementById('aboutBullets');
+  bulletsEl.innerHTML = '';
+  map.bullets.forEach(txt => { const li = document.createElement('li'); li.textContent = txt; bulletsEl.appendChild(li); });
+  document.getElementById('aboutCta').textContent = map.cta;
+  document.getElementById('aboutNote').textContent = map.note;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-hi').classList.toggle('active', lang === 'hi');
+  try { localStorage.setItem('sda_home_lang', lang); } catch(e){}
+}
+
+(function initLang(){
+  let saved = null;
+  try { saved = localStorage.getItem('sda_home_lang'); } catch(e){}
+  if (!saved){ const nav = (navigator.language||'en').toLowerCase(); saved = nav.startsWith('hi') ? 'hi' : 'en'; }
+  applyHomeLocale(saved);
+})();
+document.getElementById('btn-en').addEventListener('click', ()=>applyHomeLocale('en'));
+document.getElementById('btn-hi').addEventListener('click', ()=>applyHomeLocale('hi'));
+
+/* ---------------- Slideshow ---------------- */
+(function initSlideshow(){
+  const slides = Array.from(document.querySelectorAll('.slideshow .slide'));
+  let cur = 0;
+  if (slides.length===0) return;
+  slides[cur].classList.add('visible');
+  setInterval(()=>{
+    slides[cur].classList.remove('visible');
+    cur = (cur+1)%slides.length;
+    slides[cur].classList.add('visible');
+  },3000);
+  // small fade-in for hero
+  document.getElementById('hero').style.opacity = 1;
+  document.getElementById('slideshow').style.opacity = 1;
+})();
+
+/* ---------------- Menu behaviour (no fetch; menu markup inline) ---------------- */
+(function initMenu(){
+  const btn = document.getElementById('topMenuBtn');
+  const dropdown = document.getElementById('topMenuDropdown');
+  const links = dropdown.querySelectorAll('a');
+  function normalizePath(url){
+    try { const u = new URL(url, location.href); let p = u.pathname; if(p.endsWith('/index.html')) p = p.replace('/index.html','/'); if(p.length>1 && p.endsWith('/')) p = p.slice(0,-1); return p; } catch { return url; }
+  }
+  function markActive(){
+    const cur = normalizePath(location.pathname);
+    links.forEach(a=> { const link = normalizePath(a.getAttribute('href')||''); a.classList.toggle('active', link === cur); });
+  }
+  function openMenu(){
+    markActive(); btn.setAttribute('aria-expanded','true'); dropdown.classList.add('open');
+    const first = dropdown.querySelector('a'); if(first) first.focus();
+    document.addEventListener('click', outsideClick); document.addEventListener('keydown', keyHandler);
+  }
+  function closeMenu(){ btn.setAttribute('aria-expanded','false'); dropdown.classList.remove('open'); document.removeEventListener('click', outsideClick); document.removeEventListener('keydown', keyHandler); try{ btn.focus(); }catch(e){} }
+  function outsideClick(e){ if(!dropdown.contains(e.target) && !btn.contains(e.target)) closeMenu(); }
+  function keyHandler(e){ if(e.key === 'Escape'){ closeMenu(); } else if((e.key==='ArrowDown' || e.key==='ArrowUp') && dropdown.classList.contains('open')) {
+      const items = Array.from(dropdown.querySelectorAll('a'));
+      if(items.length===0) return;
+      e.preventDefault();
+      const idx = items.indexOf(document.activeElement);
+      if(e.key==='ArrowDown'){ items[(idx+1)%items.length].focus(); } else { items[(idx-1+items.length)%items.length].focus(); }
     }
+  }
+  btn.addEventListener('click', ()=>{ const open = btn.getAttribute('aria-expanded')==='true'; if(open) closeMenu(); else openMenu(); });
+  dropdown.addEventListener('click', (e)=>{ if(e.target.closest('a')) closeMenu(); });
+  // ensure keyboard opening works
+  btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ' || e.key==='ArrowDown'){ e.preventDefault(); btn.click(); } });
+  // initial active marking
+  markActive();
+})();
 
-    (async function initHeaderFooter() {
-      await loadHTMLWithFallback('headerdiv', 'header.html');
-      await loadHTMLWithFallback('footerdiv', 'footer.html');
-    })();
-  </script>
+/* ---------------- misc ---------------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
