@@ -1,168 +1,173 @@
-<!-- HEADER START -->
-<style>
-  :root {
-    --topbar-height: 52px;
-    --topbar-bg: linear-gradient(135deg,#1a3a1a,#2e7d32);
-    --accent:#1f7a3a;
-  }
+<!-- header.html (updated: slimmer, responsive, no-JS mobile menu) -->
+<header aria-label="Site header">
+  <style>
+    :root{
+      --accent:#1f7a3a;
+      --topbar-h:40px;           /* reduced from 52 */
+      --header-pad:10px 4vw;    /* slimmer header padding */
+      --logo-size:48px;         /* desktop fallback, reduced */
+    }
+    *{box-sizing:border-box}
 
-  /* ---------- Top bar (phone) ---------- */
-  .top-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--topbar-height);
-    background: var(--topbar-bg);
-    color: #e8f5e8;
-    padding: 8px 4vw;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 3000;
-    font-weight: 700;
-  }
-  .top-left { display:flex; align-items:center; gap:10px; }
-  .phone-link {
-    display:flex; align-items:center; gap:8px;
-    color: #e8f5e8; text-decoration: none;
-  }
-  .phone-link svg { width:18px; height:18px; fill:#e8f5e8; display:block; }
+    /* Top (phone) bar - fixed */
+    .top-bar{
+      position:fixed; top:0; left:0; right:0;
+      height:var(--topbar-h);
+      background:linear-gradient(135deg,#1a3a1a,#2e7d32);
+      color:#e8f5e8;
+      display:flex; align-items:center;
+      padding:0 4vw;
+      z-index:4000;
+      font-weight:700;
+    }
+    .phone-link { display:flex; gap:8px; align-items:center; color:inherit; text-decoration:none; }
+    .phone-link svg{ width:16px; height:16px; fill:currentColor; display:block }
 
-  /* ---------- Header / Branding ---------- */
-  .header-bar {
-    margin-top: var(--topbar-height);
-    background: linear-gradient(135deg,#fff,#f0f7f0);
-    display:flex; align-items:center; justify-content:space-between;
-    padding:12px 4vw;
-    flex-wrap:nowrap;
-  }
-  .branding {
-    display:flex; align-items:center; gap:14px; white-space:nowrap;
-  }
-  .branding-link { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
-  .logo-img {
-    width:64px; height:64px; object-fit:contain;
-    border-radius:12px; background:#fff; border:3px solid #1a3a1a;
-  }
-  .companyNameTop {
-    font-size:1.6rem; font-weight:900; color:#1a3a1a; letter-spacing:1.2px;
-  }
+    /* Header below phone bar */
+    .header-bar{
+      position:sticky;
+      top:var(--topbar-h);
+      left:0; right:0;
+      background: linear-gradient(135deg,#fff,#f0f7f0);
+      padding: var(--header-pad);
+      display:flex;
+      align-items:center;
+      gap:16px;
+      z-index:3900;
+    }
 
-  /* ---------- Desktop menu ---------- */
-  .nav-desktop {
-    display:flex; align-items:center; gap:22px;
-  }
-  .nav-desktop a {
-    text-decoration:none;
-    color:#1a3a1a;
-    font-weight:700;
-    display:flex; flex-direction:column;
-    align-items:center;
-    font-size:0.85rem;
-  }
-  .nav-desktop svg {
-    width:24px; height:24px; fill:var(--accent);
-    margin-bottom:4px;
-  }
-  .nav-desktop a:hover svg { fill:#0b3a13; }
-  .nav-desktop a:hover { color:#0b3a13; }
+    /* Brand: allow shrink, prevent overflowing layout */
+    .branding { display:flex; align-items:center; gap:12px; min-width:0; }
+    .branding-link{ display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; min-width:0 }
+    .logo-img{
+      width:var(--logo-size); height:var(--logo-size);
+      object-fit:contain;border-radius:10px;border:3px solid #1a3a1a;background:#fff; flex:0 0 auto;
+    }
 
-  /* ---------- Mobile menu (checkbox hack) ---------- */
-  #menu-toggle { display:none; }
-  .menu-label {
-    display:none;
-    background:#fff;
-    color:#1a3a1a;
-    padding:8px 12px;
-    border-radius:8px;
-    font-weight:800;
-    cursor:pointer;
-    border:1px solid rgba(26,58,26,0.15);
-  }
-  .mobile-menu {
-    display:none;
-    position:absolute;
-    right:4vw;
-    top:calc(var(--topbar-height) + 80px);
-    background:#fff;
-    border-radius:10px;
-    box-shadow:0 8px 28px rgba(0,0,0,0.15);
-    width:min(90vw,280px);
-    padding:10px;
-    z-index:2500;
-  }
-  .mobile-menu a {
-    display:block;
-    padding:10px;
-    color:#12321a;
-    text-decoration:none;
-    border-radius:6px;
-    font-weight:700;
-  }
-  .mobile-menu a:hover { background:#f1f7f1; }
+    /* Company name: single-line, responsive */
+    .companyNameTop{
+      font-weight:900;
+      color:#1a3a1a;
+      letter-spacing:1px;
+      white-space:nowrap;           /* keep single line */
+      overflow:hidden;
+      text-overflow:ellipsis;
+      /* responsive font: clamp(min, preferred, max) */
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      line-height:1;
+      flex: 1 1 auto;               /* allow shrinking */
+      min-width:0;
+    }
 
-  #menu-toggle:checked ~ .mobile-menu { display:block; }
+    /* Desktop nav: icons + label */
+    nav.nav-desktop{
+      margin-left:auto;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex:0 0 auto;
+    }
+    .nav-desktop a{
+      color:#1a3a1a; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:6px; font-weight:700; font-size:0.85rem;
+    }
+    .nav-desktop svg{ width:22px; height:22px; fill:var(--accent); display:block }
+    .nav-desktop a:hover svg{ fill:#0b3a13 }
 
-  /* ---------- Responsive rules ---------- */
-  @media(max-width:860px){
-    .nav-desktop{display:none;}
-    .menu-label{display:inline-block;}
-    .companyNameTop{font-size:1.25rem;}
-  }
-  @media(max-width:540px){
-    .logo-img{width:48px;height:48px;}
-    .companyNameTop{font-size:1.1rem;}
-  }
-</style>
+    /* Mobile menu: checkbox hack */
+    #menu-toggle{ display:none; }
+    .menu-label{
+      display:none;
+      margin-left:auto;
+      background:#fff; color:#1a3a1a;
+      padding:8px 12px; border-radius:10px; border:1px solid rgba(26,58,26,0.12); font-weight:800; cursor:pointer;
+      box-shadow: 0 6px 18px rgba(12,20,12,0.06);
+    }
+    .mobile-menu {
+      display:none;
+      position:fixed;
+      right:4vw;
+      top: calc(var(--topbar-h) + 74px); /* sits below phone+header */
+      width:min(92vw,320px);
+      background:#fff; color:#12321a; border-radius:10px;
+      box-shadow:0 14px 40px rgba(10,20,10,0.12); padding:10px; z-index:3800;
+    }
+    .mobile-menu a { display:block; padding:10px 8px; color:inherit; text-decoration:none; border-radius:8px; font-weight:700 }
+    .mobile-menu a:hover{ background:#f1f7f1 }
 
-<!-- Topbar -->
-<div class="top-bar" role="banner">
-  <div class="top-left">
-    <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
-      <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
-      <span>Call: 9999944622</span>
-    </a>
-  </div>
-</div>
+    /* show mobile menu when checked */
+    #menu-toggle:checked ~ .mobile-menu { display:block; }
 
-<!-- Branding & Navigation -->
-<header class="header-bar">
-  <div class="branding">
-    <a href="https://sdapromoters.com" class="branding-link" target="_blank" rel="noopener">
-      <img class="logo-img" src="images/logo.png" alt="SDA Infra & Promoters logo">
-      <div class="companyNameTop">SDA Infra & Promoters</div>
-    </a>
+    /* RESPONSIVE: hide desktop nav, show menu label */
+    @media (max-width:860px){
+      nav.nav-desktop { display:none; }
+      .menu-label { display:inline-block; }
+      /* make logo slightly smaller on narrow screens */
+      .logo-img { width:44px; height:44px; }
+      /* company name slightly smaller */
+      .companyNameTop { font-size: clamp(0.95rem, 4.5vw, 1.05rem); }
+      /* adjust mobile menu top to account for reduced header height */
+      .mobile-menu { top: calc(var(--topbar-h) + 64px); }
+      .header-bar { padding: 8px 4vw; }
+    }
+
+    @media (max-width:420px){
+      .logo-img { width:40px; height:40px; }
+      .companyNameTop { font-size: clamp(0.9rem, 5.5vw, 1rem); }
+    }
+  </style>
+
+  <!-- TOP PHONE BAR (unchanged except height) -->
+  <div class="top-bar" role="banner">
+    <div class="top-left">
+      <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+        <span style="font-weight:800">Call: 9999944622</span>
+      </a>
+    </div>
   </div>
 
-  <!-- Desktop icon menu -->
-  <nav class="nav-desktop" aria-label="Main Navigation">
-    <a href="index.html" title="Home">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Home
-    </a>
-    <a href="about.html" title="About Us">
-      <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
-      About
-    </a>
-    <a href="careers.html" title="Careers">
-      <svg viewBox="0 0 24 24"><path d="M14 6V4h-4v2H3v2h18V6h-7zm-9 6v8h14v-8H5z"/></svg>
-      Careers
-    </a>
-    <a href="blogs.html" title="Blogs & Gallery">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
-      Blogs
-    </a>
-  </nav>
+  <!-- BRAND + NAV -->
+  <div class="header-bar" role="navigation" aria-label="Main header">
+    <div class="branding">
+      <a class="branding-link" href="https://sdapromoters.com" target="_blank" rel="noopener">
+        <img class="logo-img" src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'">
+      </a>
+      <div class="companyNameTop">SDA Infra &amp; Promoters</div>
+    </div>
 
-  <!-- Mobile menu toggle -->
-  <input type="checkbox" id="menu-toggle">
-  <label for="menu-toggle" class="menu-label">☰ Menu</label>
+    <!-- Desktop nav (icons + labels) -->
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      <a href="index.html" title="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>Home</span>
+      </a>
 
-  <!-- Mobile dropdown -->
-  <div class="mobile-menu" role="menu">
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="careers.html">Careers</a>
-    <a href="blogs.html">Blogs & Gallery</a>
+      <a href="about.html" title="About">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+        <span>About</span>
+      </a>
+
+      <a href="careers.html" title="Careers">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6V4h-4v2H3v2h18V6h-7zm-9 6v8h14v-8H5z"/></svg>
+        <span>Careers</span>
+      </a>
+
+      <a href="blogs.html" title="Blogs">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
+        <span>Blogs</span>
+      </a>
+    </nav>
+
+    <!-- Mobile menu toggle (checkbox hack) -->
+    <input id="menu-toggle" type="checkbox" aria-hidden="true">
+    <label for="menu-toggle" class="menu-label" aria-hidden="false">☰ Menu</label>
+
+    <!-- Mobile dropdown (embedded links) -->
+    <div class="mobile-menu" role="menu" aria-hidden="true">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="careers.html">Careers</a>
+      <a href="blogs.html">Blogs &amp; Gallery</a>
+    </div>
   </div>
 </header>
-<!-- HEADER END -->
