@@ -78,6 +78,12 @@
 
 <!-- HEADER: include header.html content here (keeps index.html self-contained) -->
 <!-- header.html -->
+<!-- HEADER: include header.html content here (keeps index.html self-contained) -->
+<!-- Fixed top phone bar -->
+<div class="top-callbar">
+  <a href="tel:9999944622" class="phone-link">📞 Call: 9999944622</a>
+</div>
+
 <header aria-label="Site Header">
   <style>
     :root {
@@ -88,115 +94,138 @@
 
     * { box-sizing:border-box; }
 
+    /* Top call bar */
+    .top-callbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 36px;
+      background: #0b3a13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+    .top-callbar .phone-link {
+      color: #e8f5e8;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .top-callbar .phone-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Site header */
     .site-header {
-      position:sticky;
-      top:0;
-      left:0;
-      right:0;
-      background:var(--top-bg);
-      height:var(--topbar-h);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:8px 5vw;
-      color:#e8f5e8;
-      font-weight:700;
-      z-index:9999;
+      position: sticky;
+      top: 36px; /* shifts below call bar */
+      left: 0;
+      right: 0;
+      background: var(--top-bg);
+      height: var(--topbar-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 5vw;
+      color: #e8f5e8;
+      font-weight: 700;
+      z-index: 9999;
     }
 
     .brand {
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-decoration:none;
-      color:inherit;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
     }
 
     .brand img {
-      width:48px;
-      height:48px;
-      border-radius:10px;
-      border:2px solid rgba(255,255,255,0.3);
-      object-fit:cover;
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.3);
+      object-fit: cover;
     }
 
     .brand-name {
-      font-weight:900;
-      font-size:1.1rem;
-      letter-spacing:0.5px;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
     }
 
     /* Desktop nav */
     nav.primary {
-      display:flex;
-      gap:18px;
-      align-items:center;
+      display: flex;
+      gap: 18px;
+      align-items: center;
     }
 
     nav.primary a {
-      color:inherit;
-      text-decoration:none;
-      padding:8px 10px;
-      border-radius:8px;
-      font-weight:700;
+      color: inherit;
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 700;
     }
 
     nav.primary a:hover {
-      background:rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.1);
     }
 
-    /* Mobile menu setup */
+    /* Mobile menu */
     #menu-toggle {
-      display:none;
+      display: none;
     }
 
     .menu-btn {
-      display:none;
-      background:#fff;
-      color:#1a3a1a;
-      padding:8px 14px;
-      border-radius:8px;
-      font-weight:800;
-      border:1px solid rgba(26,58,26,0.15);
-      cursor:pointer;
+      display: none;
+      background: #fff;
+      color: #1a3a1a;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      border: 1px solid rgba(26,58,26,0.15);
+      cursor: pointer;
     }
 
     .mobile-menu {
-      display:none;
-      position:fixed;
-      right:5vw;
-      top:calc(var(--topbar-h) + 10px);
-      width:min(92vw,320px);
-      background:#fff;
-      color:#12321a;
-      border-radius:10px;
-      box-shadow:0 14px 40px rgba(10,20,10,0.15);
-      padding:10px;
-      z-index:9998;
+      display: none;
+      position: fixed;
+      right: 5vw;
+      top: calc(var(--topbar-h) + 46px); /* 36px callbar + 10px gap */
+      width: min(92vw, 320px);
+      background: #fff;
+      color: #12321a;
+      border-radius: 10px;
+      box-shadow: 0 14px 40px rgba(10,20,10,0.15);
+      padding: 10px;
+      z-index: 9998;
     }
 
     .mobile-menu a {
-      display:block;
-      padding:10px 8px;
-      color:inherit;
-      text-decoration:none;
-      border-radius:8px;
-      font-weight:700;
+      display: block;
+      padding: 10px 8px;
+      color: inherit;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 700;
     }
 
     .mobile-menu a:hover {
-      background:#f1f7f1;
+      background: #f1f7f1;
     }
 
-    /* toggle visibility */
     #menu-toggle:checked ~ .mobile-menu {
-      display:block;
+      display: block;
     }
 
-    /* show mobile menu button and hide desktop nav on small screens */
     @media (max-width: 860px) {
-      nav.primary { display:none; }
-      .menu-btn { display:inline-block; }   /* ✅ ensure button visible */
+      nav.primary { display: none; }
+      .menu-btn { display: inline-block; }
     }
   </style>
 
@@ -227,6 +256,7 @@
     </div>
   </div>
 </header>
+
 
 <main class="container">
   <div class="hero">
