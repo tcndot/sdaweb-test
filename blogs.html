@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo4favicon.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blogs — SDA Infra & Promoters</title>
+  <style>
+    :root{
+      --accent:#1f7a3a;
+      --muted:#666;
+      --wrap:1100px;
+    }
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:#111;
+      background:#fff;
+    }
+    .wrap{
+      max-width:var(--wrap);
+      margin:0 auto;
+      padding:32px 18px;
+      text-align:center;
+    }
+    #headerdiv{width:100%;}
+    h1{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+    p.muted{
+      color:var(--muted);
+      font-size:16px;
+      margin-bottom:28px;
+    }
+    .coming{
+      margin-top:40px;
+      padding:50px 20px;
+      border:2px dashed #d6e5d9;
+      border-radius:14px;
+      background:#f9fcf9;
+      box-shadow:0 4px 12px rgba(4,20,8,.05);
+    }
+    .coming h2{
+      font-size:22px;
+      color:var(--accent);
+      margin:0 0 8px;
+    }
+    .coming p{
+      color:var(--muted);
+      font-size:15px;
+      margin:0;
+    }
+    footer{
+      border-top:1px solid #eee;
+      margin-top:32px;
+      padding:16px 0;
+      text-align:center;
+      color:#444;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header dynamically loaded -->
+  <div id="headerdiv" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <h1>Our Blog</h1>
+    <p class="muted">Insights, updates, and stories from SDA Infra &amp; Promoters</p>
+
+    <div class="coming">
+      <h2>Coming Soon</h2>
+      <p>We’re working on a detailed content strategy for our blog section.<br>
+      Stay tuned for helpful guides, market insights, and project updates.</p>
+    </div>
+  </main>
+
+  <!-- Footer dynamically loaded -->
+  <div id="footerdiv" aria-hidden="true"></div>
+
+  <script>
+    // same dynamic loader used on all pages
+    async function loadHTML(targetId, relPath) {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      try {
+        const url = new URL(relPath, location.href).href;
+        const res = await fetch(url, {cache:'no-store'});
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
+        const text = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        Array.from(tmp.childNodes).forEach(node=>{
+          if(node.tagName&&node.tagName.toLowerCase()==='script')return;
+          target.appendChild(node.cloneNode(true));
+        });
+        const scripts=tmp.querySelectorAll('script');
+        for(const s of scripts){
+          const newScript=document.createElement('script');
+          for(const attr of s.attributes)newScript.setAttribute(attr.name,attr.value);
+          if(s.src){
+            await new Promise((resLoad)=>{
+              newScript.onload=resLoad;
+              newScript.onerror=resLoad;
+              document.body.appendChild(newScript);
+              newScript.src=s.src;
+            });
+          }else{
+            newScript.textContent=s.textContent;
+            document.body.appendChild(newScript);
+          }
+        }
+        target.setAttribute('aria-hidden','false');
+      } catch (err) {
+        console.error('loadHTML error', err);
+        target.innerHTML='<div style="padding:12px;background:#fee;color:#600">Failed to load header/footer</div>';
+        target.setAttribute('aria-hidden','true');
+      }
+    }
+    (async function init(){
+      await loadHTML('headerdiv','header.html');
+      await loadHTML('footerdiv','footer.html');
+    })();
+  </script>
+</body>
+</html>
