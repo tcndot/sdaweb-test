@@ -1,74 +1,150 @@
 <!-- header.html -->
 <header aria-label="Site Header">
   <style>
-    :root{
+    :root {
       --accent:#1f7a3a;
       --topbar-h:60px;
       --top-bg:linear-gradient(135deg,#1a3a1a,#2e7d32);
-      --nav-gap:18px;
     }
-    *{box-sizing:border-box}
-    .site-header{
-      position:sticky;top:0;left:0;right:0;
-      height:var(--topbar-h);
+
+    * { box-sizing:border-box; }
+
+    .site-header {
+      position:sticky;
+      top:0;
+      left:0;
+      right:0;
       background:var(--top-bg);
-      display:flex;align-items:center;justify-content:space-between;
-      padding:8px 5vw;color:#e8f5e8;font-weight:700;z-index:9999;
+      height:var(--topbar-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:8px 5vw;
+      color:#e8f5e8;
+      font-weight:700;
+      z-index:9999;
     }
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .brand img{width:48px;height:48px;border-radius:10px;border:2px solid rgba(255,255,255,.25);object-fit:cover}
-    .brand-name{font-weight:900;font-size:1.05rem;letter-spacing:.4px}
-    nav.primary{display:flex;gap:var(--nav-gap);align-items:center}
-    nav.primary a{color:inherit;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:700}
-    nav.primary a:hover{background:rgba(255,255,255,0.06)}
-    /* mobile toggle */
-    #menu-toggle{display:none}
-    .menu-btn{display:none;background:#fff;color:#1a3a1a;padding:8px 12px;border-radius:8px;font-weight:800;border:1px solid rgba(26,58,26,.12);cursor:pointer}
-    .mobile-menu{
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .brand img {
+      width:48px;
+      height:48px;
+      border-radius:10px;
+      border:2px solid rgba(255,255,255,0.3);
+      object-fit:cover;
+    }
+
+    .brand-name {
+      font-weight:900;
+      font-size:1.1rem;
+      letter-spacing:0.5px;
+    }
+
+    /* Desktop nav */
+    nav.primary {
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+
+    nav.primary a {
+      color:inherit;
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:8px;
+      font-weight:700;
+    }
+
+    nav.primary a:hover {
+      background:rgba(255,255,255,0.1);
+    }
+
+    /* Mobile menu setup */
+    #menu-toggle {
+      display:none;
+    }
+
+    .menu-btn {
+      display:none;
+      background:#fff;
+      color:#1a3a1a;
+      padding:8px 14px;
+      border-radius:8px;
+      font-weight:800;
+      border:1px solid rgba(26,58,26,0.15);
+      cursor:pointer;
+    }
+
+    .mobile-menu {
       display:none;
       position:fixed;
-      right:4vw;
+      right:5vw;
       top:calc(var(--topbar-h) + 10px);
       width:min(92vw,320px);
-      background:#fff;color:#12321a;border-radius:10px;padding:10px;box-shadow:0 14px 40px rgba(10,20,10,.12);z-index:9998;
+      background:#fff;
+      color:#12321a;
+      border-radius:10px;
+      box-shadow:0 14px 40px rgba(10,20,10,0.15);
+      padding:10px;
+      z-index:9998;
     }
-    .mobile-menu a{display:block;padding:10px 8px;color:inherit;text-decoration:none;border-radius:8px;font-weight:700}
-    .mobile-menu a:hover{background:#f1f7f1}
-    /* show mobile menu when checked */
-    #menu-toggle:checked ~ .mobile-menu{display:block}
-    @media (max-width:860px){
-      nav.primary{display:none}
-      .menu-btn{display:inline-block}
+
+    .mobile-menu a {
+      display:block;
+      padding:10px 8px;
+      color:inherit;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:700;
+    }
+
+    .mobile-menu a:hover {
+      background:#f1f7f1;
+    }
+
+    /* toggle visibility */
+    #menu-toggle:checked ~ .mobile-menu {
+      display:block;
+    }
+
+    /* show mobile menu button and hide desktop nav on small screens */
+    @media (max-width: 860px) {
+      nav.primary { display:none; }
+      .menu-btn { display:inline-block; }   /* ✅ ensure button visible */
     }
   </style>
 
   <div class="site-header" role="banner">
-    <a href="index.html" class="brand" aria-label="SDA Infra & Promoters home">
-      <img src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'">
-      <div>
-        <div class="brand-name">SDA Infra &amp; Promoters</div>
-        <div style="font-size:12px;color:rgba(232,245,232,.9);margin-top:4px">Verified plots • Clear paperwork</div>
-      </div>
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="SDA Infra Logo" onerror="this.style.display='none'">
+      <span class="brand-name">SDA Infra & Promoters</span>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="primary" aria-label="Primary navigation">
+    <nav class="primary" aria-label="Primary Navigation">
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <a href="careers.html">Careers</a>
-      <a href="blogs.html">Blogs &amp; Gallery</a>
+      <a href="blogs.html">Blogs & Gallery</a>
     </nav>
 
-    <!-- Mobile checkbox toggle -->
-    <input id="menu-toggle" type="checkbox" aria-hidden="true">
-    <label for="menu-toggle" class="menu-btn" aria-hidden="false">Menu ☰</label>
+    <!-- Mobile toggle -->
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-btn">Menu ☰</label>
 
-    <!-- Mobile menu -->
-    <div class="mobile-menu" role="menu" aria-hidden="true">
+    <!-- Mobile dropdown -->
+    <div class="mobile-menu" role="menu">
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <a href="careers.html">Careers</a>
-      <a href="blogs.html">Blogs &amp; Gallery</a>
+      <a href="blogs.html">Blogs & Gallery</a>
     </div>
   </div>
 </header>
