@@ -28,7 +28,7 @@
   .lead{color:var(--muted);margin:0 0 14px;font-size:15px;line-height:1.5}
   .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
   .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700}
-  .muted-small{color:var(--muted);font-size:13px;margin-top:12px;display:block}
+  .muted-small{Color:var(--muted);font-size:13px;margin-top:12px;display:block}
 
   /* CSS-only slideshow */
   .slideshow{position:relative;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#eef6ee,#f7faf7)}
@@ -71,7 +71,7 @@
   .socials-fixed{position:fixed;left:16px;bottom:20px;display:flex;gap:18px;z-index:9999}
   .whatsapp-fixed-wrap{position:fixed;right:18px;bottom:22px;z-index:9999;text-align:center}
   .whatsapp-fixed-btn{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 18px rgba(37,211,102,.25);border:2px solid rgba(46,125,50,.18)}
-  .whatsapp-fixed-btn img{width:48px;height:48px;filter:brightness(0) invert(1)}
+  .whatsapp-fixed-btn img{width:48px;height:48px;filter:none}
 </style>
 </head>
 <body>
@@ -284,7 +284,6 @@
 
     <div style="text-align:center">
       <b>Our Office Location</b><br>
-      <!-- kept your working embed src as-is -->
       <iframe title="office-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="260" height="200"></iframe>
       <div style="margin-top:8px">
         <a href="https://maps.apple.com/place?address=CL+Khanna+Marg%2C+Block+C+Double+Storey%2C+Ramesh+Nagar%2C+New+Delhi%2C+110015%2C+Delhi%2C+India&coordinate=28.652511071145934%2C77.13284415896229&name=Marked+Location" target="_blank" rel="noopener">Open in Apple Maps</a>
@@ -302,25 +301,15 @@
   <div style="text-align:center;margin-top:18px;opacity:.95">© 2025 SDA Infra & Promoters</div>
 
   <!-- floating socials -->
-  <div class="socials-fixed" aria-hidden="false">
-    <a href="https://m.youtube.com/@sdapromoters" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.58 7.19s-.22-1.62-.88-2.34c-.84-.9-1.78-.9-2.21-.95C15 3.71 12 3.71 12 3.71h0s-3 0-6.49.19c-.43.05-1.37.05-2.21.94-.66.73-.88 2.34-.88 2.34S2 8.81 2 10.44v.62c0 1.62.22 3.25.22 3.25s.22 1.62.88 2.34c.84.89 1.94.86 2.44.96C7.73 18.29 12 18.29 12 18.29s3 0 6.49-.19c.43-.05 1.37-.05 2.21-.94.66-.73.88-2.34.88-2.34s.22-1.62.22-3.25v-.62c0-1.63-.22-3.25-.22-3.25zM10 15V9l5 3-5 3z"/></svg>
-    </a>
-    <a href="https://m.facebook.com/sda.rameshnagar/" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">
-      <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M279.14 288l14.22-92.66h-88.91V127.44c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0C141.09 0 89.09 54.41 89.09 153.31V195.3H0V288h89.09v224h104.89V288z"/></svg>
-    </a>
-    <a href="https://www.instagram.com/Sdapromoters/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.057 1.97.24 2.422.415.5.195.858.428 1.23.8.372.372.605.73.8 1.23.175.452.358 1.251.415 2.422.058 1.266.069 1.646.069 4.85s-.011 3.584-.069 4.85c-.057 1.17-.24 1.97-.415 2.422-.195.5-.428.858-.8 1.23-.372.372-.73.605-1.23.8-.452.175-1.251.358-2.422.415-1.266.058-1.646.069-4.85.069s-3.583-.011-4.85-.069c-1.17-.057-1.97-.24-2.422-.415-.5-.195-.858-.428-1.23-.8-.372-.372-.605-.73-.8-1.23-.175-.452-.358-1.251-.415-2.422C2.175 15.647 2.163 15.267 2.163 12s.012-3.583.07-4.85c.057-1.17.24-1.97.415-2.422A3.495 3.495 0 0 1 4.379 2.55c.452-.175 1.251-.358 2.422-.415C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.015 7.053.072 5.774.127 4.685.309 3.802.634c-.892.328-1.671.768-2.447 1.544C.444 3.327.003 4.106-.325 4.998c-.324.883-.506 1.972-.561 3.251C-.015 8.667 0 9.075 0 12c0 2.926.015 3.333.072 4.613.055 1.279.237 2.368.561 3.251.328.892.769 1.67 1.544 2.447.777.777 1.555 1.216 2.447 1.545.883.324 1.972.506 3.251.56C8.333 23.985 8.741 24 12 24s3.667-.015 4.947-.072c1.279-.055 2.368-.237 3.251-.561.892-.329 1.67-.768 2.447-1.545.777-.776 1.216-1.555 1.545-2.447.324-.883.506-1.972.56-3.251C23.985 15.333 24 14.926 24 12c0-2.925-.015-3.333-.072-4.613-.055-1.279-.236-2.368-.56-3.251a4.063 4.063 0 0 0-1.545-2.447c-.777-.777-1.555-1.216-2.447-1.544C19.333.309 18.244.127 16.965.072 15.686.015 15.259 0 12 0zm0 5.838A6.162 6.162 0 1 0 18.163 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.406-11.845a1.44 1.44 0 1 0 1.438 1.44 1.438 1.438 0 0 0-1.436-1.44z"/></svg>
-    </a>
-  </div>
+  <div class="socials-fixed" aria-hidden="false" style="left:16px;bottom:20px;position:fixed;display:flex;gap:14px;z-index:9999">
+    <a href="https://m.youtube.com/@sdapromoters" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M21.58 7.19s-.22-1.62-.88-2.34c-.84-.9-1.78-.9-2.21-.95C15 3.71 12 3.71 12 3.71h0s-3 0-6.49.19c-.43.05-1.37.05-2.21.94-.66.73-.88 2.34-.88 2.34S2 8.81 2 10.44v.62c0 1.62.22 3.25.22 3.25s.22 1.62.88 2.34c.84.89 1.94.86 2.44.96C7.73 18.29 12 18.29 12 18.29s3 0 6.49-.19c.43-.05 1.37-.05 2.21-.94.66-.73.88-2.34.88-2.34s.22-1.62.22-3.25v-.62c0-1.63-.22-3.25-.22-3.25zM10 15V9l5 3-5 3z"/></svg></a>
+    <a href="https://m.facebook.com/sda.rameshnagar/" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 320 512" width="18" height="18"><path d="M279.14 288l14.22-92.66h-88.91V127.44c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0C141.09 0 89.09 54.41 89.09 153.31V195.3H0V288h89.09v224h104.89V288z"/></svg></a>
+    <a href="https://www.instagram.com/Sdapromoters/" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.057 1.97.24 2.422.415.5.195.858.428 1.23.8.372.372.605.73.8 1.23.175.452.358 1.251.415 2.422.058 1.266.069 1.646.069 4.85s-.011 3.584-.069 4.85c-.057 1.17-.24 1.97-.415 2.422-.195.5-.428.858-.8 1.23-.372.372-.73.605-1.23.8-.452.175-1.251.358-2.422.415-1.266.058-1.646.069-4.85.069s-3.583-.011-4.85-.069c-1.17-.057-1.97-.24-2.422-.415-.5-.195-.858-.428-1.23-.8-.372-.372-.605-.73-.8-1.23-.175-.452-.358-1.251-.415-2.422C2.175 15.647 2.163 15.267 2.163 12s.012-3.583.07-4.85c.057-1.17.24-1.97.415-2.422A3.495 3.495 0 0 1 4.379 2.55c.452-.175 1.251-.358 2.422-.415C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.015 7.053.072 5.774.127 4.685.309 3.802.634c-.892.328-1.671.768-2.447 1.544C.444 3.327.003 4.106-.325 4.998c-.324.883-.506 1.972-.561 3.251C-.015 8.667 0 9.075 0 12c0 2.926.015 3.333.072 4.613.055 1.279.237 2.368.561 3.251.328.892.769 1.67 1.544 2.447.777.777 1.555 1.216 2.447 1.545.883.324 1.972.506 3.251.56C8.333 23.985 8.741 24 12 24s3.667-.015 4.947-.072c1.279-.055 2.368-.237 3.251-.561.892-.329 1.67-.768 2.447-1.545.777-.776 1.216-1.555 1.545-2.447.324-.883.506-1.972.56-3.251C23.985 15.333 24 14.926 24 12c0-2.925-.015-3.333-.072-4.613-.055-1.279-.236-2.368-.56-3.251a4.063 4.063 0 0 0-1.545-2.447c-.777-.777-1.555-1.216-2.447-1.544C19.333.309 18.244.127 16.965.072 15.686.015 15.259 0 12 0zm0 5.838A6.162 6.162 0 1 0 18.163 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.406-11.845a1.44 1.44 0 1 0 1.438 1.44 1.438 1.438 0 0 0-1.436-1.44z"/></svg></a>
+    </div>
 
-  <!-- WhatsApp button: official SVG image used (bubble + tail + handset) -->
-  <div style="position:fixed;right:18px;bottom:22px;z-index:9999;text-align:center" class="whatsapp-fixed-wrap">
-    <a class="whatsapp-btn" href="https://wa.me/919999944622?text=Hello,%20Can%20I%20get%20more%20information%3F" target="_blank" rel="noopener" title="Chat with SDA on WhatsApp" aria-label="Chat with SDA on WhatsApp">
-      <!-- Using Wikimedia-hosted official WhatsApp SVG for exact glyph -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
-  </div>
+    <div style="position:fixed;right:18px;bottom:22px;z-index:9999;text-align:center">
+      <a href="https://wa.me/919999944622?text=Hello,%20Can%20I%20get%20more%20information???" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 18px rgba(37,211,102,.25);border:2px solid rgba(46,125,50,.18)"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:44px;height:44px;filter:none"></a>
+    </div>
 </footer>
 
 </body>
