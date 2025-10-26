@@ -1,284 +1,219 @@
 <!-- FOOTER START -->
 <style>
-/* layout & colors (kept similar to your original) */
-:root {
-  --green-dark-1: #1a3a1a;
-  --green-dark-2: #2e7d32;
-  --muted-text: #e8f5e8;
-  --muted-link: #a5d6a7;
+footer {
+  background: linear-gradient(135deg, #1a3a1a, #2e7d32);
+  color: #e8f5e8;
 }
-
-footer.site-footer {
-  background: linear-gradient(135deg, var(--green-dark-1), var(--green-dark-2));
-  color: var(--muted-text);
-  padding: 28px 0 48px;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.45;
-}
-
-/* three-column footer */
-.footer-inner {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 28px 5vw;
+.footer-section {
   display: flex;
-  gap: 32px;
+  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  padding: 36px 5vw 22px 5vw;
+  gap: 34px;
   flex-wrap: wrap;
-  font-size: 1.03rem;
+  font-size: 1.09em;
 }
-
-.footer-col {
-  flex: 1 1 300px;
+.footer-section > div {
   min-width: 220px;
-  max-width: 380px;
+  max-width: 370px;
+  flex: 1 1 0;
   box-sizing: border-box;
-  text-align: center;
 }
-
-.footer-col b {
+.footer-section b {
   color: #c8e6c9;
-  font-size: 1.06em;
+  font-size: 1.07em;
 }
-
-/* map iframe sizing */
-.map-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.map-iframe {
-  width: 96%;
-  max-width: 360px;
-  height: 210px;
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 0 6px rgba(26,58,26,0.14);
-  background: #fff;
-}
-
-/* Links */
-.footer-links {
-  margin-top: 12px;
-  display: flex;
-  gap: 18px;
-  justify-content: center;
-}
-.footer-links a {
-  color: var(--muted-link);
+.footer-section a {
+  color: #a5d6a7;
   text-decoration: underline;
-  font-size: 0.98rem;
+  display: inline-block;
+  margin-top: 8px;
+  margin-right: 20px;
+  font-size: 1em;
 }
-.footer-links a:hover { color: var(--muted-text); }
+.footer-section a:hover {
+  color: #e8f5e8;
+}
+.footer-section iframe {
+  border-radius: 7px;
+  margin-top: 7px;
+  width: 96%;
+  background: #fff;
+  border: none;
+  min-width: 140px;
+  min-height: 200px;
+  box-shadow: 0 0 5px rgba(26, 58, 26, 0.15);
+}
+@media (max-width: 900px) {
+  .footer-section {
+    flex-direction: column;
+    gap: 22px;
+    padding: 18px 2vw;
+  }
+  .footer-section > div {
+    max-width: unset;
+    min-width: unset;
+  }
+}
+</style>
 
-/* social icons fixed left */
+<footer>
+  <div class="footer-section">
+    <!-- Contact Us -->
+    <div>
+      <b>Contact Us</b><br>
+      SDA Infra & Promoters<br>SDA Developers & Promoters<br>
+      Phone: 9999944622<br>
+      Email: info@sdapromoters.com<br>
+      <span style="display:block;margin-top:10px;">
+        <b>Head Office:</b> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015<br>
+        <b>Branch Office:</b> Pili Building, Opposite Nithari School & Jal Board Pump, Sukhi Nehar Road, Pratap Vihar, Delhi 110086
+      </span>
+    </div>
+    <!-- Our Office Location -->
+    <div>
+      <b>Our Office Location</b><br>
+      <iframe src="https://www.google.com/maps?ll=28.652506,77.132662&z=18&t=m&hl=en&gl=IN&mapclient=embed&cid=13797735391824682410" width="260" height="200"></iframe>
+      <div>
+        <a href="https://maps.apple.com/place?address=CL+Khanna+Marg%2C+Block+C+Double+Storey%2C+Ramesh+Nagar%2C+New+Delhi%2C+110015%2C+Delhi%2C+India&coordinate=28.65250394389896%2C77.13275282934909&name=Marked+Location">Open in Apple Maps</a>
+        <a href="https://osm.org/go/zmjygoLJ~?m=">Open in OpenStreetMap</a>
+      </div>
+    </div>
+    <!-- Our Motto -->
+    <div>
+      <b>Our Motto</b><br>
+      <span style="color: #c8e6c9; font-weight: bold;">SDA ka sapna, sabka ghar ho apna</span>
+      <p style="margin-top:10px;">
+        We deeply understand the pain and struggle of renting in Delhi. Tenant hassles, constant uncertainty, and endless searching take a toll on families. SDA Promoters passionately believes every person should have their own home—a true haven from worry.
+      </p>
+      <p>
+        Our mission is to help Delhiites leave rental woes behind and step into the comfort and pride of ownership. Your dream is our own. We work tirelessly, to turn “Ghar Ho Apna” into reality for all.
+      </p>
+    </div>
+  </div>
+
+<style>
 .socials-fixed {
   position: fixed;
   left: 16px;
   bottom: 20px;
-  z-index: 9998;
+  z-index: 9999;
   display: flex;
-  gap: 14px;
+  gap: 18px;
 }
 .socials-fixed a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 2px 10px rgba(26,58,26,0.12);
-  border: 1px solid rgba(46,125,50,0.08);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(26, 58, 26, 0.15);
+  transition: background 0.17s;
+  border: 1px solid rgba(46, 125, 50, 0.1);
 }
-.socials-fixed svg { width: 22px; height: 22px; }
-
-/* footer bottom */
-.footer-bottom {
-  max-width: 1180px;
-  margin: 18px auto 0;
-  padding: 18px 5vw 0;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  text-align: center;
-  color: rgba(232,245,232,0.9);
-  font-size: 0.95rem;
+.socials-fixed a:hover {
+  background: #2e7d32;
 }
-
-/* WhatsApp floating button (clean, flat icon) */
-.whatsapp-fixed {
-  position: fixed;
-  right: 18px;
-  bottom: 20px;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #25D366; /* official green */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  border: 2px solid rgba(0,0,0,0.08);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-  text-decoration: none;
+.socials-fixed svg {
+  width: 28px;
+  height: 28px;
+  fill: #1a3a1a;
 }
-.whatsapp-fixed:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(0,0,0,0.30); }
-.whatsapp-fixed svg { width: 34px; height: 34px; display: block; }
-
-/* fallback message for iframe (visible until iframe loads) */
-.map-fallback {
-  max-width: 360px;
-  width: 96%;
-  padding: 18px;
-  border-radius: 8px;
-  background: rgba(0,0,0,0.75);
-  color: #fff;
-  font-weight: 600;
-  text-align: center;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-  margin-top: 12px;
-}
-.map-fallback a {
-  display:inline-block;
-  margin-top:8px;
-  color:#cfeacf;
-  text-decoration: underline;
-}
-
-/* responsive */
-@media (max-width: 900px) {
-  .footer-inner { flex-direction: column; gap: 22px; padding: 18px 4vw; }
-  .footer-col { text-align: left; max-width: unset; }
-  .socials-fixed { left: 8px; bottom: 8px; gap: 10px; }
-  .whatsapp-fixed { right: 12px; bottom: 12px; width: 52px; height: 52px; }
-  .whatsapp-fixed svg { width: 26px; height: 26px; }
-  .map-iframe { height: 160px; }
-  .map-fallback { max-width: 100%; }
+@media (max-width: 600px) {
+  .socials-fixed {
+    left: 5px;
+    bottom: 8px;
+    gap: 9px;
+  }
+  .socials-fixed a {
+    width: 28px; height: 28px;
+  }
+  .socials-fixed svg {
+    width: 16px; height: 16px;
+  }
 }
 </style>
 
-<footer class="site-footer" role="contentinfo">
-  <div class="footer-inner">
+<div class="socials-fixed">
+  <a href="https://m.youtube.com/@sdapromoters" target="_blank" title="YouTube" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="#FF0000"><path d="M21.58 7.19s-.22-1.62-.88-2.34c-.84-.9-1.78-.9-2.21-.95C15 3.71 12 3.71 12 3.71h0s-3 0-6.49.19c-.43.05-1.37.05-2.21.94-.66.73-.88 2.34-.88 2.34S2 8.81 2 10.44v.62c0 1.62.22 3.25.22 3.25s.22 1.62.88 2.34c.84.89 1.94.86 2.44.96C7.73 18.29 12 18.29 12 18.29s3 0 6.49-.19c.43-.05 1.37-.05 2.21-.94.66-.73.88-2.34.88-2.34s.22-1.62.22-3.25v-.62c0-1.63-.22-3.25-.22-3.25zM10 15V9l5 3-5 3z"></path></svg>
+  </a>
+  <a href="https://m.facebook.com/sda.rameshnagar/" target="_blank" title="Facebook" rel="noopener">
+    <svg viewBox="0 0 320 512" fill="#1877F3"><path d="M279.14 288l14.22-92.66h-88.91V127.44c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26
+        S260.43 0 225.36 0C141.09 0 89.09 54.41 89.09 153.31V195.3H0V288h89.09v224h104.89V288z"/></svg>
+  </a>
+  <a href="https://www.instagram.com/Sdapromoters/" target="_blank" title="Instagram" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.057 1.97.24 2.422.415.5.195.858.428 1.23.8.372.372.605.73.8 1.23.175.452.358 1.251.415 2.422.058 1.266.069 1.646.069 4.85s-.011 3.584-.069 4.85c-.057 1.17-.24 1.97-.415 2.422-.195.5-.428.858-.8 1.23-.372.372-.73.605-1.23.8-.452.175-1.251.358-2.422.415-1.266.058-1.646.069-4.85.069s-3.583-.011-4.85-.069c-1.17-.057-1.97-.24-2.422-.415-.5-.195-.858-.428-1.23-.8-.372-.372-.605-.73-.8-1.23-.175-.452-.358-1.251-.415-2.422C2.175 15.647 2.163 15.267 2.163 12s.012-3.583.07-4.85c.057-1.17.24-1.97.415-2.422A3.495 3.495 0 0 1 4.379 2.55c.452-.175 1.251-.358 2.422-.415C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.015 7.053.072 5.774.127 4.685.309 3.802.634c-.892.328-1.671.768-2.447 1.544C.444 3.327.003 4.106-.325 4.998c-.324.883-.506 1.972-.561 3.251C-.015 8.667 0 9.075 0 12c0 2.926.015 3.333.072 4.613.055 1.279.237 2.368.561 3.251.328.892.769 1.67 1.544 2.447.777.777 1.555 1.216 2.447 1.545.883.324 1.972.506 3.251.56C8.333 23.985 8.741 24 12 24s3.667-.015 4.947-.072c1.279-.055 2.368-.237 3.251-.561.892-.329 1.67-.768 2.447-1.545.777-.776 1.216-1.555 1.545-2.447.324-.883.506-1.972.56-3.251C23.985 15.333 24 14.926 24 12c0-2.925-.015-3.333-.072-4.613-.055-1.279-.236-2.368-.56-3.251a4.063 4.063 0 0 0-1.545-2.447c-.777-.777-1.555-1.216-2.447-1.544C19.333.309 18.244.127 16.965.072 15.686.015 15.259 0 12 0zm0 5.838A6.162 6.162 0 1 0 18.163 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.406-11.845a1.44 1.44 0 1 0 1.438 1.44 1.438 1.438 0 0 0-1.436-1.44z"/></svg>
+  </a>
+</div>
 
-    <!-- Contact -->
-    <div class="footer-col" aria-labelledby="footer-contact">
-      <b id="footer-contact">Contact Us</b><br>
-      SDA Infra & Promoters<br>
-      SDA Developers & Promoters<br>
-      Phone: <a href="tel:9999944622" style="color:inherit;text-decoration:underline;">9999944622</a><br>
-      Email: <a href="mailto:info@sdapromoters.com" style="color:inherit;text-decoration:underline;">info@sdapromoters.com</a>
-      <div style="display:block;margin-top:10px;text-align:center;">
-        <b>Head Office:</b> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015<br>
-        <b>Branch Office:</b> Pili Building, Opposite Nithari School & Jal Board Pump, Sukhi Nehar Road, Pratap Vihar, Delhi 110086
-      </div>
-    </div>
+<style>
+.whatsapp-fixed-wrap {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  z-index: 9999;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chat-label {
+  color: #1a3a1a;
+  background: rgba(255, 255, 255, 0.95);
+  font-weight: bold;
+  font-size: 1.13em;
+  padding: 6px 16px 4px 16px;
+  margin-bottom: 8px;
+  border-radius: 12px 12px 7px 7px;
+  border: 1.5px solid rgba(46, 125, 50, 0.2);
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 9px rgba(26, 58, 26, 0.08);
+}
+.whatsapp-fixed-btn {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.3);
+  border: 2px solid rgba(46, 125, 50, 0.2);
+  padding: 0;
+  overflow: hidden;
+}
+.whatsapp-fixed-btn svg {
+  width: 42px;
+  height: 42px;
+}
+@media (max-width: 600px) {
+  .whatsapp-fixed-wrap {
+    right: 6px;
+    bottom: 11px;
+  }
+  .chat-label {
+    font-size: .99em;
+    padding: 3px 7px 3px 7px;
+    margin-bottom: 2px;
+  }
+  .whatsapp-fixed-btn { width: 40px; height: 40px;}
+  .whatsapp-fixed-btn svg { width: 20px; height: 20px;}
+}
+</style>
 
-    <!-- Map -->
-    <div class="footer-col map-col" aria-labelledby="footer-location">
-      <b id="footer-location">Our Office Location</b><br>
-      <div class="map-wrapper" id="map-area">
-        <!-- Use the coordinate-based embed URL (more cross-browser friendly) -->
-        <iframe class="map-iframe"
-          id="office-map"
-          src="https://www.google.com/maps?q=28.652506,77.132662&z=18&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="SDA Developers and Promoters location (Google Maps)">
-        </iframe>
-
-        <!-- fallback message shown if iframe fails to load (JS will hide it when iframe loads) -->
-        <div class="map-fallback" id="map-fallback" style="display:none;">
-          Map could not load in this browser.
-          <div style="font-size:0.95rem;margin-top:6px;">
-            <a href="https://www.google.com/maps?ll=28.652506,77.132662&z=18" target="_blank" rel="noopener">Open in Google Maps</a>
-            <span style="display:inline-block;width:12px;"></span>
-            <a href="https://maps.apple.com/place?address=CL+Khanna+Marg%2C+Block+C+Double+Storey%2C+Ramesh+Nagar%2C+New+Delhi%2C+110015%2C+Delhi%2C+India&coordinate=28.65250394389896%2C77.13275282934909&name=Marked+Location" target="_blank" rel="noopener">Open in Apple Maps</a>
-          </div>
-        </div>
-
-        <!-- always-visible quick links (good if iframe is blocked) -->
-        <div class="footer-links" aria-hidden="false">
-          <a href="https://maps.apple.com/place?address=CL+Khanna+Marg%2C+Block+C+Double+Storey%2C+Ramesh+Nagar%2C+New+Delhi%2C+110015%2C+Delhi%2C+India&coordinate=28.65250394389896%2C77.13275282934909&name=Marked+Location" target="_blank" rel="noopener">Open in Apple Maps</a>
-          <a href="https://www.openstreetmap.org/?mlat=28.652506&mlon=77.132662#map=18/28.652506/77.132662" target="_blank" rel="noopener">Open in OpenStreetMap</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Motto -->
-    <div class="footer-col" aria-labelledby="footer-motto">
-      <b id="footer-motto">Our Motto</b><br>
-      <div style="color:#c8e6c9;font-weight:700;margin-top:6px;">SDA ka sapna, sabka ghar ho apna</div>
-      <p style="margin-top:10px;text-align:left;">
-        We deeply understand the pain and struggle of renting in Delhi. Tenant hassles, constant uncertainty, and endless searching take a toll on families. SDA Promoters passionately believes every person should have their own home—a true haven from worry.
-      </p>
-      <p style="text-align:left;">
-        Our mission is to help Delhiites leave rental woes behind and step into the comfort and pride of ownership. Your dream is our own. We work tirelessly to turn “Ghar Ho Apna” into reality for all.
-      </p>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    &copy; <span id="year"></span> SDA Infra &amp; Promoters
-  </div>
-
-  <!-- fixed social icons (left) -->
-  <div class="socials-fixed" aria-hidden="false">
-    <a href="https://m.youtube.com/@sdapromoters" target="_blank" rel="noopener" title="YouTube">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#FF0000"><path d="M21.58 7.19s-.22-1.62-.88-2.34c-.84-.9-1.78-.9-2.21-.95C15 3.71 12 3.71 12 3.71h0s-3 0-6.49.19c-.43.05-1.37.05-2.21.94-.66.73-.88 2.34-.88 2.34S2 8.81 2 10.44v.62c0 1.62.22 3.25.22 3.25s.22 1.62.88 2.34c.84.89 1.94.86 2.44.96C7.73 18.29 12 18.29 12 18.29s3 0 6.49-.19c.43-.05 1.37-.05 2.21-.94.66-.73.88-2.34.88-2.34s.22-1.62.22-3.25v-.62c0-1.63-.22-3.25-.22-3.25zM10 15V9l5 3-5 3z"/></svg>
-    </a>
-    <a href="https://m.facebook.com/sda.rameshnagar/" target="_blank" rel="noopener" title="Facebook">
-      <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" fill="#1877F3"><path d="M279.14 288l14.22-92.66h-88.91V127.44c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26 S260.43 0 225.36 0C141.09 0 89.09 54.41 89.09 153.31V195.3H0V288h89.09v224h104.89V288z"/></svg>
-    </a>
-    <a href="https://www.instagram.com/Sdapromoters/" target="_blank" rel="noopener" title="Instagram">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.057 1.97.24 2.422.415.5.195.858.428 1.23.8.372.372.605.73.8 1.23.175.452.358 1.251.415 2.422.058 1.266.069 1.646.069 4.85s-.011 3.584-.069 4.85c-.057 1.17-.24 1.97-.415 2.422-.195.5-.428.858-.8 1.23-.372.372-.73.605-1.23.8-.452.175-1.251.358-2.422.415-1.266.058-1.646.069-4.85.069s-3.583-.011-4.85-.069c-1.17-.057-1.97-.24-2.422-.415-.5-.195-.858-.428-1.23-.8-.372-.372-.605-.73-.8-1.23-.175-.452-.358-1.251-.415-2.422C2.175 15.647 2.163 15.267 2.163 12s.012-3.583.07-4.85c.057-1.17.24-1.97.415-2.422A3.495 3.495 0 0 1 4.379 2.55c.452-.175 1.251-.358 2.422-.415C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.015 7.053.072 5.774.127 4.685.309 3.802.634c-.892.328-1.671.768-2.447 1.544C.444 3.327.003 4.106-.325 4.998c-.324.883-.506 1.972-.561 3.251C-.015 8.667 0 9.075 0 12c0 2.926.015 3.333.072 4.613.055 1.279.237 2.368.561 3.251.328.892.769 1.67 1.544 2.447.777.777 1.555 1.216 2.447 1.545.883.324 1.972.506 3.251.56C8.333 23.985 8.741 24 12 24s3.667-.015 4.947-.072c1.279-.055 2.368-.237 3.251-.561.892-.329 1.67-.768 2.447-1.545.777-.776 1.216-1.555 1.545-2.447.324-.883.506-1.972.56-3.251C23.985 15.333 24 14.926 24 12c0-2.925-.015-3.333-.072-4.613-.055-1.279-.236-2.368-.56-3.251a4.063 4.063 0 0 0-1.545-2.447c-.777-.777-1.555-1.216-2.447-1.544C19.333.309 18.244.127 16.965.072 15.686.015 15.259 0 12 0zm0 5.838A6.162 6.162 0 1 0 18.163 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.406-11.845a1.44 1.44 0 1 0 1.438 1.44 1.438 1.438 0 0 0-1.436-1.44z"/></svg>
-    </a>
-  </div>
-
-  <!-- WhatsApp floating button (flat icon, no label) -->
-  <a class="whatsapp-fixed" href="https://wa.me/919999944622?text=Hello,%20Can%20I%20get%20more%20information%3F" target="_blank" rel="noopener noreferrer" aria-label="Chat with SDA on WhatsApp">
-    <!-- flat white glyph on green circle -->
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-      <!-- green circle background (we already have parent background in CSS, but keep a white glyph only here for crispness) -->
-      <circle cx="16" cy="16" r="16" fill="none"/>
-      <!-- white glyph -->
-      <path fill="#ffffff" d="M19.11 17.49c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.19.29-.74.94-.9 1.13-.16.19-.32.21-.6.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.72-1.61-2.01-.16-.29-.02-.45.13-.6.13-.13.29-.32.44-.48.15-.16.19-.29.29-.48.1-.19.03-.36-.02-.51-.05-.15-.64-1.54-.88-2.12-.23-.56-.46-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 1-.99 2.46.01 1.45 1.03 2.86 1.17 3.05.15.19 2.03 3.1 4.92 4.35 3.44 1.48 3.44 0 4.06-.03.62-.03 1.99-.79 2.28-1.55.29-.76.29-1.41.2-1.55-.1-.14-.36-.2-.65-.35z"/>
+<div class="whatsapp-fixed-wrap">
+  <span class="chat-label">Chat with us</span>
+  <a href="https://wa.me/919999944622?text=Hello,%20Can%20I%20get%20more%20information???" class="whatsapp-fixed-btn" target="_blank" title="Start WhatsApp chat" rel="noopener">
+    <!-- official flat WhatsApp SVG -->
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#25D366"/>
+      <path fill="#FFFFFF" d="M19.11 17.49c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.19.29-.74.94-.9 1.13-.16.19-.32.21-.6.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.72-1.61-2.01-.16-.29-.02-.45.13-.6.13-.13.29-.32.44-.48.15-.16.19-.29.29-.48.1-.19.03-.36-.02-.51-.05-.15-.64-1.54-.88-2.12-.23-.56-.46-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 1-.99 2.46.01 1.45 1.03 2.86 1.17 3.05.15.19 2.03 3.1 4.92 4.35 3.44 1.48 3.44 0 4.06-.03.62-.03 1.99-.79 2.28-1.55.29-.76.29-1.41.2-1.55-.1-.14-.36-.2-.65-.35z"/>
     </svg>
   </a>
+</div>
 </footer>
-
-<!-- small scripts: year and map fallback handling -->
-<script>
-  // Insert current year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Map fallback handling: show fallback if iframe fails to load in 2.5s
-  (function(){
-    var iframe = document.getElementById('office-map');
-    var fallback = document.getElementById('map-fallback');
-    // show fallback initially (hidden) if iframe doesn't load quickly
-    var fired = false;
-    var t = setTimeout(function(){
-      if (!fired) {
-        // Display fallback message (useful for browsers that block embedded maps)
-        fallback.style.display = 'block';
-      }
-    }, 1200);
-
-    // If iframe loads successfully, hide fallback
-    iframe.addEventListener('load', function(){
-      fired = true;
-      fallback.style.display = 'none';
-      clearTimeout(t);
-    });
-
-    // Extra: if iframe triggers error (some browsers), show fallback
-    iframe.addEventListener('error', function(){
-      fallback.style.display = 'block';
-      fired = true;
-      clearTimeout(t);
-    });
-  })();
-</script>
 <!-- FOOTER END -->
