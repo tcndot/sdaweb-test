@@ -188,6 +188,71 @@
       .logo-img{ width:40px; height:40px; }
       .companyNameTop{ font-size: clamp(0.9rem, 5.5vw, 1rem); }
     }
+    /* Hero section styles */
+.wm-hero {
+  --duration1: 2.5s;
+  --duration2: calc(var(--duration1) / 2);
+  --delay1: calc(var(--duration2) / 2);
+  --delay2: calc(var(--duration2) + var(--delay1));
+  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
+  background-color: wheat;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+.wm-hero h1 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  opacity: 0;
+  transform: translateY(3em);
+  animation: loadH1 var(--duration1) var(--easing) var(--delay1) forwards;
+}
+
+@media screen and (min-width: 981px) {
+  .wm-hero h1 {
+    font-size: 56px;
+  }
+}
+
+.wm-hero img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 1em 1em 0 0;
+  transform: translateY(100%);
+  animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
+  margin: 0 auto;
+}
+
+@keyframes loadH1 {
+  0% {
+    opacity: 0;
+    transform: translateY(3em);
+  }
+  30%,
+  50% {
+    opacity: 1;
+    transform: translateY(3em);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes loadImg {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: none;
+  }
+}
+
   </style>
 
   <!-- TOP PHONE BAR (kept content same) -->
@@ -241,7 +306,15 @@
     </div>
   </div>
 </header>
-  
+
+  <!-- This is Hero Section html -->
+  <section class="wm-hero js-animate">
+   <div class="wm-hero__inner container">
+     <h1>Your one-stop-shop for<br>random music album covers</h1>
+     <img src="https://api.lorem.space/image/album?w=960&h=600" alt="Random cover album" width="960" height="600" />
+   </div>
+  </section>
+
 <main class="container">
   <div class="hero">
     <section class="card about">
