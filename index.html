@@ -300,6 +300,8 @@ object-fit: contain; /* ✅ ensures full image is visible */
   animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
   box-shadow: 0 18px 48px rgba(0,0,0,0.45);
   margin-top: 0.8rem;
+  margin-top: 1rem;
+
 }
 
 /* larger H1 on big screens */
@@ -316,16 +318,37 @@ object-fit: contain; /* ✅ ensures full image is visible */
   .wm-hero h1 { font-size: clamp(20px, 7.2vw, 36px); }
 }
 
-/* keyframes (same logic as original) */
 @keyframes loadH1 {
-  0%   { opacity: 0; transform: translateY(3em); }
-  30%, 50% { opacity: 1; transform: translateY(3em); }
-  100% { opacity: 1; transform: none; }
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-10px); /* ✅ slight upward move */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes loadImg {
-  0% { transform: translateY(100%); opacity: 0; }
-  100% { transform: none; opacity: 1; }
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* ✅ image rises after text */
+  }
 }
 
 /* reduced-motion support */
