@@ -1,51 +1,85 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <script src="https://cdn.tailwindcss.com"></script>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SDA Infra & Promoters — Home</title>
   <link rel="icon" type="image/png" href="images/logo4favicon.png">
-  <!-- NOTE: No shared styles here — each section below is self-contained -->
+  <!-- Tailwind (keep this; your layout uses a few utility classes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* tiny global reset used by this file only */
+    html,body { margin:0; }
+  </style>
 </head>
 <body>
 
 <!-- ===========================================================
-     HEADER: START
-     Contains only header markup + header-specific CSS.
-     Replace this whole block to update header across pages.
+     HEADER: START (self-contained)
+     - Fixed topbar + header
+     - mobile menu uses checkbox + CSS; no JS
      =========================================================== -->
 <header aria-label="Site header" class="sda-header-root">
   <style>
-    /* sda-header only — no shared vars or global overrides */
     .sda-header-root { font-family: Inter, Arial, Helvetica, sans-serif; }
+
+    /* topbar (fixed) */
     .sda-header-topbar{
-      height:40px; position:fixed; top:0; left:0; right:0;
-      background:linear-gradient(135deg,#1a3a1a,#2e7d32); color:#e8f5e8;
-      display:flex; align-items:center; padding:0 4vw; z-index:5000; font-weight:700;
+      height:40px;
+      position:fixed; top:0; left:0; right:0;
+      background:linear-gradient(135deg,#1a3a1a,#2e7d32);
+      color:#e8f5e8;
+      display:flex; align-items:center;
+      padding:0 4vw;
+      z-index:5000;
+      font-weight:700;
     }
     .sda-header-topbar a{ color:inherit; text-decoration:none; display:flex; gap:8px; align-items:center }
+
+    /* header below topbar (fixed) */
     .sda-header-bar{
-      height:64px; position:fixed; top:40px; left:0; right:0;
+      height:64px;
+      position:fixed; top:40px; left:0; right:0;
       background: linear-gradient(135deg,#fff,#f0f7f0);
-      display:flex; align-items:center; gap:12px; padding:10px 4vw; z-index:4900;
+      display:flex; align-items:center; gap:12px;
+      padding:10px 4vw; z-index:4900;
     }
+
     .sda-branding{ display:flex; align-items:center; gap:12px }
     .sda-branding .sda-logo { width:48px; height:48px; object-fit:contain; border-radius:10px; border:3px solid #1a3a1a; background:#fff; }
     .sda-branding .sda-company { font-weight:900; color:#1a3a1a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:1rem }
+
     .sda-nav{ margin-left:auto; display:flex; gap:18px; align-items:center }
     .sda-nav a{ color:#1a3a1a; text-decoration:none; font-weight:700; display:flex; gap:6px; flex-direction:column; align-items:center; font-size:0.85rem }
-    .sda-menu-toggle { display:none }
+
+    /* mobile menu toggle */
+    #sda-menu-toggle { display:none; }
     .sda-menu-label{ display:none; margin-left:auto; background:#fff; color:#1a3a1a; padding:8px 12px; border-radius:10px; border:1px solid rgba(26,58,26,0.12); font-weight:800; cursor:pointer }
-    @media (max-width:860px){
-      .sda-nav{ display:none }
-      .sda-menu-label{ display:inline-block }
-      .sda-branding .sda-logo{ width:44px; height:44px }
+
+    /* mobile menu (hidden by default) */
+    .sda-mobile-menu {
+      display:none;
+      position:fixed;
+      right:4vw;
+      top: calc(40px + 64px + 8px);
+      width: min(92vw, 320px);
+      background:#fff;
+      color:#12321a;
+      border-radius:10px;
+      padding:10px;
+      box-shadow:0 14px 40px rgba(10,20,10,0.12);
+      z-index:4800;
     }
 
-    /* ensure page content doesn't hide behind fixed bars (header knows its heights) */
-    .sda-header-root + .sda-page-spacer { height:104px; } /* 40 + 64 */
+    /* reveal mobile menu when checkbox is checked */
+    #sda-menu-toggle:checked ~ .sda-mobile-menu { display:block; }
+
+    @media (max-width:860px){
+      .sda-nav{ display:none; }
+      .sda-menu-label{ display:inline-block; }
+      .sda-branding .sda-logo{ width:44px; height:44px; }
+    }
   </style>
 
   <div class="sda-header-topbar" role="banner">
@@ -70,40 +104,98 @@
       <a href="blogs.html" title="Blogs"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg><span>Blogs</span></a>
     </nav>
 
-    <input id="sda-menu-toggle" class="sda-menu-toggle" type="checkbox" aria-hidden="true">
+    <!-- mobile menu checkbox toggles menu below -->
+    <input id="sda-menu-toggle" type="checkbox" aria-hidden="true">
     <label for="sda-menu-toggle" class="sda-menu-label" aria-hidden="false">☰ Menu</label>
 
-    <div class="sda-mobile-menu" role="menu" aria-hidden="true" style="display:none">
-      <!-- this block is intentionally inert (no shared styles). show/hide by replacing fragment if you want a functional mobile menu -->
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="careers.html">Careers</a>
-      <a href="blogs.html">Blogs &amp; Gallery</a>
+    <div class="sda-mobile-menu" role="menu" aria-hidden="true">
+      <a href="index.html" style="display:block;padding:8px 6px">Home</a>
+      <a href="about.html" style="display:block;padding:8px 6px">About Us</a>
+      <a href="careers.html" style="display:block;padding:8px 6px">Careers</a>
+      <a href="blogs.html" style="display:block;padding:8px 6px">Blogs &amp; Gallery</a>
     </div>
   </div>
 </header>
-<div class="sda-page-spacer"></div>
+
+<!-- spacer keeps page content below fixed header -->
+<div class="sda-page-spacer" style="height:104px;"></div>
 <!-- HEADER: END -->
 
 
 <!-- ===========================================================
-     HERO: START
-     Contains ONLY hero markup + hero CSS (self-contained).
-     Replace between START / END to update hero.
+     HERO: START (self-contained)
+     - animations restored (text then image)
+     - background covers top area with no white gap
      =========================================================== -->
 <section class="sda-hero-root" aria-label="Hero section">
   <style>
-    /* sda-hero only */
-    .sda-hero-root { text-align:center; overflow:hidden; font-family:Inter, Arial, sans-serif; color:#111; }
-    .sda-hero-inner { max-width:1120px; margin:0 auto; padding:28px 20px 40px; position:relative; }
+    .sda-hero-root { font-family: Inter, Arial, sans-serif; }
+    .sda-hero-inner { max-width:1120px; margin:0 auto; padding:0 20px 40px; }
+
+    /* hero background block that fills the viewport minus header */
     .sda-hero-bg {
       background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png');
-      background-size:cover; background-position:center; border-radius:12px; padding:48px 22px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.45);
-      display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:calc(100vh - 104px); /* full-screen hero minus header heights */
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      padding: 48px 22px;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-height: calc(100vh - 104px); /* full-screen hero minus header heights */
+      box-sizing:border-box;
     }
-    .sda-hero-root h1 { font-size:clamp(28px,5vw,56px); margin:0 0 18px; line-height:1.05; font-weight:700; }
-    .sda-hero-root img.sda-hero-img { max-width:960px; width:85%; height:auto; border-radius:12px; box-shadow:0 18px 40px rgba(2,8,4,0.18); margin-top:18px; display:block; }
-    @media (max-width:880px){ .sda-hero-bg { min-height:320px; padding:28px 16px } .sda-hero-root img.sda-hero-img{ width:100% } }
+
+    .sda-hero-root h1 {
+      font-size: clamp(28px, 5vw, 56px);
+      margin: 0 0 18px;
+      line-height: 1.05;
+      font-weight:700;
+
+      /* start hidden & translated down */
+      opacity: 0;
+      transform: translateY(2.6rem);
+      animation: sdaLoadH1 1.1s cubic-bezier(.65,.05,.36,1) forwards;
+      animation-delay: 0.35s;
+    }
+
+    .sda-hero-img {
+      max-width:960px;
+      width:85%;
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 18px 40px rgba(2,8,4,0.18);
+      margin-top:18px;
+
+      /* start translated down & hidden, then slide in */
+      opacity:0;
+      transform: translateY(2.6rem);
+      animation: sdaLoadImg 0.9s cubic-bezier(.65,.05,.36,1) forwards;
+      animation-delay: 1.1s; /* runs after the heading */
+    }
+
+    @keyframes sdaLoadH1 {
+      0% { opacity:0; transform: translateY(2.6rem); }
+      60% { opacity:1; transform: translateY(1.2rem); }
+      100% { opacity:1; transform: translateY(0); }
+    }
+    @keyframes sdaLoadImg {
+      0% { opacity:0; transform: translateY(3.6rem); }
+      100% { opacity:1; transform: translateY(0); }
+    }
+
+    @media (max-width:880px){
+      .sda-hero-bg { min-height: 320px; padding:28px 16px; }
+      .sda-hero-img { width:100%; margin-top:12px; }
+    }
+
+    /* respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .sda-hero-root h1, .sda-hero-img { animation:none !important; opacity:1; transform:none; }
+    }
   </style>
 
   <div class="sda-hero-inner">
@@ -120,13 +212,10 @@
 
 
 <!-- ===========================================================
-     MAIN CONTENT: START
-     About card + slideshow aside — both self-contained.
-     Replace only this block to change main content.
+     MAIN: about + slideshow (unchanged, self-contained)
      =========================================================== -->
 <main class="sda-main-root">
   <style>
-    /* sda-main only */
     .sda-main-root { font-family: Inter, Arial, sans-serif; color:#111; background:#fbfbf9; padding:28px 0 60px; }
     .sda-main-wrap { max-width:1120px; margin:0 auto; padding:0 20px; display:grid; grid-template-columns:1fr 520px; gap:22px; align-items:start; }
     @media (max-width:880px) { .sda-main-wrap { grid-template-columns:1fr; } }
@@ -137,17 +226,16 @@
     .sda-about-card ul { color:#666; padding-left:18px; margin:12px 0 18px; }
     .sda-about-card .sda-cta { display:inline-block; padding:10px 14px; border-radius:8px; background:#1f7a3a; color:#fff; font-weight:700; text-decoration:none; }
 
-    /* slideshow aside (self-contained) */
     .sda-slideshow { position:relative; height:360px; border-radius:12px; overflow:hidden; background:linear-gradient(180deg,#eef6ee,#f7faf7); }
     @media (max-width:1000px){ .sda-slideshow{height:300px} }
     @media (max-width:880px){ .sda-slideshow{height:220px} }
-    .sda-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; }
-    .sda-slide.s1 { animation: sdaCycle 18s linear infinite; animation-delay:0s; }
-    .sda-slide.s2 { animation: sdaCycle 18s linear infinite; animation-delay:3s; }
-    .sda-slide.s3 { animation: sdaCycle 18s linear infinite; animation-delay:6s; }
-    .sda-slide.s4 { animation: sdaCycle 18s linear infinite; animation-delay:9s; }
-    .sda-slide.s5 { animation: sdaCycle 18s linear infinite; animation-delay:12s; }
-    .sda-slide.s6 { animation: sdaCycle 18s linear infinite; animation-delay:15s; }
+    .sda-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; will-change:opacity,transform; }
+    .sda-slide.s1 { animation:sdaCycle 18s linear infinite; animation-delay:0s; }
+    .sda-slide.s2 { animation:sdaCycle 18s linear infinite; animation-delay:3s; }
+    .sda-slide.s3 { animation:sdaCycle 18s linear infinite; animation-delay:6s; }
+    .sda-slide.s4 { animation:sdaCycle 18s linear infinite; animation-delay:9s; }
+    .sda-slide.s5 { animation:sdaCycle 18s linear infinite; animation-delay:12s; }
+    .sda-slide.s6 { animation:sdaCycle 18s linear infinite; animation-delay:15s; }
     @keyframes sdaCycle {
       0% { opacity:1; transform:scale(1); }
       16.66% { opacity:1; transform:scale(1); }
@@ -155,8 +243,8 @@
       100% { opacity:0; transform:scale(1.02); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .sda-slide { animation:none; opacity:0 }
-      .sda-slide.s1 { opacity:1 }
+      .sda-slide { animation:none; opacity:0; }
+      .sda-slide.s1 { opacity:1; }
     }
   </style>
 
@@ -185,12 +273,10 @@
     </aside>
   </div>
 </main>
-<!-- MAIN CONTENT: END -->
 
 
 <!-- ===========================================================
-     STATS SECTION: START
-     Small stats strip (self-contained).
+     STATS SECTION (unchanged)
      =========================================================== -->
 <section class="sda-stats-root" aria-label="Statistics strip">
   <style>
@@ -208,12 +294,10 @@
     <div class="sda-stat"><div class="sda-num">3</div><p>States</p></div>
   </div>
 </section>
-<!-- STATS SECTION: END -->
 
 
 <!-- ===========================================================
-     FOOTER: START
-     Footer is self-contained — replace full block to update footer.
+     FOOTER: START (unchanged)
      =========================================================== -->
 <footer class="sda-footer-root" role="contentinfo">
   <style>
@@ -256,9 +340,8 @@
     </div>
   </div>
 
-  <div class="sda-footer-bottom">©copirit 2025 SDA Infra & Promoters</div>
+  <div class="sda-footer-bottom">© 2025 SDA Infra & Promoters</div>
 
-  <!-- floating socials (self-contained) -->
   <div class="sda-floating-socials" aria-hidden="false">
     <a href="https://m.youtube.com/@sdapromoters" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M21.58 7.19s-.22-1.62-.88-2.34c-.84-.9-1.78-.9-2.21-.95C15 3.71 12 3.71 12 3.71h0s-3 0-6.49.19c-.43.05-1.37.05-2.21.94-.66.73-.88 2.34-.88 2.34S2 8.81 2 10.44v.62c0 1.62.22 3.25.22 3.25s.22 1.62.88 2.34c.84.89 1.94.86 2.44.96C7.73 18.29 12 18.29 12 18.29s3 0 6.49-.19c.43-.05 1.37-.05 2.21-.94.66-.73.88-2.34.88-2.34s.22-1.62.22-3.25v-.62c0-1.63-.22-3.25-.22-3.25zM10 15V9l5 3-5 3z"/></svg></a>
     <a href="https://m.facebook.com/sda.rameshnagar/" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 320 512" width="18" height="18"><path d="M279.14 288l14.22-92.66h-88.91V127.44c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0C141.09 0 89.09 54.41 89.09 153.31V195.3H0V288h89.09v224h104.89V288z"/></svg></a>
