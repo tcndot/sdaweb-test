@@ -223,7 +223,7 @@
   text-align: center;
   padding-bottom: 2em;
 }
- -->
+ 
     .wm-hero {
     --duration1: 2.5s;
     --duration2: calc(var(--duration1) / 2);
@@ -299,7 +299,105 @@
     transform: none;
   }
 }
+-->
+    
+    @media (max-width:420px){
+      .logo-img{ width:40px; height:40px; }
+      .companyNameTop{ font-size: clamp(0.9rem, 5.5vw, 1rem); }
+    }
+    /* Hero section styles */
+<!-- 
+    .wm-hero {
+  --duration1: 2.5s;
+  --duration2: calc(var(--duration1) / 2);
+  --delay1: calc(var(--duration2) / 2);
+  --delay2: calc(var(--duration2) + var(--delay1));
+  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
 
+  /* ✅ background (map) with dim overlay */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png')
+    center/cover no-repeat;
+
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 2em;
+  color: #fff; /* make all text white */
+}
+
+.wm-hero {
+  --duration1: 2.5s;
+  --duration2: calc(var(--duration1) / 2);
+  --delay1: calc(var(--duration2) / 2);
+  --delay2: calc(var(--duration2) + var(--delay1));
+  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
+    background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') no-repeat center center;
+  background-size: cover;
+
+  
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 2em;
+}
+ -->
+    .wm-hero {
+    --duration1: 2.5s;
+    --duration2: calc(var(--duration1) / 2);
+    --delay1: calc(var(--duration2) / 2);
+    --delay2: calc(var(--duration2) + var(--delay1));
+    --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+    background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') no-repeat center center;
+    background-size: cover;
+
+    height: 100vh; /* 👈 This makes it one full screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+}
+
+.wm-hero h1 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  opacity: 0;
+  transform: translateY(3em);
+  animation: loadH1 var(--duration1) var(--easing) var(--delay1) forwards;
+
+  /* 👇 Added for visibility */
+  color: #fff; /* makes the text white */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* soft dark glow for contrast */
+}
+@media screen and (min-width: 981px) {
+  .wm-hero h1 {
+    font-size: 56px;
+  }
+}
+
+.wm-hero img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 1em 1em 0 0;
+  transform: translateY(100%);
+  animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
+  margin: 0 auto;
+}
+
+@keyframes loadH1 {
+  0% {
+    opacity: 0;
+    transform: translateY(3em);
+  }
+  30%,
   </style>
 
   <!-- TOP PHONE BAR (kept content same) -->
