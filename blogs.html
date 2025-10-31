@@ -109,6 +109,107 @@
 <!-- spacer keeps page content below fixed header -->
 <div style="height:104px" aria-hidden="true"></div>
 <!-- HEADER: END -->
+<!-- === BLOG LIST FRAGMENT: START (paste into BODY INSERT) === -->
+<section id="blog-list-fragment" aria-label="Blog list" style="max-width:1120px;margin:28px auto;padding:20px;box-sizing:border-box;">
+  <style>
+    /* Scoped blog list styles */
+    #blog-list-fragment { font-family: Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:#0f172a; }
+    #blog-list-fragment .list-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; align-items:start; }
+    @media (max-width:880px){ #blog-list-fragment .list-grid { grid-template-columns:1fr } }
+
+    #blog-list-fragment .post-card {
+      background:#ffffff;
+      border-radius:12px;
+      box-shadow: 0 10px 30px rgba(2,8,12,0.06);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+      border:1px solid rgba(6,10,6,0.03);
+    }
+    #blog-list-fragment .post-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(2,8,12,0.10); }
+
+    /* top meta row */
+    #blog-list-fragment .post-meta {
+      display:flex; gap:12px; align-items:center; padding:14px 16px; font-size:0.92rem; color:#6b7280;
+    }
+    #blog-list-fragment .post-meta .date { font-weight:700; color:#1f7a3a; background:rgba(31,122,58,0.08); padding:6px 10px; border-radius:999px; font-size:0.88rem; }
+
+    /* content */
+    #blog-list-fragment .post-body { padding:0 18px 18px 18px; flex:1 1 auto; display:flex; flex-direction:column; gap:12px; }
+    #blog-list-fragment .post-title { margin:4px 0 0 0; font-size:1.2rem; line-height:1.15; color:#0b1220; font-weight:800; text-decoration:none; }
+    #blog-list-fragment .post-excerpt { margin:0; color:#374151; font-size:0.98rem; line-height:1.6; }
+    #blog-list-fragment .post-footer { display:flex; justify-content:space-between; align-items:center; padding:12px 18px 18px; gap:12px; }
+
+    /* read more button */
+    #blog-list-fragment .btn-read {
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px;
+      background:linear-gradient(135deg,#1f7a3a,#2e7d32); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(31,122,58,0.12);
+      transition: transform .12s ease;
+    }
+    #blog-list-fragment .btn-read:hover { transform: translateY(-2px); }
+
+    /* small author */
+    #blog-list-fragment .author { color:#6b7280; font-size:0.92rem; }
+
+    /* subtle divider between posts on small screens */
+    @media (max-width:880px) {
+      #blog-list-fragment .post-card + .post-card { margin-top:10px; }
+    }
+  </style>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+    <h2 style="margin:0;font-size:1.25rem;font-weight:800;color:#0b1220">Latest blogs</h2>
+    <div style="color:#6b7280;font-size:0.95rem">Updated: 31 अक्टूबर 2025</div>
+  </div>
+
+  <div class="list-grid">
+
+    <!-- -- First entry: the article you already created -- -->
+    <article class="post-card" aria-labelledby="post-1-title">
+      <div class="post-meta">
+        <div class="date" aria-hidden="true">31 अक्टूबर 2025</div>
+        <div class="author">नई दिल्ली · रिपोर्ट: सुगदाम यादव</div>
+      </div>
+
+      <div class="post-body">
+        <a id="post-1-title" class="post-title" href="link-expressway.html" aria-label="Read: दिल्ली में तीन एक्सप्रेसवे को कनेक्ट करेगा लिंक एक्सप्रेसवे">दिल्ली में तीन एक्सप्रेसवे को कनेक्ट करेगा लिंक एक्सप्रेसवे, ऐसे बनाया जाएगा हाई स्पीड लिंक</a>
+
+        <p class="post-excerpt">
+          दिल्ली-अमृतसर-कटरा एक्सप्रेसवे, बेस्टर्न पेरिफेरल रोड और द्वारका एक्सप्रेसवे-2 को जोड़ने के लिए करीब 20 किलोमीटर लंबा लिंक एक्सप्रेसवे बनाया जाएगा — जिससे दिल्ली-हरियाणा कनेक्टिविटी और तेज़ होगी।
+        </p>
+
+        <div class="post-footer">
+          <a class="btn-read" href="link-expressway.html" aria-label="Open full article: लिंक एक्सप्रेसवे">पढ़ें</a>
+          <div style="color:#94a3b8;font-size:0.88rem">≈ 2 min read</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- -- Example template for additional posts (duplicate & edit) -- -->
+    <article class="post-card" aria-labelledby="post-2-title">
+      <div class="post-meta">
+        <div class="date">15 सितंबर 2025</div>
+        <div class="author">गुरुग्राम · रिपोर्ट: टीम</div>
+      </div>
+
+      <div class="post-body">
+        <a id="post-2-title" class="post-title" href="another-article.html" aria-label="Read more: sample title">Sample blog post title — placeholder</a>
+
+        <p class="post-excerpt">
+          यह एक नमूना स्निपेट है — असली पोस्ट डालने के लिए इसे कॉपी करके `href`, तारीख और सारांश बदल दें।
+        </p>
+
+        <div class="post-footer">
+          <a class="btn-read" href="another-article.html" aria-label="Open sample article">पढ़ें</a>
+          <div style="color:#94a3b8;font-size:0.88rem">≈ 3 min read</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+<!-- === BLOG LIST FRAGMENT: END === -->
 
 
 <!-- ===========================================================
@@ -117,7 +218,7 @@
      - Example: replace this comment with your article list markup
      - Keep it inside <main> ... </main> or paste your existing body fragment
      =========================================================== -->
-<main aria-label="Blogs list placeholder" style="max-width:1120px;margin:28px auto;padding:20px;">
+<!--main aria-label="Blogs list placeholder" style="max-width:1120px;margin:28px auto;padding:20px;"-->
   <!-- === REPLACE THIS BLOCK WITH YOUR BLOG LIST / GRID ===
        - Example quick starter you can paste here:
          <div class="blog-card">...</div>
