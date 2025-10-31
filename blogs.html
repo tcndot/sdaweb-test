@@ -4,14 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ब्लॉग — SDA Infra & Promoters</title>
-  <style>html,body{margin:0}/* tiny reset so header/footer fragments behave */</style>
+  <style>html,body{margin:0}</style>
 </head>
 <body>
 
 <!-- ===========================================================
-     HEADER: START (copy/paste this exact block into other pages when needed)
-     - Self-contained header fragment (topbar + header + mobile menu)
-     - DO NOT duplicate partial header CSS outside this block
+     HEADER: START
      =========================================================== -->
 <header aria-label="Site header" class="sda-header-root">
   <style>
@@ -45,7 +43,6 @@
     .sda-nav{ margin-left:auto; display:flex; gap:18px; align-items:center }
     .sda-nav a{ color:#1a3a1a; text-decoration:none; font-weight:700; display:flex; gap:6px; flex-direction:column; align-items:center; font-size:0.85rem }
 
-    /* mobile menu */
     #sda-menu-toggle { display:none; }
     .sda-menu-label{ display:none; margin-left:auto; background:#fff; color:#1a3a1a; padding:8px 12px; border-radius:10px; border:1px solid rgba(26,58,26,0.12); font-weight:800; cursor:pointer }
 
@@ -73,89 +70,62 @@
   </style>
 
   <div class="sda-header-topbar" role="banner">
-    <a href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
-      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+    <a href="tel:9999944622">
+      <svg width="16" height="16" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
       <span style="font-weight:800">Call: 9999944622</span>
     </a>
   </div>
 
-  <div class="sda-header-bar" role="navigation" aria-label="Main header">
+  <div class="sda-header-bar" role="navigation">
     <div class="sda-branding">
-      <a href="index.html" class="sda-logo-link" aria-label="Home">
-        <img class="sda-logo" src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'">
-      </a>
+      <a href="index.html"><img class="sda-logo" src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'"></a>
       <div class="sda-company">SDA Infra &amp; Promoters</div>
     </div>
 
-    <nav class="sda-nav" aria-label="Primary navigation">
-      <a href="index.html" title="Home"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></a>
-      <a href="about.html" title="About"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg><span>About</span></a>
-      <a href="careers.html" title="Careers"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M14 6V4h-4v2H3v2h18V6h-7zm-9 6v8h14v-8H5z"/></svg><span>Careers</span></a>
-      <a href="blogs.html" title="Blogs"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg><span>Blogs</span></a>
+    <nav class="sda-nav">
+      <a href="index.html"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></a>
+      <a href="about.html"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg><span>About</span></a>
+      <a href="careers.html"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M14 6V4h-4v2H3v2h18V6h-7zm-9 6v8h14v-8H5z"/></svg><span>Careers</span></a>
+      <a href="blogs.html"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg><span>Blogs</span></a>
     </nav>
 
-    <input id="sda-menu-toggle" type="checkbox" aria-hidden="true">
-    <label for="sda-menu-toggle" class="sda-menu-label" aria-hidden="false">☰ Menu</label>
+    <input id="sda-menu-toggle" type="checkbox">
+    <label for="sda-menu-toggle" class="sda-menu-label">☰ Menu</label>
 
-    <div class="sda-mobile-menu" role="menu" aria-hidden="true">
-      <a href="index.html" style="display:block;padding:8px 6px">Home</a>
-      <a href="about.html" style="display:block;padding:8px 6px">About Us</a>
-      <a href="careers.html" style="display:block;padding:8px 6px">Careers</a>
-      <a href="blogs.html" style="display:block;padding:8px 6px">Blogs &amp; Gallery</a>
+    <div class="sda-mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="careers.html">Careers</a>
+      <a href="blogs.html">Blogs &amp; Gallery</a>
     </div>
   </div>
 </header>
+<div style="height:104px"></div>
+<!-- HEADER END -->
 
-<!-- spacer keeps page content below fixed header -->
-<div style="height:104px" aria-hidden="true"></div>
-<!-- HEADER: END -->
-<!-- === BLOG LIST FRAGMENT: START (paste into BODY INSERT) === -->
-<section id="blog-list-fragment" aria-label="Blog list" style="max-width:1120px;margin:28px auto;padding:20px;box-sizing:border-box;">
+
+<!-- BLOG LIST -->
+<section id="blog-list-fragment" style="max-width:1120px;margin:28px auto;padding:20px;box-sizing:border-box;">
   <style>
-    /* Scoped blog list styles */
     #blog-list-fragment { font-family: Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:#0f172a; }
-    #blog-list-fragment .list-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; align-items:start; }
+    #blog-list-fragment .list-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
     @media (max-width:880px){ #blog-list-fragment .list-grid { grid-template-columns:1fr } }
 
     #blog-list-fragment .post-card {
-      background:#ffffff;
-      border-radius:12px;
-      box-shadow: 0 10px 30px rgba(2,8,12,0.06);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+      background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(2,8,12,0.06);
+      overflow:hidden; display:flex; flex-direction:column; transition:transform .22s, box-shadow .22s;
       border:1px solid rgba(6,10,6,0.03);
     }
-    #blog-list-fragment .post-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(2,8,12,0.10); }
-
-    /* top meta row */
-    #blog-list-fragment .post-meta {
-      display:flex; gap:12px; align-items:center; padding:14px 16px; font-size:0.92rem; color:#6b7280;
-    }
-    #blog-list-fragment .post-meta .date { font-weight:700; color:#1f7a3a; background:rgba(31,122,58,0.08); padding:6px 10px; border-radius:999px; font-size:0.88rem; }
-
-    /* content */
-    #blog-list-fragment .post-body { padding:0 18px 18px 18px; flex:1 1 auto; display:flex; flex-direction:column; gap:12px; }
-    #blog-list-fragment .post-title { margin:4px 0 0 0; font-size:1.2rem; line-height:1.15; color:#0b1220; font-weight:800; text-decoration:none; }
-    #blog-list-fragment .post-excerpt { margin:0; color:#374151; font-size:0.98rem; line-height:1.6; }
-    #blog-list-fragment .post-footer { display:flex; justify-content:space-between; align-items:center; padding:12px 18px 18px; gap:12px; }
-
-    /* read more button */
-    #blog-list-fragment .btn-read {
-      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px;
-      background:linear-gradient(135deg,#1f7a3a,#2e7d32); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(31,122,58,0.12);
-      transition: transform .12s ease;
-    }
-    #blog-list-fragment .btn-read:hover { transform: translateY(-2px); }
-
-    /* small author */
+    #blog-list-fragment .post-card:hover { transform:translateY(-6px); box-shadow:0 18px 44px rgba(2,8,12,0.10); }
+    #blog-list-fragment .post-meta { display:flex; gap:12px; align-items:center; padding:14px 16px; font-size:0.92rem; color:#6b7280; }
+    #blog-list-fragment .date { font-weight:700; color:#1f7a3a; background:rgba(31,122,58,0.08); padding:6px 10px; border-radius:999px; font-size:0.88rem; }
+    #blog-list-fragment .post-body { padding:0 18px 18px; display:flex; flex-direction:column; gap:12px; }
+    #blog-list-fragment .post-title { font-size:1.2rem; font-weight:800; color:#0b1220; text-decoration:none; line-height:1.15; }
+    #blog-list-fragment .post-excerpt { color:#374151; font-size:0.98rem; line-height:1.6; margin:0; }
+    #blog-list-fragment .post-footer { display:flex; justify-content:space-between; align-items:center; padding:12px 18px 18px; }
+    #blog-list-fragment .btn-read { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; background:linear-gradient(135deg,#1f7a3a,#2e7d32); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(31,122,58,0.12); transition:transform .12s; }
+    #blog-list-fragment .btn-read:hover { transform:translateY(-2px); }
     #blog-list-fragment .author { color:#6b7280; font-size:0.92rem; }
-
-    /* subtle divider between posts on small screens */
-    @media (max-width:880px) {
-      #blog-list-fragment .post-card + .post-card { margin-top:10px; }
-    }
   </style>
 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
@@ -165,83 +135,36 @@
 
   <div class="list-grid">
 
-    <!-- -- First entry: the article you already created -- -->
-    <article class="post-card" aria-labelledby="post-1-title">
+    <article class="post-card">
       <div class="post-meta">
-        <div class="date" aria-hidden="true">31 अक्टूबर 2025</div>
+        <div class="date">31 अक्टूबर 2025</div>
         <div class="author">नई दिल्ली · रिपोर्ट: सुगदाम यादव</div>
       </div>
 
       <div class="post-body">
-        <a id="post-1-title" class="post-title" href="sdaweb-test/blogs/blogfiles/3110/2.html" aria-label="Read: दिल्ली में तीन एक्सप्रेसवे को कनेक्ट करेगा लिंक एक्सप्रेसवे">दिल्ली में तीन एक्सप्रेसवे को कनेक्ट करेगा लिंक एक्सप्रेसवे, ऐसे बनाया जाएगा हाई स्पीड लिंक</a>
-
-        <p class="post-excerpt">
-          दिल्ली-अमृतसर-कटरा एक्सप्रेसवे, बेस्टर्न पेरिफेरल रोड और द्वारका एक्सप्रेसवे-2 को जोड़ने के लिए करीब 20 किलोमीटर लंबा लिंक एक्सप्रेसवे बनाया जाएगा — जिससे दिल्ली-हरियाणा कनेक्टिविटी और तेज़ होगी।
-        </p>
-
+        <a class="post-title" href="blogs/blogfiles/3110/2.html">दिल्ली में तीन एक्सप्रेसवे को कनेक्ट करेगा लिंक एक्सप्रेसवे, ऐसे बनाया जाएगा हाई स्पीड लिंक</a>
+        <p class="post-excerpt">दिल्ली-अमृतसर-कटरा एक्सप्रेसवे, बेस्टर्न पेरिफेरल रोड और द्वारका एक्सप्रेसवे-2 को जोड़ने के लिए करीब 20 किलोमीटर लंबा लिंक एक्सप्रेसवे बनाया जाएगा — जिससे दिल्ली-हरियाणा कनेक्टिविटी और तेज़ होगी।</p>
         <div class="post-footer">
-          <a class="btn-read" href="/blogs/blogfiles/3110/2.html" aria-label="Open full article: लिंक एक्सप्रेसवे">पढ़ें</a>
+          <a class="btn-read" href="blogs/blogfiles/3110/2.html">पढ़ें</a>
           <div style="color:#94a3b8;font-size:0.88rem">≈ 2 min read</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- -- Example template for additional posts (duplicate & edit) -- -->
-    <article class="post-card" aria-labelledby="post-2-title">
-      <div class="post-meta">
-        <div class="date">15 सितंबर 2025</div>
-        <div class="author">गुरुग्राम · रिपोर्ट: टीम</div>
-      </div>
-
-      <div class="post-body">
-        <a id="post-2-title" class="post-title" href="another-article.html" aria-label="Read more: sample title">Sample blog post title — placeholder</a>
-
-        <p class="post-excerpt">
-          यह एक नमूना स्निपेट है — असली पोस्ट डालने के लिए इसे कॉपी करके `href`, तारीख और सारांश बदल दें।
-        </p>
-
-        <div class="post-footer">
-          <a class="btn-read" href="another-article.html" aria-label="Open sample article">पढ़ें</a>
-          <div style="color:#94a3b8;font-size:0.88rem">≈ 3 min read</div>
         </div>
       </div>
     </article>
 
   </div>
 </section>
-<!-- === BLOG LIST FRAGMENT: END === -->
+<!-- BLOG LIST END -->
 
 
 <!-- ===========================================================
-     BODY INSERT: START
-     - Place your blog-list (cards / grid / pagination) here
-     - Example: replace this comment with your article list markup
-     - Keep it inside <main> ... </main> or paste your existing body fragment
+     FOOTER
      =========================================================== -->
-<!--main aria-label="Blogs list placeholder" style="max-width:1120px;margin:28px auto;padding:20px;"-->
-  <!-- === REPLACE THIS BLOCK WITH YOUR BLOG LIST / GRID ===
-       - Example quick starter you can paste here:
-         <div class="blog-card">...</div>
-         <nav class="pagination">...</nav>
-       - Keep styles local to your blog-list (wrap in a <style> inside this area)
-  -->
-  <div style="background:#fff;border-radius:12px;padding:28px;box-shadow:0 12px 36px rgba(12,20,12,0.06);color:#666">
-    <strong>Placeholder:</strong> paste your blog listing here. This file intentionally contains only header + footer so you can swap body content quickly.
-  </div>
-</main>
-<!-- BODY INSERT: END -->
-
-
-<!-- ===========================================================
-     FOOTER: START (copy/paste this exact block into other pages when needed)
-     - Self-contained footer fragment
-     =========================================================== -->
-<footer class="sda-footer-root" role="contentinfo">
+<footer class="sda-footer-root">
   <style>
     .sda-footer-root { font-family: Inter, Arial, Helvetica, sans-serif; }
-    .sda-footer { background: linear-gradient(135deg,#1a3a1a,#2e7d32); color:#e8f5e8; padding:32px 5vw; box-sizing:border-box; }
-    .sda-footer-inner { max-width:1120px; margin:0 auto; display:flex; gap:24px; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; }
-    .sda-footer-col { min-width:180px; max-width:320px; flex:1 1 0; }
+    .sda-footer { background: linear-gradient(135deg,#1a3a1a,#2e7d32); color:#e8f5e8; padding:32px 5vw; }
+    .sda-footer-inner { max-width:1120px; margin:0 auto; display:flex; gap:24px; flex-wrap:wrap; justify-content:space-between; }
+    .sda-footer-col { min-width:180px; max-width:320px; flex:1; }
     .sda-footer-col b{ color:#c8e6c9; display:block; margin-bottom:8px }
     .sda-footer a{ color:#a5d6a7; text-decoration:underline }
     .sda-footer-bottom { text-align:center; margin-top:18px; opacity:0.95; font-size:0.95rem }
@@ -256,30 +179,24 @@
         Email: <a href="mailto:info@sdapromoters.com">info@sdapromoters.com</a>
         <div style="margin-top:10px">
           <b>Head Office:</b> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015<br>
-          <b>Branch Office:</b> Pili Building, Opposite Nithari School &amp; Jal Board Pump, Sukhi Nehar Road, Pratap Vihar, Delhi 110086
+          <b>Branch Office:</b> Pili Building, Opposite Nithari School &amp; Jal Board Pump, Sukhi Nehar Road, Delhi 110086
         </div>
       </div>
 
       <div class="sda-footer-col" style="text-align:center">
         <b>Our Office Location</b>
         <iframe title="office-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="260" height="200" loading="lazy" style="border-radius:7px;border:none;box-shadow:0 0 5px rgba(26,58,26,.15);background:#fff"></iframe>
-        <div style="margin-top:8px">
-          <a href="https://maps.apple.com/place?address=CL+Khanna+Marg%2C+Block+C+Double+Storey%2C+Ramesh+Nagar%2C+New+Delhi%2C%2C110015%2C%20Delhi%2C%20India&coordinate=28.652511071145934%2C77.13284415896229&name=Marked+Location" target="_blank" rel="noopener">Open in Apple Maps</a>
-          <a href="https://www.openstreetmap.org/node/6385598122#map=19/28.652766/77.132400" target="_blank" rel="noopener" style="margin-left:8px">Open in OpenStreetMap</a>
-        </div>
       </div>
 
       <div class="sda-footer-col">
         <b>Our Motto</b>
         <div style="color:#c8e6c9;font-weight:700;margin-top:6px">SDA ka sapna, sabka ghar ho apna</div>
-        <p style="margin-top:10px;color:#d8efd2">We deeply understand the pain of renting in Delhi. Our mission is to help families move from rented uncertainty to the pride of home ownership. We provide verified listings, on-site support and clear documentation.</p>
+        <p style="margin-top:10px;color:#d8efd2">We deeply understand the pain of renting in Delhi. Our mission is to help families move from rented uncertainty to the pride of home ownership.</p>
       </div>
     </div>
-
-    <div class="sda-footer-bottom">© 2025 SDA Infra &amp; Promoters</div>
+    <div class="sda-footer-bottom">© c2025 SDA Infra &amp; Promoters</div>
   </div>
 </footer>
-<!-- FOOTER: END -->
 
 </body>
 </html>
