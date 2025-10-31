@@ -20,29 +20,26 @@
     a{color:var(--accent);text-decoration:none}
     img{max-width:100%;display:block}
 
-    /* container */
-    main.container{max-width:var(--wrap);margin:0 auto;padding:calc(20px + 64px) 20px 60px} /* top padding leaves room for fixed header once header.html injects its CSS */
+    main.container{max-width:var(--wrap);margin:0 auto;padding:calc(20px + 64px) 20px 60px}
 
-    /* ========== HERO ========== */
-    /* Desktop: use background image fitted inside the viewport so it doesn't zoom/crop too much */
+    /* HERO SECTION */
     .wm-hero {
       position: relative;
       width: 100%;
-      height: 100vh; /* fill viewport height */
+      height: 100vh;
       display:flex;
+      flex-direction:column;
       align-items:center;
-      justify-content:center;
-      padding: 2rem 1rem;
+      justify-content:flex-start;
       text-align: center;
       overflow: hidden;
-      background-color: #214f49; /* fallback */
-      background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png');
+      background-color: #214f49;
+      background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXehzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png');
       background-position: center center;
       background-repeat: no-repeat;
-      background-size: contain; /* << prevents over-zoom/crop on wide screens */
+      background-size: cover; /* fills mobile screen */
     }
 
-    /* optional overlay for contrast */
     .wm-hero::before {
       content: "";
       position: absolute;
@@ -55,11 +52,12 @@
       position: relative;
       z-index: 1;
       display: inline-block;
-      background: rgba(18, 68, 62, 0.95); /* dark greenish box to match branding */
+      background: rgba(18, 68, 62, 0.95);
       color: #fff;
       border-radius: 12px;
-      padding: 1.25rem 1.75rem;
-      max-width: 92%;
+      padding: 1rem 1.5rem;
+      margin-top: 70px;
+      max-width: 90%;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       backdrop-filter: blur(3px);
     }
@@ -68,24 +66,43 @@
       margin: 0;
       font-weight: 800;
       line-height: 1.06;
-      /* scale with viewport but keep reasonable max */
-      font-size: clamp(28px, 4.6vw, 48px); /* smaller max than before so it fits one screen */
+      font-size: clamp(28px, 4.6vw, 48px);
       letter-spacing: 0.5px;
       text-transform: none;
     }
 
-    /* if you still want the inline hero image element for small screens, hide on desktop */
-    .wm-hero img.hero-inline {
-      display:none;
-      width:100%;
+    /* Sliding image (visible on mobile) */
+    .hero-inline {
+      display: none;
+      width: 90%;
       border-radius: 12px;
       margin-top: 1rem;
+      transform: translateY(60px);
+      opacity: 0;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+    .hero-inline.show {
+      transform: translateY(0);
+      opacity: 1;
     }
 
-    /* ========== MAIN CARD + SLIDESHOW ========== */
+    /* Desktop layout */
     .hero { display:grid; grid-template-columns:1fr 520px; gap:var(--gap); align-items:start; margin-top:28px }
     @media(max-width:1000px){ .hero{ grid-template-columns:1fr 420px } }
-    @media(max-width:880px){ .wm-hero { height: auto; background-size: cover; padding: 3rem 1rem 2rem } .wm-hero img.hero-inline { display:block } .hero{ grid-template-columns:1fr; row-gap:18px } }
+
+    /* Mobile: change layout */
+    @media(max-width:880px){
+      .wm-hero {
+        height: 100vh;
+        background-size: cover;
+        justify-content:flex-start;
+        padding: 2rem 1rem;
+      }
+      .hero-inline {
+        display:block;
+      }
+      .hero{ grid-template-columns:1fr; row-gap:18px }
+    }
 
     .card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 12px 36px rgba(12,20,12,0.06);border:1px solid rgba(0,0,0,0.03)}
     .title{font-size:24px;margin:0 0 8px;font-weight:800}
@@ -95,24 +112,15 @@
 
     .slideshow{position:relative;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#eef6ee,#f7faf7)}
     @media(max-width:1000px){ .slideshow{height:300px} }
-    @media(max-width:880px){ .slideshow{height:220px;border-radius:10px} }
+    @media(max-width:880px){ .slideshow{display:none} } /* hide slideshow on mobile */
     .slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; }
     .slide.show { opacity:1; transform:scale(1); }
 
-    @keyframes cycle { 0%{opacity:1} 16.66%{opacity:1} 18%{opacity:0} 100%{opacity:0} }
-    .slide.s1 { animation: cycle 18s linear infinite; animation-delay: 0s; }
-    .slide.s2 { animation: cycle 18s linear infinite; animation-delay: 3s; }
-    .slide.s3 { animation: cycle 18s linear infinite; animation-delay: 6s; }
-    .slide.s4 { animation: cycle 18s linear infinite; animation-delay: 9s; }
-    .slide.s5 { animation: cycle 18s linear infinite; animation-delay: 12s; }
-    .slide.s6 { animation: cycle 18s linear infinite; animation-delay: 15s; }
-
-    /* footer/socials sizing kept minimal here; footer.html contains its own styles */
   </style>
 </head>
 <body>
 
-  <!-- include header.html here -->
+  <!-- Load header.html -->
   <div id="header"></div>
 
   <!-- HERO -->
@@ -121,8 +129,8 @@
       <h1>आसान किस्तों पर प्लॉट<br>— Delhi NCR</h1>
     </div>
 
-    <!-- this image is shown only on small screens via CSS above -->
-    <img class="hero-inline" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHGQIpE5ppor8lJSMGANoyCuUDla_zzLh7o1Lxf8xNhV9RTfi0-OyGPd9nR9GkzKWP_IHkVhDnJWRET-7pdTeWM_aXKp4k0ri1YoNyUoqDMgUgnHL0rlwftFP8QO5rdRkm8y6d3cIFP8GlwOp6qIEwDK-qSbgpVtb_VSsUcIyVp1zBkFMNFapO9DzhmY/s1654/1000029520.png" alt="Plots in Delhi NCR" width="1200" height="700">
+    <!-- This image shows on mobile -->
+    <img class="hero-inline" id="heroInline" src="images/mainpagetopphoto/1.jpg" alt="Plots in Delhi NCR" width="1200" height="700">
   </section>
 
   <!-- MAIN CONTENT -->
@@ -152,20 +160,37 @@
     </div>
   </main>
 
-  <!-- include footer.html here -->
+  <!-- Load footer.html -->
   <div id="footer"></div>
 
-  <!-- load header/footer -->
   <script>
-    // load includes; if file not found, fail silently so page still renders
-    (function loadInclude(id, url){
-      fetch(url).then(r => {
-        if (!r.ok) throw new Error('fetch failed');
-        return r.text();
-      }).then(html => document.getElementById(id).innerHTML = html)
-      .catch(()=>{ /* silent fallback */ });
-    })('header','header.html');
-    (function(){ loadInclude('footer','footer.html'); })();
+    // Load header and footer
+    function loadInclude(id, url){
+      fetch(url)
+        .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+        .then(html => document.getElementById(id).innerHTML = html)
+        .catch(()=>{});
+    }
+    loadInclude('header','header.html');
+    loadInclude('footer','footer.html');
+
+    // Hero image slide-up animation on mobile
+    window.addEventListener('load', () => {
+      const heroImg = document.getElementById('heroInline');
+      if(window.innerWidth < 900 && heroImg){
+        setTimeout(()=> heroImg.classList.add('show'), 200);
+      }
+    });
+
+    // Simple slideshow animation for desktop
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    function cycleSlides(){
+      slides.forEach((s,i)=>s.classList.toggle('show', i === current));
+      current = (current + 1) % slides.length;
+    }
+    if(slides.length){ cycleSlides(); setInterval(cycleSlides, 3000); }
   </script>
+
 </body>
 </html>
