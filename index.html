@@ -252,31 +252,26 @@
   <!-- This is Hero Section html -->
   <section class="wm-hero js-animate" aria-label="Hero">
    <style>
-     /* make hero exactly viewport (minus fixed headers) so it never pushes page */
-    /* Replace your existing .wm-hero styles with this block */
-.wm-hero {
+    .wm-hero {
   --duration1: 2.5s;
   --duration2: calc(var(--duration1) / 2);
   --delay1: calc(var(--duration2) / 2);
   --delay2: calc(var(--duration2) + var(--delay1));
   --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
 
-  /* keep hero inside one screen below fixed top bars */
   height: calc(100vh - var(--topbar-h) - var(--header-h));
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* ✅ centers h1 and img vertically */
+
   overflow: hidden;
   text-align: center;
-  display: flex;
-  flex-direction: column;       /* stack H1 then image */
-  align-items: center;
-  justify-content: center;
-  padding: 0 16px;
-
-  /* map background + slight dark overlay for contrast */
   background:
-    linear-gradient(rgba(0,0,0,0.24), rgba(0,0,0,0.24)),
-    url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') 
-    center/cover no-repeat;
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png')
+    center center / cover no-repeat;
   color: #fff;
 }
 
