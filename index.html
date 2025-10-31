@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <link rel="icon" type="image/png" href="images/logo4favicon.png">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SDA Infra & Promoters — Home</title>
+<style>
+  :root{
+    --accent:#1f7a3a;
+    --muted:#666;
+    --bg:#fbfbf9;
+    --wrap:1120px;
+    --gap:22px;
+    --footer-bg:linear-gradient(135deg,#1a3a1a,#2e7d32);
+    --footer-color:#e8f5e8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;font-family:Inter, Arial, Helvetica, sans-serif;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  img{max-width:100%;display:block}
+  main.container{max-width:var(--wrap);margin:calc(60px + 24px) auto;padding:0 20px}
+  .hero{display:grid;grid-template-columns:1fr 560px;gap:var(--gap);align-items:start}
+  @media(max-width:1000px){ .hero{grid-template-columns:1fr 420px} }
+  @media(max-width:880px){ .hero{grid-template-columns:1fr;row-gap:18px} }
+
+  .card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 12px 36px rgba(12,20,12,0.06);border:1px solid rgba(0,0,0,0.03)}
+  .title{font-size:28px;margin:0 0 8px;font-weight:800}
+  .lead{color:var(--muted);margin:0 0 14px;font-size:15px;line-height:1.5}
+  .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
+  .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700}
+  .muted-small{Color:var(--muted);font-size:13px;margin-top:12px;display:block}
+
+  /* CSS-only slideshow */
+  .slideshow{position:relative;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#eef6ee,#f7faf7)}
+  @media(max-width:1000px){ .slideshow{height:300px} }
+  @media(max-width:880px){ .slideshow{height:220px;border-radius:10px} }
+  .slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; }
+  .slide.show { opacity:1; transform:scale(1); }
+
+  /* keyframe cycle: 6 slides, each visible ~3s (total 18s) */
+  @keyframes cycle {
+    0%   { opacity:1 }   /* slide 1 visible */
+    16.66% { opacity:1 }
+    18%  { opacity:0 }
+    100% { opacity:0 }
+  }
+  /* We layer animations with delays per slide */
+  .slide.s1 { animation: cycle 18s linear infinite; animation-delay: 0s; }
+  .slide.s2 { animation: cycle 18s linear infinite; animation-delay: 3s; }
+  .slide.s3 { animation: cycle 18s linear infinite; animation-delay: 6s; }
+  .slide.s4 { animation: cycle 18s linear infinite; animation-delay: 9s; }
+  .slide.s5 { animation: cycle 18s linear infinite; animation-delay: 12s; }
+  .slide.s6 { animation: cycle 18s linear infinite; animation-delay: 15s; }
+
+  /* Prefer reduced motion: stop animation and show first slide */
+  @media (prefers-reduced-motion: reduce) {
+    .slide { animation: none; opacity:0 }
+    .slide.s1 { opacity:1 }
+  }
+
+  /* Footer (copied from your footer.html) */
+  footer { background: var(--footer-bg); color: var(--footer-color); padding: 36px 5vw; }
+  .footer-section { display:flex;gap:34px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;max-width:var(--wrap);margin:0 auto; }
+  .footer-section > div { min-width:220px; max-width:370px; flex:1 1 0 }
+  .footer-section b { color:#c8e6c9; font-size:1.07em }
+  .footer-section a { color:#a5d6a7; text-decoration:underline; display:inline-block; margin-top:8px; margin-right:20px }
+  .footer-section iframe { border-radius:7px; margin-top:7px; width:96%; background:#fff; border:none; min-width:140px; min-height:200px; box-shadow:0 0 5px rgba(26,58,26,.15) }
+  @media(max-width:900px){ .footer-section{flex-direction:column;padding:18px 2vw} .footer-section>div{max-width:unset;min-width:unset} }
+
+  /* floating socials & whatsapp */
+  .socials-fixed{position:fixed;left:16px;bottom:20px;display:flex;gap:18px;z-index:9999}
+  .whatsapp-fixed-wrap{position:fixed;right:18px;bottom:22px;z-index:9999;text-align:center}
+  .whatsapp-fixed-btn{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 18px rgba(37,211,102,.25);border:2px solid rgba(46,125,50,.18)}
+  .whatsapp-fixed-btn img{width:48px;height:48px;filter:none}
+</style>
+</head>
+<body>
+
+<!-- HEADER: include header.html content here (keeps index.html self-contained) -->
+<!-- header.html (fixed: phone bar + header reserved space) -->
+<header aria-label="Site header">
+  <style>
+    :root{
+      --topbar-h:40px;   /* height of the call bar */
+      --header-h:64px;   /* height of the header under the call bar */
+      --accent:#1f7a3a;
+    }
+    *{box-sizing:border-box}
+
+    /* Reserve space for fixed bars so content isn't hidden */
+    /* This targets the whole page; if you include header.html into pages,
+       this will ensure the header + topbar do not overlap the content. */
+    body {
+      /* IMPORTANT: keeps the rest of the page lower than the two fixed bars */
+      padding-top: calc(var(--topbar-h) + var(--header-h));
+    }
+
+    /* Top (phone) bar - fixed */
+    .top-bar{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--topbar-h);
+      background:linear-gradient(135deg,#1a3a1a,#2e7d32);
+      color:#e8f5e8;
+      display:flex; align-items:center;
+      padding:0 4vw;
+      z-index:5000;
+      font-weight:700;
+    }
+    .phone-link { display:flex; gap:8px; align-items:center; color:inherit; text-decoration:none; }
+    .phone-link svg{ width:16px; height:16px; fill:currentColor; display:block }
+
+    /* Header below phone bar - fixed */
+    .header-bar{
+      position:fixed;
+      top:var(--topbar-h);
+      left:0; right:0;
+      height:var(--header-h);
+      background: linear-gradient(135deg,#fff,#f0f7f0);
+      display:flex; align-items:center; gap:12px;
+      padding:10px 4vw; z-index:4900;
+      /* allow header content to align vertically when heights change */
+    }
+
+    /* Branding */
+    .branding { display:flex; align-items:center; gap:12px; min-width:0; }
+    .branding-link{ display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; min-width:0 }
+    .logo-img{
+      width:48px; height:48px; object-fit:contain;
+      border-radius:10px; border:3px solid #1a3a1a; background:#fff; flex:0 0 auto;
+    }
+    .companyNameTop{
+      font-weight:900; color:#1a3a1a;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      line-height:1;
+      flex:1 1 auto; min-width:0;
+    }
+
+    /* Desktop nav */
+    nav.nav-desktop{
+      margin-left:auto; display:flex; gap:18px; align-items:center; flex:0 0 auto;
+    }
+    .nav-desktop a{ color:#1a3a1a; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:6px; font-weight:700; font-size:0.85rem; }
+    .nav-desktop svg{ width:20px; height:20px; fill:var(--accent); display:block }
+    .nav-desktop a:hover svg{ fill:#0b3a13 }
+
+    /* Mobile toggle */
+    #menu-toggle{ display:none; }
+    .menu-label{
+      display:none; margin-left:auto;
+      background:#fff; color:#1a3a1a; padding:8px 12px; border-radius:10px;
+      border:1px solid rgba(26,58,26,0.12); font-weight:800; cursor:pointer;
+      box-shadow:0 6px 18px rgba(12,20,12,0.06);
+    }
+
+    /* mobile dropdown */
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      right:4vw;
+      /* placed below topbar + header (a little gap) */
+      top: calc(var(--topbar-h) + var(--header-h) + 8px);
+      width:min(92vw,320px);
+      background:#fff; color:#12321a; border-radius:10px;
+      box-shadow:0 14px 40px rgba(10,20,10,0.12); padding:10px; z-index:4800;
+    }
+    .mobile-menu a { display:block; padding:10px 8px; color:inherit; text-decoration:none; border-radius:8px; font-weight:700 }
+    .mobile-menu a:hover{ background:#f1f7f1 }
+
+    /* show mobile menu when checked */
+    #menu-toggle:checked ~ .mobile-menu { display:block; }
+
+    /* responsive */
+    @media (max-width:860px){
+      nav.nav-desktop{ display:none; }
+      .menu-label{ display:inline-block; }
+      .logo-img{ width:44px; height:44px; }
+      .companyNameTop{ font-size: clamp(0.95rem, 4.5vw, 1.05rem); }
+      /* header height may be slightly smaller on narrow screens; keep variable the same or adjust via small media query */
+      /* if you want a smaller header on narrow screens, uncomment next line: */
+      /* :root { --header-h:56px; } */
+    }
+
+    @media (max-width:420px){
+      .logo-img{ width:40px; height:40px; }
+      .companyNameTop{ font-size: clamp(0.9rem, 5.5vw, 1rem); }
+    }
+    /* Hero section styles */
+<!-- 
+    .wm-hero {
+  --duration1: 2.5s;
+  --duration2: calc(var(--duration1) / 2);
+  --delay1: calc(var(--duration2) / 2);
+  --delay2: calc(var(--duration2) + var(--delay1));
+  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+  /* ✅ background (map) with dim overlay */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png')
+    center/cover no-repeat;
+
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 2em;
+  color: #fff; /* make all text white */
+}
+-->
+.wm-hero {
+  --duration1: 2.5s;
+  --duration2: calc(var(--duration1) / 2);
+  --delay1: calc(var(--duration2) / 2);
+  --delay2: calc(var(--duration2) + var(--delay1));
+  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
+    background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') no-repeat center center;
+  background-size: cover;
+
+  
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 2em;
+}
+.wm-hero h1 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  opacity: 0;
+  transform: translateY(3em);
+  animation: loadH1 var(--duration1) var(--easing) var(--delay1) forwards;
+
+  /* 👇 Added for visibility */
+  color: #fff; /* makes the text white */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* soft dark glow for contrast */
+}
+@media screen and (min-width: 981px) {
+  .wm-hero h1 {
+    font-size: 56px;
+  }
+}
+
+.wm-hero img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 1em 1em 0 0;
+  transform: translateY(100%);
+  animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
+  margin: 0 auto;
+}
+
+@keyframes loadH1 {
+  0% {
+    opacity: 0;
+    transform: translateY(3em);
+  }
+  30%,
+  50% {
+    opacity: 1;
+    transform: translateY(3em);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes loadImg {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+  </style>
+
+  <!-- TOP PHONE BAR (kept content same) -->
+  <div class="top-bar" role="banner">
+    <div class="top-left">
+      <a class="phone-link" href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+        <span style="font-weight:800">Call: 9999944622</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FIXED HEADER BELOW PHONE BAR -->
+  <div class="header-bar" role="navigation" aria-label="Main header">
+    <div class="branding">
+      <a class="branding-link" href="index.html" aria-label="Home">
+        <img class="logo-img" src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'">
+      </a>
+      <div class="companyNameTop">SDA Infra &amp; Promoters</div>
+    </div>
+
+    <!-- Desktop nav -->
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      <a href="index.html" title="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>Home</span>
+      </a>
+      <a href="about.html" title="About">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+        <span>About</span>
+      </a>
+      <a href="careers.html" title="Careers">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6V4h-4v2H3v2h18V6h-7zm-9 6v8h14v-8H5z"/></svg>
+        <span>Careers</span>
+      </a>
+      <a href="blogs.html" title="Blogs">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
+        <span>Blogs</span>
+      </a>
+    </nav>
+
+    <!-- Mobile menu -->
+    <input id="menu-toggle" type="checkbox" aria-hidden="true">
+    <label for="menu-toggle" class="menu-label" aria-hidden="false">☰ Menu</label>
+
+    <div class="mobile-menu" role="menu" aria-hidden="true">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="careers.html">Careers</a>
+      <a href="blogs.html">Blogs &amp; Gallery</a>
+    </div>
+  </div>
+</header>
+
+  <!-- This is Hero Section html -->
+  <section class="wm-hero js-animate">
+   <div class="wm-hero__inner container">
+     <h1>Welcome to YOUR NEW<br>PLOTS in Delhi NCR</h1>
+     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHGQIpE5ppor8lJSMGANoyCuUDla_zzLh7o1Lxf8xNhV9RTfi0-OyGPd9nR9GkzKWP_IHkVhDnJWRET-7pdTeWM_aXKp4k0ri1YoNyUoqDMgUgnHL0rlwftFP8QO5rdRkm8y6d3cIFP8GlwOp6qIEwDK-qSbgpVtb_VSsUcIyVp1zBkFMNFapO9DzhmY/s1654/1000029520.png" 
+     alt="My hero image" 
+     width="960" height="600" />
+
+   </div>
+  </section>
+
+<main class="container">
+  <div class="hero">
+    <section class="card about">
+      <h2 class="title">SDA Infra &amp; Promoters</h2>
+      <p class="lead">Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.</p>
+      <ul class="bullets">
+        <li>Verified listings with clear titles</li>
+        <li>On-site visits & complete documentation support</li>
+        <li>Local knowledge across Delhi, Gurgaon & Noida</li>
+      </ul>
+      <a class="cta" href="about.html">Read full About page</a>
+      <div class="muted-small">Photos rotate every 3 seconds — swipe on mobile to explore.</div>
+    </section>
+
+    <aside>
+      <div class="slideshow" aria-label="Featured photos">
+        <div class="slide s1" style="background-image:url('images/mainpagetopphoto/1.jpg')"></div>
+        <div class="slide s2" style="background-image:url('images/mainpagetopphoto/2.jpg')"></div>
+        <div class="slide s3" style="background-image:url('images/mainpagetopphoto/3.jpg')"></div>
+        <div class="slide s4" style="background-image:url('images/mainpagetopphoto/4.jpg')"></div>
+        <div class="slide s5" style="background-image:url('images/mainpagetopphoto/5.jpg')"></div>
+        <div class="slide s6" style="background-image:url('images/mainpagetopphoto/6.jpg')"></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- FOOTER (copied from footer.html so index is standalone) -->
+<footer>
+  <div class="footer-section">
+    <div>
+      <b>Contact Us</b><br>
+      SDA Infra & Promoters<br>SDA Developers & Promoters<br>
+      Phone: <a href="tel:9999944622" style="color:#a5d6a7;text-decoration:underline">9999944622</a><br>
+      Email: <a href="mailto:info@sdapromoters.com" style="color:#a5d6a7;text-decoration:underline">info@sdapromoters.com</a>
+      <div style="margin-top:10px">
+        <b>Head Office:</b> C7, Near Ramesh Nagar Metro Station Gate 4, Delhi 110015<br>
+        <b>Branch Office:</b> Pili Building, Opposite Nithari School &amp; Jal Board Pump, Sukhi Nehar Road, Pratap Vihar, Delhi 110086
+      </div>
+    </div>
+
+    <div style="text-align:center">
+      <b>Our Office Location</b><br>
+      <iframe title="office-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d477.26799166844086!2d77.13274115568447!3d28.65214914859093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03debc47c96d%3A0xbf7b673c3e8b9daa!2sSDA%20DEVELOPERS%20AND%20PROMOTERS!5e0!3m2!1sen!2sin!4v1759480118040!5m2!1sen!2sin" width="260" height="200"></iframe>
+      <div style="margin-top:8px">
+        <a href="https://maps.apple.com/place?address=CL+Khanna+Marg%2C+Block+C+Double+Storey%2C+Ramesh+Nagar%2C+New+Delhi%2C+110015%2C+Delhi%2C+India&coordinate=28.652511071145934%2C77.13284415896229&name=Marked+Location" target="_blank" rel="noopener">Open in Apple Maps</a>
+        <a href="https://www.openstreetmap.org/node/6385598122#map=19/28.652766/77.132400" target="_blank" rel="noopener" style="margin-left:8px">Open in OpenStreetMap</a>
+      </div>
+    </div>
+
+    <div>
+      <b>Our Motto</b><br>
+      <div style="color:#c8e6c9;font-weight:700;margin-top:6px">SDA ka sapna, sabka ghar ho apna</div>
+      <p style="margin-top:10px;color:#d8efd2">We deeply understand the pain of renting in Delhi. Our mission is to help families move from rented uncertainty to the pride of home ownership. We provide verified listings, on-site support and clear documentation.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:18px;opacity:.95">© 2025 SDA Infra & Promoters</div>
+
+  <!-- floating socials -->
+  <div class="socials-fixed" aria-hidden="false" style="left:16px;bottom:20px;position:fixed;display:flex;gap:14px;z-index:9999">
+    <a href="https://m.youtube.com/@sdapromoters" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M21.58 7.19s-.22-1.62-.88-2.34c-.84-.9-1.78-.9-2.21-.95C15 3.71 12 3.71 12 3.71h0s-3 0-6.49.19c-.43.05-1.37.05-2.21.94-.66.73-.88 2.34-.88 2.34S2 8.81 2 10.44v.62c0 1.62.22 3.25.22 3.25s.22 1.62.88 2.34c.84.89 1.94.86 2.44.96C7.73 18.29 12 18.29 12 18.29s3 0 6.49-.19c.43-.05 1.37-.05 2.21-.94.66-.73.88-2.34.88-2.34s.22-1.62.22-3.25v-.62c0-1.63-.22-3.25-.22-3.25zM10 15V9l5 3-5 3z"/></svg></a>
+    <a href="https://m.facebook.com/sda.rameshnagar/" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 320 512" width="18" height="18"><path d="M279.14 288l14.22-92.66h-88.91V127.44c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0C141.09 0 89.09 54.41 89.09 153.31V195.3H0V288h89.09v224h104.89V288z"/></svg></a>
+    <a href="https://www.instagram.com/Sdapromoters/" target="_blank" rel="noopener" style="display:inline-flex;width:36px;height:36px;border-radius:50%;background:#fff;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08)"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.057 1.97.24 2.422.415.5.195.858.428 1.23.8.372.372.605.73.8 1.23.175.452.358 1.251.415 2.422.058 1.266.069 1.646.069 4.85s-.011 3.584-.069 4.85c-.057 1.17-.24 1.97-.415 2.422-.195.5-.428.858-.8 1.23-.372.372-.73.605-1.23.8-.452.175-1.251.358-2.422.415-1.266.058-1.646.069-4.85.069s-3.583-.011-4.85-.069c-1.17-.057-1.97-.24-2.422-.415-.5-.195-.858-.428-1.23-.8-.372-.372-.605-.73-.8-1.23-.175-.452-.358-1.251-.415-2.422C2.175 15.647 2.163 15.267 2.163 12s.012-3.583.07-4.85c.057-1.17.24-1.97.415-2.422A3.495 3.495 0 0 1 4.379 2.55c.452-.175 1.251-.358 2.422-.415C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.015 7.053.072 5.774.127 4.685.309 3.802.634c-.892.328-1.671.768-2.447 1.544C.444 3.327.003 4.106-.325 4.998c-.324.883-.506 1.972-.561 3.251C-.015 8.667 0 9.075 0 12c0 2.926.015 3.333.072 4.613.055 1.279.237 2.368.561 3.251.328.892.769 1.67 1.544 2.447.777.777 1.555 1.216 2.447 1.545.883.324 1.972.506 3.251.56C8.333 23.985 8.741 24 12 24s3.667-.015 4.947-.072c1.279-.055 2.368-.237 3.251-.561.892-.329 1.67-.768 2.447-1.545.777-.776 1.216-1.555 1.545-2.447.324-.883.506-1.972.56-3.251C23.985 15.333 24 14.926 24 12c0-2.925-.015-3.333-.072-4.613-.055-1.279-.236-2.368-.56-3.251a4.063 4.063 0 0 0-1.545-2.447c-.777-.777-1.555-1.216-2.447-1.544C19.333.309 18.244.127 16.965.072 15.686.015 15.259 0 12 0zm0 5.838A6.162 6.162 0 1 0 18.163 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.406-11.845a1.44 1.44 0 1 0 1.438 1.44 1.438 1.438 0 0 0-1.436-1.44z"/></svg></a>
+    </div>
+
+    <div style="position:fixed;right:18px;bottom:22px;z-index:9999;text-align:center">
+      <a href="https://wa.me/919999944622?text=Hello,%20Can%20I%20get%20more%20information???" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 18px rgba(37,211,102,.25);border:2px solid rgba(46,125,50,.18)"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:44px;height:44px;filter:none"></a>
+    </div>
+</footer>
+
+</body>
+</html>
