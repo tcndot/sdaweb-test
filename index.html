@@ -20,14 +20,15 @@
   html,body{margin:0;padding:0;font-family:Inter, Arial, Helvetica, sans-serif;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
   a{color:var(--accent);text-decoration:none}
   img{max-width:100%;display:block}
-  main.container{max-width:var(--wrap);margin:calc(60px + 24px) auto;padding:0 20px}
+  /* MAIN container no extra top margin so hero can control height */
+  main.container{max-width:var(--wrap);margin:0 auto;padding:0 20px}
   .hero{display:grid;grid-template-columns:1fr 560px;gap:var(--gap);align-items:start}
   @media(max-width:1000px){ .hero{grid-template-columns:1fr 420px} }
   @media(max-width:880px){ .hero{grid-template-columns:1fr;row-gap:18px} }
 
   .card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 12px 36px rgba(12,20,12,0.06);border:1px solid rgba(0,0,0,0.03)}
   .title{font-size:28px;margin:0 0 8px;font-weight:800}
-  .lead{color:var(--muted);margin:0 0 14px;font-size:15px;line-height:1.5}
+  .lead{color:var(--muted);Margin:0 0 14px;font-size:15px;line-height:1.5}
   .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
   .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700}
   .muted-small{Color:var(--muted);font-size:13px;margin-top:12px;display:block}
@@ -74,6 +75,10 @@
   .whatsapp-fixed-wrap{position:fixed;right:18px;bottom:22px;z-index:9999;text-align:center}
   .whatsapp-fixed-btn{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 18px rgba(37,211,102,.25);border:2px solid rgba(46,125,50,.18)}
   .whatsapp-fixed-btn img{width:48px;height:48px;filter:none}
+
+  /* ---------------------------------------------------------
+     HEADER styles (keeps topbar/header variables and fixed bars)
+     --------------------------------------------------------- */
 </style>
 </head>
 <body>
@@ -95,6 +100,7 @@
     body {
       /* IMPORTANT: keeps the rest of the page lower than the two fixed bars */
       padding-top: calc(var(--topbar-h) + var(--header-h));
+      margin:0; /* ensure no extra default margin */
     }
 
     /* Top (phone) bar - fixed */
@@ -121,7 +127,6 @@
       background: linear-gradient(135deg,#fff,#f0f7f0);
       display:flex; align-items:center; gap:12px;
       padding:10px 4vw; z-index:4900;
-      /* allow header content to align vertically when heights change */
     }
 
     /* Branding */
@@ -179,104 +184,16 @@
       .menu-label{ display:inline-block; }
       .logo-img{ width:44px; height:44px; }
       .companyNameTop{ font-size: clamp(0.95rem, 4.5vw, 1.05rem); }
-      /* header height may be slightly smaller on narrow screens; keep variable the same or adjust via small media query */
-      /* if you want a smaller header on narrow screens, uncomment next line: */
-      /* :root { --header-h:56px; } */
     }
 
     @media (max-width:420px){
       .logo-img{ width:40px; height:40px; }
       .companyNameTop{ font-size: clamp(0.9rem, 5.5vw, 1rem); }
     }
-    /* Hero section styles */
-<!-- 
-    .wm-hero {
-  --duration1: 2.5s;
-  --duration2: calc(var(--duration1) / 2);
-  --delay1: calc(var(--duration2) / 2);
-  --delay2: calc(var(--duration2) + var(--delay1));
-  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
 
-  /* ✅ background (map) with dim overlay */
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png')
-    center/cover no-repeat;
-
-  overflow: hidden;
-  text-align: center;
-  padding-bottom: 2em;
-  color: #fff; /* make all text white */
-}
--->
-.wm-hero {
-  --duration1: 2.5s;
-  --duration2: calc(var(--duration1) / 2);
-  --delay1: calc(var(--duration2) / 2);
-  --delay2: calc(var(--duration2) + var(--delay1));
-  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
-    background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') no-repeat center center;
-  background-size: cover;
-
-  
-  overflow: hidden;
-  text-align: center;
-  padding-bottom: 2em;
-}
-.wm-hero h1 {
-  font-size: 36px;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  opacity: 0;
-  transform: translateY(3em);
-  animation: loadH1 var(--duration1) var(--easing) var(--delay1) forwards;
-
-  /* 👇 Added for visibility */
-  color: #fff; /* makes the text white */
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* soft dark glow for contrast */
-}
-@media screen and (min-width: 981px) {
-  .wm-hero h1 {
-    font-size: 56px;
-  }
-}
-
-.wm-hero img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  border-radius: 1em 1em 0 0;
-  transform: translateY(100%);
-  animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
-  margin: 0 auto;
-}
-
-@keyframes loadH1 {
-  0% {
-    opacity: 0;
-    transform: translateY(3em);
-  }
-  30%,
-  50% {
-    opacity: 1;
-    transform: translateY(3em);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes loadImg {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: none;
-  }
-}
+    /* ---------------------------
+       HERO: fixed to viewport height
+       --------------------------- */
 
   </style>
 
@@ -333,13 +250,108 @@
 </header>
 
   <!-- This is Hero Section html -->
-  <section class="wm-hero js-animate">
+  <section class="wm-hero js-animate" aria-label="Hero">
+   <style>
+     /* make hero exactly viewport (minus fixed headers) so it never pushes page */
+     .wm-hero {
+       --duration1: 2.5s;
+       --duration2: calc(var(--duration1) / 2);
+       --delay1: calc(var(--duration2) / 2);
+       --delay2: calc(var(--duration2) + var(--delay1));
+       --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+       /* full viewport minus top fixed bars */
+       height: calc(100vh - var(--topbar-h) - var(--header-h));
+       width:100%;
+       position:relative;
+       overflow:hidden;
+       display:flex;
+       align-items:center;
+       justify-content:center;
+
+       /* background map */
+       background:
+         linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22)),
+         url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') center/cover no-repeat;
+       color:#fff;
+       text-align:center;
+       padding:0 20px;
+     }
+
+     /* inner content sits above image */
+     .wm-hero__inner {
+       position:relative;
+       z-index:3;
+       max-width:var(--wrap);
+       width:100%;
+       padding: clamp(18px, 4vw, 48px) 20px;
+       margin:0 auto;
+       display:flex;
+       align-items:center;
+       justify-content:center;
+       flex-direction:column;
+     }
+
+     .wm-hero h1 {
+       font-size: clamp(28px, 5vw, 56px);
+       font-weight:800;
+       line-height:1.06;
+       margin: 0;
+       opacity: 0;
+       transform: translateY(2.4rem);
+       animation: loadH1 var(--duration1) var(--easing) var(--delay1) forwards;
+       text-shadow: 0 6px 22px rgba(0,0,0,0.55);
+     }
+
+     /* the hero image will slide up INTO the same viewport but be absolutely positioned
+        so it doesn't increase page height. adjust size & placement for large screens. */
+     .wm-hero img {
+       position:absolute;
+       right: clamp(12px, 4vw, 60px);
+       bottom: 0; /* hug bottom of hero */
+       width: min(54%, 920px);
+       max-height: calc(100% - 32px);
+       object-fit:contain;
+       border-radius: 1rem;
+       transform: translateY(40%);
+       z-index:2;
+       animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
+       box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+     }
+
+     @keyframes loadH1 {
+       0% { opacity:0; transform: translateY(2.4rem) }
+       60% { opacity:1; transform: translateY(.8rem) }
+       100% { opacity:1; transform: translateY(0) }
+     }
+
+     @keyframes loadImg {
+       0% { transform: translateY(40%); opacity:0 }
+       60% { transform: translateY(6%); opacity:1 }
+       100% { transform: translateY(0); opacity:1 }
+     }
+
+     /* responsive: on narrow screens make image smaller and centered below text */
+     @media (max-width:980px) {
+       .wm-hero img { width: min(66%, 640px); right:50%; transform: translate(50%, 30%); }
+     }
+     @media (max-width:640px) {
+       .wm-hero img { width: 88%; right:50%; transform: translate(50%, 18%); border-radius:12px; }
+       .wm-hero h1 { font-size: clamp(20px, 7.2vw, 36px) }
+     }
+
+     /* reduced motion: disable motion but keep layout */
+     @media (prefers-reduced-motion: reduce) {
+       .wm-hero h1 { animation:none; opacity:1; transform:none }
+       .wm-hero img { animation:none; transform:none; opacity:1 }
+     }
+   </style>
+
    <div class="wm-hero__inner container">
      <h1>Welcome to YOUR NEW<br>PLOTS in Delhi NCR</h1>
      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHGQIpE5ppor8lJSMGANoyCuUDla_zzLh7o1Lxf8xNhV9RTfi0-OyGPd9nR9GkzKWP_IHkVhDnJWRET-7pdTeWM_aXKp4k0ri1YoNyUoqDMgUgnHL0rlwftFP8QO5rdRkm8y6d3cIFP8GlwOp6qIEwDK-qSbgpVtb_VSsUcIyVp1zBkFMNFapO9DzhmY/s1654/1000029520.png" 
      alt="My hero image" 
      width="960" height="600" />
-
    </div>
   </section>
 
