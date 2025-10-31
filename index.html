@@ -253,98 +253,90 @@
   <section class="wm-hero js-animate" aria-label="Hero">
    <style>
      /* make hero exactly viewport (minus fixed headers) so it never pushes page */
-     .wm-hero {
-       --duration1: 2.5s;
-       --duration2: calc(var(--duration1) / 2);
-       --delay1: calc(var(--duration2) / 2);
-       --delay2: calc(var(--duration2) + var(--delay1));
-       --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
+    /* Replace your existing .wm-hero styles with this block */
+.wm-hero {
+  --duration1: 2.5s;
+  --duration2: calc(var(--duration1) / 2);
+  --delay1: calc(var(--duration2) / 2);
+  --delay2: calc(var(--duration2) + var(--delay1));
+  --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
 
-       /* full viewport minus top fixed bars */
-       height: calc(100vh - var(--topbar-h) - var(--header-h));
-       width:100%;
-       position:relative;
-       overflow:hidden;
-       display:flex;
-       align-items:center;
-       justify-content:center;
+  /* keep hero inside one screen below fixed top bars */
+  height: calc(100vh - var(--topbar-h) - var(--header-h));
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;       /* stack H1 then image */
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
 
-       /* background map */
-       background:
-         linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22)),
-         url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') center/cover no-repeat;
-       color:#fff;
-       text-align:center;
-       padding:0 20px;
-     }
+  /* map background + slight dark overlay for contrast */
+  background:
+    linear-gradient(rgba(0,0,0,0.24), rgba(0,0,0,0.24)),
+    url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') 
+    center/cover no-repeat;
+  color: #fff;
+}
 
-     /* inner content sits above image */
-     .wm-hero__inner {
-       position:relative;
-       z-index:3;
-       max-width:var(--wrap);
-       width:100%;
-       padding: clamp(18px, 4vw, 48px) 20px;
-       margin:0 auto;
-       display:flex;
-       align-items:center;
-       justify-content:center;
-       flex-direction:column;
-     }
+/* heading slides up (same behaviour as the Sass you pasted) */
+.wm-hero h1 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.12;
+  margin: 0 0 1.15rem 0;
+  opacity: 0;
+  transform: translateY(3em);
+  animation: loadH1 var(--duration1) var(--easing) var(--delay1) forwards;
+  text-shadow: 0 6px 22px rgba(0,0,0,0.55);
+}
 
-     .wm-hero h1 {
-       font-size: clamp(28px, 5vw, 56px);
-       font-weight:800;
-       line-height:1.06;
-       margin: 0;
-       opacity: 0;
-       transform: translateY(2.4rem);
-       animation: loadH1 var(--duration1) var(--easing) var(--delay1) forwards;
-       text-shadow: 0 6px 22px rgba(0,0,0,0.55);
-     }
+/* the hero image rises up from below (no absolute positioning) */
+.wm-hero img {
+  display: block;
+  max-width: 54%;
+  width: min(920px, 54%);
+  height: auto;
+  border-radius: 1rem;
+  transform: translateY(100%);
+  animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
+  box-shadow: 0 18px 48px rgba(0,0,0,0.45);
+  margin-top: 0.8rem;
+}
 
-     /* the hero image will slide up INTO the same viewport but be absolutely positioned
-        so it doesn't increase page height. adjust size & placement for large screens. */
-     .wm-hero img {
-       position:absolute;
-       right: clamp(12px, 4vw, 60px);
-       bottom: 0; /* hug bottom of hero */
-       width: min(54%, 920px);
-       max-height: calc(100% - 32px);
-       object-fit:contain;
-       border-radius: 1rem;
-       transform: translateY(40%);
-       z-index:2;
-       animation: loadImg var(--duration2) var(--easing) var(--delay2) forwards;
-       box-shadow: 0 20px 60px rgba(0,0,0,0.45);
-     }
+/* larger H1 on big screens */
+@media screen and (min-width: 981px) {
+  .wm-hero h1 { font-size: 56px; }
+}
 
-     @keyframes loadH1 {
-       0% { opacity:0; transform: translateY(2.4rem) }
-       60% { opacity:1; transform: translateY(.8rem) }
-       100% { opacity:1; transform: translateY(0) }
-     }
+/* narrow screens: smaller text, image narrower and centered */
+@media (max-width: 980px) {
+  .wm-hero img { max-width: 66%; width: min(640px, 66%); }
+}
+@media (max-width: 640px) {
+  .wm-hero img { max-width: 88%; width: 88%; border-radius: 12px; }
+  .wm-hero h1 { font-size: clamp(20px, 7.2vw, 36px); }
+}
 
-     @keyframes loadImg {
-       0% { transform: translateY(40%); opacity:0 }
-       60% { transform: translateY(6%); opacity:1 }
-       100% { transform: translateY(0); opacity:1 }
-     }
+/* keyframes (same logic as original) */
+@keyframes loadH1 {
+  0%   { opacity: 0; transform: translateY(3em); }
+  30%, 50% { opacity: 1; transform: translateY(3em); }
+  100% { opacity: 1; transform: none; }
+}
 
-     /* responsive: on narrow screens make image smaller and centered below text */
-     @media (max-width:980px) {
-       .wm-hero img { width: min(66%, 640px); right:50%; transform: translate(50%, 30%); }
-     }
-     @media (max-width:640px) {
-       .wm-hero img { width: 88%; right:50%; transform: translate(50%, 18%); border-radius:12px; }
-       .wm-hero h1 { font-size: clamp(20px, 7.2vw, 36px) }
-     }
+@keyframes loadImg {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
 
-     /* reduced motion: disable motion but keep layout */
-     @media (prefers-reduced-motion: reduce) {
-       .wm-hero h1 { animation:none; opacity:1; transform:none }
-       .wm-hero img { animation:none; transform:none; opacity:1 }
-     }
+/* reduced-motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wm-hero h1 { animation: none; opacity: 1; transform: none; }
+  .wm-hero img { animation: none; transform: none; opacity: 1; }
+}
+
    </style>
 
    <div class="wm-hero__inner container">
