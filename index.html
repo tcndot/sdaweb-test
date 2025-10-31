@@ -7,171 +7,165 @@
   <link rel="icon" type="image/png" href="images/logo4favicon.png">
 
   <style>
-    :root {
-      --accent: #1f7a3a;
-      --muted: #666;
-      --bg: #fbfbf9;
-      --wrap: 1120px;
+    :root{
+      --accent:#1f7a3a;
+      --muted:#666;
+      --bg:#fbfbf9;
+      --wrap:1120px;
+      --gap:22px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: Inter, Arial, sans-serif;
-      background: var(--bg);
-      color: #111;
-      -webkit-font-smoothing: antialiased;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter, Arial, Helvetica, sans-serif;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
 
-    /* Header/Footer include targets */
-    #header, #footer { width: 100%; }
+    /* container */
+    main.container{max-width:var(--wrap);margin:0 auto;padding:calc(20px + 64px) 20px 60px} /* top padding leaves room for fixed header once header.html injects its CSS */
 
-    main.container {
-      max-width: var(--wrap);
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-
-    /* --- HERO SECTION --- */
+    /* ========== HERO ========== */
+    /* Desktop: use background image fitted inside the viewport so it doesn't zoom/crop too much */
     .wm-hero {
       position: relative;
-      background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png') no-repeat center center/cover;
+      width: 100%;
+      height: 100vh; /* fill viewport height */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 2rem 1rem;
       text-align: center;
-      color: #fff;
       overflow: hidden;
-      padding: 5em 1em 2em;
+      background-color: #214f49; /* fallback */
+      background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain; /* << prevents over-zoom/crop on wide screens */
     }
 
-    .hero-text-box {
-      display: inline-block;
-      background: rgba(0, 0, 0, 0.55);
-      border-radius: 16px;
-      padding: 1.5em 2em;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(6px);
+    /* optional overlay for contrast */
+    .wm-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+      z-index: 0;
     }
 
-    .wm-hero h1 {
-      font-size: clamp(28px, 5vw, 56px);
-      font-weight: 700;
-      line-height: 1.3;
-      margin: 0;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    }
-
-    .wm-hero img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      border-radius: 1em;
-      margin: 2em auto 0;
-    }
-
-    /* --- MAIN SECTION --- */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 560px;
-      gap: 22px;
-      align-items: start;
-    }
-    @media(max-width:880px) {
-      .hero { grid-template-columns: 1fr; }
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 22px;
-      box-shadow: 0 12px 36px rgba(12,20,12,0.06);
-      border: 1px solid rgba(0,0,0,0.03);
-    }
-    .title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-    .lead { color: var(--muted); margin-bottom: 14px; font-size: 15px; line-height: 1.5; }
-    .bullets { margin: 12px 0 18px; padding-left: 18px; color: var(--muted); }
-    .cta {
-      display: inline-block;
-      padding: 10px 14px;
-      border-radius: 8px;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .slideshow {
+    .hero-text-box{
       position: relative;
-      height: 360px;
+      z-index: 1;
+      display: inline-block;
+      background: rgba(18, 68, 62, 0.95); /* dark greenish box to match branding */
+      color: #fff;
       border-radius: 12px;
-      overflow: hidden;
-      background: linear-gradient(180deg,#eef6ee,#f7faf7);
+      padding: 1.25rem 1.75rem;
+      max-width: 92%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      backdrop-filter: blur(3px);
     }
-    .slide {
-      position: absolute; inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      animation: cycle 18s linear infinite;
-    }
-    .slide:nth-child(1) { animation-delay: 0s; }
-    .slide:nth-child(2) { animation-delay: 3s; }
-    .slide:nth-child(3) { animation-delay: 6s; }
-    .slide:nth-child(4) { animation-delay: 9s; }
-    .slide:nth-child(5) { animation-delay: 12s; }
-    .slide:nth-child(6) { animation-delay: 15s; }
 
-    @keyframes cycle {
-      0%, 16% { opacity: 1; }
-      18%, 100% { opacity: 0; }
+    .wm-hero h1{
+      margin: 0;
+      font-weight: 800;
+      line-height: 1.06;
+      /* scale with viewport but keep reasonable max */
+      font-size: clamp(28px, 4.6vw, 48px); /* smaller max than before so it fits one screen */
+      letter-spacing: 0.5px;
+      text-transform: none;
     }
+
+    /* if you still want the inline hero image element for small screens, hide on desktop */
+    .wm-hero img.hero-inline {
+      display:none;
+      width:100%;
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+
+    /* ========== MAIN CARD + SLIDESHOW ========== */
+    .hero { display:grid; grid-template-columns:1fr 520px; gap:var(--gap); align-items:start; margin-top:28px }
+    @media(max-width:1000px){ .hero{ grid-template-columns:1fr 420px } }
+    @media(max-width:880px){ .wm-hero { height: auto; background-size: cover; padding: 3rem 1rem 2rem } .wm-hero img.hero-inline { display:block } .hero{ grid-template-columns:1fr; row-gap:18px } }
+
+    .card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 12px 36px rgba(12,20,12,0.06);border:1px solid rgba(0,0,0,0.03)}
+    .title{font-size:24px;margin:0 0 8px;font-weight:800}
+    .lead{color:var(--muted);margin:0 0 14px;font-size:15px;line-height:1.5}
+    .bullets{margin:12px 0 18px;color:var(--muted);padding-left:18px}
+    .cta{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700}
+
+    .slideshow{position:relative;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#eef6ee,#f7faf7)}
+    @media(max-width:1000px){ .slideshow{height:300px} }
+    @media(max-width:880px){ .slideshow{height:220px;border-radius:10px} }
+    .slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; }
+    .slide.show { opacity:1; transform:scale(1); }
+
+    @keyframes cycle { 0%{opacity:1} 16.66%{opacity:1} 18%{opacity:0} 100%{opacity:0} }
+    .slide.s1 { animation: cycle 18s linear infinite; animation-delay: 0s; }
+    .slide.s2 { animation: cycle 18s linear infinite; animation-delay: 3s; }
+    .slide.s3 { animation: cycle 18s linear infinite; animation-delay: 6s; }
+    .slide.s4 { animation: cycle 18s linear infinite; animation-delay: 9s; }
+    .slide.s5 { animation: cycle 18s linear infinite; animation-delay: 12s; }
+    .slide.s6 { animation: cycle 18s linear infinite; animation-delay: 15s; }
+
+    /* footer/socials sizing kept minimal here; footer.html contains its own styles */
   </style>
 </head>
-
 <body>
-  <!-- HEADER -->
+
+  <!-- include header.html here -->
   <div id="header"></div>
 
   <!-- HERO -->
-  <section class="wm-hero">
-    <div class="hero-text-box">
-      <h1>Welcome to YOUR NEW<br>PLOTS in Delhi NCR</h1>
+  <section class="wm-hero" role="region" aria-label="Hero — Welcome">
+    <div class="hero-text-box" aria-hidden="false">
+      <h1>आसान किस्तों पर प्लॉट<br>— Delhi NCR</h1>
     </div>
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHGQIpE5ppor8lJSMGANoyCuUDla_zzLh7o1Lxf8xNhV9RTfi0-OyGPd9nR9GkzKWP_IHkVhDnJWRET-7pdTeWM_aXKp4k0ri1YoNyUoqDMgUgnHL0rlwftFP8QO5rdRkm8y6d3cIFP8GlwOp6qIEwDK-qSbgpVtb_VSsUcIyVp1zBkFMNFapO9DzhmY/s1654/1000029520.png" alt="Delhi NCR Plots" />
+
+    <!-- this image is shown only on small screens via CSS above -->
+    <img class="hero-inline" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHGQIpE5ppor8lJSMGANoyCuUDla_zzLh7o1Lxf8xNhV9RTfi0-OyGPd9nR9GkzKWP_IHkVhDnJWRET-7pdTeWM_aXKp4k0ri1YoNyUoqDMgUgnHL0rlwftFP8QO5rdRkm8y6d3cIFP8GlwOp6qIEwDK-qSbgpVtb_VSsUcIyVp1zBkFMNFapO9DzhmY/s1654/1000029520.png" alt="Plots in Delhi NCR" width="1200" height="700">
   </section>
 
   <!-- MAIN CONTENT -->
-  <main class="container">
+  <main class="container" role="main">
     <div class="hero">
-      <section class="card">
-        <h2 class="title">SDA Infra & Promoters</h2>
+      <section class="card about">
+        <h2 class="title">SDA Infra &amp; Promoters</h2>
         <p class="lead">Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.</p>
         <ul class="bullets">
           <li>Verified listings with clear titles</li>
-          <li>On-site visits & complete documentation support</li>
-          <li>Local knowledge across Delhi, Gurgaon & Noida</li>
+          <li>On-site visits &amp; complete documentation support</li>
+          <li>Local knowledge across Delhi, Gurgaon &amp; Noida</li>
         </ul>
         <a class="cta" href="about.html">Read full About page</a>
       </section>
 
       <aside>
-        <div class="slideshow">
-          <div class="slide" style="background-image:url('images/mainpagetopphoto/1.jpg')"></div>
-          <div class="slide" style="background-image:url('images/mainpagetopphoto/2.jpg')"></div>
-          <div class="slide" style="background-image:url('images/mainpagetopphoto/3.jpg')"></div>
-          <div class="slide" style="background-image:url('images/mainpagetopphoto/4.jpg')"></div>
-          <div class="slide" style="background-image:url('images/mainpagetopphoto/5.jpg')"></div>
-          <div class="slide" style="background-image:url('images/mainpagetopphoto/6.jpg')"></div>
+        <div class="slideshow" aria-label="Featured photos">
+          <div class="slide s1" style="background-image:url('images/mainpagetopphoto/1.jpg')"></div>
+          <div class="slide s2" style="background-image:url('images/mainpagetopphoto/2.jpg')"></div>
+          <div class="slide s3" style="background-image:url('images/mainpagetopphoto/3.jpg')"></div>
+          <div class="slide s4" style="background-image:url('images/mainpagetopphoto/4.jpg')"></div>
+          <div class="slide s5" style="background-image:url('images/mainpagetopphoto/5.jpg')"></div>
+          <div class="slide s6" style="background-image:url('images/mainpagetopphoto/6.jpg')"></div>
         </div>
       </aside>
     </div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- include footer.html here -->
   <div id="footer"></div>
 
-  <!-- JS to load header/footer -->
+  <!-- load header/footer -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("header.html").then(r => r.text()).then(d => document.getElementById("header").innerHTML = d);
-      fetch("footer.html").then(r => r.text()).then(d => document.getElementById("footer").innerHTML = d);
-    });
+    // load includes; if file not found, fail silently so page still renders
+    (function loadInclude(id, url){
+      fetch(url).then(r => {
+        if (!r.ok) throw new Error('fetch failed');
+        return r.text();
+      }).then(html => document.getElementById(id).innerHTML = html)
+      .catch(()=>{ /* silent fallback */ });
+    })('header','header.html');
+    (function(){ loadInclude('footer','footer.html'); })();
   </script>
 </body>
 </html>
