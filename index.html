@@ -15,6 +15,72 @@
     --gap:22px;
     --footer-bg:linear-gradient(135deg,#1a3a1a,#2e7d32);
     --footer-color:#e8f5e8;
+    /* ---------- Floating hero (unique names to avoid conflicts) ---------- */
+.floating-hero {
+  position: fixed;
+  left: 0;
+  right: 0;
+  /* place it below the phone + header bars that you already set with CSS variables */
+  top: calc(var(--topbar-h) + var(--header-h));
+  /* fill remaining viewport under the header bars */
+  height: calc(100vh - (var(--topbar-h) + var(--header-h)));
+  background: url('https://images.unsplash.com/photo-1550353127-b0da3aeaa0ca') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  z-index: 4800; /* below header (header uses 4900/5000) */
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* inner wrapper so transform origin is center */
+.floating-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: #fff;
+  text-align: center;
+  padding: 24px;
+  transform-origin: center center;
+  pointer-events: none; /* clicks pass through if you want scroll to happen */
+}
+
+.floating-hero h1 {
+  margin: 0;
+  font-size: clamp(28px, 6vw, 44px);
+  letter-spacing: -0.6px;
+  font-weight: 800;
+  text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+}
+
+/* down chevron container pinned to bottom inside the hero */
+.floating-hero__down {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.9;
+  pointer-events: auto;
+}
+
+/* spacer that keeps the rest of the page pushed below the hero */
+.floating-hero-spacer {
+  height: calc(100vh - (var(--topbar-h) + var(--header-h)));
+  width: 100%;
+  display: block;
+}
+
+/* ensure the content that already exists (wm-hero) will sit below — no changes required */
+@media (max-width: 880px) {
+  .floating-hero h1 { font-size: clamp(22px, 8vw, 34px); }
+  .floating-hero { border-radius: 0; }
+}
+
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;font-family:Inter, Arial, Helvetica, sans-serif;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
@@ -331,6 +397,22 @@
     </div>
   </div>
 </header>
+<!-- Floating full-screen hero (insert this immediately after </header>) -->
+<section class="floating-hero" aria-hidden="false">
+  <div class="floating-hero__inner">
+    <h1>Get scrollin'</h1>
+    <div class="floating-hero__down" aria-hidden="true">
+      <!-- simple double-chevron -->
+      <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <polyline points="7 6 12 11 17 6"></polyline>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- spacer to keep page flow below the fixed hero -->
+<div class="floating-hero-spacer" aria-hidden="true"></div>
 
   <!-- This is Hero Section html -->
   <section class="wm-hero js-animate">
@@ -413,6 +495,54 @@
       <a href="https://wa.me/919999944622?text=Hello,%20Can%20I%20get%20more%20information???" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 18px rgba(37,211,102,.25);border:2px solid rgba(46,125,50,.18)"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:44px;height:44px;filter:none"></a>
     </div>
 </footer>
+<script>
+  (function(){
+    const hero = document.querySelector('.floating-hero');
+    const down = document.querySelector('.floating-hero__down');
+
+    if (!hero) return;
+
+    function onScroll() {
+      const scroll = window.scrollY || window.pageYOffset || 0;
+
+      // translate hero downward slowly and gently scale down as user scrolls
+      // translatePercent increases slowly with scroll (choose smooth factor)
+      const translatePercent = Math.min(scroll / 8, 60); // caps at 60%
+      // scale reduces slightly with scroll, min 0.86
+      const scale = Math.max(1 - (scroll / 1200), 0.86);
+
+      hero.style.transform = `translate3d(0, ${translatePercent}%, 0) scale(${scale})`;
+
+      // fade out the chevron as user scrolls a bit
+      const chevronOpacity = Math.max(0, 1 - (scroll / 160));
+      if (down) down.style.opacity = chevronOpacity;
+    }
+
+    // initial frame
+    onScroll();
+
+    // throttle via requestAnimationFrame for smoothness
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          onScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // optional: clicking chevron scrolls down one hero-height (nice UX)
+    if (down) {
+      down.addEventListener('click', function(e) {
+        e.preventDefault();
+        const heroHeight = document.querySelector('.floating-hero-spacer').offsetHeight || window.innerHeight;
+        window.scrollTo({ top: heroHeight + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbar-h')) || 0), behavior: 'smooth' });
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>
