@@ -290,7 +290,9 @@
 /* the hero image rises up from below (no absolute positioning) */
 .wm-hero img {
   display: block;
-  max-width: 54%;
+  max-width: 80%;
+object-fit: contain; /* ✅ ensures full image is visible */
+
   width: min(920px, 54%);
   height: auto;
   border-radius: 1rem;
