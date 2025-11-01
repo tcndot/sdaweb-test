@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SDA Infra & Promoters — Home</title>
-  <link rel="icon" type="image/png" href="images/logo4favicon.png">
+  <!-- favicon -->
+  <link rel="icon" href="https://sdapromoters.com/favicon.png" type="image/png">
   <!-- Tailwind (keep this; your layout uses a few utility classes) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -92,7 +93,11 @@
   <div class="sda-header-bar" role="navigation" aria-label="Main header">
     <div class="sda-branding">
       <a href="index.html" class="sda-logo-link" aria-label="Home">
-        <img class="sda-logo" src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'">
+      <!-- logo -->
+     <img class="sda-logo" 
+     src="https://sdapromoters.com/images/logo.png" 
+     alt="SDA logo" 
+     onerror="this.style.display='none'">
       </a>
       <div class="sda-company">SDA Infra &amp; Promoters</div>
     </div>
