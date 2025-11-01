@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SDA Infra & Promoters — Home</title>
   <!-- favicon -->
-  <link rel="icon" href="https://sdapromoters.com/favicon.png" type="image/png">
+  <link rel="icon" href="https://sdapromoters.com/images/logo4favicon.png" type="image/png">
   <!-- Tailwind (keep this; your layout uses a few utility classes) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
