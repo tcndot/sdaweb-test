@@ -274,7 +274,340 @@
   </div>
 </main>
 
+<!-- ========== WHY INVEST / WORK WITH US (self-contained, responsive, touch-friendly) ========== -->
+<section id="sda-why-section" aria-label="Why invest or work with us" style="padding:46px 0;">
+  <style>
+    /* ---------- scoped variables and base ---------- */
+    #sda-why-section { --accent: #06693b; --accent-2:#0b9a7c; --bg-dark:#072219; --muted:#dbe9df; --card:#ffffff; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif; color:var(--bg-dark); }
 
+    /* unique layered background for the section */
+    #sda-why-section .sda-why-bg {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 8%),
+        radial-gradient(circle at 90% 80%, rgba(255,255,255,0.02), transparent 10%),
+        linear-gradient(180deg, #eafaf5 0%, #f4fff9 40%, rgba(6,105,59,0.06) 100%);
+      padding: 28px 0;
+    }
+
+    #sda-why-inner { max-width:1120px; margin:0 auto; padding:0 20px; }
+
+    /* header */
+    #sda-why-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+    #sda-why-head h2 { margin:0; font-size:22px; color:var(--accent); font-weight:900; letter-spacing:0.2px; }
+    #sda-why-head p { margin:0; color:var(--muted); font-size:14px; }
+
+    /* viewport */
+    .sda-why-viewport {
+      position:relative;
+      height:320px;
+      overflow:hidden;
+      border-radius:14px;
+      box-shadow:0 18px 44px rgba(3,10,6,0.06);
+      background: linear-gradient(180deg, rgba(7,34,25,0.03), rgba(11,154,124,0.02));
+      border: 1px solid rgba(6,105,59,0.06);
+    }
+
+    /* slide base */
+    .sda-why-slide {
+      position:absolute;
+      inset:0;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      padding:22px;
+      box-sizing:border-box;
+      transform:translateX(100%);
+      opacity:0;
+      transition: transform 600ms cubic-bezier(.2,.9,.3,1), opacity 280ms ease;
+      will-change:transform,opacity;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.90));
+      border-radius:10px;
+    }
+
+    /* image column */
+    .sda-why-img {
+      width:46%;
+      min-width:220px;
+      height:100%;
+      overflow:hidden;
+      border-radius:10px;
+      box-shadow:0 10px 30px rgba(5,30,20,0.06);
+      flex-shrink:0;
+      background: #f2f7f6;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .sda-why-img img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* text column */
+    .sda-why-copy {
+      width:54%;
+      color: #04221a;
+    }
+    .sda-why-copy h3 { margin:0 0 8px; font-size:20px; color:var(--accent-2); font-weight:900; letter-spacing:0.2px; }
+    .sda-why-copy p { margin:0 0 12px; color:#234; line-height:1.58; font-size:15px; font-weight:600; }
+    .sda-why-copy ul { margin:0; padding-left:18px; color:#456; font-weight:600; }
+
+    /* visible / centered / exit */
+    .sda-why-slide.center { transform:translateX(0%); opacity:1; z-index:3; }
+    .sda-why-slide.exit-left { transform:translateX(-100%); opacity:0; z-index:2; }
+    .sda-why-slide.off-right { transform:translateX(100%); opacity:0.98; z-index:1; }
+
+    /* controls */
+    .sda-controls { display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-top:12px; }
+    .sda-btn { background:transparent; border:1px solid rgba(6,105,59,0.12); padding:8px 10px; border-radius:8px; font-weight:800; cursor:pointer; color:var(--accent-2); }
+    .sda-btn[aria-pressed="true"]{ background:var(--accent-2); color:#fff; border-color:var(--accent-2); }
+
+    /* responsive: on small screens, stack vertically (image top, text bottom) but keep slide animation */
+    @media (max-width:880px) {
+      .sda-why-viewport { height:420px; }
+      .sda-why-slide { flex-direction:column; padding:16px; }
+      .sda-why-img { width:100%; height:220px; min-width:0; border-radius:8px; }
+      .sda-why-copy { width:100%; padding-top:12px; }
+      .sda-why-copy h3 { font-size:18px; }
+      .sda-why-copy p { font-size:15px; }
+    }
+
+    /* reduced motion respects user preference */
+    @media (prefers-reduced-motion: reduce) {
+      .sda-why-slide { transition:none !important; transform:none !important; opacity:1 !important; position:relative; display:block; margin-bottom:12px; }
+      .sda-why-viewport { overflow:visible; height:auto; }
+      .sda-why-img{height:180px}
+    }
+  </style>
+
+  <div class="sda-why-bg">
+    <div id="sda-why-inner">
+      <div id="sda-why-head">
+        <div>
+          <h2>Why invest / Work with us</h2>
+          <p>Short, honest reasons — slides come in from the right, pause so you can read, then exit left. Swipe on mobile.</p>
+        </div>
+
+        <div class="sda-controls" aria-hidden="false">
+          <button id="sda-why-pause" class="sda-btn" aria-pressed="false" title="Pause">Pause</button>
+          <button id="sda-why-prev" class="sda-btn" title="Previous">Prev</button>
+          <button id="sda-why-next" class="sda-btn" title="Next">Next</button>
+        </div>
+      </div>
+
+      <div class="sda-why-viewport" id="sda-why-viewport" role="region" aria-live="polite" tabindex="0">
+        <!-- Slide 0 -->
+        <article class="sda-why-slide off-right" data-index="0" id="why-slide-0" aria-hidden="true">
+          <div class="sda-why-img" aria-hidden="true">
+            <img src="images/why/why1.jpg" alt="Verified titles and checks">
+          </div>
+          <div class="sda-why-copy">
+            <h3>Verified & Clear Titles</h3>
+            <p>Each plot is fully verified for ownership and encumbrances so you invest with confidence.</p>
+            <ul>
+              <li>Title & ownership checks</li>
+              <li>Encumbrance search</li>
+              <li>Legal handholding</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Slide 1 -->
+        <article class="sda-why-slide off-right" data-index="1" id="why-slide-1" aria-hidden="true">
+          <div class="sda-why-img" aria-hidden="true">
+            <img src="images/why/why2.jpg" alt="On site visits and local knowledge">
+          </div>
+          <div class="sda-why-copy">
+            <h3>On-site & Local Knowledge</h3>
+            <p>We visit every site ourselves — that lets us give practical micro-market guidance, not just a brochure.</p>
+            <ul>
+              <li>Micro-market insights</li>
+              <li>Guided site visits</li>
+              <li>Neighbourhood checks</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="sda-why-slide off-right" data-index="2" id="why-slide-2" aria-hidden="true">
+          <div class="sda-why-img" aria-hidden="true">
+            <img src="images/why/why3.jpg" alt="Transparent pricing and no hidden charges">
+          </div>
+          <div class="sda-why-copy">
+            <h3>Transparent Pricing</h3>
+            <p>Clear cost sheets and no hidden charges — you'll know the full cost before you commit.</p>
+            <ul>
+              <li>No surprise commissions</li>
+              <li>Full cost breakdown</li>
+              <li>Negotiation support</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="sda-why-slide off-right" data-index="3" id="why-slide-3" aria-hidden="true">
+          <div class="sda-why-img" aria-hidden="true">
+            <img src="images/why/why4.jpg" alt="End-to-end support and registry help">
+          </div>
+          <div class="sda-why-copy">
+            <h3>End-to-End Support</h3>
+            <p>From booking to registry and handover — we assist at every step including post-sale coordination.</p>
+            <ul>
+              <li>Documentation help</li>
+              <li>Registry & handover</li>
+              <li>Post-sale coordination</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const viewport = document.getElementById('sda-why-viewport');
+      const slides = Array.from(viewport.querySelectorAll('.sda-why-slide'));
+      const btnPause = document.getElementById('sda-why-pause');
+      const btnPrev = document.getElementById('sda-why-prev');
+      const btnNext = document.getElementById('sda-why-next');
+
+      // timings (ms)
+      const enterDuration = 600; // matches CSS transition
+      const holdDuration = 2400; // visible time in center
+      const exitDuration = 600;
+      const gap = 160;
+
+      let current = -1;
+      let timer = null;
+      let isPaused = false;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // initialize classes & aria
+      slides.forEach((s,i)=>{
+        s.classList.remove('center','exit-left');
+        s.classList.add('off-right');
+        s.setAttribute('aria-hidden','true');
+      });
+
+      function showIndex(nextIndex){
+        if (reduced) {
+          // in reduced motion, make slides flow vertically and visible
+          slides.forEach(s=>{
+            s.style.position = 'relative';
+            s.style.transform = 'none';
+            s.style.opacity = '1';
+            s.removeAttribute('aria-hidden');
+          });
+          return;
+        }
+
+        if (nextIndex < 0) nextIndex = slides.length - 1;
+        if (nextIndex >= slides.length) nextIndex = 0;
+
+        const prev = current;
+        const next = nextIndex;
+        current = next;
+
+        slides.forEach((s,i)=>{
+          s.classList.remove('center','exit-left','off-right');
+          if (i === prev) {
+            s.classList.add('exit-left');
+            s.setAttribute('aria-hidden','true');
+          } else if (i === next) {
+            s.classList.add('center');
+            s.setAttribute('aria-hidden','false');
+          } else {
+            s.classList.add('off-right');
+            s.setAttribute('aria-hidden','true');
+          }
+        });
+      }
+
+      function scheduleNext(){
+        if (isPaused || reduced) return;
+        clearTimeout(timer);
+        timer = setTimeout(()=> {
+          showIndex(current + 1);
+          scheduleNext();
+        }, enterDuration + holdDuration + exitDuration + gap);
+      }
+
+      function startCycle(){
+        if (reduced) { showIndex(0); return; }
+        if (current === -1) showIndex(0);
+        scheduleNext();
+      }
+
+      function stopCycle(){ clearTimeout(timer); }
+
+      // Pause/play
+      btnPause.addEventListener('click', ()=>{
+        isPaused = !isPaused;
+        btnPause.textContent = isPaused ? 'Play' : 'Pause';
+        btnPause.setAttribute('aria-pressed', isPaused ? 'true' : 'false');
+        if (isPaused) stopCycle(); else startCycle();
+      });
+
+      // Prev / Next
+      btnPrev.addEventListener('click', ()=>{
+        stopCycle();
+        showIndex(current - 1);
+        if (!isPaused) scheduleNext();
+      });
+      btnNext.addEventListener('click', ()=>{
+        stopCycle();
+        showIndex(current + 1);
+        if (!isPaused) scheduleNext();
+      });
+
+      // pause on hover/focus
+      viewport.addEventListener('mouseenter', ()=>{ isPaused = true; btnPause.textContent = 'Play'; stopCycle(); });
+      viewport.addEventListener('mouseleave', ()=>{ isPaused = false; btnPause.textContent = 'Pause'; startCycle(); });
+      viewport.addEventListener('focusin', ()=>{ isPaused = true; btnPause.textContent = 'Play'; stopCycle(); });
+      viewport.addEventListener('focusout', ()=>{ isPaused = false; btnPause.textContent = 'Pause'; startCycle(); });
+
+      // touch swipe support (mobile)
+      let touchStartX = null;
+      let touchStartTime = 0;
+      const minSwipeDist = 50; // px
+      const maxSwipeTime = 700; // ms
+
+      viewport.addEventListener('touchstart', (e)=>{
+        isPaused = true; btnPause.textContent='Play'; stopCycle();
+        if (e.touches && e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartTime = Date.now();
+        }
+      }, {passive:true});
+
+      viewport.addEventListener('touchend', (e)=>{
+        if (touchStartX === null) { isPaused=false; startCycle(); return; }
+        const dx = (e.changedTouches && e.changedTouches[0]) ? (e.changedTouches[0].clientX - touchStartX) : 0;
+        const dt = Date.now() - touchStartTime;
+        touchStartX = null;
+        if (Math.abs(dx) > minSwipeDist && dt < maxSwipeTime) {
+          if (dx < 0) { // swipe left -> next
+            showIndex(current + 1);
+          } else { // swipe right -> prev
+            showIndex(current - 1);
+          }
+        }
+        // resume cycle after short delay
+        setTimeout(()=>{ isPaused=false; btnPause.textContent='Pause'; if (!reduced) startCycle(); }, 400);
+      }, {passive:true});
+
+      // keyboard navigation
+      viewport.addEventListener('keydown', (e)=>{
+        if (e.key === 'ArrowLeft') { stopCycle(); showIndex(current - 1); if (!isPaused) scheduleNext(); }
+        if (e.key === 'ArrowRight') { stopCycle(); showIndex(current + 1); if (!isPaused) scheduleNext(); }
+      });
+
+      // init
+      startCycle();
+
+      // expose for debug
+      window._sdaWhy = { showIndex, startCycle, stopCycle, slides };
+    })();
+  </script>
+</section>
+<!-- ========== END: WHY INVEST SECTION ========== -->
+
+  
 <!-- ===========================================================
      STATS SECTION (unchanged)
      =========================================================== -->
