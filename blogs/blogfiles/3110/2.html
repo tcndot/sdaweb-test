@@ -1,21 +1,32 @@
+
 <!doctype html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>दिल्ली में तीन एक्सप्रेसवे को कनेक्ट करेगा लिंक एक्सप्रेसवे</title>
-  <!-- NOTE: favicon removed because this is a blog post file (you said header must match site) -->
-  <style>html,body{margin:0}/* tiny reset */</style>
+  <!-- favicon -->
+  <link rel="icon" href="https://sdapromoters.com/images/logo4favicon.png" type="image/png">
+  <!-- Tailwind (keep this; your layout uses a few utility classes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* tiny global reset used by this file only */
+    html,body { margin:0; }
+  </style>
 </head>
 <body>
 
 <!-- ===========================================================
-     HEADER: START — restored site header (same as other pages)
+     HEADER: START (self-contained)
+     - Fixed topbar + header
+     - mobile menu uses checkbox + CSS; no JS
      =========================================================== -->
 <header aria-label="Site header" class="sda-header-root">
   <style>
     .sda-header-root { font-family: Inter, Arial, Helvetica, sans-serif; }
 
+    /* topbar (fixed) */
     .sda-header-topbar{
       height:40px;
       position:fixed; top:0; left:0; right:0;
@@ -28,13 +39,13 @@
     }
     .sda-header-topbar a{ color:inherit; text-decoration:none; display:flex; gap:8px; align-items:center }
 
+    /* header below topbar (fixed) */
     .sda-header-bar{
       height:64px;
       position:fixed; top:40px; left:0; right:0;
       background: linear-gradient(135deg,#fff,#f0f7f0);
       display:flex; align-items:center; gap:12px;
       padding:10px 4vw; z-index:4900;
-      box-shadow:0 1px 0 rgba(0,0,0,0.03);
     }
 
     .sda-branding{ display:flex; align-items:center; gap:12px }
@@ -44,10 +55,11 @@
     .sda-nav{ margin-left:auto; display:flex; gap:18px; align-items:center }
     .sda-nav a{ color:#1a3a1a; text-decoration:none; font-weight:700; display:flex; gap:6px; flex-direction:column; align-items:center; font-size:0.85rem }
 
-    /* mobile menu */
+    /* mobile menu toggle */
     #sda-menu-toggle { display:none; }
     .sda-menu-label{ display:none; margin-left:auto; background:#fff; color:#1a3a1a; padding:8px 12px; border-radius:10px; border:1px solid rgba(26,58,26,0.12); font-weight:800; cursor:pointer }
 
+    /* mobile menu (hidden by default) */
     .sda-mobile-menu {
       display:none;
       position:fixed;
@@ -61,6 +73,8 @@
       box-shadow:0 14px 40px rgba(10,20,10,0.12);
       z-index:4800;
     }
+
+    /* reveal mobile menu when checkbox is checked */
     #sda-menu-toggle:checked ~ .sda-mobile-menu { display:block; }
 
     @media (max-width:860px){
@@ -79,13 +93,15 @@
 
   <div class="sda-header-bar" role="navigation" aria-label="Main header">
     <div class="sda-branding">
-      <a href="../../../index.html" class="sda-logo-link" aria-label="Home">
-        <!-- logo restored -->
-        <img class="sda-logo" src="images/logo.png" alt="SDA logo" onerror="this.style.display='none'">
+      <a href="index.html" class="sda-logo-link" aria-label="Home">
+      <!-- logo -->
+     <img class="sda-logo" 
+     src="https://sdapromoters.com/images/logo.png" 
+     alt="SDA logo" 
+     onerror="this.style.display='none'">
       </a>
       <div class="sda-company">SDA Infra &amp; Promoters</div>
     </div>
-
     <nav class="sda-nav" aria-label="Primary navigation">
       <a href="../../../index.html" title="Home"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></a>
       <a href="../../../about.html" title="About"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg><span>About</span></a>
@@ -106,12 +122,15 @@
       <a href="../../../careers.html" style="display:block;padding:8px 6px">Careers</a>
       <a href="../../../blogs.html" style="display:block;padding:8px 6px">Blogs &amp; Gallery</a>
     </div>
+   
+    </div>
   </div>
 </header>
 
 <!-- spacer keeps page content below fixed header -->
-<div style="height:104px" aria-hidden="true"></div>
+<div class="sda-page-spacer" style="height:104px;"></div>
 <!-- HEADER: END -->
+
 
 
 <!-- ===========================================================
