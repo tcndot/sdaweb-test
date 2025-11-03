@@ -628,155 +628,257 @@
   </div>
 </section>
 
-
-  <!-- ===========================================================
-     CONTACT US SECTION (FormSubmit via AJAX, no redirect)
+<!-- ===========================================================
+     CONTACT US SECTION (FormSubmit via AJAX, no required fields, mobile-friendly)
      =========================================================== -->
 <section id="contact-us" aria-label="Contact form">
   <style>
+    /* Scoped styles for the contact section */
     #contact-us {
       font-family: Inter, Arial, sans-serif;
       background: linear-gradient(180deg,#f8faf8,#eaf9f0);
-      padding: 48px 20px 60px;
+      padding: 40px 16px 56px;
     }
-    #contact-us .contact-wrap {
-      max-width: 720px;
+    .contact-wrap {
+      max-width: 840px;
       margin: 0 auto;
       background: #fff;
       border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(10,30,10,0.06);
-      padding: 28px 22px;
+      box-shadow: 0 8px 28px rgba(10,30,10,0.06);
+      padding: 28px;
       border: 1px solid rgba(0,0,0,0.03);
-      text-align:left;
+      box-sizing: border-box;
     }
-    #contact-us h2 {
-      font-size: 24px;
-      font-weight: 900;
-      margin: 0 0 10px;
-      color: #14532d;
-    }
-    #contact-us p {
-      color: #555;
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
-    #contact-us form {
+
+    .contact-grid {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
-    #contact-us label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 6px;
-      display: block;
+
+    .contact-head {
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
     }
-    #contact-us input,
-    #contact-us textarea {
-      width: 100%;
-      padding: 12px 14px;
-      font-size: 14px;
-      border: 1px solid rgba(0,0,0,0.1);
-      border-radius: 10px;
-      outline: none;
-      background: #f9faf9;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    #contact-us input:focus,
-    #contact-us textarea:focus {
-      border-color: #1a7a3a;
-      box-shadow: 0 0 0 3px rgba(26,122,58,0.12);
-      background: #fff;
-    }
-    #contact-us textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-    #contact-us button {
-      background: linear-gradient(90deg,#1a7a3a,#31c173);
-      color: #fff;
-      font-weight: 700;
-      padding: 12px 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform .15s ease, box-shadow .2s;
-    }
-    #contact-us button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(26,122,58,0.2);
-    }
-    #contact-us button:active {
-      transform: translateY(1px);
-    }
-    #contact-us .thankyou {
-      display: none;
-      text-align: center;
+    .contact-head h2 {
+      font-size: 22px;
+      font-weight: 900;
+      margin: 0;
       color: #14532d;
-      font-weight: 700;
-      background: #f0fdf4;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid rgba(20,83,45,0.2);
-      box-shadow: 0 4px 10px rgba(20,83,45,0.08);
+      line-height:1.1;
+    }
+    .contact-head p { margin:0; color:#475057; font-size:14px; }
+
+    label {
+      font-size: 13px;
+      font-weight:700;
+      color:#263238;
+      display:block;
+      margin-bottom:6px;
+    }
+
+    input, textarea {
+      width:100%;
+      padding:14px 12px;
+      font-size:15px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:#fbfdfb;
+      outline:none;
+      box-sizing:border-box;
+      transition: box-shadow .15s, border-color .15s;
+    }
+    input:focus, textarea:focus {
+      border-color:#167a3a;
+      box-shadow: 0 6px 18px rgba(22,122,58,0.08);
+      background:#ffffff;
+    }
+    textarea { min-height:120px; resize:vertical; }
+
+    .controls {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg,#1a7a3a,#31c173);
+      color:#fff;
+      font-weight:800;
+      padding:12px 18px;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      font-size:15px;
+      box-shadow:0 8px 22px rgba(26,122,58,0.12);
+    }
+    .btn-ghost {
+      background:transparent;
+      border:1px solid rgba(0,0,0,0.06);
+      padding:12px 16px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      color:#234;
+    }
+
+    .msg {
+      display:none;
+      padding:14px;
+      border-radius:10px;
+      font-weight:700;
+      margin-top:12px;
+      box-sizing:border-box;
+    }
+    .msg.success {
+      background:#f0fdf4;
+      color:#14532d;
+      border:1px solid rgba(20,83,45,0.12);
+      box-shadow:0 6px 18px rgba(20,83,45,0.05);
+      animation:fadeIn .9s ease both;
+    }
+    .msg.error {
+      background:#fff6f6;
+      color:#7b1e1e;
+      border:1px solid rgba(123,30,30,0.08);
+      box-shadow:0 6px 18px rgba(123,30,30,0.04);
+      animation:fadeIn .9s ease both;
+    }
+
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:none } }
+
+    /* single-column on small screens, larger tap targets */
+    @media (max-width:760px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-wrap { padding:20px; }
+      input, textarea { padding:14px; font-size:16px; }
+      .btn-primary, .btn-ghost { width:100%; text-align:center; padding:14px; font-size:16px; }
+      .controls { flex-direction:column; gap:10px; }
+    }
+
+    /* accessibility */
+    .visually-hidden {
+      position:absolute !important;
+      height:1px; width:1px;
+      overflow:hidden; clip:rect(1px,1px,1px,1px);
+      white-space:nowrap;
     }
   </style>
 
-  <div class="contact-wrap">
-    <h2>Contact Us</h2>
-    <p>Have a question or want to visit a plot? Send us your details and we'll get back soon.</p>
+  <div class="contact-wrap" role="form" aria-labelledby="contact-title">
+    <div class="contact-head">
+      <div>
+        <h2 id="contact-title">Contact Us</h2>
+        <p>Fill whatever you like — name, mobile, email or a quick message. We'll receive it and reply to whichever contact you leave.</p>
+      </div>
+    </div>
 
-    <form id="contactForm">
-      <input type="hidden" name="_subject" value="New inquiry from SDA Infra site">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
+    <form id="contactForm" class="contact-grid" novalidate>
+      <!-- optional honeypot to block bots (keeps it hidden from users) -->
+      <input type="text" name="website" class="visually-hidden" autocomplete="off" tabindex="-1">
 
       <div>
-        <label for="name">Full Name *</label>
-        <input type="text" id="name" name="Name" placeholder="Your full name" required>
+        <label for="name">Full name</label>
+        <input id="name" name="Name" type="text" placeholder="e.g. Amit Sharma">
       </div>
 
       <div>
-        <label for="mobile">Mobile Number *</label>
-        <input type="text" id="mobile" name="Mobile" placeholder="+91 99999 99999" required pattern="[0-9 +()-]{7,20}">
+        <label for="mobile">Mobile</label>
+        <input id="mobile" name="Mobile" type="text" inputmode="tel" placeholder="+91 9xxxxxxxxx">
       </div>
 
-      <div>
-        <label for="email">Email Address *</label>
-        <input type="email" id="email" name="Email" placeholder="you@example.com" required>
+      <div style="grid-column:1 / -1;">
+        <label for="email">Email</label>
+        <input id="email" name="Email" type="email" placeholder="you@example.com">
       </div>
 
-      <div>
+      <div style="grid-column:1 / -1;">
         <label for="message">Message</label>
-        <textarea id="message" name="Message" placeholder="Tell us what you're looking for..."></textarea>
+        <textarea id="message" name="Message" placeholder="Type your question or requirement (optional)"></textarea>
       </div>
 
-      <button type="submit">Send Message</button>
+      <div style="grid-column:1 / -1; display:flex; justify-content:flex-start; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div class="controls" style="margin:0; padding:0;">
+          <button type="submit" class="btn-primary" id="contactSendBtn" aria-live="polite">Send Message</button>
+          <button type="button" class="btn-ghost" id="contactClearBtn">Clear</button>
+        </div>
+        <div id="statusMsg" style="flex:1;"></div>
+      </div>
     </form>
 
-    <div class="thankyou" id="thankyouMsg">
-      ✅ Thank you! Your message has been sent successfully.
+    <div id="formSuccess" class="msg success" role="status" aria-live="polite">
+      ✅ Thanks — your message has been sent. We'll contact you if you left contact details.
+    </div>
+
+    <div id="formError" class="msg error" role="alert" aria-live="assertive">
+      ⚠️ There was an error sending your message. Please try again or contact us at sdaph1@yahoo.com
     </div>
   </div>
 
   <script>
-    document.getElementById("contactForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const thankyou = document.getElementById("thankyouMsg");
-      const data = new FormData(form);
-      try {
-        await fetch("https://formsubmit.co/ajax/sdaph1@yahoo.com", {
-          method: "POST",
-          body: data
-        });
-        form.reset();
-        form.style.display = "none";
-        thankyou.style.display = "block";
-      } catch (err) {
-        alert("Error submitting form. Please try again later.");
+    (function(){
+      const form = document.getElementById('contactForm');
+      const successBox = document.getElementById('formSuccess');
+      const errorBox = document.getElementById('formError');
+      const sendBtn = document.getElementById('contactSendBtn');
+      const clearBtn = document.getElementById('contactClearBtn');
+
+      function show(el){
+        el.style.display = 'block';
+        setTimeout(()=> { el.style.opacity = '1'; }, 10);
       }
-    });
+      function hide(el){ el.style.display = 'none'; el.style.opacity = ''; }
+
+      clearBtn.addEventListener('click', function(){
+        form.reset();
+        hide(successBox); hide(errorBox);
+      });
+
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+
+        // honeypot: silently drop if filled
+        const hp = form.querySelector('[name="website"]');
+        if (hp && hp.value.trim() !== '') return;
+
+        // prepare UI
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Sending...';
+        hide(successBox); hide(errorBox);
+
+        // collect data
+        const data = new FormData(form);
+        // set FormSubmit hidden fields (subject/template/captcha) — optional but kept for clarity
+        data.set('_subject', 'New inquiry from SDA Infra site');
+        data.set('_captcha', 'false');
+        data.set('_template', 'table');
+
+        try {
+          const resp = await fetch('https://formsubmit.co/ajax/sdaph1@yahoo.com', {
+            method: 'POST',
+            body: data
+          });
+
+          if (!resp.ok) throw new Error('Network response not ok');
+
+          // success
+          form.style.display = 'none';
+          show(successBox);
+        } catch (err) {
+          // show error but keep form so user can retry
+          console.error(err);
+          show(errorBox);
+        } finally {
+          sendBtn.disabled = false;
+          sendBtn.textContent = 'Send Message';
+        }
+      });
+    })();
   </script>
 </section>
 
