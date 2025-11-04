@@ -8,6 +8,7 @@
   <link rel="icon" href="https://sdapromoters.com/images/logo4favicon.png" type="image/png">
   <!-- Tailwind (keep this; your layout uses a few utility classes) -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
 
   <style>
     /* tiny global reset used by this file only */
@@ -217,14 +218,16 @@
 
           <!-- Uploadcare widget (hidden input role) - your real public key is used -->
           <input
-            type="hidden"
-            role="uploadcare-uploader"
-            data-public-key="demopublickey"
-            data-tabs="file url camera"
-            data-allowed-file-types="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png"
-            data-images-only="false"
-            id="resume"
-            name="resume" />
+  type="hidden"
+  role="uploadcare-uploader"
+  data-public-key="cabc0d1e791242b11bbe"
+  data-tabs="file url camera"
+  data-allowed-file-types=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+  data-images-only="false"
+  id="resume"
+  name="resume" />
+
+
 
           <label for="coverLetter">Cover Letter (Optional)</label>
           <textarea id="coverLetter" name="coverLetter" placeholder="Write your cover letter here (optional)"></textarea>
@@ -240,7 +243,7 @@
       </div>
 
       <!-- Uploadcare script (keeps your existing upload flow) -->
-      <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+      <!--script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script-->
       <!--script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script-->
       <!--script src="uploadcare.full.min.js" charset="utf-8"></script-->
 
