@@ -1,177 +1,296 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <link rel="icon" type="image/png" href="images/logo4favicon.png">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Careers — SDA Infra & Promoters</title>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      color: #111;
-      background: #fff;
-    }
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18px;
-    }
-    #headerdiv { width: 100%; }
+<!-- ===== CAREERS BODY (paste between your header & footer) ===== -->
 
-    h1, h2 { margin-top: 0; }
-    .card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 18px;
-      box-shadow: 0 6px 18px rgba(8,24,12,.06);
-      border: 1px solid rgba(0,0,0,.04);
-      margin-bottom: 24px;
-    }
-    .muted { color: #666; }
-    .btn {
-      background: #1f7a3a;
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-block;
-      margin-top: 8px;
-    }
-    ul { padding-left: 18px; }
-    footer {
-      border-top: 1px solid #eee;
-      margin-top: 32px;
-      padding: 16px 0;
-      text-align: center;
-      color: #444;
-    }
+<!-- spacer for fixed header (adjust height if your header differs) -->
+<div style="height:104px" aria-hidden="true"></div>
 
-    /* Responsive Google Form */
-    .form-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 120%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 8px;
-      margin-top: 12px;
-    }
-    .form-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+<!-- CAREERS MAIN WRAPPER -->
+<main id="careers-body" role="main" aria-label="Careers at SDA Infra & Promoters" style="max-width:1100px;margin:18px auto;padding:18px;box-sizing:border-box;font-family:Inter, Arial, Helvetica, sans-serif;color:#0b1220;">
 
-    @media (max-width: 900px) {
-      .wrap { padding: 16px; }
-    }
-  </style>
-</head>
-<body>
-  <!-- Header dynamically loaded -->
-  <div id="headerdiv" aria-hidden="true"></div>
+  <!-- HERO / INTRO (self-contained) -->
+  <section id="c-hero" aria-labelledby="c-hero-h" style="margin-bottom:18px;">
+    <style>
+      #c-hero .card { background:#fff;border-radius:12px;padding:20px;box-shadow:0 8px 26px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04) }
+      #c-hero h1{ margin:0 0 8px 0; font-size:clamp(1.25rem,2.4vw,1.6rem); font-weight:800; line-height:1.08 }
+      #c-hero .lede{ color:#666; margin:0 }
+    </style>
 
-  <main class="wrap">
-    <h1>Careers at SDA Infra & Promoters</h1>
-    <p class="muted">Join our growing team and help us build Delhi NCR’s most trusted real estate brand.</p>
+    <div class="card" style="background:#fff">
+      <h1 id="c-hero-h">Careers at SDA Infra &amp; Promoters</h1>
+      <p class="lede">Join our growing team and help us build Delhi NCR’s most trusted real estate brand. Open roles and the application form are below.</p>
+    </div>
+  </section>
 
-    <!-- Apply Section -->
+  <!-- APPLY CARD + JOB FORM (self-contained) -->
+  <section id="c-apply" aria-labelledby="c-apply-h" style="margin-bottom:18px;">
+    <style>
+      #c-apply .card { background:#fff;border-radius:12px;padding:18px;box-shadow:0 8px 26px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04) }
+      #c-apply h2{ margin:0 0 8px 0; font-size:1.05rem; font-weight:800 }
+      #c-apply .muted{ color:#666; margin-bottom:10px }
+      #c-apply ul{ margin:8px 0 0 18px; color:#666 }
+      #c-apply .form-container { max-width:760px;margin-top:14px;padding:20px;border-radius:12px;border:1px solid #eee;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,0.04) }
+      #c-apply label{ display:block;font-weight:700;margin-bottom:6px;color:#222 }
+      #c-apply input[type="text"], #c-apply input[type="email"], #c-apply input[type="tel"], #c-apply input[type="date"], #c-apply select, #c-apply textarea { width:100%; padding:10px 12px; margin-bottom:12px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box; font-family:inherit }
+      #c-apply button[type="submit"]{ width:100%; padding:12px 14px; border-radius:10px; border:none; background:linear-gradient(135deg,#1f7a3a,#2e7d32); color:#fff; font-weight:800; cursor:pointer }
+      #c-apply button[type="submit"]:disabled{ background:#94a3b8; cursor:not-allowed }
+      #c-apply .consent { display:flex; align-items:center; gap:10px; margin-bottom:14px }
+      #c-apply .confirmation { display:none; margin-top:12px; font-weight:700; color:green; text-align:center }
+      @media (max-width:540px){ #c-apply .form-container { margin:15px; padding:18px } }
+    </style>
+
     <div class="card">
-      <h2>Apply for Customer Relationship Manager</h2>
-      <p class="muted">
-        We are looking for an energetic and persuasive
-        <strong>Customer Relationship Manager</strong> to manage client interactions,
-        follow up on leads, and maintain long-term relationships with homebuyers.
-      </p>
-      <p><strong>Skills required:</strong> Excellent communication, sales coordination, client follow-up, and CRM tools.</p>
-      <p><strong>Location:</strong> Ramesh Nagar, Delhi</p>
+      <h2 id="c-apply-h">Apply: Customer Relationship Manager</h2>
+      <p class="muted">We are looking for an energetic and persuasive <strong>Customer Relationship Manager</strong> to manage client interactions, follow up on leads, and maintain long-term relationships with homebuyers.</p>
 
-      <!-- Google Form Embed -->
-      <div class="form-container">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLScxize_mrgB8FnPcMQRCsrMSdZH_mmi15VCDKWT453YFRBAlw/viewform?embedded=true"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          loading="lazy"
-          allowfullscreen>
-        </iframe>
+      <p style="margin:8px 0 0 0"><strong>Skills required:</strong> Excellent communication, sales coordination, client follow-up, CRM tools.</p>
+      <p style="margin:6px 0"><strong>Location:</strong> Ramesh Nagar, Delhi</p>
+
+      <ul>
+        <li>Handle inbound & outbound leads</li>
+        <li>Coordinate site visits and documentation</li>
+        <li>Keep CRM records and follow-ups up to date</li>
+        <li>Professional communication with buyers</li>
+      </ul>
+
+      <!-- === Begin job application form (Uploadcare based, as provided) === -->
+      <div class="form-container" role="main" aria-label="Job application form">
+        <h2 style="text-align:center;margin:0 0 12px 0;font-size:1.05rem">Apply: Customer Relationship Manager</h2>
+
+        <form id="job-application-form" novalidate>
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required />
+
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="example@email.com" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
+
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required pattern="^\+?\d{7,15}$" title="Enter a valid phone number" />
+
+          <label for="dob">Date of Birth *</label>
+          <input type="date" id="dob" name="dob" required />
+
+          <label for="position">Position Applied For</label>
+          <input type="text" id="fixedPosition" name="position" value="Customer Relationship Manager" readonly style="background:#f3f3f3; cursor:not-allowed" />
+
+          <label for="qualification">Highest Qualification *</label>
+          <select id="qualification" name="qualification" required>
+            <option value="" disabled selected>Select highest qualification</option>
+            <option value="10th Pass">10th Pass / Secondary School</option>
+            <option value="12th Pass">12th Pass / Higher Secondary</option>
+            <option value="Diploma">Diploma / Vocational Training</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Postgraduate">Postgraduate</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <div id="otherQualificationContainer" style="display:none;">
+            <input type="text" id="otherQualification" name="otherQualification" placeholder="Please specify other qualification" />
+          </div>
+
+          <label for="resume">Upload Resume (pdf, docx, jpeg, png) *</label>
+
+          <!-- Uploadcare widget (hidden input role) - your real public key is used -->
+          <input
+            type="hidden"
+            role="uploadcare-uploader"
+            data-public-key="demopublickey"
+            data-tabs="file url camera"
+            data-allowed-file-types="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png"
+            data-images-only="false"
+            id="resume"
+            name="resume" />
+
+          <label for="coverLetter">Cover Letter (Optional)</label>
+          <textarea id="coverLetter" name="coverLetter" placeholder="Write your cover letter here (optional)"></textarea>
+
+          <div class="consent">
+            <input type="checkbox" id="consent" name="consent" required />
+            <label for="consent" style="margin:0;font-size:0.95rem;color:#555">I consent to the processing of my personal data submitted in this application, to be contacted for hiring purposes.</label>
+          </div>
+
+          <button type="submit" id="submitBtn" disabled>Submit Application</button>
+          <div id="confirmationMessage" class="confirmation" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <!-- Uploadcare script (keeps your existing upload flow) -->
+      <script src="uploadcare.full.min.js" charset="utf-8"></script>
+
+      <!-- Scoped JS for this form only -->
+      <script>
+        (function(){
+          const form = document.getElementById('job-application-form');
+          const submitBtn = document.getElementById('submitBtn');
+          const consentCheckbox = document.getElementById('consent');
+          const confirmationMessage = document.getElementById('confirmationMessage');
+          const qualificationSelect = document.getElementById('qualification');
+          const otherQualificationContainer = document.getElementById('otherQualificationContainer');
+          const otherQualificationInput = document.getElementById('otherQualification');
+          const dobInput = document.getElementById('dob');
+
+          // Set max date for DOB (>=18)
+          function setMaxDOB() {
+            const today = new Date();
+            today.setFullYear(today.getFullYear() - 18);
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            dobInput.max = `${yyyy}-${mm}-${dd}`;
+          }
+          setMaxDOB();
+
+          // Show/hide other qualification
+          qualificationSelect.addEventListener('change', () => {
+            if (qualificationSelect.value === 'Other') {
+              otherQualificationContainer.style.display = 'block';
+              otherQualificationInput.required = true;
+            } else {
+              otherQualificationContainer.style.display = 'none';
+              otherQualificationInput.required = false;
+              otherQualificationInput.value = '';
+            }
+          });
+
+          // Enable submit only when consent checked
+          consentCheckbox.addEventListener('change', () => {
+            submitBtn.disabled = !consentCheckbox.checked;
+          });
+
+          // Submit handler (uses Uploadcare to upload file, then composes payload)
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!form.checkValidity()) {
+              form.reportValidity();
+              return;
+            }
+
+            // DOB age check
+            const dobDate = new Date(dobInput.value);
+            const cutoffDate = new Date();
+            cutoffDate.setFullYear(cutoffDate.getFullYear() - 18);
+            if (dobDate > cutoffDate) {
+              alert('You must be at least 18 years old to apply.');
+              dobInput.focus();
+              return;
+            }
+
+            // Uploadcare widget instance
+            const widget = uploadcare.Widget('[role=uploadcare-uploader]');
+            const fileInfo = widget.value();
+
+            if (!fileInfo) {
+              alert('Please upload your resume.');
+              return;
+            }
+
+            try {
+              const fileData = await fileInfo.promise();
+              const fileUrl = fileData.cdnUrl;
+
+              const qualificationValue = qualificationSelect.value === 'Other' ? otherQualificationInput.value.trim() : qualificationSelect.value;
+
+              const payload = {
+                fullName: form.fullName.value.trim(),
+                email: form.email.value.trim(),
+                phone: form.phone.value.trim(),
+                dob: dobInput.value,
+                position: form.position ? form.position.value.trim() : 'Customer Relationship Manager',
+                qualification: qualificationValue,
+                resumeUrl: fileUrl,
+                coverLetter: form.coverLetter.value.trim(),
+                consentGiven: form.consent.checked
+              };
+
+              // TODO: send `payload` to your backend/email.
+              // For now show success and reset form.
+              confirmationMessage.textContent = 'Your form has been submitted. We have received your details and will contact you as soon as possible.';
+              confirmationMessage.style.display = 'block';
+              submitBtn.style.display = 'none';
+              form.reset();
+              submitBtn.disabled = true;
+              otherQualificationContainer.style.display = 'none';
+            } catch (err) {
+              console.error(err);
+              alert('Error uploading resume. Please try again.');
+            }
+          });
+        })();
+      </script>
+      <!-- === End job application form === -->
+
+    </div>
+  </section>
+
+  <!-- OPENINGS (self-contained) -->
+  <section id="c-openings" aria-labelledby="c-openings-h" style="margin-bottom:18px;">
+    <style>
+      #c-openings .card { background:#fff;border-radius:12px;padding:18px;box-shadow:0 8px 26px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04) }
+      #c-openings h2{ margin:0 0 8px 0;font-size:1.05rem;font-weight:800 }
+      #c-openings ul{ margin:8px 0 0 18px;color:#666 }
+      #c-openings .role-badge { display:inline-block;padding:6px 8px;background:rgba(31,122,58,0.08);color:#1f7a3a;border-radius:999px;font-weight:700;margin-right:8px;font-size:0.95rem }
+    </style>
+
+    <div class="card">
+      <h2 id="c-openings-h">Current Openings</h2>
+      <ul>
+        <li><span class="role-badge">CRM</span> Customer Relationship Manager — Full Time</li>
+        <li><span class="role-badge">Sales</span> Sales Executive — Real Estate (Delhi NCR)</li>
+        <li><span class="role-badge">Media</span> Video Editor — Part-Time</li>
+        <li><span class="role-badge">Marketing</span> Marketing &amp; Social Media Associate</li>
+      </ul>
+      <p style="color:#6b7280;margin-top:12px">To add/remove roles, edit the `<li>` items above.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT (self-contained) -->
+  <section id="c-contact" aria-label="Contact recruiter" style="margin-bottom:18px;">
+    <style>
+      #c-contact .card { background:#fff;border-radius:12px;padding:18px;box-shadow:0 8px 26px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04) }
+      #c-contact .phone-btn { display:inline-flex; align-items:center; gap:10px; padding:10px 14px;border-radius:8px;background:linear-gradient(135deg,#1f7a3a,#2e7d32);color:#fff;font-weight:800;text-decoration:none }
+    </style>
+
+    <div class="card">
+      <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="phone-btn" href="tel:9999944622" aria-label="Call HR">📞 Call HR — 9999944622</a>
+          <div>
+            <div style="font-weight:700">Walk-in / Recruiter enquiries</div>
+            <div style="color:#6b7280">Email: <a href="mailto:info@sdapromoters.com">info@sdapromoters.com</a></div>
+          </div>
+        </div>
+        <div style="text-align:right;color:#6b7280">Office Hours: Mon–Sat, 10:00 — 18:00</div>
       </div>
     </div>
+  </section>
 
-    <!-- Current Openings -->
+  <!-- FAQ (self-contained) -->
+  <section id="c-faq" aria-labelledby="c-faq-h" style="margin-bottom:18px;">
+    <style>
+      #c-faq .card { background:#fff;border-radius:12px;padding:18px;box-shadow:0 8px 26px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04) }
+      #c-faq details { margin:10px 0;padding:10px;border-radius:8px;background:#fbfbfb;border:1px solid #eee }
+      #c-faq summary { font-weight:700; cursor:pointer }
+    </style>
+
     <div class="card">
-      <h2>Current Openings</h2>
-      <ul class="muted">
-        <li>Customer Relationship Manager — Full Time</li>
-        <li>Sales Executive — Real Estate (Delhi NCR)</li>
-        <li>Video Editor — Part-Time</li>
-        <li>Marketing & Social Media Associate</li>
-      </ul>
+      <h2 id="c-faq-h" style="margin:0 0 8px 0;font-size:1.05rem;font-weight:800">Quick Notes</h2>
+
+      <details>
+        <summary>How to apply?</summary>
+        <div style="margin-top:8px">Use the form above. Attach your CV (PDF) and write a short note about your experience.</div>
+      </details>
+
+      <details>
+        <summary>Selection process</summary>
+        <div style="margin-top:8px">Shortlisted candidates will be contacted within 7–10 working days for a telephonic round followed by an office interview.</div>
+      </details>
     </div>
+  </section>
 
-    <!-- Contact / Call -->
-    <div class="card" style="text-align:center;">
-      <a class="btn" href="tel:9999944622">📞 Call Now</a>
-    </div>
-  </main>
+  <!-- small copyright / note -->
+  <div style="max-width:1100px;margin:6px auto 28px;padding:0 18px;color:#6b7280;font-size:0.95rem">
+    © 2025 SDA Infra &amp; Promoters — Careers. Replace the demo Uploadcare key or wire the payload to your backend when ready.
+  </div>
 
-  <!-- Footer dynamically loaded -->
-  <div id="footerdiv" aria-hidden="true"></div>
+</main>
 
-  <script>
-    // same dynamic loader as index.html
-    async function loadHTML(targetId, relPath) {
-      const target = document.getElementById(targetId);
-      if (!target) return;
-      try {
-        const url = new URL(relPath, location.href).href;
-        const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
-        const text = await res.text();
-        const tmp = document.createElement('div');
-        tmp.innerHTML = text;
-
-        Array.from(tmp.childNodes).forEach(node => {
-          if (node.tagName && node.tagName.toLowerCase() === 'script') return;
-          target.appendChild(node.cloneNode(true));
-        });
-
-        const scripts = tmp.querySelectorAll('script');
-        for (const s of scripts) {
-          const newScript = document.createElement('script');
-          for (const attr of s.attributes) newScript.setAttribute(attr.name, attr.value);
-          if (s.src) {
-            await new Promise(resLoad => {
-              newScript.onload = resLoad;
-              newScript.onerror = resLoad;
-              document.body.appendChild(newScript);
-              newScript.src = s.src;
-            });
-          } else {
-            newScript.textContent = s.textContent;
-            document.body.appendChild(newScript);
-          }
-        }
-
-        target.setAttribute('aria-hidden', 'false');
-      } catch (err) {
-        console.error('loadHTML error', err);
-        target.innerHTML =
-          '<div style="padding:12px;background:#fee;color:#600">Failed to load header/footer</div>';
-        target.setAttribute('aria-hidden', 'true');
-      }
-    }
-
-    (async function init() {
-      await loadHTML('headerdiv', 'header.html');
-      await loadHTML('footerdiv', 'footer.html');
-    })();
-  </script>
-</body>
-</html>
+<!-- ===== END CAREERS BODY ===== -->
