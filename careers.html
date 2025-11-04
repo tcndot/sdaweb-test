@@ -248,6 +248,7 @@
           </div>
 
           <button type="submit" id="submitBtn" disabled>Submit Application</button>
+             <input type="hidden" name="Resume Link" id="resume-url-field" />
           <div id="confirmationMessage" class="confirmation" role="status" aria-live="polite"></div>
         </form>
       </div>
@@ -527,6 +528,36 @@
   </div>
 </footer>
 <!-- FOOTER: END -->
+<!-- Uploadcare -> write CDN url into hidden field -> submit to FormSubmit -->
+<script>
+  async function handleUploadAndSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('job-application-form');
+    const widget = uploadcare.Widget('[role=uploadcare-uploader]');
+    const fileInfo = widget.value();
 
+    if (!fileInfo) {
+      alert('Please upload your resume before submitting.');
+      return false;
+    }
+
+    try {
+      const fileData = await fileInfo.promise();
+      const fileUrl = fileData && (fileData.cdnUrl || fileData.original_url || fileData.fileUrl || fileData.url) || '';
+
+      // Put the CDN URL into hidden field for FormSubmit
+      const hidden = document.getElementById('resume-url-field');
+      if (hidden) hidden.value = fileUrl;
+
+      // Now submit the form to FormSubmit (it will send email to your hotmail)
+      form.submit();
+      return true;
+    } catch (err) {
+      console.error('Upload error:', err);
+      alert('There was an error uploading your resume. Try again.');
+      return false;
+    }
+  }
+</script>
 </body>
 </html>
