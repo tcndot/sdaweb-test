@@ -1,3 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SDA Infra & Promoters — Careers</title>
+  <!-- favicon -->
+  <link rel="icon" href="https://sdapromoters.com/images/logo4favicon.png" type="image/png">
+  <!-- Tailwind (keep this; your layout uses a few utility classes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* tiny global reset used by this file only */
+    html,body { margin:0; }
+  </style>
+</head>
+<body>
+
+<!-- ===========================================================
+     HEADER: START (self-contained)
+     - Fixed topbar + header
+     - mobile menu uses checkbox + CSS; no JS
+     =========================================================== -->
+<header aria-label="Site header" class="sda-header-root">
+  <style>
+    .sda-header-root { font-family: Inter, Arial, Helvetica, sans-serif; }
+
+    /* topbar (fixed) */
+    .sda-header-topbar{
+      height:40px;
+      position:fixed; top:0; left:0; right:0;
+      background:linear-gradient(135deg,#1a3a1a,#2e7d32);
+      color:#e8f5e8;
+      display:flex; align-items:center;
+      padding:0 4vw;
+      z-index:5000;
+      font-weight:700;
+    }
+    .sda-header-topbar a{ color:inherit; text-decoration:none; display:flex; gap:8px; align-items:center }
+
+    /* header below topbar (fixed) */
+    .sda-header-bar{
+      height:64px;
+      position:fixed; top:40px; left:0; right:0;
+      background: linear-gradient(135deg,#fff,#f0f7f0);
+      display:flex; align-items:center; gap:12px;
+      padding:10px 4vw; z-index:4900;
+    }
+
+    .sda-branding{ display:flex; align-items:center; gap:12px }
+    .sda-branding .sda-logo { width:48px; height:48px; object-fit:contain; border-radius:10px; border:3px solid #1a3a1a; background:#fff; }
+    .sda-branding .sda-company { font-weight:900; color:#1a3a1a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:1rem }
+
+    .sda-nav{ margin-left:auto; display:flex; gap:18px; align-items:center }
+    .sda-nav a{ color:#1a3a1a; text-decoration:none; font-weight:700; display:flex; gap:6px; flex-direction:column; align-items:center; font-size:0.85rem }
+
+    /* mobile menu toggle */
+    #sda-menu-toggle { display:none; }
+    .sda-menu-label{ display:none; margin-left:auto; background:#fff; color:#1a3a1a; padding:8px 12px; border-radius:10px; border:1px solid rgba(26,58,26,0.12); font-weight:800; cursor:pointer }
+
+    /* mobile menu (hidden by default) */
+    .sda-mobile-menu {
+      display:none;
+      position:fixed;
+      right:4vw;
+      top: calc(40px + 64px + 8px);
+      width: min(92vw, 320px);
+      background:#fff;
+      color:#12321a;
+      border-radius:10px;
+      padding:10px;
+      box-shadow:0 14px 40px rgba(10,20,10,0.12);
+      z-index:4800;
+    }
+
+    /* reveal mobile menu when checkbox is checked */
+    #sda-menu-toggle:checked ~ .sda-mobile-menu { display:block; }
+
+    @media (max-width:860px){
+      .sda-nav{ display:none; }
+      .sda-menu-label{ display:inline-block; }
+      .sda-branding .sda-logo{ width:44px; height:44px; }
+    }
+  </style>
+
+  <div class="sda-header-topbar" role="banner">
+    <a href="tel:9999944622" aria-label="Call SDA Infra and Promoters">
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.21.2 2.41.57 3.55a1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+      <span style="font-weight:800">Call: 9999944622</span>
+    </a>
+  </div>
+
+  <div class="sda-header-bar" role="navigation" aria-label="Main header">
+    <div class="sda-branding">
+      <a href="index.html" class="sda-logo-link" aria-label="Home">
+      <!-- logo -->
+     <img class="sda-logo" 
+     src="https://sdapromoters.com/images/logo.png" 
+     alt="SDA logo" 
+     onerror="this.style.display='none'">
+      </a>
+      <div class="sda-company">SDA Infra &amp; Promoters</div>
+    </div>
+
+    <nav class="sda-nav" aria-label="Primary navigation">
+      <a href="index.html" title="Home"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></a>
+      <a href="about.html" title="About"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg><span>About</span></a>
+      <a href="careers.html" title="Careers"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M14 6V4h-4v2H3v2h18V6h-7zm-9 6v8h14v-8H5z"/></svg><span>Careers</span></a>
+      <a href="blogs.html" title="Blogs"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg><span>Blogs</span></a>
+    </nav>
+
+    <!-- mobile menu checkbox toggles menu below -->
+    <input id="sda-menu-toggle" type="checkbox" aria-hidden="true">
+    <label for="sda-menu-toggle" class="sda-menu-label" aria-hidden="false">☰ Menu</label>
+
+    <div class="sda-mobile-menu" role="menu" aria-hidden="true">
+      <a href="index.html" style="display:block;padding:8px 6px">Home</a>
+      <a href="about.html" style="display:block;padding:8px 6px">About Us</a>
+      <a href="careers.html" style="display:block;padding:8px 6px">Careers</a>
+      <a href="blogs.html" style="display:block;padding:8px 6px">Blogs &amp; Gallery</a>
+    </div>
+  </div>
+</header>
+
+<!-- spacer keeps page content below fixed header -->
+<div class="sda-page-spacer" style="height:104px;"></div>
+<!-- HEADER: END -->
 <!-- ===== CAREERS BODY (paste between your header & footer) ===== -->
 
 <!-- spacer for fixed header (adjust height if your header differs) -->
