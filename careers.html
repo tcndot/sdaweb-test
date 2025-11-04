@@ -183,7 +183,17 @@
       <div class="form-container" role="main" aria-label="Job application form">
         <h2 style="text-align:center;margin:0 0 12px 0;font-size:1.05rem">Apply: Customer Relationship Manager</h2>
 
-        <form id="job-application-form" novalidate>
+        <!--form id="job-application-form" novalidate-->
+           <form
+               action="https://formsubmit.co/sdadevelopers99+jobapplications@hotmail.com"
+               method="POST"
+               id="job-application-form"
+               onsubmit="return handleUploadAndSubmit(event)"
+                novalidate
+                    >
+
+
+        
           <label for="fullName">Full Name *</label>
           <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required />
 
