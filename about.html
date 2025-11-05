@@ -13,6 +13,54 @@
     /* tiny global reset used by this file only */
     html,body { margin:0; }
   </style>
+  <!-- ADD: small global styles for About page (paste inside <head> after the tiny reset) -->
+<style>
+  :root{
+    --wrap: 1100px;
+    --accent: #1f7a3a;
+    --muted: #666;
+    --card-radius: 12px;
+    --card-padding: 20px;
+  }
+  body {
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+    color: #111;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #fff;
+  }
+  .wrap{ max-width:var(--wrap); margin:0 auto; padding:22px; box-sizing:border-box; }
+  .topbar h1 { font-size:1.6rem; margin:0; }
+  .topbar .lead { font-size:1rem; color:var(--muted); margin-top:6px; }
+  .grid { display:grid; grid-template-columns: 1fr 320px; gap:28px; align-items:start; }
+  @media (max-width:920px){ .grid{ grid-template-columns: 1fr; } }
+  .card {
+    background: #fff;
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    box-shadow: 0 6px 22px rgba(12,20,12,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .card h2 { font-size:1.05rem; margin:0 0 10px; color:#0f3f23; }
+  .card p { margin:0 0 12px; color:#222; }
+  .card ul { margin:0 0 12px 18px; color:var(--muted); }
+  .btn {
+    display:inline-block; text-decoration:none; font-weight:800;
+    padding:10px 14px; border-radius:10px;
+    background:var(--accent); color:#fff;
+    box-shadow: 0 6px 18px rgba(31,122,58,0.12);
+  }
+  .btn.secondary {
+    background:#fff; color:var(--accent); border:1px solid rgba(0,0,0,0.06);
+    box-shadow:none;
+  }
+  a { color:var(--accent); }
+  a:hover { text-decoration:underline; }
+  /* keep header spacer aligned with header */
+  .sda-page-spacer { height:104px; }
+  @media(max-width:860px){ .sda-page-spacer { height:116px; } }
+</style>
 </head>
 <body>
 
