@@ -363,6 +363,22 @@
 
     </div>
   </section>
+   <style>
+  .wa-fallback-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  @media (max-width: 640px) {
+    .wa-fallback-row {
+      display: block;   /* stack items vertically */
+    }
+    .wa-fallback-row > * {
+      margin-top: 12px;
+    }
+  }
+</style>
 
     <!-- ===== Resume fallback (WhatsApp) - paste directly below the form ===== -->
 <div id="resume-wa-fallback" aria-live="polite" style="max-width:760px;margin:18px 0;padding:14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);background:linear-gradient(180deg,#f7fff7,#ffffff);box-shadow:0 8px 20px rgba(8,24,12,0.04);font-family:Inter, Arial, Helvetica, sans-serif">
