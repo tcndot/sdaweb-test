@@ -378,6 +378,12 @@
       margin-top: 12px;
     }
   }
+     @media (max-width: 640px) {
+  .wa-btn-box {
+    margin-top: 16px;
+  }
+}
+
 </style>
 
     <!-- ===== Resume fallback (WhatsApp) - paste directly below the form ===== -->
@@ -404,7 +410,9 @@
     </div>
 
     <!-- WhatsApp link button -->
-    <div style="flex:0 0 auto">
+    <!--div style="flex:0 0 auto"-->
+      <div class="wa-btn-box">
+
       <!-- NOTE: Number uses India country code +91 -->
       <a href="https://wa.me/919999944622?text=Hello%2C%20I%20am%20unable%20to%20submit%20my%20job%20application%20via%20the%20website.%20Please%20help.%20Name%3A%20%5BYour%20Name%5D" 
          target="_blank" rel="noopener" 
