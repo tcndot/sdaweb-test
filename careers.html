@@ -450,6 +450,18 @@
     <style>
       #c-contact .card { background:#fff;border-radius:12px;padding:18px;box-shadow:0 8px 26px rgba(8,24,12,.06);border:1px solid rgba(0,0,0,.04) }
       #c-contact .phone-btn { display:inline-flex; align-items:center; gap:10px; padding:10px 14px;border-radius:8px;background:linear-gradient(135deg,#1f7a3a,#2e7d32);color:#fff;font-weight:800;text-decoration:none }
+   @media (max-width:640px){
+  #c-contact .card > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #c-contact .phone-btn {
+    width: 100%;
+    margin-top: 12px;
+    justify-content: center;
+  }
+}
+
     </style>
 
     <div class="card">
