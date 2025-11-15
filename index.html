@@ -500,12 +500,112 @@
      STATS SECTION (unchanged)
      =========================================================== -->
 <section class="sda-stats-root" aria-label="Statistics strip">
-  <style>
+      <!-- <style>
     .sda-stats-root { font-family:Inter, Arial, sans-serif; padding:18px 0 48px; background:#fbfbf9; }
     .sda-stats-inner { max-width:1120px; margin:0 auto; padding:0 20px; display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap; text-align:center; }
     .sda-stat { flex:1 1 180px; background:#fff; padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(12,20,12,0.04); }
     .sda-stat .sda-num { font-size:28px; font-weight:800; margin-bottom:6px; }
     .sda-stat p { margin:0; color:#666; }
+  </style> -->
+  <style>
+    /* STATS — compact on mobile, premium on desktop */
+
+    .sda-stats-root { font-family:Inter, Arial, sans-serif; padding:22px 0 44px; background:#fbfbf9; }
+
+    /* inner wrapper default: centered and constrained for desktop */
+    .sda-stats-inner {
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 18px;
+      display:flex;
+      gap:20px;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      align-items:stretch;
+      text-align:center;
+    }
+
+    /* each stat card (desktop/premium) */
+    .sda-stat {
+      flex:1 1 200px;
+      background:#fff;
+      padding:26px 22px;
+      border-radius:16px;
+      box-shadow: 0 12px 36px rgba(10,20,10,0.06);
+      border: 1px solid rgba(0,0,0,0.035);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .sda-stat:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(8,18,8,0.09);
+    }
+
+    .sda-num {
+      font-size:34px;
+      font-weight:900;
+      margin-bottom:8px;
+      color:#0f3f23;
+      letter-spacing:0.6px;
+    }
+    .sda-stat p {
+      margin:0;
+      color:#6a6f6b;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    /* make cards slightly larger on very wide screens for premium feel */
+    @media (min-width:1200px) {
+      .sda-stat { padding:34px 28px; border-radius:18px; }
+      .sda-num { font-size:40px; }
+      .sda-stat p { font-size:15px; }
+    }
+
+    /* ---------- MOBILE: compact + 2-up grid ---------- */
+    @media (max-width:880px) {
+
+      .sda-stats-root { padding:14px 0 28px; }
+
+      /* convert flex to grid for tighter 2-up layout */
+      .sda-stats-inner {
+        display:grid;
+        grid-template-columns: repeat(2, 1fr); /* two columns */
+        gap:10px;
+        max-width: 920px; /* keeps some left/right breathing room on medium phones */
+        margin: 0 auto;
+        padding: 0 12px;
+      }
+
+      .sda-stat {
+        padding:12px 10px; /* much smaller padding */
+        border-radius:10px;
+        box-shadow: 0 6px 18px rgba(10,20,10,0.04);
+      }
+
+      .sda-num {
+        font-size:20px; /* compact number */
+        font-weight:900;
+        margin-bottom:6px;
+      }
+
+      .sda-stat p {
+        font-size:12px; /* compact label */
+        color:#666;
+        font-weight:600;
+      }
+
+      /* reduce bottom spacing in the entire section */
+      .sda-stats-inner { gap:8px; }
+    }
+
+    /* accessibility / reduced motion: remove hover lift */
+    @media (prefers-reduced-motion: reduce) {
+      .sda-stat { transition:none; transform:none; }
+    }
   </style>
 
   <div class="sda-stats-inner">
