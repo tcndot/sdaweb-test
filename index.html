@@ -270,7 +270,8 @@
      MAIN: about + slideshow (unchanged, self-contained)
      =========================================================== -->
 <main class="sda-main-root">
-  <style>
+    <!--
+     <style>
     .sda-main-root { font-family: Inter, Arial, sans-serif; color:#111; background:#fbfbf9; padding:28px 0 60px; }
     .sda-main-wrap { max-width:1120px; margin:0 auto; padding:0 20px; display:grid; grid-template-columns:1fr 520px; gap:22px; align-items:start; }
     @media (max-width:880px) { .sda-main-wrap { grid-template-columns:1fr; } }
@@ -302,6 +303,83 @@
       .sda-slide.s1 { opacity:1; }
     }
   </style>
+          -->
+     <style>
+    /* main area — no extra outer padding so content fills the centered area */
+    .sda-main-root { font-family: Inter, Arial, sans-serif; color:#111; background:#fbfbf9; padding:0 0 40px; }
+
+    /* two equal columns on desktop so left becomes prominent (left half), images on right */
+    .sda-main-wrap {
+      max-width:1120px;
+      margin:0 auto;
+      padding:0; /* remove side-padding as requested */
+      display:grid;
+      grid-template-columns: 1fr 1fr; /* left = 50%, right = 50% on wide screens */
+      gap:18px;
+      align-items:start;
+    }
+
+    /* mobile: single column — about first, slideshow (photos) below */
+    @media (max-width:880px) {
+      .sda-main-wrap {
+        grid-template-columns: 1fr;
+        padding: 12px; /* small page padding on mobile for tap targets */
+        gap:12px;
+      }
+    }
+
+    /* ABOUT CARD — make it visually prominent (bigger lead text, tighter layout) */
+    .sda-about-card {
+      background:#fff;
+      border-radius:12px;
+      padding:28px; /* inner padding keeps text readable; tweak as needed */
+      box-shadow: 0 14px 40px rgba(12,20,12,0.06);
+      border: 1px solid rgba(0,0,0,0.03);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .sda-about-card .sda-title { font-size:30px; margin:0 0 10px; font-weight:900; color:#0f3f23; }
+    .sda-about-card .sda-lead { color:#333; margin:0 0 14px; font-size:16px; line-height:1.6; font-weight:600; }
+    .sda-about-card ul { color:#444; padding-left:18px; margin:12px 0 18px; font-weight:600; }
+    .sda-about-card .sda-cta { display:inline-block; padding:10px 14px; border-radius:8px; background:#1f7a3a; color:#fff; font-weight:800; text-decoration:none; }
+
+    /* SLIDESHOW / PHOTOS — occupy right column, remove large internal padding so photos dominate */
+    .sda-slideshow {
+      position:relative;
+      height:420px; /* slightly taller on desktop for visual weight */
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#eef6ee,#f7faf7);
+      box-shadow: 0 10px 30px rgba(12,20,12,0.05);
+    }
+
+    /* reduce slideshow height on smaller breakpoints */
+    @media (max-width:1000px){ .sda-slideshow{ height:340px; } }
+    @media (max-width:880px){ .sda-slideshow{ height:220px; border-radius:10px; } }
+
+    /* slide sizing — keep them full area, background covers */
+    .sda-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; will-change:opacity,transform; }
+    .sda-slide.s1 { animation:sdaCycle 18s linear infinite; animation-delay:0s; }
+    .sda-slide.s2 { animation:sdaCycle 18s linear infinite; animation-delay:3s; }
+    .sda-slide.s3 { animation:sdaCycle 18s linear infinite; animation-delay:6s; }
+    .sda-slide.s4 { animation:sdaCycle 18s linear infinite; animation-delay:9s; }
+    .sda-slide.s5 { animation:sdaCycle 18s linear infinite; animation-delay:12s; }
+    .sda-slide.s6 { animation:sdaCycle 18s linear infinite; animation-delay:15s; }
+
+    @keyframes sdaCycle {
+      0% { opacity:1; transform:scale(1); }
+      16.66% { opacity:1; transform:scale(1); }
+      18% { opacity:0; transform:scale(1.02); }
+      100% { opacity:0; transform:scale(1.02); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sda-slide { animation:none; opacity:0; }
+      .sda-slide.s1 { opacity:1; }
+    }
+  </style>
+
 
   <div class="sda-main-wrap">
     <section class="sda-about-card">
