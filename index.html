@@ -314,7 +314,9 @@
       margin:0 auto;
       padding:0; /* remove side-padding as requested */
       display:grid;
-      grid-template-columns: 1fr 1fr; /* left = 50%, right = 50% on wide screens */
+      /*grid-template-columns: 1fr 1fr; */ 
+      grid-template-columns: 1.25fr 0.75fr;
+
       gap:18px;
       align-items:start;
     }
@@ -409,7 +411,9 @@
 
   /* reduce slideshow height so it doesn't push page too far down */
   .sda-slideshow {
-    height: 180px; /* compact mobile slideshow */
+    /*height: 180px;*/
+    height: 150px;
+
     border-radius: 10px;
   }
 
