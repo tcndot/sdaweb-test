@@ -12,6 +12,62 @@
     /* tiny global reset used by this file only */
     html,body { margin:0; }
   </style>
+  <!-- ===== sda layout tweaks: hero full-bleed + readable gutters ===== -->
+<style>
+  /* Make the hero background image truly edge-to-edge while keeping header/footer intact.
+     Technique: allow the hero background to expand to 100vw and center it using negative margin.
+     This preserves the centered text/content inside .sda-hero-inner but lets the background touch edges. */
+  .sda-hero-inner { /* keep inner content width and small side padding for text */
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 18px 40px;
+    box-sizing: border-box;
+  }
+
+  /* Make background block bleed full width */
+  .sda-hero-bg {
+    width: 100vw;
+    left: 50%;
+    position: relative;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    border-radius: 0; /* remove rounded corners so image touches viewport edges */
+    padding: 48px 22px; /* keeps existing vertical padding for hero content */
+  }
+
+  /* Keep hero text/image readable on very small screens */
+  @media (max-width:880px){
+    .sda-hero-inner { padding-left: 14px; padding-right: 14px; }
+    .sda-hero-bg { padding-left: 14px; padding-right: 14px; min-height: 320px; }
+  }
+
+  /* For other main sections: keep a comfortable readable gutter (no huge white margins) */
+  .sda-main-wrap,
+  #sda-why-inner,
+  .sda-stats-inner,
+  .contact-wrap,
+  .sda-footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: 18px;
+    padding-right: 18px;
+    box-sizing: border-box;
+  }
+
+  /* If any inner wrappers still add extra 20px causing larger gaps, reduce them slightly */
+  .sda-main-wrap, .sda-stats-inner, #sda-why-inner {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  /* small visual tweak: restore rounded hero content card if you still want inner rounded card
+     (optional — comment out if you prefer the hero overlay to remain flush with image edges) */
+  .sda-hero-bg > .sda-hero-img,
+  .sda-hero-bg > .sda-hero-img img {
+    border-radius: 10px;
+  }
+</style>
 </head>
 <body>
 
