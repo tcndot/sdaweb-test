@@ -320,6 +320,16 @@
       gap:18px;
       align-items:start;
     }
+   /* Equal height fix for desktop */
+@media (min-width: 881px) {
+  .sda-main-wrap {
+    align-items: stretch !important;
+  }
+  .sda-about-card,
+  .sda-slideshow {
+    height: 100% !important;
+  }
+}
 
     /* mobile: single column — about first, slideshow (photos) below */
     @media (max-width:880px) {
