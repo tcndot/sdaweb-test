@@ -378,6 +378,46 @@
       .sda-slide { animation:none; opacity:0; }
       .sda-slide.s1 { opacity:1; }
     }
+       /* MOBILE TIGHTENING — add this at the end of the same style block */
+@media (max-width:880px) {
+  /* make the main wrapper use normal mobile padding and stack nicely */
+  .sda-main-wrap {
+    max-width: 100%;
+    padding: 12px; /* small page padding for mobile */
+    grid-template-columns: 1fr; /* single column: about first, photos below */
+    gap: 12px;
+  }
+
+  /* reduce inner padding so the card is shorter vertically */
+  .sda-about-card {
+    padding: 14px; /* compact but readable */
+  }
+  .sda-about-card .sda-title {
+    font-size: 20px; /* slightly smaller title on mobile */
+    margin-bottom: 8px;
+  }
+  .sda-about-card .sda-lead {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .sda-about-card ul {
+    margin: 8px 0 12px;
+    padding-left: 14px;
+    font-size: 14px;
+  }
+
+  /* reduce slideshow height so it doesn't push page too far down */
+  .sda-slideshow {
+    height: 180px; /* compact mobile slideshow */
+    border-radius: 10px;
+  }
+
+  /* if you used larger slide images with box-shadow, tone it down on mobile */
+  .sda-slideshow, .sda-slide {
+    box-shadow: none;
+  }
+}
   </style>
 
 
