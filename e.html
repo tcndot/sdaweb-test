@@ -30,7 +30,7 @@
       margin: 10px 0 5px;
       font-weight: bold;
     }
-    .calculator input {
+    .calculator input, .calculator select {
       width: 100%;
       padding: 8px;
       border: 1px solid #ccc;
@@ -70,8 +70,14 @@
     <label for="rate">Rate per gaj</label>
     <input type="number" id="rate" placeholder="Enter rate">
 
-    <label for="duration">Duration (months, max 36)</label>
-    <input type="number" id="duration" placeholder="Enter duration">
+    <label for="duration">Duration (months)</label>
+    <select id="duration">
+      <option value="12">12</option>
+      <option value="18">18</option>
+      <option value="24">24</option>
+      <option value="30">30</option>
+      <option value="36">36</option>
+    </select>
 
     <button onclick="calculateEMI()">Calculate EMI</button>
 
@@ -82,15 +88,10 @@
     function calculateEMI() {
       const area = parseFloat(document.getElementById('area').value);
       const rate = parseFloat(document.getElementById('rate').value);
-      let duration = parseInt(document.getElementById('duration').value);
+      const duration = parseInt(document.getElementById('duration').value);
 
       if (isNaN(area) || isNaN(rate) || isNaN(duration)) {
         alert("Please fill all fields correctly.");
-        return;
-      }
-
-      if (duration > 36) {
-        alert("Duration cannot exceed 36 months.");
         return;
       }
 
