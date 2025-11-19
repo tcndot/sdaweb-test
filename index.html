@@ -1,0 +1,713 @@
+---
+layout: default
+title: index
+---
+
+
+<!-- ===========================================================
+     HERO: START (self-contained)
+     - animations restored (text then image)
+     - background covers top area with no white gap
+     =========================================================== -->
+<section class="sda-hero-root" aria-label="Hero section">
+  <style>
+    .sda-hero-root { font-family: Inter, Arial, sans-serif; }
+    .sda-hero-inner { max-width:1120px; margin:0 auto; padding:0 20px 40px; }
+
+    /* hero background block that fills the viewport minus header */
+    .sda-hero-bg {
+      background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzAMUWLQngjqAkBoZIVdeP8RNhnZ36h2f5CBNxyWMR0_c36ShTDJrACxpIqht-BW4OuQ4vYdLAPBUHtytx3_sQDYIWsFs4_OIDQIaQvT_0EANP3LJb4B2t2tzfXqs464nCBJ-kc26UXgaQ1BqLqbLSU2439EvHZx7G7rwrct1eYirOLE9xrTPoNIa3_yw/s1552/Screenshot%20from%202025-10-30%2017-55-59.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      padding: 48px 22px;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-height: calc(100vh - 104px); /* full-screen hero minus header heights */
+      box-sizing:border-box;
+    }
+
+    .sda-hero-root h1 {
+      font-size: clamp(28px, 5vw, 56px);
+      margin: 0 0 18px;
+      line-height: 1.05;
+      font-weight:700;
+
+      /* start hidden & translated down */
+      opacity: 0;
+      transform: translateY(2.6rem);
+      animation: sdaLoadH1 1.1s cubic-bezier(.65,.05,.36,1) forwards;
+      animation-delay: 0.35s;
+    }
+
+    .sda-hero-img {
+      max-width:960px;
+      width:85%;
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 18px 40px rgba(2,8,4,0.18);
+      margin-top:18px;
+
+      /* start translated down & hidden, then slide in */
+      opacity:0;
+      transform: translateY(2.6rem);
+      animation: sdaLoadImg 0.9s cubic-bezier(.65,.05,.36,1) forwards;
+      animation-delay: 1.1s; /* runs after the heading */
+    }
+
+    @keyframes sdaLoadH1 {
+      0% { opacity:0; transform: translateY(2.6rem); }
+      60% { opacity:1; transform: translateY(1.2rem); }
+      100% { opacity:1; transform: translateY(0); }
+    }
+    @keyframes sdaLoadImg {
+      0% { opacity:0; transform: translateY(3.6rem); }
+      100% { opacity:1; transform: translateY(0); }
+    }
+
+    @media (max-width:880px){
+      .sda-hero-bg { min-height: 320px; padding:28px 16px; }
+      .sda-hero-img { width:100%; margin-top:12px; }
+    }
+
+    /* respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .sda-hero-root h1, .sda-hero-img { animation:none !important; opacity:1; transform:none; }
+    }
+  </style>
+
+  <div class="sda-hero-inner">
+    <div class="sda-hero-bg">
+      <h1>Welcome to YOUR NEW<br>PLOTS in Delhi NCR</h1>
+      <img class="sda-hero-img"
+           src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHGQIpE5ppor8lJSMGANoyCuUDla_zzLh7o1Lxf8xNhV9RTfi0-OyGPd9nR9GkzKWP_IHkVhDnJWRET-7pdTeWM_aXKp4k0ri1YoNyUoqDMgUgnHL0rlwftFP8QO5rdRkm8y6d3cIFP8GlwOp6qIEwDK-qSbgpVtb_VSsUcIyVp1zBkFMNFapO9DzhmY/s1654/1000029520.png"
+           alt="Hero image showing plots"
+           width="960" height="600" loading="eager">
+    </div>
+  </div>
+</section>
+<!-- HERO: END -->
+
+
+<!-- ===========================================================
+     MAIN: about + slideshow (unchanged, self-contained)
+     =========================================================== -->
+<main class="sda-main-root">
+    <!--
+     <style>
+    .sda-main-root { font-family: Inter, Arial, sans-serif; color:#111; background:#fbfbf9; padding:28px 0 60px; }
+    .sda-main-wrap { max-width:1120px; margin:0 auto; padding:0 20px; display:grid; grid-template-columns:1fr 520px; gap:22px; align-items:start; }
+    @media (max-width:880px) { .sda-main-wrap { grid-template-columns:1fr; } }
+
+    .sda-about-card { background:#fff; border-radius:12px; padding:22px; box-shadow:0 12px 36px rgba(12,20,12,0.06); border:1px solid rgba(0,0,0,0.03); }
+    .sda-about-card .sda-title { font-size:28px; margin:0 0 8px; font-weight:800; }
+    .sda-about-card .sda-lead { color:#666; margin:0 0 14px; font-size:15px; line-height:1.5 }
+    .sda-about-card ul { color:#666; padding-left:18px; margin:12px 0 18px; }
+    .sda-about-card .sda-cta { display:inline-block; padding:10px 14px; border-radius:8px; background:#1f7a3a; color:#fff; font-weight:700; text-decoration:none; }
+
+    .sda-slideshow { position:relative; height:360px; border-radius:12px; overflow:hidden; background:linear-gradient(180deg,#eef6ee,#f7faf7); }
+    @media (max-width:1000px){ .sda-slideshow{height:300px} }
+    @media (max-width:880px){ .sda-slideshow{height:220px} }
+    .sda-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; will-change:opacity,transform; }
+    .sda-slide.s1 { animation:sdaCycle 18s linear infinite; animation-delay:0s; }
+    .sda-slide.s2 { animation:sdaCycle 18s linear infinite; animation-delay:3s; }
+    .sda-slide.s3 { animation:sdaCycle 18s linear infinite; animation-delay:6s; }
+    .sda-slide.s4 { animation:sdaCycle 18s linear infinite; animation-delay:9s; }
+    .sda-slide.s5 { animation:sdaCycle 18s linear infinite; animation-delay:12s; }
+    .sda-slide.s6 { animation:sdaCycle 18s linear infinite; animation-delay:15s; }
+    @keyframes sdaCycle {
+      0% { opacity:1; transform:scale(1); }
+      16.66% { opacity:1; transform:scale(1); }
+      18% { opacity:0; transform:scale(1.02); }
+      100% { opacity:0; transform:scale(1.02); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sda-slide { animation:none; opacity:0; }
+      .sda-slide.s1 { opacity:1; }
+    }
+  </style>
+          -->
+     <style>
+    /* main area — no extra outer padding so content fills the centered area */
+    .sda-main-root { font-family: Inter, Arial, sans-serif; color:#111; background:#fbfbf9; padding:0 0 40px; }
+
+    /* two equal columns on desktop so left becomes prominent (left half), images on right */
+    .sda-main-wrap {
+      max-width:1600px;
+      margin:0 auto;
+      padding:0; /* remove side-padding as requested */
+      display:grid;
+      /*grid-template-columns: 1fr 1fr; */ 
+      grid-template-columns: 1.25fr 0.75fr;
+
+      gap:18px;
+      align-items:start;
+    }
+   /* Equal height fix for desktop */
+@media (min-width: 881px) {
+  .sda-main-wrap {
+    align-items: stretch !important;
+  }
+  .sda-about-card,
+  .sda-slideshow {
+    height: 100% !important;
+  }
+}
+
+    /* mobile: single column — about first, slideshow (photos) below */
+    @media (max-width:880px) {
+      .sda-main-wrap {
+        grid-template-columns: 1fr;
+        padding: 12px; /* small page padding on mobile for tap targets */
+        gap:12px;
+      }
+    }
+
+    /* ABOUT CARD — make it visually prominent (bigger lead text, tighter layout) */
+    .sda-about-card {
+      background:#fff;
+      border-radius:12px;
+      padding:28px; /* inner padding keeps text readable; tweak as needed */
+      box-shadow: 0 14px 40px rgba(12,20,12,0.06);
+      border: 1px solid rgba(0,0,0,0.03);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .sda-about-card .sda-title { font-size:30px; margin:0 0 10px; font-weight:900; color:#0f3f23; }
+    .sda-about-card .sda-lead { color:#333; margin:0 0 14px; font-size:16px; line-height:1.6; font-weight:600; }
+    .sda-about-card ul { color:#444; padding-left:18px; margin:12px 0 18px; font-weight:600; }
+    .sda-about-card .sda-cta { display:inline-block; padding:10px 14px; border-radius:8px; background:#1f7a3a; color:#fff; font-weight:800; text-decoration:none; }
+
+    /* SLIDESHOW / PHOTOS — occupy right column, remove large internal padding so photos dominate */
+    .sda-slideshow {
+      position:relative;
+      height:420px; /* slightly taller on desktop for visual weight */
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#eef6ee,#f7faf7);
+      box-shadow: 0 10px 30px rgba(12,20,12,0.05);
+    }
+
+    /* reduce slideshow height on smaller breakpoints */
+    @media (max-width:1000px){ .sda-slideshow{ height:340px; } }
+    @media (max-width:880px){ .sda-slideshow{ height:220px; border-radius:10px; } }
+
+    /* slide sizing — keep them full area, background covers */
+    .sda-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition:opacity .6s ease; will-change:opacity,transform; }
+    .sda-slide.s1 { animation:sdaCycle 18s linear infinite; animation-delay:0s; }
+    .sda-slide.s2 { animation:sdaCycle 18s linear infinite; animation-delay:3s; }
+    .sda-slide.s3 { animation:sdaCycle 18s linear infinite; animation-delay:6s; }
+    .sda-slide.s4 { animation:sdaCycle 18s linear infinite; animation-delay:9s; }
+    .sda-slide.s5 { animation:sdaCycle 18s linear infinite; animation-delay:12s; }
+    .sda-slide.s6 { animation:sdaCycle 18s linear infinite; animation-delay:15s; }
+
+    @keyframes sdaCycle {
+      0% { opacity:1; transform:scale(1); }
+      16.66% { opacity:1; transform:scale(1); }
+      18% { opacity:0; transform:scale(1.02); }
+      100% { opacity:0; transform:scale(1.02); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sda-slide { animation:none; opacity:0; }
+      .sda-slide.s1 { opacity:1; }
+    }
+       /* MOBILE TIGHTENING — add this at the end of the same style block */
+@media (max-width:880px) {
+  /* make the main wrapper use normal mobile padding and stack nicely */
+  .sda-main-wrap {
+    max-width: 100%;
+    padding: 12px; /* small page padding for mobile */
+    grid-template-columns: 1fr; /* single column: about first, photos below */
+    gap: 12px;
+  }
+
+  /* reduce inner padding so the card is shorter vertically */
+  .sda-about-card {
+    padding: 14px; /* compact but readable */
+  }
+  .sda-about-card .sda-title {
+    font-size: 20px; /* slightly smaller title on mobile */
+    margin-bottom: 8px;
+  }
+  .sda-about-card .sda-lead {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .sda-about-card ul {
+    margin: 8px 0 12px;
+    padding-left: 14px;
+    font-size: 14px;
+  }
+
+  /* reduce slideshow height so it doesn't push page too far down */
+  .sda-slideshow {
+    /*height: 180px;*/
+    height: 180px;
+
+    border-radius: 10px;
+  }
+
+  /* if you used larger slide images with box-shadow, tone it down on mobile */
+  .sda-slideshow, .sda-slide {
+    box-shadow: none;
+  }
+}
+  </style>
+
+
+  <div class="sda-main-wrap">
+    <section class="sda-about-card">
+      <h2 class="sda-title">SDA Infra &amp; Promoters</h2>
+      <!--p class="sda-lead">Delhi-based experts in premium residential plots across Delhi NCR. We focus on verified properties, clear paperwork and honest guidance so every buyer feels confident.</p>
+      <ul>
+        <li>Verified listings with clear titles</li>
+        <li>On-site visits & complete documentation support</li>
+        <li>Local knowledge across Delhi, Gurgaon & Noida</li>
+      </ul-->
+      <p class="sda-lead">
+  दिल्ली NCR में प्रीमियम प्लॉट्स ढूँढते समय सबसे ज़रूरी चीज़ होती है—विश्वसनीयता।  
+  SDA Infra & Promoters उन कुछ चुनिंदा फर्मों में से है जो केवल <strong>पूरी तरह वेरीफाइड, कानूनी रूप से सुरक्षित और 
+  लोकेशन-वाइज़ हाई-ग्रोथ</strong> प्लॉट्स ही प्रस्तुत करती है।  
+  यहाँ हर विकल्प सोचा-समझा, क्यूरेटेड और भविष्य की वैल्यू को ध्यान में रखकर चुना जाता है।
+</p>
+
+<ul>
+  <li>Exclusive inventory — सीमित पर बेहतरीन प्रॉपर्टीज़</li>
+  <li>Zero hidden charges — 100% पारदर्शी प्रक्रिया</li>
+  <li>Premium client support — विज़िट, पेपरवर्क और रजिस्ट्री तक साथ</li>
+</ul>
+      <!--<a class="sda-cta" href="about.html">Read full About page</a> -->
+      <div style="text-align:center; margin-top:16px;">
+
+  <a href="about.html"
+     class="sda-cta premium-btn"
+     style="
+       display:inline-block;
+       min-width:260px;
+       padding:14px 30px;
+       border-radius:999px;
+       text-align:center;
+       font-weight:800;
+       background:linear-gradient(135deg,#1f7a3a,#32c56a);
+       color:#fff;
+       box-shadow:0 6px 18px rgba(31,122,58,0.22);
+       transition:all .28s ease;
+       transform:translateY(0);
+     ">
+    Read more
+  </a>
+
+</div>
+
+<style>
+  .premium-btn:hover {
+    background:linear-gradient(135deg,#32c56a,#1f7a3a);
+    box-shadow:0 12px 26px rgba(31,122,58,0.35);
+    transform:translateY(-4px) scale(1.03);
+  }
+
+  .premium-btn:active {
+    transform:translateY(-1px) scale(1.00);
+    box-shadow:0 4px 14px rgba(31,122,58,0.25);
+  }
+</style>
+
+
+      <!--  <div style="color:#666;font-size:13px;margin-top:12px">Photos rotate every 3 seconds — swipe on mobile to explore.</div> -->
+    </section>
+
+    <aside>
+      <div class="sda-slideshow" aria-label="Featured photos">
+        <div class="sda-slide s1" style="background-image:url('images/mainpagetopphoto/1.jpg')"></div>
+        <div class="sda-slide s2" style="background-image:url('images/mainpagetopphoto/2.jpg')"></div>
+        <div class="sda-slide s3" style="background-image:url('images/mainpagetopphoto/3.jpg')"></div>
+        <div class="sda-slide s4" style="background-image:url('images/mainpagetopphoto/4.jpg')"></div>
+        <div class="sda-slide s5" style="background-image:url('images/mainpagetopphoto/5.jpg')"></div>
+        <div class="sda-slide s6" style="background-image:url('images/mainpagetopphoto/6.jpg')"></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+
+<!-- ===========================================================
+     STATS SECTION (unchanged)
+     =========================================================== -->
+<section class="sda-stats-root" aria-label="Statistics strip">
+      <!-- <style>
+    .sda-stats-root { font-family:Inter, Arial, sans-serif; padding:18px 0 48px; background:#fbfbf9; }
+    .sda-stats-inner { max-width:1120px; margin:0 auto; padding:0 20px; display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap; text-align:center; }
+    .sda-stat { flex:1 1 180px; background:#fff; padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(12,20,12,0.04); }
+    .sda-stat .sda-num { font-size:28px; font-weight:800; margin-bottom:6px; }
+    .sda-stat p { margin:0; color:#666; }
+  </style> -->
+  <style>
+    /* STATS — compact on mobile, premium on desktop */
+
+    .sda-stats-root { font-family:Inter, Arial, sans-serif; padding:22px 0 44px; background:#fbfbf9; }
+
+    /* inner wrapper default: centered and constrained for desktop */
+    .sda-stats-inner {
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 18px;
+      display:flex;
+      gap:20px;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      align-items:stretch;
+      text-align:center;
+    }
+
+    /* each stat card (desktop/premium) */
+    .sda-stat {
+      flex:1 1 200px;
+      background:#fff;
+      padding:26px 22px;
+      border-radius:16px;
+      box-shadow: 0 12px 36px rgba(10,20,10,0.06);
+      border: 1px solid rgba(0,0,0,0.035);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .sda-stat:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(8,18,8,0.09);
+    }
+
+    .sda-num {
+      font-size:34px;
+      font-weight:900;
+      margin-bottom:8px;
+      color:#0f3f23;
+      letter-spacing:0.6px;
+    }
+    .sda-stat p {
+      margin:0;
+      color:#6a6f6b;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    /* make cards slightly larger on very wide screens for premium feel */
+    @media (min-width:1200px) {
+      .sda-stat { padding:34px 28px; border-radius:18px; }
+      .sda-num { font-size:40px; }
+      .sda-stat p { font-size:15px; }
+    }
+
+    /* ---------- MOBILE: compact + 2-up grid ---------- */
+    @media (max-width:880px) {
+
+      .sda-stats-root { padding:14px 0 28px; }
+
+      /* convert flex to grid for tighter 2-up layout */
+      .sda-stats-inner {
+        display:grid;
+        grid-template-columns: repeat(2, 1fr); /* two columns */
+        gap:10px;
+        max-width: 920px; /* keeps some left/right breathing room on medium phones */
+        margin: 0 auto;
+        padding: 0 12px;
+      }
+
+      .sda-stat {
+        padding:12px 10px; /* much smaller padding */
+        border-radius:10px;
+        box-shadow: 0 6px 18px rgba(10,20,10,0.04);
+      }
+
+      .sda-num {
+        font-size:20px; /* compact number */
+        font-weight:900;
+        margin-bottom:6px;
+      }
+
+      .sda-stat p {
+        font-size:12px; /* compact label */
+        color:#666;
+        font-weight:600;
+      }
+
+      /* reduce bottom spacing in the entire section */
+      .sda-stats-inner { gap:8px; }
+    }
+
+    /* accessibility / reduced motion: remove hover lift */
+    @media (prefers-reduced-motion: reduce) {
+      .sda-stat { transition:none; transform:none; }
+    }
+  </style>
+
+  <div class="sda-stats-inner">
+    <div class="sda-stat"><div class="sda-num">1,000+</div><p>Clients</p></div>
+    <div class="sda-stat"><div class="sda-num">14+</div><p>Years of Trust</p></div>
+    <div class="sda-stat"><div class="sda-num">8+</div><p>Projects</p></div>
+    <div class="sda-stat"><div class="sda-num">3</div><p>States</p></div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     CONTACT US SECTION (FormSubmit via AJAX, no required fields, mobile-friendly)
+     =========================================================== -->
+<section id="contact-us" aria-label="Contact form">
+  <style>
+    /* Scoped styles for the contact section */
+    #contact-us {
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(180deg,#f8faf8,#eaf9f0);
+      padding: 40px 16px 56px;
+    }
+    .contact-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(10,30,10,0.06);
+      padding: 28px;
+      border: 1px solid rgba(0,0,0,0.03);
+      box-sizing: border-box;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contact-head {
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+    .contact-head h2 {
+      font-size: 22px;
+      font-weight: 900;
+      margin: 0;
+      color: #14532d;
+      line-height:1.1;
+    }
+    .contact-head p { margin:0; color:#475057; font-size:14px; }
+
+    label {
+      font-size: 13px;
+      font-weight:700;
+      color:#263238;
+      display:block;
+      margin-bottom:6px;
+    }
+
+    input, textarea {
+      width:100%;
+      padding:14px 12px;
+      font-size:15px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:#fbfdfb;
+      outline:none;
+      box-sizing:border-box;
+      transition: box-shadow .15s, border-color .15s;
+    }
+    input:focus, textarea:focus {
+      border-color:#167a3a;
+      box-shadow: 0 6px 18px rgba(22,122,58,0.08);
+      background:#ffffff;
+    }
+    textarea { min-height:120px; resize:vertical; }
+
+    .controls {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg,#1a7a3a,#31c173);
+      color:#fff;
+      font-weight:800;
+      padding:12px 18px;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      font-size:15px;
+      box-shadow:0 8px 22px rgba(26,122,58,0.12);
+    }
+    .btn-ghost {
+      background:transparent;
+      border:1px solid rgba(0,0,0,0.06);
+      padding:12px 16px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      color:#234;
+    }
+
+    .msg {
+      display:none;
+      padding:14px;
+      border-radius:10px;
+      font-weight:700;
+      margin-top:12px;
+      box-sizing:border-box;
+    }
+    .msg.success {
+      background:#f0fdf4;
+      color:#14532d;
+      border:1px solid rgba(20,83,45,0.12);
+      box-shadow:0 6px 18px rgba(20,83,45,0.05);
+      animation:fadeIn .9s ease both;
+    }
+    .msg.error {
+      background:#fff6f6;
+      color:#7b1e1e;
+      border:1px solid rgba(123,30,30,0.08);
+      box-shadow:0 6px 18px rgba(123,30,30,0.04);
+      animation:fadeIn .9s ease both;
+    }
+
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:none } }
+
+    /* single-column on small screens, larger tap targets */
+    @media (max-width:760px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-wrap { padding:20px; }
+      input, textarea { padding:14px; font-size:16px; }
+      .btn-primary, .btn-ghost { width:100%; text-align:center; padding:14px; font-size:16px; }
+      .controls { flex-direction:column; gap:10px; }
+    }
+
+    /* accessibility */
+    .visually-hidden {
+      position:absolute !important;
+      height:1px; width:1px;
+      overflow:hidden; clip:rect(1px,1px,1px,1px);
+      white-space:nowrap;
+    }
+  </style>
+
+  <div class="contact-wrap" role="form" aria-labelledby="contact-title">
+    <div class="contact-head">
+      <div>
+        <h2 id="contact-title">Contact Us</h2>
+        <p>Fill whatever you like — name, mobile, email or a quick message. We'll receive it and reply to whichever contact you leave.</p>
+      </div>
+    </div>
+
+    <form id="contactForm" class="contact-grid" novalidate>
+      <!-- optional honeypot to block bots (keeps it hidden from users) -->
+      <input type="text" name="website" class="visually-hidden" autocomplete="off" tabindex="-1">
+
+      <div>
+        <label for="name">Full name</label>
+        <input id="name" name="Name" type="text" placeholder="e.g. Amit Sharma">
+      </div>
+
+      <div>
+        <label for="mobile">Mobile</label>
+        <input id="mobile" name="Mobile" type="text" inputmode="tel" placeholder="+91 9xxxxxxxxx">
+      </div>
+
+      <div style="grid-column:1 / -1;">
+        <label for="email">Email</label>
+        <input id="email" name="Email" type="email" placeholder="you@example.com">
+      </div>
+
+      <div style="grid-column:1 / -1;">
+        <label for="message">Message</label>
+        <textarea id="message" name="Message" placeholder="Type your question or requirement (optional)"></textarea>
+      </div>
+
+      <div style="grid-column:1 / -1; display:flex; justify-content:flex-start; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div class="controls" style="margin:0; padding:0;">
+          <button type="submit" class="btn-primary" id="contactSendBtn" aria-live="polite">Send Message</button>
+          <button type="button" class="btn-ghost" id="contactClearBtn">Clear</button>
+        </div>
+        <div id="statusMsg" style="flex:1;"></div>
+      </div>
+    </form>
+
+    <div id="formSuccess" class="msg success" role="status" aria-live="polite">
+      ✅ Thanks — your message has been sent. We'll contact you if you left contact details.
+    </div>
+
+    <div id="formError" class="msg error" role="alert" aria-live="assertive">
+      ⚠️ There was an error sending your message. Please try again or contact us at sdaph1@yahoo.com
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const form = document.getElementById('contactForm');
+      const successBox = document.getElementById('formSuccess');
+      const errorBox = document.getElementById('formError');
+      const sendBtn = document.getElementById('contactSendBtn');
+      const clearBtn = document.getElementById('contactClearBtn');
+
+      function show(el){
+        el.style.display = 'block';
+        setTimeout(()=> { el.style.opacity = '1'; }, 10);
+      }
+      function hide(el){ el.style.display = 'none'; el.style.opacity = ''; }
+
+      clearBtn.addEventListener('click', function(){
+        form.reset();
+        hide(successBox); hide(errorBox);
+      });
+
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+
+        // honeypot: silently drop if filled
+        const hp = form.querySelector('[name="website"]');
+        if (hp && hp.value.trim() !== '') return;
+
+        // prepare UI
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Sending...';
+        hide(successBox); hide(errorBox);
+
+        // collect data
+        const data = new FormData(form);
+        // set FormSubmit hidden fields (subject/template/captcha) — optional but kept for clarity
+        data.set('_subject', 'New inquiry from SDA Infra site');
+        data.set('_captcha', 'false');
+        data.set('_template', 'table');
+
+        try {
+          const resp = await fetch('https://formsubmit.co/ajax/sdaph1@yahoo.com', {
+            method: 'POST',
+            body: data
+          });
+
+          if (!resp.ok) throw new Error('Network response not ok');
+
+          // success
+          form.style.display = 'none';
+          show(successBox);
+        } catch (err) {
+          // show error but keep form so user can retry
+          console.error(err);
+          show(errorBox);
+        } finally {
+          sendBtn.disabled = false;
+          sendBtn.textContent = 'Send Message';
+        }
+      });
+    })();
+  </script>
+</section>
+
