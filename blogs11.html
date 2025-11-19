@@ -1,0 +1,23 @@
+---
+layout: default
+title: Blog
+permalink: /blog/
+---
+
+<div class="wrap">
+  <header style="margin-bottom:18px">
+    <h1>Blog</h1>
+    <p class="meta">Latest posts</p>
+  </header>
+
+  <section class="posts-list">
+    {% for post in site.posts %}
+      <article style="padding:12px 0;border-bottom:1px solid #eee">
+        <h2 style="margin:0 0 6px"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        <div class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.author %} • {{ post.author }}{% endif %}</div>
+        <p style="margin:8px 0 0">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        <p style="margin-top:8px"><a href="{{ post.url }}">Read →</a></p>
+      </article>
+    {% endfor %}
+  </section>
+</div>
