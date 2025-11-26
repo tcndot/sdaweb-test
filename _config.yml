@@ -1,6 +1,6 @@
 title: "SDA Promoters"
 description: ""
-url: "https://sdapromoters.com"
+url: "https://sdapromoters.com" #https://tcndot.github.io/sdaweb-test/
 baseurl: "" # IMPORTANT — empty for live root domain
 
 markdown: kramdown
