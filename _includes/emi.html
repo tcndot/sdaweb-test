@@ -1,0 +1,161 @@
+{% comment %}
+EMI CALCULATOR INCLUDE — QUICK GUIDE
+
+This file is meant to be included using:
+    {% include emi.html rate=VALUE gaj=VALUE %}
+
+● rate = default rate per gaj (number)
+● gaj  = default total gaj    (number)
+
+Examples:
+    {% include emi.html rate=15000 gaj=100 %}
+    {% include emi.html rate=18000 %}
+    {% include emi.html gaj=200 %}
+
+If no values are passed:
+    rate defaults to 15000
+    gaj  defaults to 100
+
+Only edit the HTML/CSS/JS below if you want to change design or behavior.
+Otherwise, change default values directly from where you include this file.
+
+DO NOT modify IDs (rate, gaj, months, etc.) unless you also update JS.
+{% endcomment %}
+
+{% assign default_rate = include.rate | default: 15000 %}
+{% assign default_gaj  = include.gaj  | default: 100 %}
+
+<style>
+  .emi-wrap { display:flex; justify-content:center; padding:18px 12px; }
+  .emi-card {
+    width: 380px;
+    max-width: calc(100% - 24px);
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  .title { font-weight:800; font-size:18px; margin:0 0 10px 0; }
+  .row { display:flex; gap:10px; align-items:flex-end; }
+  .col { display:flex; flex-direction:column; gap:6px; }
+  .input { width:100%; padding:8px 10px; border-radius:8px; border:1px solid #e6e7ea; font-size:14px; box-sizing:border-box; }
+  .small { font-size:13px; color:#475569; margin:0; }
+  .top-total { text-align:right; min-width:120px; }
+  .top-total .small { margin:0; font-size:12px; color:#475569; }
+  .top-total .amount { font-weight:800; font-size:15px; margin-top:4px; }
+  .select { padding:8px 10px; border-radius:8px; border:1px solid #e6e7ea; background:#fff; font-size:14px; width:100%; box-sizing:border-box; }
+  .emi-output { margin-top:12px; padding:10px; border-radius:10px; background:#fbfdff; border:1px solid #eef2f7; text-align:center; }
+  .emi-output .label { color:#374151; font-size:13px; }
+  .emi-output .value { font-weight:800; font-size:18px; margin-top:6px; }
+  @media (max-width:420px){
+    .emi-card { width:100%; padding:10px; }
+    .row { flex-direction:column; align-items:stretch; gap:8px; }
+    .top-total { text-align:left; }
+  }
+</style>
+
+<div class="emi-wrap">
+  <div class="emi-card" id="emi-card">
+    <div class="title">EMI Calculator</div>
+
+    <div class="row">
+      <div class="col" style="flex:1;">
+        <label class="small" for="rate">Rate (₹)</label>
+        <input id="rate" class="input" type="number" min="1" step="1"
+          value="{{ default_rate }}" inputmode="numeric" />
+      </div>
+
+      <div class="col" style="width:88px;">
+        <label class="small" for="gaj">Gaj</label>
+        <input id="gaj" class="input" type="number" min="1" step="1"
+          value="{{ default_gaj }}" inputmode="numeric" />
+      </div>
+
+      <div class="top-total">
+        <div class="small">Property total</div>
+        <div id="top_property" class="amount">₹ 0</div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+      <div class="col" style="flex:1;">
+        <label class="small" for="months">Months</label>
+        <select id="months" class="select" aria-label="Tenure">
+          <option value="12">12</option>
+          <option value="18">18</option>
+          <option value="24">24</option>
+          <option value="30">30</option>
+          <option value="36" selected>36</option>
+        </select>
+      </div>
+
+      <div class="col" style="width:160px;">
+        <label class="small" for="down_select">Down payment</label>
+        <select id="down_select" class="select" aria-label="Down percent">
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20" selected>20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+          <option value="33">33%</option>
+          <option value="40">40%</option>
+          <option value="50">50%</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="emi-output" aria-live="polite">
+      <div class="label">EMI (monthly)</div>
+      <div id="emi_value" class="value">₹ 0</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const rateEl = document.getElementById('rate');
+  const gajEl = document.getElementById('gaj');
+  const monthsEl = document.getElementById('months');
+  const downSelect = document.getElementById('down_select');
+
+  const topPropertyEl = document.getElementById('top_property');
+  const emiValueEl = document.getElementById('emi_value');
+
+  function fmt0(n){ return new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(Math.round(n||0)); }
+  function safeNum(v){ const n = Number(v); return isFinite(n) ? n : 0; }
+
+  function refreshDownLabels(property){
+    Array.from(downSelect.options).forEach(opt=>{
+      const pct = parseInt(opt.value,10) || 0;
+      const amt = Math.round(property * (pct/100));
+      opt.textContent = pct + "% — ₹ " + fmt0(amt);
+    });
+  }
+
+  function recompute(){
+    const rate = safeNum(rateEl.value);
+    const gaj  = safeNum(gajEl.value);
+    const months = parseInt(monthsEl.value) || 1;
+    const pct = parseInt(downSelect.value) || 0;
+
+    const property = rate * gaj;
+    const downAmt = property * (pct/100);
+    const loan = property - downAmt;
+    const emi = Math.round(loan / months);
+
+    topPropertyEl.textContent = "₹ " + fmt0(property);
+    emiValueEl.textContent = "₹ " + fmt0(emi);
+    refreshDownLabels(property);
+  }
+
+  [rateEl, gajEl, monthsEl, downSelect].forEach(el=>{
+    el.addEventListener("input", recompute);
+    el.addEventListener("change", recompute);
+  });
+
+  recompute();
+})();
+</script>

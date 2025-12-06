@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{{ page.title }}</title>
+
+ <link rel="icon" type="image/png" 
+   href="{{ site.baseurl }}/assets/logo4favicon.png">
+
+  <!-- Global CSS/JS that is common for all pages -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  html, body { margin: 0; }
+
+  /* === HERO SECTION LAYOUT === */
+  .sda-hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 18px 40px;
+    box-sizing: border-box;
+  }
+
+  .sda-hero-bg {
+    width: 100vw;
+    left: 50%;
+    position: relative;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    border-radius: 0;
+    padding: 48px 22px;
+  }
+
+  @media (max-width: 880px) {
+    .sda-hero-inner {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+    .sda-hero-bg {
+      padding-left: 14px;
+      padding-right: 14px;
+      min-height: 320px;
+    }
+  }
+
+  /* === GLOBAL PAGE CONTAINERS USED IN INDEX === */
+  .sda-main-wrap,
+  .sda-stats-inner,
+  .contact-wrap,
+  .sda-footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: 18px;
+    padding-right: 18px;
+    box-sizing: border-box;
+  }
+</style>
+
+  <!-- Page-specific HEAD content (optional) -->
+  {{ page.head | default: "" }}
+
+</head>
+
+<body>
+
+  {% include header.html %}
+       <!--  <div class="sda-page-spacer" style="height:104px;"></div> -->
+
+  <!-- Page content goes here -->
+  {{ content }}
+
+  {% include footer.html %}
+
+</body>
+</html>

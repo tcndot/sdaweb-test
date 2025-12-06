@@ -1,0 +1,25 @@
+title: "SDA Promoters"
+description: ""
+url: "https://sdapromoters.com"
+baseurl: "" # IMPORTANT — empty for live root domain
+
+markdown: kramdown
+
+# Enable posts
+collections:
+  posts:
+    output: true
+
+# Default layout for blog posts
+defaults:
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+
+# Keep permalinks simple and clean
+permalink: /blogs/:title/
+
+
+---
